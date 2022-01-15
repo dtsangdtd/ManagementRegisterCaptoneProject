@@ -16,7 +16,7 @@ import utils.DBUtils;
  * @author mac
  */
 public class UserDAO {
-    public UserDTO checkLogin(String userID, String password) throws SQLException{
+    public UserDTO checkLogin(String gmail, String password) throws SQLException{
         UserDTO user = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -24,18 +24,18 @@ public class UserDAO {
         try{
             conn = DBUtils.getConnection();
             if(conn != null){
-                String sql = "SELECT username, roleID, email "
-                        + "FROM tbl_User "
-                        + "WHERE  userID=? AND password=? ";
+                String sql = "SELECT name, roleID, userID "
+                        + "FROM tblUser "
+                        + "WHERE  gmail=? AND password=? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, userID);
+                stm.setString(1, gmail);
                 stm.setString(2, password);
                 rs = stm.executeQuery();
                 if(rs.next()){
-                    String username = rs.getString("username");
+                    String username = rs.getString("name");
                     String roleID = rs.getString("roleID");
-                    String email = rs.getString("email");
-                    user = new UserDTO(userID, username, password, roleID, email);
+                    String userID = rs.getString("userID");
+                    user = new UserDTO(userID, username, password, roleID, gmail);
                 }
             }   
         }catch(Exception e){
@@ -48,7 +48,7 @@ public class UserDAO {
         return user;
     }
     
-    public UserDTO checkLoginGG(String userID) throws SQLException{
+    public UserDTO checkLoginGG(String gmail) throws SQLException{
         UserDTO user = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -56,18 +56,18 @@ public class UserDAO {
         try{
             conn = DBUtils.getConnection();
             if(conn != null){
-                String sql = "SELECT username, password, roleID, email "
-                        + "FROM tbl_User "
-                        + "WHERE  userID=? ";
+                String sql = "SELECT name, password, roleID, userID "
+                        + "FROM tblUser "
+                        + "WHERE  gmail=? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, userID);
+                stm.setString(1, gmail);
                 rs = stm.executeQuery();
                 if(rs.next()){
-                    String username = rs.getString("username");
+                    String username = rs.getString("name");
                     String password = rs.getString("password");
                     String roleID = rs.getString("roleID");
-                    String email = rs.getString("email");
-                    user = new UserDTO(userID, username, password, roleID, email);
+                    String userID = rs.getString("userID");
+                    user = new UserDTO(userID, username, password, roleID, gmail);
                 }
             }   
         }catch(Exception e){
@@ -87,7 +87,7 @@ public class UserDAO {
         try{
             conn = DBUtils.getConnection();
             if(conn != null){
-                String sql = "INSERT INTO tbl_User(username, email, password, userID, roleID) "
+                String sql = "INSERT INTO tblUser(name, gmail, password, userID, roleID) "
                         + " VALUES(?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, user.getUsername());
@@ -96,7 +96,7 @@ public class UserDAO {
                 stm.setString(4, user.getUserID());
                 stm.setString(5, user.getRoleID());
                 check = stm.executeUpdate()>0?true:false;
-            }
+            } 
         }catch(Exception e){
             e.printStackTrace();
         }finally{

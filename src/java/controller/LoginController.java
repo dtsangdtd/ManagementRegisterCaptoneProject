@@ -23,10 +23,8 @@ import user.UserDTO;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
     private static final String ERROR = "login.jsp";
-    private static final String ADMIN = "admin.jsp";
-    private static final String USER = "user.jsp";
-    private static final String US="US";    
-    private static final String AD="AD"; 
+    private static final String MENTOR = "supervisor.jsp";    
+    private static final String MT="MT"; 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,18 +39,16 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try{
-            String userID = request.getParameter("userID");
+            String gmail = request.getParameter("gmail");
             String password = request.getParameter("password");
             UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLogin(userID, password);
+            UserDTO user = dao.checkLogin(gmail, password);
             HttpSession session = request.getSession();
             if(user != null){
                 session.setAttribute("LOGIN_USER", user);
                 String roleID = user.getRoleID();
-                if(AD.equals(roleID)){
-                    url = ADMIN;
-                }else if(US.equals(roleID)){
-                    url = USER;
+                if(MT.equals(roleID)){
+                    url = MENTOR;
                 }else{
                     request.setAttribute("ERROR_MESSAGE", "Your role is not supported!");
                 }

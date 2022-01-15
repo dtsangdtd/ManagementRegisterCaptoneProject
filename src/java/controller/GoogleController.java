@@ -26,7 +26,12 @@ import user.UserDTO;
 @WebServlet("/login-google")
 public class GoogleController extends HttpServlet {
 
-    private static final String SUCCESS = "user.jsp";
+    private static final String USER = "student.jsp";
+    private static final String ADMIN = "moderator.jsp";
+    private static final String MENTOR = "supervisor.jsp";
+    private static final String AD = "AD";
+    private static final String US = "US";
+    private static final String MT = "MT";
     private static final String ERROR = "login.jsp";
 
     public GoogleController() {
@@ -54,18 +59,23 @@ public class GoogleController extends HttpServlet {
             } else {
                 String accessToken = GoogleUtils.getToken(code);
                 GooglePojo ggPojo = GoogleUtils.getUserInfo(accessToken);
-                String userID = ggPojo.getId();
+                String gmail = ggPojo.getEmail();
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.checkLoginGG(userID);
+                UserDTO user = dao.checkLoginGG(gmail);
                 HttpSession session = request.getSession();
                 if (user != null) {
                     session.setAttribute("LOGIN_USER", user);
-                    url = SUCCESS;
-                } else {
-                    UserDTO newUser = new UserDTO(userID, "GG USER", "", "US", ggPojo.getEmail());
-                    dao.insertUser(newUser);
-                    session.setAttribute("LOGIN_USER", newUser);
-                    url = SUCCESS;
+                    String roleID = user.getRoleID();
+                    if(AD.equals(roleID)){
+                        url = ADMIN;
+                    }else if(US.equals(roleID)){
+                        url = USER;
+                    }else if(MT.equals(roleID)){
+                        url = MENTOR;
+                    }else{
+                        request.setAttribute("ERROR_MESSAGE", "Your role is not supported!");
+                    }
+                    
                 }
 
             }
