@@ -36,13 +36,10 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="p-5">
-<!--                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">FPT University Academic Portal</h1>
-                                </div>-->
                                 <form action="MainController" method="POST" class="user">
                                     <img src="img/2021-FPTU-Eng.png" width="530.98px">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="userID"
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="gmail"
                                                placeholder="Email Address">
                                     </div>
                                     <div class="form-group">
@@ -50,14 +47,6 @@
                                             <input type="password" class="form-control form-control-user" name="password"
                                                    id="exampleInputPassword" placeholder="Password">
                                         </div>
-                                        <!-- <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleRepeatPassword" placeholder="Repeat Password">
-                                        </div> -->
-                                    </div>
-                                    <!-- <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                        Register Account
-                                    </a> -->
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" id="customCheck">
@@ -68,17 +57,11 @@
                                     <input type="submit" name="action"class="btn btn-primary btn-user btn-block" value="Login">
                                         
                                     
-                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/LoginGG/login-google&response_type=code
+                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/ManagementRegisterCaptoneProject/login-google&response_type=code
                                        &client_id=130712381079-lsfn0bj6q55gicpnofp13tbaa5jh59ra.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Login with Google
                                     </a>
                                 </form>
-                                <!-- <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div> -->
-                                <!-- <div class="text-center">
-                                    <a class="small" href="login.html">Already have an account? Login!</a>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -86,15 +69,6 @@
             </div>
 
         </div>
-
-<!--        <h1>login</h1>
-        <form action="MainController" method="POST" >
-            <input type="text" name="userID" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="submit" name="action" value="Login"/>
-        </form>
-        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/LoginGG/login-google&response_type=code
-           &client_id=130712381079-lsfn0bj6q55gicpnofp13tbaa5jh59ra.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>-->
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
