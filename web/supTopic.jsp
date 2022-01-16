@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="user.UserDTO"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,35 +11,31 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Tables</title>
+        <title>SB Admin 2 - Dashboard</title>
 
-        <!-- Custom fonts for this template -->
+        <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
-        <!-- Custom styles for this template -->
+        <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-        <!-- Custom styles for this page -->
-        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     </head>
 
     <body id="page-top">
-        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
+        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'MT'}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
-        <!-- Page Wrapper -->
+        <!-- Page Wrapper -->       
         <div id="wrapper">
-            <%@include file="studentSidebar.jsp"%>
-
+            <%@include file="supSidebar.jsp" %>
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Student</h1>
+                <h1 class="h3 mb-2 text-gray-800">Group 1</h1>
 
                 <div class="card shadow mb-4">
                     <div class="card-body">
@@ -53,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-bordered" width="100%" cellspacing="0">
+                            <table class="table table-bordered"  width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -63,7 +60,6 @@
                                         <th>Number Of Group</th>
                                         <th>Gmail</th>
                                         <th>Salary</th>
-                                        <th>Request</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,11 +71,6 @@
                                         <td>27</td>
                                         <td>2011/01/25</td>
                                         <td>$112,000</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -87,16 +78,14 @@
                     </div>
                 </div>
 
-            </div>
+            </div>          
             <!-- /.container-fluid -->
 
         </div>
 
         <!-- End of Main Content -->
 
-        <!-- Footer -->
         <%@include file ="footer.jsp" %>
-        <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->
@@ -110,7 +99,7 @@
 </a>
 
 <!-- Logout Modal-->
-<%@include file="logout.jsp" %>
+<%@include file ="logout.jsp" %>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -123,11 +112,11 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

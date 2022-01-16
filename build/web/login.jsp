@@ -3,7 +3,7 @@
     Created on : Dec 15, 2021, 8:08:39 PM
     Author     : mac
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -47,37 +47,32 @@
                                             <input type="password" class="form-control form-control-user" name="password"
                                                    id="exampleInputPassword" placeholder="Password">
                                         </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember
-                                                Me</label>
-                                        </div>
+                                        <hr>
+                                        <input type="submit" name="action"class="btn btn-primary btn-user btn-block" value="Login">
+
+
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/ManagementRegisterCaptoneProject/login-google&response_type=code
+                                           &client_id=130712381079-lsfn0bj6q55gicpnofp13tbaa5jh59ra.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google btn-user btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        </a>
+
                                     </div>
-                                    <input type="submit" name="action"class="btn btn-primary btn-user btn-block" value="Login">
-                                        
-                                    
-                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/ManagementRegisterCaptoneProject/login-google&response_type=code
-                                       &client_id=130712381079-lsfn0bj6q55gicpnofp13tbaa5jh59ra.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
     </body>
 </html>

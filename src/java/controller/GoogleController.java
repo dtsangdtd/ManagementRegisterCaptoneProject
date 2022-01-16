@@ -77,7 +77,6 @@ public class GoogleController extends HttpServlet {
                     }
                     
                 }
-
             }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());

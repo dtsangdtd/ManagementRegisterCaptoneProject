@@ -1,4 +1,10 @@
+<%-- 
+    Document   : modStudentList
+    Created on : Jan 16, 2022, 12:56:11 PM
+    Author     : mac
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,18 +33,23 @@
     </head>
 
     <body id="page-top">
-        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
-            <c:redirect url="login.jsp"></c:redirect>
-        </c:if>
+
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <%@include file="studentSidebar.jsp"%>
+            <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
+                <c:redirect url="login.jsp"></c:redirect>
+            </c:if>
+
+            <%@include file="modSidebar.jsp" %>  
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Student</h1>
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Supervisor</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>
+                </div>
 
                 <div class="card shadow mb-4">
                     <div class="card-body">
@@ -60,10 +71,16 @@
                                         <th>Name</th>
                                         <th>Major</th>
                                         <th>Phone</th>
-                                        <th>Number Of Group</th>
+                                        <th style="width: 160px">Number Group 
+                                            <div class="dropdown">
+                                                <i class="fas fa-filter "></i>
+                                                <div class="dropdown-content">
+                                                    <p>Hello World!</p>
+                                                </div>
+                                            </div>
+                                        </th>
                                         <th>Gmail</th>
                                         <th>Salary</th>
-                                        <th>Request</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,27 +92,20 @@
                                         <td>27</td>
                                         <td>2011/01/25</td>
                                         <td>$112,000</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.container-fluid -->
 
         </div>
-
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <%@include file ="footer.jsp" %>
+        <%@include file="footer.jsp" %>
         <!-- End of Footer -->
 
     </div>
@@ -113,6 +123,26 @@
 <%@include file="logout.jsp" %>
 
 <!-- Bootstrap core JavaScript-->
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

@@ -3,7 +3,7 @@
     Created on : Jan 14, 2022, 2:18:27 PM
     Author     : dtsang
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +26,9 @@
     <body>
 
         <div id="wrapper">
+            <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
+                <c:redirect url="login.jsp"></c:redirect>
+            </c:if>
             <%@include file="sidebar.jsp"%>
             <!-- End of Topbar -->
 

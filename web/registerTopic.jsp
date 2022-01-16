@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,28 +30,33 @@
     </head>
 
     <body id="page-top">
-
+        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <%@include file="sidebar.jsp"%>
+            <%@include file="studentSidebar.jsp"%>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Student</h1>
-                <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                    For more information about DataTables, please visit the <a target="_blank"
-                        href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
-                <!-- DataTales Example -->
+                <h1 class="h3 mb-2 text-gray-800">Topic</h1>
                 <div class="card shadow mb-4">
-                    <!-- <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                    </div> -->
+
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-9"></div>
+                                    <div class="col-3">
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <table class="table table-bordered"width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -87,7 +93,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-      <%@include file ="footer.jsp" %>
+        <%@include file ="footer.jsp" %>
         <!-- End of Footer -->
 
     </div>
@@ -102,24 +108,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
+<%@include file="logout.jsp" %>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
