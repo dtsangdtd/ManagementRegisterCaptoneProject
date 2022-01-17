@@ -14,17 +14,27 @@ public class UserDTO {
     private String username;
     private String password;
     private String roleID;
-    private String email;
-
+    private String gmail;
+    private String phone;
+    private String capstoneID;
+    private String groupID;
+    private String statusID;
+    private String photoUrl;
+    
     public UserDTO() {
     }
-    
-    public UserDTO(String userID, String username, String password, String roleID, String email) {
+
+    public UserDTO(String userID, String username, String password, String roleID, String gmail, String phone, String capstoneID, String groupID, String statusID, String photoUrl) {
         this.userID = userID;
         this.username = username;
         this.password = password;
         this.roleID = roleID;
-        this.email = email;
+        this.gmail = gmail;
+        this.phone = phone;
+        this.capstoneID = capstoneID;
+        this.groupID = groupID;
+        this.statusID = statusID;
+        this.photoUrl = photoUrl;
     }
 
     public String getUserID() {
@@ -51,14 +61,6 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getRoleID() {
         return roleID;
     }
@@ -66,5 +68,53 @@ public class UserDTO {
     public void setRoleID(String roleID) {
         this.roleID = roleID;
     }
-    
+
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCapstoneID() {
+        return capstoneID;
+    }
+
+    public void setCapstoneID(String capstoneID) {
+        this.capstoneID = capstoneID;
+    }
+
+    public String getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
+    }
+
+    public String getStatusID() {
+        return statusID;
+    }
+
+    public void setStatusID(String statusID) {
+        this.statusID = statusID;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
 }

@@ -72,22 +72,24 @@
                                         <th>Name</th>
                                         <th>Major</th>
                                         <th>Phone</th>
-                                        <th>Number Of Group</th>
+                                        <th>GroupID</th>
                                         <th>Gmail</th>
-                                        <th>Salary</th>
+                                        <th>Photo</th>
                                     </tr>
                                 </thead>
+                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
+                                        <td>${counter.count}</td>
+                                        <td>${stu.username}</td>
+                                        <td>SE</td>
+                                        <td>${stu.phone}</td>
+                                        <td>${stu.groupID}</td>
+                                        <td>${stu.gmail}</td>
+                                        <td>${stu.photoUrl}</td>
                                     </tr>
                                 </tbody>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
@@ -130,83 +132,6 @@
                         </div>
                     </div>
 
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                            Group 2</div>
-                                        <div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#" class="btn btn-success btn-circle">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                            Group 3</div>
-                                        <div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#" class="btn btn-success btn-circle">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                            Group 4</div>
-                                        <div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#" class="btn btn-success btn-circle">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- /.container-fluid -->

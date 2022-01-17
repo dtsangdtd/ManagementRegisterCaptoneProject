@@ -60,28 +60,30 @@
                                         <th>Name</th>
                                         <th>Major</th>
                                         <th>Phone</th>
-                                        <th>Number Of Group</th>
+                                        <th>GroupID</th>
                                         <th>Gmail</th>
-                                        <th>Salary</th>
-                                        <th>Request</th>
+                                        <th>Photo</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <!-- tu chon field -->
+                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                    <tbody>
+                                        <tr>
+                                            <td>${counter.count}</td>
+                                            <td>${stu.username}</td>
+                                            <td>SE</td>
+                                            <td>${stu.phone}</td>
+                                            <td>${stu.groupID}</td>
+                                            <td>${stu.gmail}</td>
+                                            <td>${stu.photoUrl}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-success btn-circle btn-sm">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
