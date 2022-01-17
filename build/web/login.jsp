@@ -55,7 +55,7 @@
                                            &client_id=130712381079-lsfn0bj6q55gicpnofp13tbaa5jh59ra.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
-
+                                        
                                     </div>
                                 </form>
                             </div>

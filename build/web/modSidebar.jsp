@@ -21,7 +21,7 @@
     <li class="nav-item ">
         <a class="nav-link" href="modGroup.jsp">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Student Groups</span>
+            <span>Groups</span>
         </a>
     </li>
 

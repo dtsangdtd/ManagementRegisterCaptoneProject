@@ -71,29 +71,36 @@
                                         <th>Name</th>
                                         <th>Major</th>
                                         <th>Phone</th>
-                                        <th style="width: 160px">Number Group 
+                                        <th style="width: 160px">Groups 
                                             <div class="dropdown">
                                                 <i class="fas fa-filter "></i>
                                                 <div class="dropdown-content">
-                                                    <p>Hello World!</p>
+                                                    <input type="checkbox" id="scales" name="full"
+                                                           checked>
+                                                    <label for="full">full</label>
+                                                    <input type="checkbox" id="scales" name="notFull"
+                                                           checked>
+                                                    <label for="notFull">not full</label>
                                                 </div>
                                             </div>
                                         </th>
                                         <th>Gmail</th>
-                                        <th>Salary</th>
+                                        <th>photoUrl</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
-                                    </tr>
-                                </tbody>
+                                <c:forEach var="sup" varStatus="counter" items="${LIST_SUPERVISOR}">
+                                    <tbody>
+                                        <tr>
+                                            <td>${counter.count}</td>
+                                            <td>${sup.username}</td>
+                                            <td>SE</td>
+                                            <td>${sup.phone}</td>
+                                            <td>${sup.groupID}</td>
+                                            <td>${sup.gmail}</td>
+                                            <td>${sup.photoUrl}</td>
+                                        </tr>
+                                    </tbody>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
