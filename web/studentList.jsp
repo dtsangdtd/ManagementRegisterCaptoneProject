@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-bordered" width="100%" cellspacing="0">
+                            <table class="table table-sm" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -63,6 +63,7 @@
                                         <th>GroupID</th>
                                         <th>Gmail</th>
                                         <th>Photo</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <!-- tu chon field -->
