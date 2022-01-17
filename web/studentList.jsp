@@ -23,7 +23,7 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+        <%@include file="bootstrap.jsp" %>
     </head>
 
     <body id="page-top">

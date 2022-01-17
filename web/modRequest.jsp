@@ -27,6 +27,7 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <%@include file="bootstrap.jsp" %>
     </head>
     <body id="page-top"> 
         <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
@@ -57,7 +58,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-bordered" width="100%" cellspacing="0">
+                            <table class="table table-sm" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
