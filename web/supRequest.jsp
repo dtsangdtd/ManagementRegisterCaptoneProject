@@ -21,7 +21,7 @@
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+        <%@include file="bootstrap.jsp" %>
     </head>
 
     <body id="page-top">
@@ -46,7 +46,20 @@
                         <div class="table-responsive">
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-9"></div>
+                                    <div class="col-9">
+                                        <div class="dropdown">
+                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Semester
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                                                <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
+                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
                                     <div class="col-3">
                                         <div class="mb-3">
                                             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
@@ -54,16 +67,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-bordered" width="100%" cellspacing="0">
+                            <table class="table table-sm" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th>Number Of Group</th>
-                                        <th>Gmail</th>
-                                        <th>Salary</th>
+                                        <th>Captones Name</th>
+                                        <th>Group Name  </th>
+                                        <th>Register Date</th>
+                                        <th>Status</th>
                                         <th>Request</th>
                                     </tr>
                                 </thead>
@@ -71,18 +82,18 @@
                                     <tr>
                                         <td>1</td>
                                         <td>Donna Snider</td>
-                                        <td>Customer Support</td>
+                                        <td><a href="group-detail.jsp">Customer Support </a></td>
                                         <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
+                                        <td>Processing</td>
                                         <td>
                                             <a href="#" class="btn btn-success btn-circle btn-sm">
                                                 <i class="fas fa-check"></i>
                                             </a>
+                                            <!-- g?i th?ng qua bên mod n?u dong y-->
                                             <a href="#" class="btn btn-danger btn-circle btn-sm">
                                                 <i class="fas fa-ban"></i>
                                             </a>
+
                                         </td>
                                     </tr>
                                 </tbody>
