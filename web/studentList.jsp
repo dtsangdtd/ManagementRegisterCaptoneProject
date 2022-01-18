@@ -53,9 +53,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-sm" width="100%" cellspacing="0">
+                            <table class="table-sm" width="100%" >
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Major</th>
@@ -69,7 +69,7 @@
                                 <!-- tu chon field -->
                                 <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
                                     <tbody>
-                                        <tr>
+                                        <tr class="" >
                                             <td>${counter.count}</td>
                                             <td>${stu.username}</td>
                                             <td>SE</td>
