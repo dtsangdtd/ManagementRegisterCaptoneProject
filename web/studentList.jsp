@@ -33,105 +33,157 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
             <%@include file="studentSidebar.jsp"%>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                     aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                   placeholder="Search for..." aria-label="Search"
+                                                   aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
+                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="profile.jsp">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Student</h1>
+                        </ul>
 
-                <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-9"></div>
-                                    <div class="col-3">
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                    </nav>
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Student</h1>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-9"></div>
+                                            <div class="col-3">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <table class="table table-sm" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Major</th>
+                                                <th>Phone</th>
+                                                <th>GroupID</th>
+                                                <th>Gmail</th>
+                                                <th>Photo</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <!-- tu chon field -->
+                                        <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                            <tbody>
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${stu.username}</td>
+                                                    <td>SE</td>
+                                                    <td>${stu.phone}</td>
+                                                    <td>${stu.groupID}</td>
+                                                    <td>${stu.gmail}</td>
+                                                    <td>${stu.photoUrl}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-success btn-circle btn-sm">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
+                                    </table>
                                 </div>
                             </div>
-                            <table class="table table-sm" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th>GroupID</th>
-                                        <th>Gmail</th>
-                                        <th>Photo</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <!-- tu chon field -->
-                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
-                                    <tbody>
-                                        <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${stu.username}</td>
-                                            <td>SE</td>
-                                            <td>${stu.phone}</td>
-                                            <td>${stu.groupID}</td>
-                                            <td>${stu.gmail}</td>
-                                            <td>${stu.photoUrl}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                    <i class="fas fa-plus"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </c:forEach>
-                            </table>
                         </div>
+
                     </div>
+                    <!-- /.container-fluid -->
+
                 </div>
 
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <%@include file ="footer.jsp" %>
+                <!-- End of Footer -->
+
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Content Wrapper -->
 
         </div>
+        <!-- End of Page Wrapper -->
 
-        <!-- End of Main Content -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-        <!-- Footer -->
-        <%@include file ="footer.jsp" %>
-        <!-- End of Footer -->
+        <!-- Logout Modal-->
+        <%@include file="logout.jsp" %>
 
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</div>
-<!-- End of Page Wrapper -->
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-<!-- Logout Modal-->
-<%@include file="logout.jsp" %>
+        <!-- Page level plugins -->
+        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/datatables-demo.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
-
-</body>
+    </body>
 
 </html>
