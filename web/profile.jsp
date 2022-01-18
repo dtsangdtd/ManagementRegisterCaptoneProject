@@ -14,7 +14,6 @@
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
-
         <!-- Custom styles for this template -->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -30,12 +29,7 @@
                 <c:redirect url="login.jsp"></c:redirect>
             </c:if>
             <%@include file="sidebar.jsp"%>
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid" style="height: 70vh">
-
-
+            <div class="container-fluid" style="height: 70%">
                 <div class="card shadow mb-4">
                     <form>
                         <div class="container">
@@ -79,12 +73,15 @@
                                     <div id="preview-wrapper">
                                         <div class="container">
                                             <div class="avatar-upload">
+                                             
                                                 <div class="avatar-edit">
+                                                    
                                                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                                                     <label for="imageUpload"><i style="padding: 8px 0 0 8px" class="fas fa-pen"></i></label>
                                                 </div>
                                                 <div class="avatar-preview">
                                                     <div id="imagePreview" >
+                                                        <input type='text' id="imageURL" hidden />
                                                     </div>
                                                 </div>
                                             </div>
@@ -95,21 +92,11 @@
                             </div>
                         </div>
                         <div class="container" style="width: 100%; text-align: center">  <button type="button" class="btn btn-success">Submit</button></div>
-
                     </form>
-
                 </div>
-                <!-- Footer -->
-
-
-                <!-- End of Footer -->
-
             </div>
             <%@include file="footer.jsp" %>
-            <!-- End of Content Wrapper -->
-
         </div>
-
         <style >
             .container {
                 max-width: 960px;
@@ -184,37 +171,60 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>  
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
-
         <!-- Page level plugins -->
         <script src="vendor/datatables/jquery.dataTables.min.js"></script>
         <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
         <!-- Page level custom scripts -->
         <script src="js/demo/datatables-demo.js"></script>
-        <script>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
+            import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
+            const firebaseConfig = {
+            apiKey: "AIzaSyAaeDrbFpEOKxfsmeYaUvVhOCsh9o8nxyI",
+            authDomain: "upload-image-125bb.firebaseapp.com",
+            projectId: "upload-image-125bb",
+            storageBucket: "upload-image-125bb.appspot.com",
+            messagingSenderId: "186232203166",
+            appId: "1:186232203166:web:8350eb791825d6adbad88f",
+            measurementId: "G-16ZE60ZJVS"
+            };
+            const firebaseApp = initializeApp(firebaseConfig);
+            const storage = getStorage(firebaseApp);
             function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                        $('#imagePreview').hide();
-                        $('#imagePreview').fadeIn(650);
-
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
+            const metadata = {
+            contentType: 'image/jpeg'
+            };
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
 
             }
-            $("#imageUpload").change(function () {
-                readURL(this);
+            reader.readAsDataURL(input.files[0]);
+            const name = new Date().getTime() + '-' + input.files[0].name;
+            console.log(name);
+            const storageRef = ref(storage, 'images/'+name);
+            uploadBytesResumable(storageRef, input.files[0], metadata).then((snapshot) => {
+               console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+               console.log('File metadata:', snapshot.metadata);
+               getDownloadURL(snapshot.ref).then((url) => {
+               console.log('File available at', url);
+               document.getElementById('imageURL').value = url;
             });
-
-
+              }).catch((error) => {
+            console.error('Upload failed', error);
+    
+            });
+            }}
+            $("#imageUpload").change(function () {
+            readURL(this);
+            });
         </script>
     </body>
 </html>
