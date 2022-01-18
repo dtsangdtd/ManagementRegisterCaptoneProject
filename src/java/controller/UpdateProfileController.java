@@ -18,14 +18,10 @@ import user.UserDTO;
 
 /**
  *
- * @author mac
+ * @author dtsang
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
-
-    private static final String ERROR = "login.jsp";
-    private static final String MENTOR = "supervisor.jsp";
-    private static final String MT = "MT";
+@WebServlet(name = "UpdateProfileController", urlPatterns = {"/UpdateProfileController"})
+public class UpdateProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,31 +35,21 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String gmail = request.getParameter("gmail");
-            String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLogin(gmail, password);
-            UserDTO userInfor = dao.getInforUser(user.getUserID());
-            System.out.println(userInfor);
+            String userID = request.getParameter("userID");
+//            String gmail = request.getParameter("gmail");
+            String name = request.getParameter("fullname");
+            String phone = request.getParameter("phone");
+            String photoUrl = request.getParameter("imageURL");
+            UserDAO userDao = new UserDAO();
+            userDao.updateInfor(name, phone, photoUrl, userID);
+            UserDTO userInfor = userDao.getInforUser(userID);
             HttpSession session = request.getSession();
             session.setAttribute("INFOR", userInfor);
-            if (user != null) {
-                session.setAttribute("LOGIN_USER", user);
-                String roleID = user.getRoleID();
-                if (MT.equals(roleID)) {
-                    url = MENTOR;
-                } else {
-                    request.setAttribute("ERROR_MESSAGE", "Your role is not supported!");
-                }
-            } else {
-                request.setAttribute("ERROR_MESSAGE", "Incorrect UserID or Password!");
-            }
         } catch (Exception e) {
-            log("ERROR at LoginController:" + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+             log("ERROR at MainController" + e.toString());
+        }finally{
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
         }
     }
 

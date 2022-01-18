@@ -20,7 +20,7 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String LOGIN = "LoginController";
     private static final String LOGOUT = "LogoutController";
-
+    private static final String UPDATEPROFILE = "UpdateProfileController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,7 +42,9 @@ public class MainController extends HttpServlet {
                 url = LOGIN;
             } else if ("Logout".equals(action)) {
                 url = LOGOUT;   
-            } else {
+            }else if ("editProfile".equals(action)){
+                url = UPDATEPROFILE;
+            }else {
                 session.setAttribute("ERROR_MESSAGE", "Function is not available!");
             }
         } catch (Exception e) {

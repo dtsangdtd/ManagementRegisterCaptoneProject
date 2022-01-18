@@ -5,11 +5,13 @@
  */
 package user;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mac
  */
-public class UserDTO {
+public class UserDTO implements Serializable{
     private String userID;
     private String username;
     private String password;
@@ -21,6 +23,8 @@ public class UserDTO {
     private String statusID;
     private String photoUrl;
     
+    private String semesterName;
+    private String capstoneName;
     public UserDTO() {
     }
 
@@ -35,6 +39,32 @@ public class UserDTO {
         this.groupID = groupID;
         this.statusID = statusID;
         this.photoUrl = photoUrl;
+    }
+
+    public String getSemesterName() {
+        return semesterName;
+    }
+
+    public void setSemesterName(String semesterName) {
+        this.semesterName = semesterName;
+    }
+
+    public String getCapstoneName() {
+        return capstoneName;
+    }
+
+    public void setCapstoneName(String capstoneName) {
+        this.capstoneName = capstoneName;
+    }
+
+    public UserDTO(String userID, String username, String gmail, String phone, String photoUrl, String semesterName, String capstoneName) {
+        this.userID = userID;
+        this.username = username;
+        this.gmail = gmail;
+        this.phone = phone;
+        this.photoUrl = photoUrl;
+        this.semesterName = semesterName;
+        this.capstoneName = capstoneName;
     }
 
     public String getUserID() {
