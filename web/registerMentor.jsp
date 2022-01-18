@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <title>Sinh Viên</title>
+        <title>Sinh ViÃªn</title>
 
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <!-- Custom styles for this template -->
@@ -20,6 +20,7 @@
             rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <%@include file="bootstrap.jsp" %>
     </head>
 
     <body id="page-top">
@@ -29,31 +30,34 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
             <%@include file="studentSidebar.jsp"%>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Register Mentor</h1>
-                <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                    For more information about DataTables, please visit the <a target="_blank"
-                        href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <!-- <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                    </div> -->
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-9"></div>
-                                    <div class="col-3">
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                     aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                   placeholder="Search for..." aria-label="Search"
+                                                   aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
+
                             </div>
                             <table class="table-sm"  width="100%" cellspacing="0">
                                 <thead>
@@ -67,95 +71,158 @@
                                                 <i class="fas fa-filter "></i>
                                                 <div class="dropdown-content">
                                                     <p>Hello World!</p>
+                            </li>
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
+                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="profile.jsp">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Register Mentor</h1>
+                        <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                            For more information about DataTables, please visit the <a target="_blank"
+                                href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <!-- <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            </div> -->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-9"></div>
+                                            <div class="col-3">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
                                                 </div>
                                             </div>
-                                        </th>
-                                        <th>Gmail
-                                        </th>
-                                        <th>Register</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Nguyen Trung Kien</td>
-                                        <td>SE</td>
-                                        <td>0123473689</td>
-                                        <td>4/5</td>
-                                        <td>test@fpt.edu.vn</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered"  width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Major</th>
+                                                <th>Phone</th>
+                                                <th style="width: 160px">Number Group 
+                                                    <div class="dropdown">
+                                                        <i class="fas fa-filter "></i>
+                                                        <div class="dropdown-content">
+                                                            <p>Hello World!</p>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>Gmail
+                                                </th>
+                                                <th>Register</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Nguyen Trung Kien</td>
+                                                <td>SE</td>
+                                                <td>0123473689</td>
+                                                <td>4/5</td>
+                                                <td>test@fpt.edu.vn</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-success btn-circle btn-sm">
+                                                        <i class="fas fa-check"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
+                    <!-- /.container-fluid -->
+
                 </div>
 
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <%@include file ="footer.jsp" %>
+                <!-- End of Footer -->
+
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Content Wrapper -->
 
         </div>
+        <!-- End of Page Wrapper -->
 
-        <!-- End of Main Content -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-        <!-- Footer -->
-        <%@include file ="footer.jsp" %>
-        <!-- End of Footer -->
+        <!-- Logout Modal-->
+        <%@include file="logout.jsp" %>
 
-    </div>
-    <!-- End of Content Wrapper -->
+        <style>
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
 
-</div>
-<!-- End of Page Wrapper -->
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        </style>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Logout Modal-->
-<%@include file="logout.jsp" %>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<style>
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        padding: 12px 16px;
-        z-index: 1;
-    }
+        <!-- Page level plugins -->
+        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-</style>
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
-</body>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/datatables-demo.js"></script>
+    </body>
 
 </html>

@@ -38,46 +38,108 @@
                 <c:redirect url="login.jsp"></c:redirect>
             </c:if>
             <%@include file="modSidebar.jsp" %>
+            <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+                <!-- Main Content -->
+                <div id="content">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Group</h1>
-                <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                    For more information about DataTables, please visit the <a target="_blank"
-                        href="https://datatables.net">official DataTables documentation</a>.</p> -->
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <ul class="navbar-nav ml-auto">
 
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <!-- <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                    </div> -->
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-9">
-                                         <div class="dropdown">
-                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Semester
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
-                                                <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
+                                    <img class="img-profile rounded-circle"
+                                         src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
 
-                                            </ul>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Group</h1>
+                        <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                            For more information about DataTables, please visit the <a target="_blank"
+                                href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <!-- <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            </div> -->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Semester
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                                                        <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-                                        </div>
-                                    </div>
+                                    <table class="table table-sm" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Major</th>
+                                                <th>Phone</th>
+                                                <th>Member Of Group</th>
+                                                <th>Gmail</th>
+                                                <th>Salary</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Donna Snider</td>
+                                                <td>Customer Support</td>
+                                                <td>New York</td>
+                                                <td>27</td>
+                                                <td>2011/01/25</td>
+                                                <td>$112,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+
                             <table class="table-sm" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -103,51 +165,49 @@
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
+                    <!-- /.container-fluid -->
+
                 </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <%@include file="footer.jsp" %>
+
+                <!-- End of Footer -->
 
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Main Content -->
+        <!-- End of Page Wrapper -->
 
-        <!-- Footer -->
-        <%@include file="footer.jsp" %>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-        <!-- End of Footer -->
+        <!-- Logout Modal-->
+        <%@include file="logout.jsp" %>
 
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</div>
-<!-- End of Page Wrapper -->
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-<!-- Logout Modal-->
-<%@include file="logout.jsp" %>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
-
-</body>
+    </body>
 
 </html>

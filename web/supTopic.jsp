@@ -31,36 +31,96 @@
         <!-- Page Wrapper -->       
         <div id="wrapper">
             <%@include file="supSidebar.jsp" %>
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <div id="content-wrapper" class="d-flex flex-column">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Manager Capstone Topic</h1>
+                <!-- Main Content -->
+                <div id="content">
 
-                <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="col-12">
-                                <div class="row">
-                                  <div class="col-9">
-                                          <div class="dropdown">
-                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Semester
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
-                                                <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <ul class="navbar-nav ml-auto">
 
-                                            </ul>
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
+                                    <img class="img-profile rounded-circle"
+                                         src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Manager Capstone Topic</h1>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Semester
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                                                        <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-                                        </div>
-                                    </div>
+                                    <table class="table table-sm"  width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Captones Name</th>
+                                                <th>Group Name</th>
+                                                <th>Register Date</th>
+                                                <!--<th>Status</th>-->
+                                                <!--<th>Action</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Donna Snider</td>
+                                                <td>Customer Support</td>
+                                                <td>New York</td>
+                                                <!--<td>Unregistered</td>-->
+                                                <!--<td></td>-->
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <table class="table-sm"  width="100%" cellspacing="0">
@@ -86,49 +146,47 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+
+                    </div>          
+                    <!-- /.container-fluid -->
+
                 </div>
 
-            </div>          
-            <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <%@include file ="footer.jsp" %>
+
+            </div>
+            <!-- End of Content Wrapper -->
 
         </div>
+        <!-- End of Page Wrapper -->
 
-        <!-- End of Main Content -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-        <%@include file ="footer.jsp" %>
+        <!-- Logout Modal-->
+        <%@include file ="logout.jsp" %>
 
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</div>
-<!-- End of Page Wrapper -->
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-<!-- Logout Modal-->
-<%@include file ="logout.jsp" %>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
-
-</body>
+    </body>
 
 </html>
