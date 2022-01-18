@@ -148,6 +148,35 @@
                                         </c:forEach>
                                     </table>
                                 </div>
+
+                            </div>
+                            <table class="table-sm" width="100%" cellspacing="0" >
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Major</th>
+                                        <th>Phone</th>
+                                        <th>GroupID</th>
+                                        <th>Gmail</th>
+                                        <th>Photo</th>
+                                    </tr>
+                                </thead>
+                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                    <tbody>
+                                        <tr>
+                                            <td>${counter.count}</td>
+                                            <td>${stu.username}</td>
+                                            <td>SE</td>
+                                            <td>${stu.phone}</td>
+                                            <td>${stu.groupID}</td>
+                                            <td>${stu.gmail}</td>
+                                            <td>${stu.photoUrl}</td>
+                                        </tr>
+                                    </tbody>
+                                </c:forEach>
+                            </table>
+
                             </div>  
 
                         </div>
@@ -159,6 +188,7 @@
                                 <span class="text">Randomize Student Group</span>
                             </a>
                             <button type="button" class="btn btn-primary">Noti <i class="far fa-bell"></i></button>
+
                         </div>
 
                         <div class="row stu-tab-gr mt-3">

@@ -140,6 +140,39 @@
                                     </table>
                                 </div>
                             </div>
+                            <table class="table-sm" width="100%" >
+                                <thead>
+                                    <tr >
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Major</th>
+                                        <th>Phone</th>
+                                        <th>GroupID</th>
+                                        <th>Gmail</th>
+                                        <th>Photo</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <!-- tu chon field -->
+                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                    <tbody>
+                                        <tr class="" >
+                                            <td>${counter.count}</td>
+                                            <td>${stu.username}</td>
+                                            <td>SE</td>
+                                            <td>${stu.phone}</td>
+                                            <td>${stu.groupID}</td>
+                                            <td>${stu.gmail}</td>
+                                            <td>${stu.photoUrl}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-success btn-circle btn-sm">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </c:forEach>
+                            </table>
                         </div>
 
                     </div>

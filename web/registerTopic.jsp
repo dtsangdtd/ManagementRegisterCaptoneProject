@@ -131,6 +131,32 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            </div> 
+                            <table class="table-sm"width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Captone Name</th>
+                                        <th>Start time</th>
+                                        <th>End time</th>
+                                        <th>Register</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Touris Smart </td>
+                                        <td>27/2/2021</td>
+                                        <td>30/4/2021</td>
+                                        <td>
+                                            <a href="#" class="btn btn-success btn-circle btn-sm">
+                                                <i class="fas fa-plus"></i> 
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             </div>
                         </div>
 

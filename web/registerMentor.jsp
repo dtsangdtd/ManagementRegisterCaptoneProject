@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <title>Sinh Viên</title>
+        <title>Sinh ViÃªn</title>
 
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <!-- Custom styles for this template -->
@@ -57,6 +57,20 @@
                                         </div>
                                     </form>
                                 </div>
+
+                            </div>
+                            <table class="table-sm"  width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Major</th>
+                                        <th>Phone</th>
+                                        <th style="width: 160px">Number Group 
+                                            <div class="dropdown">
+                                                <i class="fas fa-filter "></i>
+                                                <div class="dropdown-content">
+                                                    <p>Hello World!</p>
                             </li>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">

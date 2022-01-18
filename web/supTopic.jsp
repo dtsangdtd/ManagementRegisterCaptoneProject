@@ -123,6 +123,28 @@
                                     </table>
                                 </div>
                             </div>
+                            <table class="table-sm"  width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Captones Name</th>
+                                        <th>Group Name</th>
+                                        <th>Register Date</th>
+                                        <!--<th>Status</th>-->
+                                        <!--<th>Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Donna Snider</td>
+                                        <td>Customer Support</td>
+                                        <td>New York</td>
+                                        <!--<td>Unregistered</td>-->
+                                        <!--<td></td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>          
