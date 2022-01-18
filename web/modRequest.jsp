@@ -34,16 +34,10 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div id="wrapper">
-            <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
-                <c:redirect url="login.jsp"></c:redirect>
-            </c:if>
-
             <%@include file="modSidebar.jsp" %>
             <div id="content-wrapper" class="d-flex flex-column">
-
                 <!-- Main Content -->
                 <div id="content">
-
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <ul class="navbar-nav ml-auto">
@@ -71,15 +65,12 @@
                                     </a>
                                 </div>
                             </li>
-
                         </ul>
-
                     </nav>
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">Request</h1>
-
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -93,7 +84,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table table-sm" width="100%" cellspacing="0">
+                                    <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -128,79 +119,44 @@
                                     </table>
                                 </div>
                             </div>
-
-                            <table class="table-sm" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th>Number Of Group</th>
-                                        <th>Gmail</th>
-                                        <th>Salary</th>
-                                        <th>Request</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                <i class="fas fa-ban"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
-
                     </div>
                     <!-- End of Main Content -->
-
-                    <!-- Footer -->
-                    <%@include file="footer.jsp" %>
-                    <!-- End of Footer -->
-
                 </div>
-                <!-- End of Content Wrapper -->
+                <!-- Footer -->
+                <%@include file="footer.jsp" %>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Page Wrapper -->
+            <!-- End of Content Wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        </div>
+        <!-- End of Page Wrapper -->
 
-            <!-- Logout Modal-->
-            <%@include file="logout.jsp" %>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-            <!-- Bootstrap core JavaScript-->
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Logout Modal-->
+        <%@include file="logout.jsp" %>
 
-            <!-- Core plugin JavaScript-->
-            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="js/sb-admin-2.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="vendor/chart.js/Chart.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="js/demo/chart-area-demo.js"></script>
-            <script src="js/demo/chart-pie-demo.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
     </body>
 

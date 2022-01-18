@@ -34,10 +34,6 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div id="wrapper">
-            <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
-                <c:redirect url="login.jsp"></c:redirect>
-            </c:if>
-
             <%@include file="modSidebar.jsp" %>
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -109,7 +105,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table table-sm" width="100%" cellspacing="0">
+
+                                    <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -133,39 +130,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
+
                                 </div>
                             </div>
-
-                            <table class="table-sm" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th>Number Of Group</th>
-                                        <th>Gmail</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
                         </div>
+                        <!-- End of Main Content -->
                     </div>
                 </div>
-                <!-- End of Main Content -->
-
                 <!-- Footer -->
                 <%@include file="footer.jsp" %>
                 <!-- End of Footer -->
@@ -174,6 +145,7 @@
             <!-- End of Content Wrapper -->
 
         </div>
+
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->

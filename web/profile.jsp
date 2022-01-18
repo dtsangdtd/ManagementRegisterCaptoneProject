@@ -23,80 +23,140 @@
 
     </head>
     <body>
-
         <div id="wrapper">
             <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
                 <c:redirect url="login.jsp"></c:redirect>
             </c:if>
             <%@include file="sidebar.jsp"%>
-            <div class="container-fluid" style="height: 70%">
-                <div class="card shadow mb-4">
-                    <form>
-                        <div class="container">
-                            <div class="row">
-                                <h2 style="text-align: center">Edit profile</h2>
-                                <div class="col-7">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                                <input class="form-control" type="text" value="" aria-label="Disabled input example" disabled readonly>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <form class="form-inline">
+                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </form>
+                        <ul class="navbar-nav ml-auto">
+
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                     aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                   placeholder="Search for..." aria-label="Search"
+                                                   aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Phone</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Major</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                                <div class="col-5">
-                                    <div id="preview-wrapper">
-                                        <div class="container">
-                                            <div class="avatar-upload">
-                                             
-                                                <div class="avatar-edit">
-                                                    
-                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                                    <label for="imageUpload"><i style="padding: 8px 0 0 8px" class="fas fa-pen"></i></label>
+                            </li>
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="profile.jsp">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                    <div class="container-fluid" style="height: 70%">
+                        <div class="card shadow mb-4">
+                            <form>
+                                <div class="container">
+                                    <div class="row">
+                                        <h2 style="text-align: center">Edit profile</h2>
+                                        <div class="col-7">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">ID</label>
+                                                        <input class="form-control" type="text" value="" aria-label="Disabled input example" disabled readonly>
+                                                    </div>
                                                 </div>
-                                                <div class="avatar-preview">
-                                                    <div id="imagePreview" >
-                                                        <input type='text' id="imageURL" hidden />
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="exampleFormControlInput1" class="form-label">Major</label>
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="col-5">
+                                            <div id="preview-wrapper">
+                                                <div class="container">
+                                                    <div class="avatar-upload">
 
+                                                        <div class="avatar-edit">
+
+                                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                            <label for="imageUpload"><i style="padding: 8px 0 0 8px" class="fas fa-pen"></i></label>
+                                                        </div>
+                                                        <div class="avatar-preview">
+                                                            <div id="imagePreview" >
+                                                                <input type='text' id="imageURL" hidden />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="container" style="width: 100%; text-align: center">  <button type="button" class="btn btn-success">Submit</button></div>
+                            </form>
                         </div>
-                        <div class="container" style="width: 100%; text-align: center">  <button type="button" class="btn btn-success">Submit</button></div>
-                    </form>
+                    </div>
                 </div>
+                <%@include file="footer.jsp" %>
             </div>
-            <%@include file="footer.jsp" %>
         </div>
+        <%@include file="logout.jsp" %>
         <style >
             .container {
                 max-width: 960px;
@@ -184,46 +244,47 @@
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
             import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
             const firebaseConfig = {
-            apiKey: "AIzaSyAaeDrbFpEOKxfsmeYaUvVhOCsh9o8nxyI",
-            authDomain: "upload-image-125bb.firebaseapp.com",
-            projectId: "upload-image-125bb",
-            storageBucket: "upload-image-125bb.appspot.com",
-            messagingSenderId: "186232203166",
-            appId: "1:186232203166:web:8350eb791825d6adbad88f",
-            measurementId: "G-16ZE60ZJVS"
+                apiKey: "AIzaSyAaeDrbFpEOKxfsmeYaUvVhOCsh9o8nxyI",
+                authDomain: "upload-image-125bb.firebaseapp.com",
+                projectId: "upload-image-125bb",
+                storageBucket: "upload-image-125bb.appspot.com",
+                messagingSenderId: "186232203166",
+                appId: "1:186232203166:web:8350eb791825d6adbad88f",
+                measurementId: "G-16ZE60ZJVS"
             };
             const firebaseApp = initializeApp(firebaseConfig);
             const storage = getStorage(firebaseApp);
             function readURL(input) {
-            const metadata = {
-            contentType: 'image/jpeg'
-            };
-            if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650);
+                const metadata = {
+                    contentType: 'image/jpeg'
+                };
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
 
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                    const name = new Date().getTime() + '-' + input.files[0].name;
+                    console.log(name);
+                    const storageRef = ref(storage, 'images/' + name);
+                    uploadBytesResumable(storageRef, input.files[0], metadata).then((snapshot) => {
+                        console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+                        console.log('File metadata:', snapshot.metadata);
+                        getDownloadURL(snapshot.ref).then((url) => {
+                            console.log('File available at', url);
+                            document.getElementById('imageURL').value = url;
+                        });
+                    }).catch((error) => {
+                        console.error('Upload failed', error);
+
+                    });
+                }
             }
-            reader.readAsDataURL(input.files[0]);
-            const name = new Date().getTime() + '-' + input.files[0].name;
-            console.log(name);
-            const storageRef = ref(storage, 'images/'+name);
-            uploadBytesResumable(storageRef, input.files[0], metadata).then((snapshot) => {
-               console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-               console.log('File metadata:', snapshot.metadata);
-               getDownloadURL(snapshot.ref).then((url) => {
-               console.log('File available at', url);
-               document.getElementById('imageURL').value = url;
-            });
-              }).catch((error) => {
-            console.error('Upload failed', error);
-    
-            });
-            }}
             $("#imageUpload").change(function () {
-            readURL(this);
+                readURL(this);
             });
         </script>
     </body>
