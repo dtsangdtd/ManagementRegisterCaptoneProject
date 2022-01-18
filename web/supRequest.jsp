@@ -103,7 +103,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table table-sm" width="100%" cellspacing="0">
+
+                                    <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -136,39 +137,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <table class="table-sm" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Captones Name</th>
-                                        <th>Group Name  </th>
-                                        <th>Register Date</th>
-                                        <th>Status</th>
-                                        <th>Request</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Donna Snider</td>
-                                        <td><a href="group-detail.jsp">Customer Support </a></td>
-                                        <td>New York</td>
-                                        <td>Processing</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                            <!-- g?i th?ng qua bên mod n?u dong y-->
-                                            <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                <i class="fas fa-ban"></i>
-                                            </a>
-
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
-
                     </div>       
                     <!-- /.container-fluid -->
 

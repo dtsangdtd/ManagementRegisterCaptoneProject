@@ -34,15 +34,10 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div id="wrapper">
-            <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
-                <c:redirect url="login.jsp"></c:redirect>
-            </c:if>
             <%@include file="modSidebar.jsp" %>
             <div id="content-wrapper" class="d-flex flex-column">
-
                 <!-- Main Content -->
                 <div id="content">
-
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <ul class="navbar-nav ml-auto">
@@ -113,7 +108,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table table-sm" width="100%" cellspacing="0">
+
+                                    <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -138,37 +134,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
-
-                            <table class="table-sm" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th>Member Of Group</th>
-                                        <th>Gmail</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <!-- /.container-fluid -->
                         </div>
-
                     </div>
-                    <!-- /.container-fluid -->
-
                 </div>
                 <!-- End of Main Content -->
 

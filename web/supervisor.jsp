@@ -103,7 +103,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table-sm" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -144,49 +144,8 @@
                                     </table>
                                 </div>
                             </div>
-                            <table class="table-sm" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Group Name</th>
-                                        <th>Capstone Name</th>
-                                        <th>Person Of Group</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>New York</td>
-                                        <td>Tourism Smart Card</td>
-                                        <td>4</td>
-                                        <td>Pass</td>
-                                          <td>
-                                            <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
-                                              <i class="fas fa-search"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                     <tr>
-                                        <td>1</td>
-                                        <td>New York</td>
-                                        <td>Tourism Smart Card</td>
-                                        <td>4</td>
-                                        <td>Pass</td>
-                                          <td>
-                                            <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
-                                              <i class="fas fa-search"></i>
-                                            </a>
-                                           
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
-
                     </div>
-
 
                 </div>
 

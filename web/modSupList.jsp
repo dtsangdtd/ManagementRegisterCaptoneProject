@@ -38,14 +38,10 @@
         </c:if>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            
-
             <%@include file="modSidebar.jsp" %>  
             <div id="content-wrapper" class="d-flex flex-column">
-
                 <!-- Main Content -->
                 <div id="content">
-
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <ul class="navbar-nav ml-auto">
@@ -112,7 +108,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table table-sm" width="100%" cellspacing="0">
+                                    <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -150,51 +146,12 @@
                                             </tbody>
                                         </c:forEach>
                                     </table>
+
                                 </div>
                             </div>
-                            <table class="table-sm" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th style="width: 160px">Groups 
-                                            <div class="dropdown">
-                                                <i class="fas fa-filter "></i>
-                                                <div class="dropdown-content">
-                                                    <input type="checkbox" id="scales" name="full"
-                                                           checked>
-                                                    <label for="full">full</label>
-                                                    <input type="checkbox" id="scales" name="notFull"
-                                                           checked>
-                                                    <label for="notFull">not full</label>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <th>Gmail</th>
-                                        <th>photoUrl</th>
-                                    </tr>
-                                </thead>
-                                <c:forEach var="sup" varStatus="counter" items="${LIST_SUPERVISOR}">
-                                    <tbody>
-                                        <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${sup.username}</td>
-                                            <td>SE</td>
-                                            <td>${sup.phone}</td>
-                                            <td>${sup.groupID}</td>
-                                            <td>${sup.gmail}</td>
-                                            <td>${sup.photoUrl}</td>
-                                        </tr>
-                                    </tbody>
-                                </c:forEach>
-                            </table>
-
+                            <!-- /.container-fluid -->
                         </div>
                     </div>
-                    <!-- /.container-fluid -->
-
                 </div>
                 <!-- End of Main Content -->
 
