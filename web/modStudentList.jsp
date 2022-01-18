@@ -38,157 +38,208 @@
     </head>
 
     <body id="page-top">
-
+        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
-                <c:redirect url="login.jsp"></c:redirect>
-            </c:if>
-
             <%@include file="modSidebar.jsp" %>     
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+                        <ul class="navbar-nav ml-auto">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Student</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>
-                </div>
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
+                                    <img class="img-profile rounded-circle"
+                                         src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
 
-                <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive" style="height: 500px">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-9">
-                                        <div class="dropdown">
-                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Semester
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
-                                                <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-                                        </div>
-                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
                                 </div>
-                            </div>
-                            <table class="table table-sm" width="100%" cellspacing="0" >
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th>GroupID</th>
-                                        <th>Gmail</th>
-                                        <th>Photo</th>
-                                    </tr>
-                                </thead>
-                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
-                                    <tbody>
-                                        <tr>
-                                            <td>${counter.count}</td>
-                                            <td>${stu.username}</td>
-                                            <td>SE</td>
-                                            <td>${stu.phone}</td>
-                                            <td>${stu.groupID}</td>
-                                            <td>${stu.gmail}</td>
-                                            <td>${stu.photoUrl}</td>
-                                        </tr>
-                                    </tbody>
-                                </c:forEach>
-                            </table>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Student</h1>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>
                         </div>
-                    </div>
-                </div>                   
 
-                <div>
-                    <a href="#" class="btn btn-light btn-icon-split">
-                        <span class="icon text-gray-600">
-                            <i class="fas fa-arrow-right"></i>
-                        </span>
-                        <span class="text">Randomize Student Group</span>
-                    </a>
-                    <button type="button" class="btn btn-primary">Noti <i class="far fa-bell"></i></button>
-                </div>
-
-                <div class="row stu-tab-gr mt-3">
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card shadow mb-4">
                             <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                            Group 1</div>
-                                        <div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
+                                <div class="table-responsive" style="height: 500px">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Semester
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                                                        <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <a href="#" class="btn btn-success btn-circle">
-                                            <i class="fas fa-check"></i>
-                                        </a>
+                                    <table class="table table-sm" width="100%" cellspacing="0" >
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Major</th>
+                                                <th>Phone</th>
+                                                <th>GroupID</th>
+                                                <th>Gmail</th>
+                                                <th>Photo</th>
+                                            </tr>
+                                        </thead>
+                                        <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                            <tbody>
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${stu.username}</td>
+                                                    <td>SE</td>
+                                                    <td>${stu.phone}</td>
+                                                    <td>${stu.groupID}</td>
+                                                    <td>${stu.gmail}</td>
+                                                    <td>${stu.photoUrl}</td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>  
+
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-light btn-icon-split">
+                                <span class="icon text-gray-600">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                                <span class="text">Randomize Student Group</span>
+                            </a>
+                            <button type="button" class="btn btn-primary">Noti <i class="far fa-bell"></i></button>
+                        </div>
+
+                        <div class="row stu-tab-gr mt-3">
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                    Group 1</div>
+                                                <div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <a href="#" class="btn btn-success btn-circle">
+                                                    <i class="fas fa-check"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /.container-fluid -->
 
                 </div>
+
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <%@include file="footer.jsp" %>
+                <!-- End of Footer -->
+
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Content Wrapper -->
 
         </div>
+        <!-- End of Page Wrapper -->
 
-        <!-- End of Main Content -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-        <!-- Footer -->
-        <%@include file="footer.jsp" %>
-        <!-- End of Footer -->
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <c:url var="logoutLink" value="MainController">
+                            <c:param name="action" value="Logout"></c:param>
+                        </c:url>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="${logoutLink}">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-</div>
-<!-- End of Page Wrapper -->
+        <!-- Page level custom scripts -->
+        <script src="js/demo/datatables-demo.js"></script>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<%@include file="logout.jsp" %>
-
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<!-- Core plugin JavaScript-->
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
-
-</body>
+    </body>
 
 </html>
