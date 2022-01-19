@@ -115,7 +115,7 @@
                                                 <th>Phone</th>
                                                 <th>Number Of Group</th>
                                                 <th>Gmail</th>
-                                                <th>Salary</th>
+                                                <th>Photo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -126,7 +126,7 @@
                                                 <td>New York</td>
                                                 <td>27</td>
                                                 <td>2011/01/25</td>
-                                                <td>$112,000</td>
+                                                <td></td>
                                             </tr>
                                         </tbody>
                                     </table>

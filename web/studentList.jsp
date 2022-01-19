@@ -71,7 +71,7 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="profile.jsp">
+                                    <a class="dropdown-item" href="stuProfile.jsp">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
@@ -105,49 +105,49 @@
                                             </div>
                                         </div>
                                     </div>
-                          
-                            <table class="table-sm" width="100%" >
-                                <thead>
-                                    <tr >
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Major</th>
-                                        <th>Phone</th>
-                                        <th>GroupID</th>
-                                        <th>Gmail</th>
-                                        <th>Photo</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <!-- tu chon field -->
-                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
-                                    <tbody>
-                                        <tr class="" >
-                                            <td>${counter.count}</td>
-                                            <td>${stu.username}</td>
-                                            <td>SE</td>
-                                            <td>${stu.phone}</td>
-                                            <td>${stu.groupID}</td>
-                                            <td>${stu.gmail}</td>
-                                            <td><image style="width: 100px; height: 100px; border-radius: 50%" src="${stu.photoUrl}"/></td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                    <i class="fas fa-plus"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </c:forEach>
-                            </table>
+
+                                    <table class="table-sm" width="100%" >
+                                        <thead>
+                                            <tr >
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Major</th>
+                                                <th>Phone</th>
+                                                <th>GroupID</th>
+                                                <th>Gmail</th>
+                                                <th>Photo</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <!-- tu chon field -->
+                                        <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                            <tbody>
+                                                <tr class="" >
+                                                    <td>${counter.count}</td>
+                                                    <td>${stu.username}</td>
+                                                    <td>SE</td>
+                                                    <td>${stu.phone}</td>
+                                                    <td>${stu.groupID}</td>
+                                                    <td>${stu.gmail}</td>
+                                                    <td>${stu.photoUrl}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-success btn-circle btn-sm">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- /.container-fluid -->
+
                         </div>
-
                     </div>
-                    <!-- /.container-fluid -->
-
+                    <!-- End of Main Content -->
                 </div>
-                    </div>
-                <!-- End of Main Content -->
-                    </div>
                 <!-- Footer -->
                 <%@include file ="footer.jsp" %>
                 <!-- End of Footer -->

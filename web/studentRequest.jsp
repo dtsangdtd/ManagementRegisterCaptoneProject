@@ -71,7 +71,7 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="profile.jsp">
+                                    <a class="dropdown-item" href="stuProfile.jsp">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
@@ -114,7 +114,7 @@
                                                 <th>Phone</th>
                                                 <th>Number Of Group</th>
                                                 <th>Gmail</th>
-                                                <th>Salary</th>
+                                                <th>Photo</th>
                                                 <th>Request</th>
                                             </tr>
                                         </thead>
@@ -126,7 +126,7 @@
                                                 <td>New York</td>
                                                 <td>27</td>
                                                 <td>2011/01/25</td>
-                                                <td>$112,000</td>
+                                                <td></td>
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-check"></i> 

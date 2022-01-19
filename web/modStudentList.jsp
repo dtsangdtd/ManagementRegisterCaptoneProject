@@ -135,7 +135,9 @@
                                                     <td>${stu.phone}</td>
                                                     <td>${stu.groupID}</td>
                                                     <td>${stu.gmail}</td>
-                                                    <td>${stu.photoUrl}</td>
+                                                    <td>
+                                                        <img src="${stu.photoUrl}" width="150px">
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </c:forEach>
