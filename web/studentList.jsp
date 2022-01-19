@@ -71,7 +71,7 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="stuProfile.jsp">
+                                    <a class="dropdown-item" href="profile.jsp">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
@@ -129,7 +129,7 @@
                                                     <td>${stu.phone}</td>
                                                     <td>${stu.groupID}</td>
                                                     <td>${stu.gmail}</td>
-                                                    <td>${stu.photoUrl}</td>
+                                                    <td> <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/></td>
                                                     <td>
                                                         <a href="#" class="btn btn-success btn-circle btn-sm">
                                                             <i class="fas fa-plus"></i>
