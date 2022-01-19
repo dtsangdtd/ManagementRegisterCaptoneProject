@@ -129,7 +129,7 @@
                                             <td>${stu.phone}</td>
                                             <td>${stu.groupID}</td>
                                             <td>${stu.gmail}</td>
-                                            <td>${stu.photoUrl}</td>
+                                            <td><image style="width: 100px; height: 100px; border-radius: 50%" src="${stu.photoUrl}"/></td>
                                             <td>
                                                 <a href="#" class="btn btn-success btn-circle btn-sm">
                                                     <i class="fas fa-plus"></i>

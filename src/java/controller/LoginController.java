@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
             UserDAO dao = new UserDAO();
             UserDTO user = dao.checkLogin(gmail, password);
             UserDTO userInfor = dao.getInforUser(user.getUserID());
-            System.out.println(userInfor);
+//            System.out.println(userInfor);
             HttpSession session = request.getSession();
             session.setAttribute("INFOR", userInfor);
             if (user != null) {
