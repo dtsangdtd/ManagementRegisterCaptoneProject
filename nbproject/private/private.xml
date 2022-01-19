@@ -14,13 +14,15 @@
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/src/java/controller/LogoutController.java</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/supervisor.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
-            <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/profile.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/src/java/controller/LoginController.java</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/modSidebar.jsp</file>
+            <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/stuProfile.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/modRequest.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/logout.jsp</file>
+            <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/supProfile.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/studentList.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/modStudentList.jsp</file>
+            <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/sidebar.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/modGroup.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/registerTopic.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/supSidebar.jsp</file>
@@ -28,6 +30,7 @@
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/modTopic.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/student.jsp</file>
             <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/web/WEB-INF/web.xml</file>
+            <file>file:/Users/mac/Documents/JavaWeb/ManagementRegisterCaptoneProject/src/java/user/UserDTO.java</file>
         </group>
     </open-files>
 </project-private>

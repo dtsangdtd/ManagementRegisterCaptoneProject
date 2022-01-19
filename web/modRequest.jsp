@@ -93,7 +93,6 @@
                                                 <th>Phone</th>
                                                 <th>Number Of Group</th>
                                                 <th>Gmail</th>
-                                                <th>Salary</th>
                                                 <th>Request</th>
                                             </tr>
                                         </thead>
@@ -105,7 +104,6 @@
                                                 <td>New York</td>
                                                 <td>27</td>
                                                 <td>2011/01/25</td>
-                                                <td>$112,000</td>
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-check"></i>

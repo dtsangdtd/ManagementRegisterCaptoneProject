@@ -74,9 +74,6 @@
 
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">Group</h1>
-                        <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                            For more information about DataTables, please visit the <a target="_blank"
-                                href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -118,7 +115,7 @@
                                                 <th>Phone</th>
                                                 <th>Member Of Group</th>
                                                 <th>Gmail</th>
-                                                <th>Salary</th>
+                                                <th>Photo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -129,7 +126,7 @@
                                                 <td>New York</td>
                                                 <td>27</td>
                                                 <td>2011/01/25</td>
-                                                <td>$112,000</td>
+                                                <td></td>
                                             </tr>
                                         </tbody>
                                     </table>
