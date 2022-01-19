@@ -26,7 +26,6 @@
     <body class="bg-gradient-primary">
 
         <div class="container">
-
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
@@ -49,22 +48,20 @@
                                         </div>
                                         <hr>
                                         <input type="submit" name="action"class="btn btn-primary btn-user btn-block" value="Login">
-
-
                                         <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/ManagementRegisterCaptoneProject/login-google&response_type=code
                                            &client_id=130712381079-lsfn0bj6q55gicpnofp13tbaa5jh59ra.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
-                                        
                                     </div>
-                                </form>
-                            </div>
+                                </form>                               
+                                <h3>${requestScope.ERROR}</h3>
+                            </div>                            
                         </div>
                     </div>
                 </div>
 
             </div>
-
+        </div>
             <!-- Bootstrap core JavaScript-->
             <script src="vendor/jquery/jquery.min.js"></script>
             <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

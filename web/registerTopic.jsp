@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Tables</title>
+        <title>Student Register Topic</title>
 
         <!-- Custom fonts for this template -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,7 +23,6 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%@include file="bootstrap.jsp" %>
     </head>
 
     <body id="page-top">
@@ -38,6 +37,7 @@
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                         <ul class="navbar-nav ml-auto">
+                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                             <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -90,7 +90,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Topic</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Mentor Topic</h1>
                         <div class="card shadow mb-4">
 
                             <div class="card-body">
@@ -98,11 +98,6 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-9"></div>
-                                            <div class="col-3">
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>                                     
                                     <table class="table-sm"width="100%" cellspacing="0">

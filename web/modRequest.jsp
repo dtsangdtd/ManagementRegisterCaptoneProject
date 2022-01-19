@@ -14,7 +14,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Mod Group List</title>
+        <title>Moderator Request List</title>
 
         <!-- Custom fonts for this template -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,6 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%@include file="bootstrap.jsp" %>
     </head>
     <body id="page-top"> 
         <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
@@ -40,8 +39,20 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                         <ul class="navbar-nav ml-auto">
-
+                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -70,7 +81,9 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Request</h1>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Request</h1>
+                        </div>
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -78,9 +91,7 @@
                                         <div class="row">
                                             <div class="col-9"></div>
                                             <div class="col-3">
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

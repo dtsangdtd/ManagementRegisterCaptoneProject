@@ -25,6 +25,7 @@ public class UserDTO implements Serializable{
     
     private String semesterName;
     private String capstoneName;
+    
     public UserDTO() {
     }
 
@@ -145,6 +146,11 @@ public class UserDTO implements Serializable{
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", roleID=" + roleID + ", gmail=" + gmail + ", phone=" + phone + ", capstoneID=" + capstoneID + ", groupID=" + groupID + ", statusID=" + statusID + ", photoUrl=" + photoUrl + ", semesterName=" + semesterName + ", capstoneName=" + capstoneName + '}';
     }
 
 }
