@@ -143,8 +143,8 @@
                                                             <label for="imageUpload"><i style="padding: 8px 0 0 8px" class="fas fa-pen"></i></label>
                                                         </div>
                                                         <div class="avatar-preview">
-                                                            <div id="imagePreview" >
-                                                                
+                                                            <div>
+                                                                <img id="imagePreview" src="${sessionScope.INFOR.photoUrl}"/>
                                                                 <input type='text' id="imageURL" name="imageURL" hidden value="${sessionScope.INFOR.photoUrl}"/>
                                                             </div>
                                                         </div>
@@ -280,9 +280,9 @@
             if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650);
+//            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+//            $('#imagePreview').hide();
+//            $('#imagePreview').fadeIn(650);
 
             }
             
@@ -295,7 +295,8 @@
             console.log('File metadata:', snapshot.metadata);
             getDownloadURL(snapshot.ref).then((url) => {
             console.log('File available at', url);
-            
+            document.getElementById("imagePreview").src = url;
+            document.getElementById("imageURL").value = url;
             });
             }).catch((error) => {
             console.error('Upload failed', error);
