@@ -16,7 +16,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Tables</title>
+        <title>Moderator Supervisor List</title>
 
         <!-- Custom fonts for this template -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,7 +29,6 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%@include file="bootstrap.jsp" %>
     </head>
 
     <body id="page-top">
@@ -44,8 +43,20 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                         <ul class="navbar-nav ml-auto">
-
+                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -84,26 +95,21 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" style="height: 500px">
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-9">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div class="dropdown mb-4">
+                                                    <button class="btn btn-info dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
                                                         Semester
                                                     </button>
-                                                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
-                                                        <li><a class="dropdown-item active" href="#">Fall 2021</a></li>
-                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-                                                        <li><a class="dropdown-item" href="#">Spring 2021</a></li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
+                                                    <div class="dropdown-menu animated--fade-in"
+                                                         aria-labelledby="dropdownMenuButton1">
+                                                        <a class="dropdown-item" href="#">Fall 2021</a>
+                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +135,7 @@
                                                     </div>
                                                 </th>
                                                 <th>Gmail</th>
-                                                <th>photoUrl</th>
+<!--                                                <th>photoUrl</th>-->
                                             </tr>
                                         </thead>
                                         <c:forEach var="sup" varStatus="counter" items="${LIST_SUPERVISOR}">
@@ -140,8 +146,14 @@
                                                     <td>SE</td>
                                                     <td>${sup.phone}</td>
                                                     <td>${sup.groupID}</td>
-                                                    <td>${sup.gmail}</td>
-                                                    <td>${sup.photoUrl}</td>
+                                                    <td>
+                                                        <a href="" class="copy-click"
+                                                           data-tooltip-text="Click To Copy" 
+                                                           data-tooltip-text-copied="✔ Copied">
+                                                            ${sup.gmail}
+                                                        </a>
+                                                    </td>
+<!--                                                    <td>${sup.photoUrl}</td>-->
                                                 </tr>
                                             </tbody>
                                         </c:forEach>
@@ -193,7 +205,94 @@
             .dropdown:hover .dropdown-content {
                 display: block;
             }
+            .copy-click {
+                position: relative;
+                padding-bottom: 2px;
+                text-decoration: none;
+                cursor: copy;
+                color: #484848;
+                /*                border-bottom: 1px dashed #767676;*/
+                transition: background-color calc(var(--duration) * 2) var(--ease);
+            }
+
+            .copy-click:after {
+                content: attr(data-tooltip-text);
+                position: absolute;
+                bottom: calc(100% + 6px);
+                left: 50%;
+                padding: 8px 16px;
+                white-space: nowrap;
+                background-color: white;
+                border-radius: 4px;
+                box-shadow: 0 0 0 -12px rgba(0, 0, 0, 0);
+                pointer-events: none;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                opacity: 0;
+                -webkit-transform: translate(-50%, 12px);
+                transform: translate(-50%, 12px);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+            }
+
+            .copy-click.is-hovered:after {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                opacity: 1;
+                -webkit-transform: translate(-50%, 0);
+                transform: translate(-50%, 0);
+                transition-timing-function: var(--ease);
+            }
+
+            /*            .copy-click.is-copied {
+                            background-color: yellow;
+                        }*/
+
+            .copy-click.is-copied:after {
+                content: attr(data-tooltip-text-copied);
+            }
         </style>
+        <script>
+            const links = document.querySelectorAll('.copy-click');
+            const cls = {
+                copied: 'is-copied',
+                hover: 'is-hovered'};
+
+
+            const copyToClipboard = str => {
+                const el = document.createElement('input');
+                str.dataset.copyString ? el.value = str.dataset.copyString : el.value = str.text;
+                el.setAttribute('readonly', '');
+                el.style.position = 'absolute';
+                el.style.opacity = 0;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+            };
+
+            const clickInteraction = e => {
+                e.preventDefault();
+                copyToClipboard(e.target);
+                e.target.classList.add(cls.copied);
+                setTimeout(() => e.target.classList.remove(cls.copied), 1000);
+                setTimeout(() => e.target.classList.remove(cls.hover), 700);
+            };
+
+            Array.from(links).forEach(link => {
+                link.addEventListener('click', e => clickInteraction(e));
+                link.addEventListener('keypress', e => {
+                    if (e.keyCode === 13)
+                        clickInteraction(e);
+                });
+                link.addEventListener('mouseover', e => e.target.classList.add(cls.hover));
+                link.addEventListener('mouseleave', e => {
+                    if (!e.target.classList.contains(cls.copied)) {
+                        e.target.classList.remove(cls.hover);
+                    }
+                });
+            });
+        </script>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

@@ -95,35 +95,6 @@ public class UserDAO {
         return user;
     }
 
-//    public boolean insertUser(UserDTO user) throws SQLException {
-//        boolean check = false;
-//        Connection conn = null;
-//        PreparedStatement stm = null;
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                String sql = "INSERT INTO tblUser(name, gmail, password, userID, roleID) "
-//                        + " VALUES(?,?,?,?,?)";
-//                stm = conn.prepareStatement(sql);
-//                stm.setString(1, user.getUsername());
-//                stm.setString(2, user.getGmail());
-//                stm.setString(3, user.getPassword());
-//                stm.setString(4, user.getUserID());
-//                stm.setString(5, user.getRoleID());
-//                check = stm.executeUpdate() > 0 ? true : false;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return check;
-//    }
     public List<UserDTO> getListStudent() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -230,8 +201,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
                     String semesterName = rs.getString("semesterName");
                     String capstoneName = rs.getString("capstoneName");
-                    user = new UserDTO(userID, name, gmail, phone, photoUrl, semesterName, capstoneName);
-                    System.out.println(user);
+                    user = new UserDTO(userID, name, gmail, phone, photoUrl, semesterName, capstoneName);                   
                     if (user != null) {
                         return user;
                     }

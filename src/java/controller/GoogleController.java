@@ -64,25 +64,24 @@ public class GoogleController extends HttpServlet {
                 UserDTO user = dao.checkLoginGG(gmail);
                 HttpSession session = request.getSession();
                 UserDTO userInfor = dao.getInforUser(user.getUserID());
-                System.out.println(userInfor);
-                session.setAttribute("INFOR",userInfor );
+               
+                session.setAttribute("INFOR", userInfor);
                 if (user != null) {
                     session.setAttribute("LOGIN_USER", user);
                     String roleID = user.getRoleID();
-                    if(AD.equals(roleID)){
+                    if (AD.equals(roleID)) {
                         url = ADMIN;
-                    }else if(US.equals(roleID)){
+                    } else if (US.equals(roleID)) {
                         url = USER;
-                    }else if(MT.equals(roleID)){
+                    } else if (MT.equals(roleID)) {
                         url = MENTOR;
-                    }else{
-                        request.setAttribute("ERROR_MESSAGE", "Your role is not supported!");
                     }
-                    
+                } else {
+                    request.setAttribute("ERROR_MESSAGE", "Your email is not supported!");
                 }
             }
         } catch (Exception e) {
-            log("Error at LoginController: " + e.toString());
+            log("Error at GoogleController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

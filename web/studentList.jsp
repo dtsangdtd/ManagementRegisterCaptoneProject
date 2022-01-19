@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Tables</title>
+        <title>Student Invite List</title>
 
         <!-- Custom fonts for this template -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,7 +23,6 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%@include file="bootstrap.jsp" %>
     </head>
 
     <body id="page-top">
@@ -36,8 +35,20 @@
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+                        <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                         <ul class="navbar-nav ml-auto">
+                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                             <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -94,19 +105,9 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-9"></div>
-                                            <div class="col-3">
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="table-responsive" style="height: 500px">
 
-                                    <table class="table-sm" width="100%" >
+                                    <table class="table-sm" width="100%">
                                         <thead>
                                             <tr >
                                                 <th>No</th>
@@ -116,7 +117,7 @@
                                                 <th>GroupID</th>
                                                 <th>Gmail</th>
                                                 <th>Photo</th>
-                                                <th></th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <!-- tu chon field -->

@@ -17,12 +17,12 @@
         </a>
     </li>
 
-    <li class="nav-item ">
+<!--    <li class="nav-item ">
         <a class="nav-link" href="registerTopic.jsp">
             <i class="fas fa-fw fa-folder"></i>
             <span>Register Topic</span>
         </a>
-    </li>
+    </li>-->
 
     <li class="nav-item ">
         <a class="nav-link" href="registerMentor.jsp">

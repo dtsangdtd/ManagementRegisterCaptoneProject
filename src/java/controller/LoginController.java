@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
             UserDAO dao = new UserDAO();
             UserDTO user = dao.checkLogin(gmail, password);
             UserDTO userInfor = dao.getInforUser(user.getUserID());
-            System.out.println(userInfor);
+
             HttpSession session = request.getSession();
             session.setAttribute("INFOR", userInfor);
             if (user != null) {
@@ -55,10 +55,10 @@ public class LoginController extends HttpServlet {
                 if (MT.equals(roleID)) {
                     url = MENTOR;
                 } else {
-                    request.setAttribute("ERROR_MESSAGE", "Your role is not supported!");
+                    request.setAttribute("ERROR", "Your role is not supported!");
                 }
             } else {
-                request.setAttribute("ERROR_MESSAGE", "Incorrect UserID or Password!");
+                request.setAttribute("ERROR", "Incorrect UserID or Password!");
             }
         } catch (Exception e) {
             log("ERROR at LoginController:" + e.toString());

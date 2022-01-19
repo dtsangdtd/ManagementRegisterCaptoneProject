@@ -9,8 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <title>Sinh Viên</title>
+        <title>Student Register Mentor</title>
 
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <!-- Custom styles for this template -->
@@ -20,7 +19,6 @@
             rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%@include file="bootstrap.jsp" %>
     </head>
 
     <body id="page-top">
@@ -33,7 +31,20 @@
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                         <ul class="navbar-nav ml-auto">
+                            <%@include file="noti.jsp" %>
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,11 +78,6 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-9"></div>
-                                            <div class="col-3">
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <table class="table-sm"  width="100%" cellspacing="0">
@@ -85,13 +91,19 @@
                                                     <div class="dropdown">
                                                         <i class="fas fa-filter "></i>
                                                         <div class="dropdown-content">
-                                                            <p>Hello World!</p>
+                                                            <input type="checkbox" id="scales" name="Full"
+                                                                   checked>
+                                                            <label for="full">full</label>
+                                                            <input type="checkbox" id="scales" name="Not Full"
+                                                                   checked>
+                                                            <label for="notFull">not full</label>
                                                         </div>
                                                     </div>
                                                 </th>
                                                 <th>Gmail
                                                 </th>
                                                 <th>Register</th>
+                                                <th>Topics</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -105,6 +117,11 @@
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-check"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="registerTopic.jsp" class="btn btn-success btn-circle btn-sm">
+                                                        <i class="fas fa-search"></i>
                                                     </a>
                                                 </td>
                                             </tr>

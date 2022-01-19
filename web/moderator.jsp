@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Dashboard</title>
+        <title>Moderator</title>
 
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,8 @@
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        
+                <link href="css/chat.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700" rel="stylesheet"> 
     </head>
 
     <body id="page-top"> 
@@ -29,14 +30,16 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div id="wrapper">
+
             <%@include file="modSidebar.jsp" %>
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <ul class="navbar-nav ml-auto">
 
+                        <ul class="navbar-nav ml-auto">
+                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -395,9 +398,11 @@
                     </div>
                     <!-- /.container-fluid -->
 
+                    <!-- End of .chatbox -->
                 </div>
                 <!-- End of Main Content -->
 
+                <!-- End of .chatbox -->
                 <!-- Footer -->
                 <%@include file="footer.jsp" %>
                 <!-- End of Footer -->
@@ -412,7 +417,7 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
+        
         <!-- Logout Modal-->
         <%@include file="logout.jsp" %>
 
