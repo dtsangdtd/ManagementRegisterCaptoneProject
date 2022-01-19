@@ -26,7 +26,6 @@
         <div id="wrapper">
             <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
                 <c:redirect url="login.jsp"></c:redirect>
-
             </c:if>
             <%@include file="sidebar.jsp"%>
             <div id="content-wrapper" class="d-flex flex-column">
@@ -87,8 +86,8 @@
                     </nav>
                     <div class="container-fluid" style="height: 70%">
                         <div class="card shadow mb-4">
-                            <form action="MainController" method="POST" >
-                                <div class="container">                              
+                            <form>
+                                <div class="container">
                                     <div class="row">
                                         <h2 style="text-align: center">Edit profile</h2>
                                         <div class="col-7">
@@ -96,37 +95,31 @@
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                                        <input class="form-control" type="text" name="userID" aria-label="Disabled input example" readonly value="${sessionScope.INFOR.userID}">
+                                                        <input class="form-control" type="text" value="" aria-label="Disabled input example" disabled readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
+                                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-                                                        <input type="text" class="form-control" name="fullname"id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Phone</label>
-                                                        <input type="text" class="form-control" name="phone" id="exampleFormControlInput1"  value="${sessionScope.INFOR.phone}">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
-                                                        <label for="exampleFormControlInput1" class="form-label">Semester</label>
-                                                        <input type="text" class="form-control" name="semesterName" id="exampleFormControlInput1" disabled value="${sessionScope.INFOR.semesterName}">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="mb-3">
-                                                        <label for="exampleFormControlInput1" class="form-label">Capstone Name</label>
-                                                        <input type="text" class="form-control" name="capstoneName" id="exampleFormControlInput1" value="${sessionScope.INFOR.capstoneName}" disabled>
+                                                        <label for="exampleFormControlInput1" class="form-label">Major</label>
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,13 +131,12 @@
 
                                                         <div class="avatar-edit">
 
-                                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"  />
+                                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                                                             <label for="imageUpload"><i style="padding: 8px 0 0 8px" class="fas fa-pen"></i></label>
                                                         </div>
                                                         <div class="avatar-preview">
-                                                            <div>
-                                                                <img id="imagePreview" src="${sessionScope.INFOR.photoUrl}"/>
-                                                                <input type='text' id="imageURL" name="imageURL" hidden value="${sessionScope.INFOR.photoUrl}"/>
+                                                            <div id="imagePreview" >
+                                                                <input type='text' id="imageURL" hidden />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -154,7 +146,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="container" style="width: 100%; text-align: center">  <button type="submit" name="action" value="editProfile" class="btn btn-success">Save</button></div>
+                                <div class="container" style="width: 100%; text-align: center">  <button type="button" class="btn btn-success">Submit</button></div>
                             </form>
                         </div>
                     </div>
@@ -218,18 +210,6 @@
                 border-radius: 100%;
                 border: 6px solid #f8f8f8;
                 box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-
-            }
-            .avatar-upload .avatar-preview img{
-
-                width: 192px;
-                height: 192px;
-                position: relative;
-                border-radius: 100%;
-                background-size: auto;
-                background-repeat: no-repeat;
-                object-fit: cover;
-
             }
             .avatar-upload .avatar-preview > div {
                 width: 100%;
@@ -262,51 +242,47 @@
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
             import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
             const firebaseConfig = {
-            apiKey: "AIzaSyAaeDrbFpEOKxfsmeYaUvVhOCsh9o8nxyI",
-            authDomain: "upload-image-125bb.firebaseapp.com",
-            projectId: "upload-image-125bb",
-            storageBucket: "upload-image-125bb.appspot.com",
-            messagingSenderId: "186232203166",
-            appId: "1:186232203166:web:8350eb791825d6adbad88f",
-            measurementId: "G-16ZE60ZJVS"
+                apiKey: "AIzaSyAaeDrbFpEOKxfsmeYaUvVhOCsh9o8nxyI",
+                authDomain: "upload-image-125bb.firebaseapp.com",
+                projectId: "upload-image-125bb",
+                storageBucket: "upload-image-125bb.appspot.com",
+                messagingSenderId: "186232203166",
+                appId: "1:186232203166:web:8350eb791825d6adbad88f",
+                measurementId: "G-16ZE60ZJVS"
             };
             const firebaseApp = initializeApp(firebaseConfig);
             const storage = getStorage(firebaseApp);
             function readURL(input) {
-            const metadata = {
-            contentType: 'image/jpeg'
-            };
-            if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-//            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-//            $('#imagePreview').hide();
-//            $('#imagePreview').fadeIn(650);
+                const metadata = {
+                    contentType: 'image/jpeg'
+                };
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
 
-            }
-            
-            reader.readAsDataURL(input.files[0]);
-            const name = new Date().getTime() + '-' + input.files[0].name;
-            console.log(name);
-            const storageRef = ref(storage, 'images/' + name);
-            uploadBytesResumable(storageRef, input.files[0], metadata).then((snapshot) => {
-            console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-            console.log('File metadata:', snapshot.metadata);
-            getDownloadURL(snapshot.ref).then((url) => {
-            console.log('File available at', url);
-            document.getElementById("imagePreview").src = url;
-            document.getElementById("imageURL").value = url;
-            });
-            }).catch((error) => {
-            console.error('Upload failed', error);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                    const name = new Date().getTime() + '-' + input.files[0].name;
+                    console.log(name);
+                    const storageRef = ref(storage, 'images/' + name);
+                    uploadBytesResumable(storageRef, input.files[0], metadata).then((snapshot) => {
+                        console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+                        console.log('File metadata:', snapshot.metadata);
+                        getDownloadURL(snapshot.ref).then((url) => {
+                            console.log('File available at', url);
+                            document.getElementById('imageURL').value = url;
+                        });
+                    }).catch((error) => {
+                        console.error('Upload failed', error);
 
-            });
+                    });
+                }
             }
-            }
-            
             $("#imageUpload").change(function () {
-            readURL(this);
-            
+                readURL(this);
             });
         </script>
     </body>
