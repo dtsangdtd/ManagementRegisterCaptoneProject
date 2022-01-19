@@ -297,6 +297,7 @@
             console.log('File available at', url);
             document.getElementById("imagePreview").src = url;
             document.getElementById("imageURL").value = url;
+            <!-- image preview-->
             });
             }).catch((error) => {
             console.error('Upload failed', error);
