@@ -37,7 +37,6 @@ public class UpdateProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String userID = request.getParameter("userID");
-//            String gmail = request.getParameter("gmail");
             String name = request.getParameter("fullname");
             String phone = request.getParameter("phone");
             String photoUrl = request.getParameter("imageURL");
