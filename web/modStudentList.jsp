@@ -120,10 +120,11 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Major</th>
                                                 <th>Phone</th>
-                                                <th style="width: 160px">GroupID 
-                                                    <div class="dropdown">
+                                                
+                                                <th>Gmail</th>
+                                                <th style="width: 160px">Status
+                                                 <div class="dropdown">
                                                         <i class="fas fa-filter "></i>
                                                         <div class="dropdown-content">
                                                             <input type="checkbox" id="scales" name="full"
@@ -135,7 +136,6 @@
                                                         </div>
                                                     </div>
                                                 </th>
-                                                <th>Gmail</th>
                                             </tr>
                                         </thead>
                                         <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
@@ -143,9 +143,7 @@
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${stu.username}</td>
-                                                    <td>SE</td>
                                                     <td>${stu.phone}</td>
-                                                    <td>${stu.groupID}</td>
                                                     <td>
                                                         <a href="" class="copy-click"
                                                            data-tooltip-text="Click To Copy" 

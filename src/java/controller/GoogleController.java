@@ -64,7 +64,6 @@ public class GoogleController extends HttpServlet {
                 UserDTO user = dao.checkLoginGG(gmail);
                 HttpSession session = request.getSession();
                 UserDTO userInfor = dao.getInforUser(user.getUserID());
-               
                 session.setAttribute("INFOR", userInfor);
                 if (user != null) {
                     session.setAttribute("LOGIN_USER", user);

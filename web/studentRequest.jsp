@@ -112,11 +112,9 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Major</th>
-                                                <th>Phone</th>
-                                                <th>Number Of Group</th>
-                                                <th>Gmail</th>
                                                 <th>Photo</th>
+                                                <th>Phone</th>
+                                                <th>Gmail</th>
                                                 <th>Request</th>
                                             </tr>
                                         </thead>
@@ -124,11 +122,9 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>Donna Snider</td>
+                                                <td><img style="height: 100px; width: 100px; border-radius: 100%" alt="test" src=""/></td>
                                                 <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
-                                                <td>2011/01/25</td>
-                                                <td></td>
+                                                <td>test@gmai.com</td>
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-check"></i> 

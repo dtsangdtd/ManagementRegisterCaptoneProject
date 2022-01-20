@@ -119,8 +119,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Major</th>
-                                                <th>Phone</th>
+                                                <th>Capstone Name</th>
                                                 <th style="width: 160px">Groups 
                                                     <div class="dropdown">
                                                         <i class="fas fa-filter "></i>
@@ -143,7 +142,6 @@
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${sup.username}</td>
-                                                    <td>SE</td>
                                                     <td>${sup.phone}</td>
                                                     <td>${sup.groupID}</td>
                                                     <td>

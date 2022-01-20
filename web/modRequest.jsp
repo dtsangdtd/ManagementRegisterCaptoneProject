@@ -99,22 +99,19 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Name</th>
-                                                <th>Major</th>
-                                                <th>Phone</th>
-                                                <th>Number Of Group</th>
-                                                <th>Gmail</th>
+                                                <th>Group Name</th>
+                                                <th>
+                                                    Capstone Name</th>
+                                                <th>Supervior</th>
                                                 <th>Request</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
-                                                <td>2011/01/25</td>
+                                                <td>Nhom 2 vip pro</td>
+                                                <td>ban do an</td>
+                                                <td>Khai ngu ngoc</td>   
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-check"></i>

@@ -21,6 +21,7 @@ public class MainController extends HttpServlet {
     private static final String LOGIN = "LoginController";
     private static final String LOGOUT = "LogoutController";
     private static final String UPDATEPROFILE = "UpdateProfileController";
+    private static final String GETLIST = "GetListController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,6 +45,8 @@ public class MainController extends HttpServlet {
                 url = LOGOUT;   
             }else if ("editProfile".equals(action)){
                 url = UPDATEPROFILE;
+            }else if("getList".equals(action)){
+                url = GETLIST;
             }else {
                 session.setAttribute("ERROR_MESSAGE", "Function is not available!");
             }

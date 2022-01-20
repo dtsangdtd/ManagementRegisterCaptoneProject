@@ -86,7 +86,6 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Major</th>
                                                 <th>Phone</th>
                                                 <th style="width: 160px">Number Group 
                                                     <div class="dropdown">
@@ -111,7 +110,6 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>Nguyen Trung Kien</td>
-                                                <td>SE</td>
                                                 <td>0123473689</td>
                                                 <td>4/5</td>
                                                 <td>test@fpt.edu.vn</td>

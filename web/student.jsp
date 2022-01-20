@@ -110,7 +110,6 @@
                                                 <th>Name</th>
                                                 <th>Phone</th>
                                                 <th>Gmail</th>
-                                                <th>Major</th>
                                                 <th>Group name</th>
                                             </tr>
                                         </thead>
@@ -118,10 +117,18 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>Donna Snider</td>
-                                                <td>Customer Support</td>
+                                                <td>1242234234</td>
                                                 <td>test@fpt.edu.vn</td>
-                                                <td>SE</td>
                                                 <td>Group 1</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Khai Ngu Ngoc</td>
+                                                <td>32323232</td>
+                                                <td>test1@fpt.edu.vn</td>
+                                                <td>Group 1</td>
+                                                <td><button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-times"></i></button> </td>
                                             </tr>
                                         </tbody>
                                     </table>

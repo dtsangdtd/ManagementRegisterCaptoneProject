@@ -116,22 +116,18 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Major</th>
-                                                <th>Phone</th>
-                                                <th>Number Of Group</th>
-                                                <th>Gmail</th>
-
+                                                <th>Supervior</th>
+                                                <th>Group Name</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
                                                 <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
-                                                <td>2011/01/25</td>
-                                                
+                                                <td>LHK Phuong</td>
+                                                <td>Nhom 1</td>
+                                                <th><input type="checkbox"></th>
                                             </tr>
                                         </tbody>
                                     </table>

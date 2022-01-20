@@ -119,6 +119,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     list.add(new UserDTO(userID, username, "", "US", gmail, phone, capstoneID, groupID, statusID, photoUrl));
                 }
+                System.out.println(list);
             }
 
         } catch (Exception e) {
@@ -201,7 +202,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
                     String semesterName = rs.getString("semesterName");
                     String capstoneName = rs.getString("capstoneName");
-                    user = new UserDTO(userID, name, gmail, phone, photoUrl, semesterName, capstoneName);                   
+                    user = new UserDTO(userID, name, gmail, phone, photoUrl, semesterName, capstoneName);  
                     if (user != null) {
                         return user;
                     }

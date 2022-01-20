@@ -113,7 +113,6 @@
                                             <tr >
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Major</th>
                                                 <th>Phone</th>
                                                 <th>GroupID</th>
                                                 <th>Gmail</th>
@@ -127,7 +126,6 @@
                                                 <tr class="" >
                                                     <td>${counter.count}</td>
                                                     <td>${stu.username}</td>
-                                                    <td>SE</td>
                                                     <td>${stu.phone}</td>
                                                     <td>${stu.groupID}</td>
                                                     <td>${stu.gmail}</td>

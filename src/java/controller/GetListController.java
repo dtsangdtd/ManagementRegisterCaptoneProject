@@ -37,6 +37,7 @@ public class GetListController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             List<UserDTO> listStudent = dao.getListStudent();
+            System.out.println(listStudent);
             session.setAttribute("LIST_STUDENT", listStudent);
             List<UserDTO> listSupervisor = dao.getListSupervisor();
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);

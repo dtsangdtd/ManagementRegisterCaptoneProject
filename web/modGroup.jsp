@@ -117,11 +117,12 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Name</th>
-                                                <th>Major</th>
-                                                <th>Phone</th>
+                                                <th>Group Name</th>
+                                                <th>Leader</th>
                                                 <th>Member Of Group</th>
-                                                <th>More Information</th>
+                                                <th>Supervior</th>
+                                                
+                                                
 
                                             </tr>
                                         </thead>
@@ -130,8 +131,9 @@
                                                 <td>1</td>
                                                 <td>Donna Snider</td>
                                                 <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
+                                                <td>4/5</td>
+                                                <td>Khai ngu ngoc</td>
+                                                
                                                 <td>
                                                     <a href="mod-group-detail.jsp" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-search"></i>
