@@ -54,7 +54,7 @@
                                         </a>
                                     </div>
                                 </form>                               
-                                <h3>${requestScope.ERROR}</h3>
+                                <div style="text-align: center;"><i>${requestScope.ERROR}</i></div>
                             </div>                            
                         </div>
                     </div>

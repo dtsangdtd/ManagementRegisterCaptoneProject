@@ -87,21 +87,8 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Phone</th>
-                                                <th style="width: 160px">Number Group 
-                                                    <div class="dropdown">
-                                                        <i class="fas fa-filter "></i>
-                                                        <div class="dropdown-content">
-                                                            <input type="checkbox" id="scales" name="Full"
-                                                                   checked>
-                                                            <label for="full">full</label>
-                                                            <input type="checkbox" id="scales" name="Not Full"
-                                                                   checked>
-                                                            <label for="notFull">not full</label>
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>Gmail
-                                                </th>
+                                                <th>Number Group</th>
+                                                <th>Gmail</th>
                                                 <th>Register</th>
                                                 <th>Topics</th>
                                             </tr>

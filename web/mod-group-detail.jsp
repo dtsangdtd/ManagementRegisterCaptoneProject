@@ -114,11 +114,18 @@
                                 </div>
                                 <div>
                                     <h5 style="text-align: center">
-                                        Capstone Name
+                                        Capstone Name: Tourism Smart Card
                                     </h5>
-                                    <div style="text-align: center">
-                                        Tourism Smart Card
-                                    </div>
+                                    <h5 style="text-align: center">
+                                        Supervisor:
+                                    </h5>
+                                    <h5 style="text-align: center">
+                                        Khai ngu ngok 
+                                    </h5>
+                                    <h5 style="text-align: center">
+                                        Sang ngu ngok 
+                                    </h5>
+                                    
                                 </div>
 
                             </div>

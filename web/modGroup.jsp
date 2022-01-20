@@ -120,10 +120,6 @@
                                                 <th>Group Name</th>
                                                 <th>Leader</th>
                                                 <th>Member Of Group</th>
-                                                <th>Supervior</th>
-                                                
-                                                
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -132,7 +128,6 @@
                                                 <td>Donna Snider</td>
                                                 <td>Customer Support</td>
                                                 <td>4/5</td>
-                                                <td>Khai ngu ngoc</td>
                                                 
                                                 <td>
                                                     <a href="mod-group-detail.jsp" class="btn btn-success btn-circle btn-sm">
@@ -171,6 +166,72 @@
         <%@include file="logout.jsp" %>
 
         <!-- Bootstrap core JavaScript-->
+        <style>
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            .copy-click {
+                position: relative;
+                padding-bottom: 2px;
+                text-decoration: none;
+                cursor: copy;
+                color: #484848;
+                /*                border-bottom: 1px dashed #767676;*/
+                transition: background-color calc(var(--duration) * 2) var(--ease);
+            }
+
+            .copy-click:after {
+                content: attr(data-tooltip-text);
+                position: absolute;
+                bottom: calc(100% + 6px);
+                left: 50%;
+                padding: 8px 16px;
+                white-space: nowrap;
+                background-color: white;
+                border-radius: 4px;
+                box-shadow: 0 0 0 -12px rgba(0, 0, 0, 0);
+                pointer-events: none;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                opacity: 0;
+                -webkit-transform: translate(-50%, 12px);
+                transform: translate(-50%, 12px);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+            }
+
+            .copy-click.is-hovered:after {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                opacity: 1;
+                -webkit-transform: translate(-50%, 0);
+                transform: translate(-50%, 0);
+                transition-timing-function: var(--ease);
+            }
+
+            /*            .copy-click.is-copied {
+                            background-color: yellow;
+                        }*/
+
+            .copy-click.is-copied:after {
+                content: attr(data-tooltip-text-copied);
+            }
+        </style>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
