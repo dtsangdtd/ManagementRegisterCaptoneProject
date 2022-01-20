@@ -21,6 +21,7 @@
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="css/chat.css" rel="stylesheet">
     </head>
 
     <body id="page-top">
@@ -131,7 +132,29 @@
                 </div>
 
                 <!-- End of Main Content -->
+                <section class="chatbox js-chatbox">
+                    <div class="chatbox__header">
+                        <h3 class="chatbox__header-cta-text"><span class="chatbox__header-cta-icon"><i
+                                    class="fas fa-comments"></i></span>Let's chat</h3>
+                        <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-chevron-up"></i></button>
+                    </div>
+                    <!-- End of .chatbox__header -->
+                    <div class="js-chatbox-display chatbox__display">
 
+                    </div>
+                    <!-- End of .chatbox__display -->
+
+                    <form class="js-chatbox-form chatbox__form">     
+                        <div style="display: flex; width: 100%">                  
+                            <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
+                            <span>
+                                <button class="chatbox__form-submit u-btn"><i class="fas fa-paper-plane"></i></button>
+                            </span>
+                        </div>
+                    </form>
+
+                    <!-- End of .chatbox__form -->
+                </section>
 
                 <%@include file ="footer.jsp" %>
 
@@ -151,6 +174,46 @@
         <%@include file="logout.jsp" %>
 
         <!-- Bootstrap core JavaScript-->
+        <script>
+            const toggleChatboxBtn = document.querySelector(".js-chatbox-toggle");
+            const chatbox = document.querySelector(".js-chatbox");
+            const chatboxMsgDisplay = document.querySelector(".js-chatbox-display");
+            const chatboxForm = document.querySelector(".js-chatbox-form");
+
+// Use to create chat bubble when user submits text
+// Appends to display
+            const createChatBubble = input => {
+                const chatSection = document.createElement("p");
+                chatSection.textContent = input;
+                chatSection.classList.add("chatbox__display-chat");
+
+                chatboxMsgDisplay.appendChild(chatSection);
+            };
+
+// Toggle the visibility of the chatbox element when clicked
+// And change the icon depending on visibility
+            toggleChatboxBtn.addEventListener("click", () => {
+                chatbox.classList.toggle("chatbox--is-visible");
+
+                if (chatbox.classList.contains("chatbox--is-visible")) {
+                    toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                } else {
+                    toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+                }
+            });
+
+// Form input using method createChatBubble
+// To append any user message to display
+            chatboxForm.addEventListener("submit", e => {
+                const chatInput = document.querySelector(".js-chatbox-input").value;
+
+                createChatBubble(chatInput);
+
+                e.preventDefault();
+                chatboxForm.reset();
+            });
+
+        </script>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
