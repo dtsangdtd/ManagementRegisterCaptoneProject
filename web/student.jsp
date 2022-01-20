@@ -120,7 +120,11 @@
                                                 <td>1242234234</td>
                                                 <td>test@fpt.edu.vn</td>
                                                 <td>Group 1</td>
-                                                <td></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
@@ -128,7 +132,11 @@
                                                 <td>32323232</td>
                                                 <td>test1@fpt.edu.vn</td>
                                                 <td>Group 1</td>
-                                                <td><button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-times"></i></button> </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

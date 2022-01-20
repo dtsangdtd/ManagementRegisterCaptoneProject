@@ -63,9 +63,10 @@ public class GoogleController extends HttpServlet {
                 UserDAO dao = new UserDAO();
                 UserDTO user = dao.checkLoginGG(gmail);
                 HttpSession session = request.getSession();
-                UserDTO userInfor = dao.getInforUser(user.getUserID());
-                session.setAttribute("INFOR", userInfor);
+
                 if (user != null) {
+                    UserDTO userInfor = dao.getInforUser(user.getUserID());
+                    session.setAttribute("INFOR", userInfor);
                     session.setAttribute("LOGIN_USER", user);
                     String roleID = user.getRoleID();
                     if (AD.equals(roleID)) {
@@ -76,7 +77,7 @@ public class GoogleController extends HttpServlet {
                         url = MENTOR;
                     }
                 } else {
-                    request.setAttribute("ERROR_MESSAGE", "Your email is not supported!");
+                    request.setAttribute("ERROR", "Your email is not supported!");
                 }
             }
         } catch (Exception e) {

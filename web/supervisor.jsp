@@ -119,7 +119,6 @@
                                                 <th>Group Name</th>
                                                 <th>Capstone Name</th>
                                                 <th>Person Of Group</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -129,7 +128,6 @@
                                                 <td>New York</td>
                                                 <td>Tourism Smart Card</td>
                                                 <td>4</td>
-                                                <td>Pass</td>
                                                 <td>
                                                     <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-search"></i>
@@ -141,7 +139,6 @@
                                                 <td>New York</td>
                                                 <td>Tourism Smart Card</td>
                                                 <td>4</td>
-                                                <td>Pass</td>
                                                 <td>
                                                     <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
                                                         <i class="fas fa-search"></i>

@@ -45,11 +45,10 @@ public class LoginController extends HttpServlet {
             String password = request.getParameter("password");
             UserDAO dao = new UserDAO();
             UserDTO user = dao.checkLogin(gmail, password);
-            UserDTO userInfor = dao.getInforUser(user.getUserID());
-
-            HttpSession session = request.getSession();
-            session.setAttribute("INFOR", userInfor);
+            HttpSession session = request.getSession();           
             if (user != null) {
+                UserDTO userInfor = dao.getInforUser(user.getUserID());
+                session.setAttribute("INFOR", userInfor);
                 session.setAttribute("LOGIN_USER", user);
                 String roleID = user.getRoleID();
                 if (MT.equals(roleID)) {
