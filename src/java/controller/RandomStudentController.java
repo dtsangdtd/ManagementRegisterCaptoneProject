@@ -12,44 +12,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import user.UserDAO;
-import user.UserDTO;
 
 /**
  *
- * @author dtsang
+ * @author Mai
  */
-@WebServlet(name = "UpdateProfileController", urlPatterns = {"/UpdateProfileController"})
-public class UpdateProfileController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "RandomStudentController", urlPatterns = {"/RandomStudentController"})
+public class RandomStudentController extends HttpServlet {
+    
+    private static final String ERROR = "login.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
-            String name = request.getParameter("fullname");
-            String phone = request.getParameter("phone");
-            String photoUrl = request.getParameter("imageURL");
-            UserDAO userDao = new UserDAO();
-            userDao.updateInfor(name, phone, photoUrl, userID);
-            UserDTO userInfor = userDao.getInforUser(userID);
-            HttpSession session = request.getSession();
-            session.setAttribute("INFOR", userInfor);
+            
         } catch (Exception e) {
-             log("ERROR at MainController" + e.toString());
+            log("Error at GetListController" + e.toString());
         }finally{
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

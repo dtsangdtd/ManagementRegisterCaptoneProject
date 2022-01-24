@@ -23,9 +23,9 @@ import user.UserDTO;
  */
 @WebServlet(name = "GetListController", urlPatterns = {"/GetListController"})
 public class GetListController extends HttpServlet {
-    private static final String AD = "moderator.jsp";
-    private static final String MT = "supervisor.jsp";
-    private static final String US = "student.jsp";
+
+    private static final String AD = "modStudentList.jsp";
+    private static final String US = "studentList.jsp";
     private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -37,17 +37,14 @@ public class GetListController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             List<UserDTO> listStudent = dao.getListStudent();
-            System.out.println(listStudent);
-            session.setAttribute("LIST_STUDENT", listStudent);
             List<UserDTO> listSupervisor = dao.getListSupervisor();
+            session.setAttribute("LIST_STUDENT", listStudent);
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {
                 url = LOGIN;
-            }else if ("AD".equals(loginUser.getRoleID())){
+            } else if ("AD".equals(loginUser.getRoleID())) {
                 url = AD;
-            }else if ("MT".equals(loginUser.getRoleID())){
-                url = MT;
-            }else if ("US".equals(loginUser.getRoleID())){
+            } else if ("US".equals(loginUser.getRoleID())) {
                 url = US;
             }
         } catch (Exception e) {

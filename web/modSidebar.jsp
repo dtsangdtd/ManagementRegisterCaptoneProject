@@ -12,7 +12,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item ">
-        <a class="nav-link" href="modStudentList.jsp">
+        <a class="nav-link" href="GetListController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Students</span>
         </a>

@@ -27,9 +27,9 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT name, roleID, userID "
-                        + "FROM tblUser "
-                        + "WHERE  gmail=? AND password=? ";
+                String sql = "SELECT u.name, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone "
+                        + "FROM tblUser u, tblStatus s "
+                        + "WHERE u.statusID = s.statusID AND gmail=? AND password=? AND s.statusID != 0";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, gmail);
                 stm.setString(2, password);
@@ -38,7 +38,10 @@ public class UserDAO {
                     String username = rs.getString("name");
                     String roleID = rs.getString("roleID");
                     String userID = rs.getString("userID");
-                    user = new UserDTO(userID, username, password, roleID, gmail, "", "", "", "", "");
+                    String statusID = rs.getString("statusID");
+                    String photo = rs.getString("photoUrl");
+                    String phone = rs.getString("phone");
+                    user = new UserDTO(userID, username, password, roleID, gmail, phone, "", "", statusID, photo);
                 }
             }
         } catch (Exception e) {
@@ -65,9 +68,9 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT name, password, roleID, userID "
-                        + "FROM tblUser "
-                        + "WHERE  gmail=? ";
+                String sql = "SELECT u.name, u.password, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone "
+                        + "FROM tblUser u, tblStatus s "
+                        + "WHERE u.statusID = s.statusID AND gmail=? AND s.statusID != 0 ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, gmail);
                 rs = stm.executeQuery();
@@ -76,7 +79,10 @@ public class UserDAO {
                     String password = rs.getString("password");
                     String roleID = rs.getString("roleID");
                     String userID = rs.getString("userID");
-                    user = new UserDTO(userID, username, password, roleID, gmail, "", "", "", "", "");
+                    String statusID = rs.getString("statusID");
+                    String photoUrl = rs.getString("photoUrl");
+                    String phone = rs.getString("phone");
+                    user = new UserDTO(userID, username, password, roleID, gmail, phone, "", "", statusID, photoUrl);
                 }
             }
         } catch (Exception e) {
@@ -103,9 +109,9 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT userID, name, gmail, phone, photoUrl, capstoneID, groupID, statusID "
+                String sql = " SELECT userID, name, gmail, phone, photoUrl, userCapstoneID, userGroupID, statusID "
                         + " FROM tblUser "
-                        + " WHERE [roleID] LIKE 'US' ";
+                        + " WHERE [roleID] = 'US' ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -114,12 +120,11 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
-                    String capstoneID = rs.getString("capstoneID");
-                    String groupID = rs.getString("groupID");
+                    String capstoneID = rs.getString("userCapstoneID");
+                    String groupID = rs.getString("userGroupID");
                     String statusID = rs.getString("statusID");
                     list.add(new UserDTO(userID, username, "", "US", gmail, phone, capstoneID, groupID, statusID, photoUrl));
                 }
-                System.out.println(list);
             }
 
         } catch (Exception e) {
@@ -145,9 +150,9 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT userID, name, gmail, phone, photoUrl, capstoneID, groupID, statusID "
+                String sql = " SELECT userID, name, gmail, phone, photoUrl, userCapstoneID, userGroupID, statusID "
                         + " FROM tblUser "
-                        + " WHERE [roleID] LIKE 'MT' ";
+                        + " WHERE [roleID] = 'MT' ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -156,10 +161,51 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
-                    String capstoneID = rs.getString("capstoneID");
-                    String groupID = rs.getString("groupID");
+                    String capstoneID = rs.getString("userCapstoneID");
+                    String groupID = rs.getString("userGroupID");
                     String statusID = rs.getString("statusID");
                     list.add(new UserDTO(userID, username, "", "MT", gmail, phone, capstoneID, groupID, statusID, photoUrl));
+                }
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+        public List<UserDTO> getListStudentNoGroup() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT userID, name, gmail, phone, photoUrl, userCapstoneID, userGroupID, statusID "
+                        + " FROM tblUser "
+                        + " WHERE [statusID] = '2' ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String username = rs.getString("name");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    String photoUrl = rs.getString("photoUrl");
+                    String capstoneID = rs.getString("userCapstoneID");
+                    String groupID = rs.getString("userGroupID");
+                    String statusID = rs.getString("statusID");
+                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, capstoneID, groupID, statusID, photoUrl));
                 }
             }
 
