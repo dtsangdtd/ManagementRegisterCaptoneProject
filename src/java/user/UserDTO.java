@@ -18,8 +18,8 @@ public class UserDTO implements Serializable{
     private String roleID;
     private String gmail;
     private String phone;
-    private String capstoneID;
-    private String groupID;
+    private String userCapstoneID;
+    private String userGroupID;
     private String statusID;
     private String photoUrl;
     
@@ -29,15 +29,15 @@ public class UserDTO implements Serializable{
     public UserDTO() {
     }
 
-    public UserDTO(String userID, String username, String password, String roleID, String gmail, String phone, String capstoneID, String groupID, String statusID, String photoUrl) {
+    public UserDTO(String userID, String username, String password, String roleID, String gmail, String phone, String userCapstoneID, String userGroupID, String statusID, String photoUrl) {
         this.userID = userID;
         this.username = username;
         this.password = password;
         this.roleID = roleID;
         this.gmail = gmail;
         this.phone = phone;
-        this.capstoneID = capstoneID;
-        this.groupID = groupID;
+        this.userCapstoneID = userCapstoneID;
+        this.userGroupID = userGroupID;
         this.statusID = statusID;
         this.photoUrl = photoUrl;
     }
@@ -116,20 +116,20 @@ public class UserDTO implements Serializable{
         this.phone = phone;
     }
 
-    public String getCapstoneID() {
-        return capstoneID;
+    public String getUserCapstoneID() {
+        return userCapstoneID;
     }
 
-    public void setCapstoneID(String capstoneID) {
-        this.capstoneID = capstoneID;
+    public void setUserCapstoneID(String userCapstoneID) {
+        this.userCapstoneID = userCapstoneID;
     }
 
-    public String getGroupID() {
-        return groupID;
+    public String getUserGroupID() {
+        return userGroupID;
     }
 
-    public void setGroupID(String groupID) {
-        this.groupID = groupID;
+    public void setUserGroupID(String userGroupID) {
+        this.userGroupID = userGroupID;
     }
 
     public String getStatusID() {
@@ -150,7 +150,7 @@ public class UserDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", roleID=" + roleID + ", gmail=" + gmail + ", phone=" + phone + ", capstoneID=" + capstoneID + ", groupID=" + groupID + ", statusID=" + statusID + ", photoUrl=" + photoUrl + ", semesterName=" + semesterName + ", capstoneName=" + capstoneName + '}';
+        return "UserDTO{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", roleID=" + roleID + ", gmail=" + gmail + ", phone=" + phone + ", userCapstoneID=" + userCapstoneID + ", userGroupID=" + userGroupID + ", statusID=" + statusID + ", photoUrl=" + photoUrl + ", semesterName=" + semesterName + ", capstoneName=" + capstoneName + '}';
     }
 
 }
