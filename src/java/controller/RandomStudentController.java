@@ -5,13 +5,19 @@
  */
 package controller;
 
+import group.GroupDAO;
+import group.UserGroup;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
@@ -21,13 +27,41 @@ import javax.servlet.http.HttpServletResponse;
 public class RandomStudentController extends HttpServlet {
     
     private static final String ERROR = "login.jsp";
-    
+    private static final String SUCCESS = "modStudentList.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            UserDAO dao = new UserDAO();
+            HttpSession session = request.getSession();
+            List<UserDTO> listStudentNoGroup = dao.getListStudentNoGroup();
+            int n = listStudentNoGroup.size();
             
+            if (n < 4) {
+
+            } else {
+                int num = n/5;
+                int mod = n % 5;
+                GroupDAO daoGroup = new GroupDAO();
+                int key = daoGroup.getMaxUserGroupID();
+                UserGroup map = (UserGroup) session.getAttribute("GROUP");
+                for (int i = 0; i < num; i++) {
+                    map.add(key, listStudentNoGroup.subList(i, (i+1)*5));
+                    key++ ;
+                }
+                switch (mod) {
+                    case 1:
+                        
+                        break;
+                    case 2:
+ 
+                        break;
+                    case 3:
+    
+                        break;
+                }
+            }
         } catch (Exception e) {
             log("Error at GetListController" + e.toString());
         }finally{
