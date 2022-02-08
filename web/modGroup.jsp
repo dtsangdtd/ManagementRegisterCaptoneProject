@@ -89,59 +89,77 @@
                         </div>
 
                         <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <!-- <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                            </div> -->
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <div class="dropdown mb-4">
-                                                    <button class="btn btn-info dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                        Semester
-                                                    </button>
-                                                    <div class="dropdown-menu animated--fade-in"
-                                                         aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                        <!-- <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div> -->
+                        <div style="display: flex;">
+                            <div class="col-4">
+                                <div class="stu-tab-gr">
+                                    <!-- Earnings (Monthly) Card Example -->
+                                    <div class="">
+                                        <div class="card border-left-primary shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                            Nguyen Hieu Kien</div>
+                                                        <div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">0902915671</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">kiennhse150691@fpt.edu.vn</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table-sm" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Group Name</th>
-                                                <th>Leader</th>
-                                                <th>Member Of Group</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>4/5</td>
-                                                
-                                                <td>
-                                                    <a href="mod-group-detail.jsp" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-search"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
-
                             </div>
-                            <!-- /.container-fluid -->
+
+                            <div class="col-4" style="display: block;">
+                                <div class="stu-tab-gr">
+                                    <!-- Earnings (Monthly) Card Example -->
+                                    <div class="">
+                                        <div class="card border-left-primary shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                            Nguyen Hong Mai</div>
+                                                        <div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">124124513523</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">mai@fpt.edu.vn</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-4" style="display: block;">
+                                <div class="stu-tab-gr">
+                                    <!-- Earnings (Monthly) Card Example -->
+                                    <div class="">
+                                        <div class="card border-left-primary shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                            Nguyen Tho Thai Bao</div>
+                                                        <div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">124124513523</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">mai@fpt.edu.vn</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <!-- /.container-fluid -->
                     </div>
                 </div>
                 <!-- End of Main Content -->

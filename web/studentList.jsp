@@ -106,9 +106,9 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <div class="table-responsive" style="height: 500px">
+                                <div class="table-responsive" >
 
-                                    <table class="table-sm" width="100%">
+                                    <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr >
                                                 <th>No</th>
@@ -123,13 +123,15 @@
                                         <!-- tu chon field -->
                                         <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
                                             <tbody>
-                                                <tr class="" >
+                                                <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${stu.username}</td>
                                                     <td>${stu.phone}</td>
-                                                    <td>${stu.groupID}</td>
+                                                    <td>${stu.userGroupID}</td>
                                                     <td>${stu.gmail}</td>
-                                                    <td> <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/></td>
+                                                    <td> 
+                                                        <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/>
+                                                    </td>
                                                     <td>
                                                         <a href="#" class="btn btn-success btn-circle btn-sm">
                                                             <i class="fas fa-plus"></i>
@@ -138,6 +140,7 @@
                                                 </tr>
                                             </tbody>
                                         </c:forEach>
+
                                     </table>
                                 </div>
 
