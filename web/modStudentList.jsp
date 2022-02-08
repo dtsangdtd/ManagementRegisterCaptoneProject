@@ -94,108 +94,115 @@
                                     class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>
                         </div>
 
-                        <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive" style="height: 500px">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <div class="dropdown mb-4">
-                                                    <button class="btn btn-info dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                        Semester
-                                                    </button>
-                                                    <div class="dropdown-menu animated--fade-in"
-                                                         aria-labelledby="dropdownMenuButton1">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card shadow mb-4">
+                                    <div class="card-body">
+                                        <div class="table-responsive" style="height: 500px">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <div class="dropdown mb-4">
+                                                            <button class="btn btn-info dropdown-toggle" type="button"
+                                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                Semester
+                                                            </button>
+                                                            <div class="dropdown-menu animated--fade-in"
+                                                                 aria-labelledby="dropdownMenuButton1">
+                                                                <a class="dropdown-item" href="#">Fall 2021</a>
+                                                                <a class="dropdown-item" href="#">Spring 2021</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <table class="table-sm" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Name</th>
+                                                        <th>Phone</th>
+
+                                                        <th>Gmail</th>
+                                                        <th style="width: 160px">Status
+                                                            <div class="dropdown">
+                                                                <i class="fas fa-filter "></i>
+                                                                <div class="dropdown-content">
+                                                                    <input type="checkbox" id="scales" name="full"
+                                                                           checked>
+                                                                    <label for="full">full</label>
+                                                                    <input type="checkbox" id="scales" name="Not Full"
+                                                                           checked>
+                                                                    <label for="notFull">not full</label>
+                                                                </div>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>${counter.count}</td>
+                                                            <td>${stu.username}</td>
+                                                            <td>${stu.phone}</td>
+                                                            <td>
+                                                                <a href="" class="copy-click"
+                                                                   data-tooltip-text="Click To Copy" 
+                                                                   data-tooltip-text-copied="✔ Copied">
+                                                                    ${stu.gmail}
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </c:forEach>
+                                            </table>
+
+                                        </div>  
                                     </div>
-                                    <table class="table-sm" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Name</th>
-                                                <th>Phone</th>
-                                                
-                                                <th>Gmail</th>
-                                                <th style="width: 160px">Status
-                                                 <div class="dropdown">
-                                                        <i class="fas fa-filter "></i>
-                                                        <div class="dropdown-content">
-                                                            <input type="checkbox" id="scales" name="full"
-                                                                   checked>
-                                                            <label for="full">full</label>
-                                                            <input type="checkbox" id="scales" name="Not Full"
-                                                                   checked>
-                                                            <label for="notFull">not full</label>
+                                </div>
+                            </div>
+                            <div class="col-2"> 
+                                <a href="#" class="btn btn-info btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </span>
+                                    <span class="text">Random</span>
+                                </a>
+                                <div class="mt-2"></div>
+                                <a href="#" class="btn btn-info btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-bell"></i>
+                                    </span>
+                                    <span class="text">Noti</span>
+                                </a>
+                                 <div class="mt-2"></div>
+                                <a href="#" class="btn btn-success btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">Accept</span>
+                                </a>
+
+                            </div>
+                            <div class="col-4">
+                                <div class="stu-tab-gr">
+                                    <!-- Earnings (Monthly) Card Example -->
+                                    <div class="">
+                                        <div class="card border-left-primary shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                            Group 1</div>
+                                                        <div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
                                                         </div>
                                                     </div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
-                                            <tbody>
-                                                <tr>
-                                                    <td>${counter.count}</td>
-                                                    <td>${stu.username}</td>
-                                                    <td>${stu.phone}</td>
-                                                    <td>
-                                                        <a href="" class="copy-click"
-                                                           data-tooltip-text="Click To Copy" 
-                                                           data-tooltip-text-copied="✔ Copied">
-                                                            ${stu.gmail}
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </c:forEach>
-                                    </table>
-
-                                </div>  
-                            </div>
-                        </div>
-                        <div>
-                            <a href="#" class="btn btn-info btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-sync-alt"></i>
-                                </span>
-                                <span class="text">Random</span>
-                            </a>
-                            <a href="#" class="btn btn-info btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-bell"></i>
-                                </span>
-                                <span class="text">Noti</span>
-                            </a>
-                            <a href="#" class="btn btn-success btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                                <span class="text">Accept</span>
-                            </a>
-                        </div>
-
-                        <div class="row stu-tab-gr mt-3">
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Group 1</div>
-                                                <div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -203,6 +210,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
                 <!-- End of Main Content -->
