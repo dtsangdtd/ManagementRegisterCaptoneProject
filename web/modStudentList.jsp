@@ -98,7 +98,7 @@
                             <div class="col-6">
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
-                                        <div class="table-responsive" style="height: 500px">
+                                        <div class="table-responsive" >
                                             <div class="col-12">
                                                 <div class="row">
                                                     <div class="col-9">

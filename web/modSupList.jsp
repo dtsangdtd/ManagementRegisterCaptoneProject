@@ -143,7 +143,7 @@
                                                     <td>${counter.count}</td>
                                                     <td>${sup.username}</td>
                                                     <td>${sup.phone}</td>
-                                                    <td>${sup.groupID}</td>
+                                                    <td>${sup.userGroupID}</td>
                                                     <td>
                                                         <a href="" class="copy-click"
                                                            data-tooltip-text="Click To Copy" 
@@ -151,7 +151,6 @@
                                                             ${sup.gmail}
                                                         </a>
                                                     </td>
-<!--                                                    <td>${sup.photoUrl}</td>-->
                                                 </tr>
                                             </tbody>
                                         </c:forEach>
