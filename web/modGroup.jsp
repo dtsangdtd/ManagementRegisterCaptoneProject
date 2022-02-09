@@ -93,6 +93,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div> -->
                         <div style="display: flex;">
+
                             <div class="col-4">
                                 <div class="stu-tab-gr">
                                     <!-- Earnings (Monthly) Card Example -->
@@ -102,10 +103,13 @@
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col mr-2">
                                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                            Nguyen Hieu Kien</div>
+                                                            Group 1</div>
                                                         <div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">0902915671</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">kiennhse150691@fpt.edu.vn</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,10 +128,13 @@
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col mr-2">
                                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                            Nguyen Hong Mai</div>
+                                                            Group 2</div>
                                                         <div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">124124513523</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">mai@fpt.edu.vn</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -136,7 +143,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-4" style="display: block;">
                                 <div class="stu-tab-gr">
                                     <!-- Earnings (Monthly) Card Example -->
@@ -146,10 +153,13 @@
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col mr-2">
                                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                            Nguyen Tho Thai Bao</div>
+                                                            Group 3</div>
                                                         <div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">124124513523</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">mai@fpt.edu.vn</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -157,6 +167,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <!-- /.container-fluid -->
