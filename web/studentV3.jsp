@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="user.UserDTO"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
     <head>
 
@@ -10,19 +11,17 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Student Register Topic</title>
+        <title>Student</title>
 
-        <!-- Custom fonts for this template -->
+        <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
-        <!-- Custom styles for this template -->
+        <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="css/chat.css" rel="stylesheet">
-        <!-- Custom styles for this page -->
-        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
 
     <body id="page-top">
@@ -31,7 +30,7 @@
         </c:if>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <%@include file="studentSidebar.jsp"%>
+            <%@include file="stuSidebarV3.jsp"%>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -65,8 +64,8 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
-                                    <img class="img-profile rounded-circle" src="${sessionScope.INFOR.photoUrl}">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Student 3</span>
+                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -86,70 +85,82 @@
                         </ul>
 
                     </nav>
+                    <!-- End of Topbar -->
+
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Capstone Topics</h1>
-                        <div class="card shadow mb-4">
+                        <h1 class="h3 mb-2 text-gray-800">Group</h1>
+                        <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                            For more information about DataTables, please visit the <a target="_blank"
+                                href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <!-- <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            </div> -->
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-9"></div>
-                                        </div>
-                                    </div>                                     
-                                    <table class="table-sm"width="100%" cellspacing="0">
+                                    <table class="table-sm" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Captone Name</th>
-                                                <th>Start time</th>
-                                                <th>End time</th>
-                                                <th>Mentor</th>
-                                                <th>Register</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Gmail</th>
+                                                <th>Group name</th>
+                                                <th>Vote</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Touris Smart Card</td>
-                                                <td>27/2/2021</td>
-                                                <td>30/4/2021</td>
-                                                <td>HoangNT2</td>
+                                                <td>Nguyen Tho Thai Bao</td>
+                                                <td>1242234234</td>
+                                                <td>test@fpt.edu.vn</td>
+                                                <td>Group 1</td>
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-plus"></i> 
+                                                        <i class="fas fa-check"></i>
                                                     </a>
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                        <tbody>
                                             <tr>
                                                 <td>2</td>
-                                                <td>IOT things</td>
-                                                <td>27/2/2021</td>
-                                                <td>30/4/2021</td>
-                                                <td>HoangNT2, KhanhKT</td>
+                                                <td>Khai Ngu Ngoc</td>
+                                                <td>32323232</td>
+                                                <td>test1@fpt.edu.vn</td>
+                                                <td>Group 1</td>
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-plus"></i> 
+                                                        <i class="fas fa-check"></i>
                                                     </a>
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                        <tbody>
                                             <tr>
                                                 <td>3</td>
-                                                <td>Phu Quoc Photograph </td>
-                                                <td>27/2/2021</td>
-                                                <td>30/4/2021</td>
-                                                <td>PhuongLHK</td>
+                                                <td>QA</td>
+                                                <td>23523523523</td>
+                                                <td>test2@fpt.edu.vn</td>
+                                                <td>Group 1</td>
                                                 <td>
                                                     <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-plus"></i> 
+                                                        <i class="fas fa-check"></i>
                                                     </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Student 3</td>
+                                                <td>0902915671</td>
+                                                <td>test3@fpt.edu.vn</td>
+                                                <td>Group 1</td>
+                                                <td>
+<!--                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-check"></i>
+                                                    </a>-->
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -157,9 +168,9 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /.container-fluid -->
                     </div>
                 </div>
+
                 <!-- End of Main Content -->
                 <section class="chatbox js-chatbox">
                     <div class="chatbox__header">
@@ -172,6 +183,7 @@
 
                     </div>
                     <!-- End of .chatbox__display -->
+
                     <form class="js-chatbox-form chatbox__form">     
                         <div style="display: flex; width: 100%">                  
                             <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
@@ -180,11 +192,12 @@
                             </span>
                         </div>
                     </form>
+
                     <!-- End of .chatbox__form -->
                 </section>
-                <!-- Footer -->
+
                 <%@include file ="footer.jsp" %>
-                <!-- End of Footer -->
+
 
             </div>
             <!-- End of Content Wrapper -->
@@ -207,6 +220,8 @@
             const chatboxMsgDisplay = document.querySelector(".js-chatbox-display");
             const chatboxForm = document.querySelector(".js-chatbox-form");
 
+// Use to create chat bubble when user submits text
+// Appends to display
             const createChatBubble = input => {
                 const chatSection = document.createElement("p");
                 chatSection.textContent = input;
@@ -215,6 +230,8 @@
                 chatboxMsgDisplay.appendChild(chatSection);
             };
 
+// Toggle the visibility of the chatbox element when clicked
+// And change the icon depending on visibility
             toggleChatboxBtn.addEventListener("click", () => {
                 chatbox.classList.toggle("chatbox--is-visible");
 
@@ -225,6 +242,8 @@
                 }
             });
 
+// Form input using method createChatBubble
+// To append any user message to display
             chatboxForm.addEventListener("submit", e => {
                 const chatInput = document.querySelector(".js-chatbox-input").value;
 
@@ -245,11 +264,11 @@
         <script src="js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
         <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
     </body>
 

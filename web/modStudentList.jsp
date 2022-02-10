@@ -90,11 +90,17 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Student</h1>
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>
+                            <form id="file_form" action="ImportController" method="POST"  enctype="multipart/form-data">
+                                <input id="file_input" name="file" type="file" />
+                                <button id="upFile-btn" type="submit" name="action" value="Import Excel" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <!--                                                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                                                                                                class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>-->
+                                    <i class="fas fa-upload fa-sm text-white-50"></i> Import Excel
+                                </button>
+                            </form>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="display: flex;">
                             <div class="col-6">
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
@@ -176,7 +182,7 @@
                                     </span>
                                     <span class="text">Noti</span>
                                 </a>
-                                 <div class="mt-2"></div>
+                                <div class="mt-2"></div>
                                 <a href="#" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-check"></i>
@@ -185,22 +191,94 @@
                                 </a>
 
                             </div>
-                            <div class="col-4">
-                                <div class="stu-tab-gr">
-                                    <!-- Earnings (Monthly) Card Example -->
-                                    <div class="">
-                                        <div class="card border-left-primary shadow h-100 py-2">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                            Group 1</div>
-                                                        <div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
+                            <div id="wrapper1">
+                                <div class="scrollbar" id="style-default">
+<!--                                    <div class="force-overflow"></div>-->
+
+                                    <div class="col-4" style="display: block;">
+                                        <div class="stu-tab-gr">
+                                            <!-- Earnings (Monthly) Card Example -->
+                                            <div class="">
+                                                <div class="card border-left-primary shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                                    Group 1</div>
+                                                                <div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="stu-tab-gr" style="margin-top: 0.5rem;">
+                                            <!-- Earnings (Monthly) Card Example -->
+                                            <div class="">
+                                                <div class="card border-left-primary shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                                    Group 2</div>
+                                                                <div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="stu-tab-gr" style="margin-top: 0.5rem;">
+                                            <!-- Earnings (Monthly) Card Example -->
+                                            <div class="">
+                                                <div class="card border-left-primary shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                                    Group 3</div>
+                                                                <div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="stu-tab-gr" style="margin-top: 0.5rem;">
+                                            <!-- Earnings (Monthly) Card Example -->
+                                            <div class="">
+                                                <div class="card border-left-primary shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                                    Group 4</div>
+                                                                <div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -235,6 +313,30 @@
         <!-- Logout Modal-->
         <%@include file="logout.jsp" %>
         <style>
+            /* ScrollBar*/
+            .scrollbar
+            {
+                margin-left: 30px;
+                float: left;
+                height: 300px;
+                width: 900px;
+/*                background: #F5F5F5;*/
+                overflow-y: scroll;
+                margin-bottom: 25px;
+            }
+
+            .force-overflow
+            {
+                min-height: 100%;
+            }
+
+            #wrapper1
+            {
+                text-align: center;
+                width: 500px;
+                margin: auto;
+            }
+            /* ScrollBar*/
             .dropdown {
                 position: relative;
                 display: inline-block;
@@ -301,6 +403,15 @@
             }
         </style>
         <script>
+            
+            $(document).ready(function () {
+                if (!$.browser.webkit) {
+                    $('.wrapper1').html('<p>Sorry! Non webkit users. :(</p>');
+                }
+            });
+            
+            
+            
             const links = document.querySelectorAll('.copy-click');
             const cls = {
                 copied: 'is-copied',
@@ -341,7 +452,44 @@
                 });
             });
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+
+                $("#file_form").submit(
+                        function () {
+                            //First verify file format
+                            var fileName = $('#file_input').val();
+                            if (fileName === '') {
+                                alert('Please select a file');
+                                return false;
+                            }
+                            var fileType = (fileName.substring(fileName
+                                    .lastIndexOf(".") + 1, fileName.length))
+                                    .toLowerCase();
+                            if (fileType !== 'xls' && fileType !== 'xlsx') {
+                                alert('The file format is incorrect, Excel file!');
+                                return false;
+                            }
+
+                            $("#file_form").ajaxSubmit({
+                                dataType: "json",
+                                success: function (data, textStatus) {
+                                    if (data['result'] === 'OK') {
+                                        console.log('Upload file success');
+                                    } else {
+                                        console.log('File format error');
+                                    }
+                                    return false;
+                                }
+                            });
+                            return false;
+                        });
+
+            });
+        </script>
         <!-- Bootstrap core JavaScript-->
+
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
