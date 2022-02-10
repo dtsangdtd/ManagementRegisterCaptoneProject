@@ -11,7 +11,7 @@
     <hr class="sidebar-divider my-0">
 
     <li class="nav-item ">
-        <a class="nav-link" href="student.jsp">
+        <a class="nav-link" href="studentV2.jsp">
             <i class="fas fa-fw fa-folder"></i>
             <span>Your Group</span>
         </a>
@@ -24,25 +24,25 @@
         </a>
     </li>-->
 
-    <li class="nav-item ">
+<!--    <li class="nav-item ">
         <a class="nav-link" href="registerTopic.jsp">
             <i class="fas fa-fw fa-folder"></i>
             <span>Register Capstone</span>
         </a>
-    </li>   
+    </li>   -->
 
-    <li class="nav-item ">
+<!--    <li class="nav-item ">
         <a class="nav-link" href="GetListController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Students</span>
         </a>
-    </li>  
-    <li class="nav-item ">
+    </li>  -->
+<!--    <li class="nav-item ">
         <a class="nav-link" href="studentRequest.jsp">
             <i class="fas fa-fw fa-folder"></i>
             <span>Students Invite</span>
         </a>
-    </li>
+    </li>-->
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

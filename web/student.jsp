@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="user.UserDTO"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
     <head>
 
@@ -111,15 +111,39 @@
                                                 <th>Phone</th>
                                                 <th>Gmail</th>
                                                 <th>Group name</th>
+                                                <th>Info</th>
+                                                <th>Kick</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Donna Snider</td>
+                                                <td>Nguyen Tho Thai Bao</td>
                                                 <td>1242234234</td>
                                                 <td>test@fpt.edu.vn</td>
                                                 <td>Group 1</td>
+                                                <td>
+<!--                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                        <i class="fas fa-info"></i>
+                                                    </a>-->
+                                                </td>
+<!--                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </td>-->
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Khai Ngu Ngoc</td>
+                                                <td>32323232</td>
+                                                <td>test1@fpt.edu.vn</td>
+                                                <td>Group 1</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                        <i class="fas fa-info"></i>
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     <a href="#" class="btn btn-danger btn-circle btn-sm">
                                                         <i class="fas fa-times"></i>
@@ -128,10 +152,32 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>Khai Ngu Ngoc</td>
-                                                <td>32323232</td>
-                                                <td>test1@fpt.edu.vn</td>
+                                                <td>QA</td>
+                                                <td>23523523523</td>
+                                                <td>test2@fpt.edu.vn</td>
                                                 <td>Group 1</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                        <i class="fas fa-info"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Kiêng</td>
+                                                <td>0902915671</td>
+                                                <td>test3@fpt.edu.vn</td>
+                                                <td>Group 1</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                        <i class="fas fa-info"></i>
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     <a href="#" class="btn btn-danger btn-circle btn-sm">
                                                         <i class="fas fa-times"></i>
