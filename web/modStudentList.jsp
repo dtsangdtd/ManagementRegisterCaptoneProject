@@ -128,8 +128,6 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Name</th>
-                                                        <th>Phone</th>
-
                                                         <th>Gmail</th>
                                                         <th style="width: 160px">Status
                                                             <div class="dropdown">
@@ -151,7 +149,6 @@
                                                         <tr>
                                                             <td>${counter.count}</td>
                                                             <td>${stu.username}</td>
-                                                            <td>${stu.phone}</td>
                                                             <td>
                                                                 <a href="" class="copy-click"
                                                                    data-tooltip-text="Click To Copy" 
@@ -159,6 +156,7 @@
                                                                     ${stu.gmail}
                                                                 </a>
                                                             </td>
+                                                            <td>not group yet</td>
                                                         </tr>
                                                     </tbody>
                                                 </c:forEach>
@@ -168,7 +166,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2"> 
+                            <div class="col-1"> 
                                 <a href="#" class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-sync-alt"></i>
@@ -191,18 +189,18 @@
                                 </a>
 
                             </div>
-                            <div id="wrapper1">
+                            <div id="wrapper1 " class="col-5">
                                 <div class="scrollbar" id="style-default">
 <!--                                    <div class="force-overflow"></div>-->
 
-                                    <div class="col-4" style="display: block;">
+                                    <div style="display: block;">
                                         <div class="stu-tab-gr">
                                             <!-- Earnings (Monthly) Card Example -->
                                             <div class="">
                                                 <div class="card border-left-primary shadow h-100 py-2">
-                                                    <div class="card-body">
+                                                    <div class="card-body mr-2">
                                                         <div class="row no-gutters align-items-center">
-                                                            <div class="col mr-2">
+                                                            <div class="col ">
                                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                                     Group 1</div>
                                                                 <div>
@@ -318,7 +316,7 @@
             {
                 margin-left: 30px;
                 float: left;
-                height: 300px;
+                height: 70vh;
                 width: 900px;
 /*                background: #F5F5F5;*/
                 overflow-y: scroll;
@@ -333,7 +331,6 @@
             #wrapper1
             {
                 text-align: center;
-                width: 500px;
                 margin: auto;
             }
             /* ScrollBar*/
