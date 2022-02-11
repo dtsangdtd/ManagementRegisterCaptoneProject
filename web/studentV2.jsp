@@ -122,9 +122,7 @@
                                                 <td>test@fpt.edu.vn</td>
                                                 <td>Group 1</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
+                                                  
                                                 </td>
 
                                             </tr>
@@ -135,9 +133,7 @@
                                                 <td>test1@fpt.edu.vn</td>
                                                 <td>Group 1</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
+                                                   
                                                 </td>
                                             </tr>
                                             <tr>
@@ -147,9 +143,7 @@
                                                 <td>test2@fpt.edu.vn</td>
                                                 <td>Group 1</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
+                                                   
                                                 </td>
                                             </tr>
                                             <tr>
@@ -159,9 +153,7 @@
                                                 <td>test2@fpt.edu.vn</td>
                                                 <td>Group 1</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
+                                                  
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -123,15 +123,15 @@
                                                 <td>test@fpt.edu.vn</td>
                                                 <td>Group 1</td>
                                                 <td>
-<!--                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
                                                         <i class="fas fa-info"></i>
-                                                    </a>-->
+                                                    </a>
                                                 </td>
-<!--                                                <td>
+                                                <td>
                                                     <a href="#" class="btn btn-danger btn-circle btn-sm">
                                                         <i class="fas fa-times"></i>
                                                     </a>
-                                                </td>-->
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
