@@ -24,11 +24,16 @@
     </head>
     <body>
         <div id="wrapper">
-            <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
+            <c:if test="${sessionScope.LOGIN_USER == null }">
                 <c:redirect url="login.jsp"></c:redirect>
 
             </c:if>
-            <%@include file="sidebar.jsp"%>
+            <c:if test="${sessionScope.LOGIN_USER.roleID == 'US'}">
+                <%@include file="sidebar.jsp"%>
+            </c:if>
+            <c:if test="${sessionScope.LOGIN_USER.roleID == 'MT'}">
+                <%@include file="supSidebar.jsp"%>
+            </c:if>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -118,18 +123,20 @@
                                                         <input type="text" class="form-control" name="phone" id="exampleFormControlInput1"  value="${sessionScope.INFOR.phone}">
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="mb-3">
-                                                        <label for="exampleFormControlInput1" class="form-label">Semester</label>
-                                                        <input type="text" class="form-control" name="semesterName" id="exampleFormControlInput1" disabled value="${sessionScope.INFOR.semesterName}">
+                                                <c:if test="${sessionScope.LOGIN_USER.roleID ne 'MT'}">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleFormControlInput1" class="form-label">Semester</label>
+                                                            <input type="text" class="form-control" name="semesterName" id="exampleFormControlInput1" disabled value="${sessionScope.INFOR.semesterName}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="mb-3">
-                                                        <label for="exampleFormControlInput1" class="form-label">Capstone Name</label>
-                                                        <input type="text" class="form-control" name="capstoneName" id="exampleFormControlInput1" value="${sessionScope.INFOR.capstoneName}" disabled>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="exampleFormControlInput1" class="form-label">Capstone Name</label>
+                                                            <input type="text" class="form-control" name="capstoneName" id="exampleFormControlInput1" value="${sessionScope.INFOR.capstoneName}" disabled>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </c:if>
                                             </div>
                                         </div>
                                         <div class="col-5">
@@ -280,12 +287,12 @@
             if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-//            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-//            $('#imagePreview').hide();
-//            $('#imagePreview').fadeIn(650);
+            //            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+            //            $('#imagePreview').hide();
+            //            $('#imagePreview').fadeIn(650);
 
             }
-            
+
             reader.readAsDataURL(input.files[0]);
             const name = new Date().getTime() + '-' + input.files[0].name;
             console.log(name);
@@ -304,10 +311,10 @@
             });
             }
             }
-            
+
             $("#imageUpload").change(function () {
             readURL(this);
-            
+
             });
         </script>
     </body>
