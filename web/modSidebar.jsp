@@ -33,7 +33,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListController">
+        <a class="nav-link" href="GetListSupController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Supervisors</span>
         </a>

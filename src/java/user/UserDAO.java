@@ -201,10 +201,8 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
-                    String capstoneID = rs.getString("userCapstoneID");
-                    String groupID = rs.getString("userGroupID");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, capstoneID, groupID, statusID, photoUrl));
+                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
             }
 
