@@ -99,7 +99,7 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-9">
-                                                <div class="dropdown mb-4">
+<!--                                                <div class="dropdown mb-4">
                                                     <button class="btn btn-info dropdown-toggle" type="button"
                                                             id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
@@ -110,7 +110,7 @@
                                                         <a class="dropdown-item" href="#">Fall 2021</a>
                                                         <a class="dropdown-item" href="#">Spring 2021</a>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Capstone Name</th>
-                                                <th style="width: 160px">Groups 
+                                                <th style="width: 160px">Gmail
                                                     <div class="dropdown">
                                                         <i class="fas fa-filter "></i>
                                                         <div class="dropdown-content">
@@ -133,7 +133,8 @@
                                                         </div>
                                                     </div>
                                                 </th>
-                                                <th>Gmail</th>
+                                                <th>Groups</th>
+                                                
 <!--                                                <th>photoUrl</th>-->
                                             </tr>
                                         </thead>
@@ -142,8 +143,7 @@
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${sup.username}</td>
-                                                    <td>${sup.phone}</td>
-                                                    <td>${sup.userGroupID}</td>
+                                                    <td>${sup.capstoneName}</td>
                                                     <td>
                                                         <a href="" class="copy-click"
                                                            data-tooltip-text="Click To Copy" 
