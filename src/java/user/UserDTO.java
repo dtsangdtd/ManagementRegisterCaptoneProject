@@ -18,8 +18,7 @@ public class UserDTO implements Serializable{
     private String roleID;
     private String gmail;
     private String phone;
-    private String userCapstoneID;
-    private String userGroupID;
+ 
     private String statusID;
     private String photoUrl;
     
@@ -29,15 +28,14 @@ public class UserDTO implements Serializable{
     public UserDTO() {
     }
 
-    public UserDTO(String userID, String username, String password, String roleID, String gmail, String phone, String userCapstoneID, String userGroupID, String statusID, String photoUrl) {
+    public UserDTO(String userID, String username, String password, String roleID, String gmail, String phone, String statusID, String photoUrl) {
         this.userID = userID;
         this.username = username;
         this.password = password;
         this.roleID = roleID;
         this.gmail = gmail;
         this.phone = phone;
-        this.userCapstoneID = userCapstoneID;
-        this.userGroupID = userGroupID;
+       
         this.statusID = statusID;
         this.photoUrl = photoUrl;
     }
@@ -116,21 +114,7 @@ public class UserDTO implements Serializable{
         this.phone = phone;
     }
 
-    public String getUserCapstoneID() {
-        return userCapstoneID;
-    }
-
-    public void setUserCapstoneID(String userCapstoneID) {
-        this.userCapstoneID = userCapstoneID;
-    }
-
-    public String getUserGroupID() {
-        return userGroupID;
-    }
-
-    public void setUserGroupID(String userGroupID) {
-        this.userGroupID = userGroupID;
-    }
+   
 
     public String getStatusID() {
         return statusID;
@@ -150,7 +134,7 @@ public class UserDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", roleID=" + roleID + ", gmail=" + gmail + ", phone=" + phone + ", userCapstoneID=" + userCapstoneID + ", userGroupID=" + userGroupID + ", statusID=" + statusID + ", photoUrl=" + photoUrl + ", semesterName=" + semesterName + ", capstoneName=" + capstoneName + '}';
+        return "UserDTO{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", roleID=" + roleID + ", gmail=" + gmail + ", phone=" + phone + ", statusID=" + statusID + ", photoUrl=" + photoUrl + ", semesterName=" + semesterName + ", capstoneName=" + capstoneName + '}';
     }
 
 }
