@@ -33,7 +33,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="modSupList.jsp">
+        <a class="nav-link" href="GetListController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Supervisors</span>
         </a>
