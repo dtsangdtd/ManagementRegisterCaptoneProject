@@ -99,18 +99,18 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-9">
-<!--                                                <div class="dropdown mb-4">
-                                                    <button class="btn btn-info dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                        Semester
-                                                    </button>
-                                                    <div class="dropdown-menu animated--fade-in"
-                                                         aria-labelledby="dropdownMenuButton1">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
-                                                    </div>
-                                                </div>-->
+                                                <!--                                                <div class="dropdown mb-4">
+                                                                                                    <button class="btn btn-info dropdown-toggle" type="button"
+                                                                                                            id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                                                                                                            aria-expanded="false">
+                                                                                                        Semester
+                                                                                                    </button>
+                                                                                                    <div class="dropdown-menu animated--fade-in"
+                                                                                                         aria-labelledby="dropdownMenuButton1">
+                                                                                                        <a class="dropdown-item" href="#">Fall 2021</a>
+                                                                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                                                                                                    </div>
+                                                                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -134,8 +134,8 @@
                                                     </div>
                                                 </th>
                                                 <th>Groups</th>
-                                                
-<!--                                                <th>photoUrl</th>-->
+
+                                                <!--                                                <th>photoUrl</th>-->
                                             </tr>
                                         </thead>
                                         <c:forEach var="sup" varStatus="counter" items="${LIST_SUPERVISOR}">
@@ -161,6 +161,23 @@
                             <!-- /.container-fluid -->
                         </div>
                     </div>
+                    <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
                 <!-- End of Main Content -->
 

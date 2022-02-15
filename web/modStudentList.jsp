@@ -100,8 +100,8 @@
                             </form>
                         </div>
 
-                        <div class="row" style="display: flex;">
-                            <div class="col-6">
+                        <div class="row" style="display: flex; margin-bottom: 50px">
+                            <div class="col-6" style="position: relative">
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive" >
@@ -161,11 +161,29 @@
                                                     </tbody>
                                                 </c:forEach>
                                             </table>
+                                        </div>
 
-                                        </div>  
                                     </div>
                                 </div>
+                                <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
+
                             <div class="col-1"> 
                                 <a href="#" class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">
