@@ -99,7 +99,7 @@
 
                     </nav>
                     <!-- Begin Page Content -->
-                    <div class="container-fluid">
+                    <div class="container-fluid" style="margin-bottom: 20px">
 
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">Student</h1>
@@ -147,9 +147,29 @@
                             <!-- /.container-fluid -->
 
                         </div>
+                        
                     </div>
+                    <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     <!-- End of Main Content -->
+
                 </div>
+                                <div class="mt-5"></div>
                 <section class="chatbox js-chatbox">
                     <div class="chatbox__header">
                         <h3 class="chatbox__header-cta-text"><span class="chatbox__header-cta-icon"><i
