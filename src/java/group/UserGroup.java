@@ -15,26 +15,48 @@ import user.UserDTO;
  * @author Mai
  */
 public class UserGroup {
-    private Map<Integer , List<UserDTO>> userGroup;
+    private int userGroupID;
+    private String userID;
+    private String groupID;
+    private int isSupervisor;
 
-    public UserGroup() {
+    public UserGroup(int userGroupID, String userID, String groupID, int isSupervisor) {
+        this.userGroupID = userGroupID;
+        this.userID = userID;
+        this.groupID = groupID;
+        this.isSupervisor = isSupervisor;
     }
 
-    public UserGroup(Map<Integer, List<UserDTO>> userGroup) {
-        this.userGroup = userGroup;
+    public int getUserGroupID() {
+        return userGroupID;
     }
 
-    public Map<Integer, List<UserDTO>> getUserGroup() {
-        return userGroup;
+    public void setUserGroupID(int userGroupID) {
+        this.userGroupID = userGroupID;
     }
 
-    public void setUserGroup(Map<Integer, List<UserDTO>> userGroup) {
-        this.userGroup = userGroup;
+    public String getUserID() {
+        return userID;
     }
-    public void add(int key, List<UserDTO> list){
-        if (this.userGroup == null){
-            this.userGroup = new HashMap<>();
-        }
-        //userGroup.put(list.get(list.size()-1).getGroupID(), list);
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
+
+    public String getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
+    }
+
+    public int getIsSupervisor() {
+        return isSupervisor;
+    }
+
+    public void setIsSupervisor(int isSupervisor) {
+        this.isSupervisor = isSupervisor;
+    }
+    
 }
