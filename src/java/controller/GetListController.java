@@ -46,12 +46,12 @@ public class GetListController extends HttpServlet {
             session.setAttribute("checked", checked);
 
             int pageNumber = 1;
-            int pageSize = 15;
+            int pageSize = 11;
             if (request.getParameter("page") != null) {
                 pageNumber = Integer.parseInt(request.getParameter("page"));
             }
             int noOfPages;
-            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin() * 1.0 / pageSize);
+            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked) * 1.0 / pageSize);
             List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked);
             System.out.println(listStudent);
             request.setAttribute("noOfPages", noOfPages);
