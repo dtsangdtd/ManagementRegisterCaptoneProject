@@ -129,18 +129,27 @@
                                                         <th>No</th>
                                                         <th>Name</th>
                                                         <th>Gmail</th>
-                                                        <th style="width: 160px">Status
+                                                        <th style="width: 160px">
                                                             <div class="dropdown">
                                                                 <i class="fas fa-filter "></i>
-                                                                <div class="dropdown-content">
-                                                                    <input type="checkbox" id="scales" name="full"
-                                                                           checked>
-                                                                    <label for="full">full</label>
-                                                                    <input type="checkbox" id="scales" name="Not Full"
-                                                                           checked>
-                                                                    <label for="notFull">not full</label>
-                                                                </div>
+                                                                <form action="GetListController" >
+                                                                    <div class="dropdown-content">
+                                                                        <input type="radio" id="scales" name="radioGroup"
+                                                                               <c:if test="${sessionScope.checked == '1'}">
+                                                                                   checked="checked"
+                                                                               </c:if>
+                                                                               value="1">
+                                                                        <label for="full">full</label>
+                                                                        <input type="radio" id="scales" name="radioGroup"
+                                                                               <c:if test="${sessionScope.checked == '0'}">
+                                                                                   checked="checked"
+                                                                               </c:if>
+                                                                               value="0">
+                                                                        <label for="notFull">not full</label>
+                                                                    </div>
+                                                                </form>
                                                             </div>
+                                                            Status
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -171,19 +180,36 @@
                                 </div>
                                 <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
                                     <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
+                                        <c:url var="nextpage" value="GetListController">
+                                            <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
+                                        </c:url>
+                                        <c:if test="${requestScope.currentPage > 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+
+                                        <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                                            <c:choose >
+                                                <c:when test="${requestScope.currentPage == i}">
+
+                                                    <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
+
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>    
                                     </ul>
                                 </nav>
                             </div>
@@ -493,6 +519,13 @@
                         });
 
             });
+            $('input[type=radio][name=radioGroup]').change(function (e) {
+                var selected = $('input[name="radioGroup"]:checked').val();
+                console.log(selected);
+                $(this).closest("form").submit();
+                e.preventDefault();
+            })
+
         </script>
         <!-- Bootstrap core JavaScript-->
 
