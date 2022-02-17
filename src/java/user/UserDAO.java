@@ -302,7 +302,7 @@ public class UserDAO {
         return false;
     }
 
-    public int getNoOfRecordsSearchAdmin() throws SQLException {
+    public int getNoOfRecordsSearchAdmin(int check) throws SQLException {
         int result = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -310,10 +310,18 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT count(*) as noRecord "
-                        + "FROM tblUser\n"
-                        + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
-                        + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US'";
+                String sql = null;
+
+                if (check == 1) {
+                    sql = "SELECT count(*) as noRecord \n"
+                            + "FROM tblUser \n"
+                            + "WHERE  tblUser.roleID = 'US'";
+                } else if (check == 0) {
+                    sql = "SELECT count(*) as noRecord "
+                            + "FROM tblUser\n"
+                            + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US'";
+                }
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 if (rs.next()) {
