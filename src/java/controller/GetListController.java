@@ -32,12 +32,30 @@ public class GetListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
+        int checked = 1;
+        System.out.println(request.getParameter("radioGroup"));
+        if ( request.getParameter("radioGroup") != null) {
+            checked = Integer.parseInt(request.getParameter("radioGroup"));
+
+        }
         try {
             UserDAO dao = new UserDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            List<UserDTO> listStudent = dao.getListStudent();
             List<UserDTO> listSupervisor = dao.getListSupervisor();
+            session.setAttribute("checked", checked);
+
+            int pageNumber = 1;
+            int pageSize = 15;
+            if (request.getParameter("page") != null) {
+                pageNumber = Integer.parseInt(request.getParameter("page"));
+            }
+            int noOfPages;
+            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin() * 1.0 / pageSize);
+            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked);
+            System.out.println(listStudent);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_STUDENT", listStudent);
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {

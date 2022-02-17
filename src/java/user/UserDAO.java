@@ -120,7 +120,7 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
-                    
+
                     String statusID = rs.getString("statusID");
                     list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
@@ -300,5 +300,94 @@ public class UserDAO {
             }
         }
         return false;
+    }
+
+    public int getNoOfRecordsSearchAdmin() throws SQLException {
+        int result = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT count(*) as noRecord "
+                        + "FROM tblUser\n"
+                        + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
+                        + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US'";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    result = rs.getInt("noRecord");
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+
+    public List<UserDTO> getUserSearch(int pagesize, int pageNumber, int check) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = null;
+                if (check == 1) {
+                    sql = "SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                            + "FROM tblUser\n"
+                            + "WHERE tblUser.roleID = 'US'"
+                            + "ORDER BY (SELECT NULL)"
+                            + "OFFSET ? * (? - 1) ROWS "
+                            + "FETCH NEXT ? ROWS ONLY ";
+                } else if (check == 0) {
+                    sql = "SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                            + "FROM tblUser\n"
+                            + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US'"
+                            + "ORDER BY (SELECT NULL)"
+                            + "OFFSET ? * (? - 1) ROWS "
+                            + "FETCH NEXT ? ROWS ONLY ";
+                }
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, pagesize);
+                stm.setInt(2, pageNumber);
+                stm.setInt(3, pagesize);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String username = rs.getString("name");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    String photoUrl = rs.getString("photoUrl");
+                    String statusID = rs.getString("statusID");
+                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }
