@@ -165,9 +165,14 @@
                                                                     ${stu.gmail}
                                                                 </a>
                                                             </td>
-                                                            <td>not group yet</td>
-                                                        </tr>
-                                                    </tbody>
+                                                            <td>
+                                                                <c:if test="${stu.statusID == '0'}"><div class="badge bg-dark">inActive</div></c:if>
+                                                                <c:if test="${stu.statusID == '1'}"><div class="badge bg-success">Active</div></c:if>
+                                                                <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
+                                                                <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
+                                                            </td>
+                                                            </tr>
+                                                        </tbody>
                                                 </c:forEach>
                                             </table>
                                         </div>
@@ -211,12 +216,17 @@
                             </div>
 
                             <div class="col-1"> 
-                                <a href="#" class="btn btn-info btn-icon-split">
+
+                                <button 
+                                    <c:if test="${sessionScope.checked == '1'}">
+                                        disabled="disabled"
+                                    </c:if>
+                                    class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-sync-alt"></i>
                                     </span>
                                     <span class="text">Random</span>
-                                </a>
+                                </button>
                                 <div class="mt-2"></div>
                                 <a href="#" class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">
@@ -342,9 +352,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
                 <!-- End of Main Content -->
