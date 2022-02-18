@@ -398,4 +398,104 @@ public class UserDAO {
         }
         return list;
     }
+
+    public int getNoOfRecordsSupervisor(int check) throws SQLException {
+        int result = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = null;
+
+                if (check == 1) {
+                    sql = "SELECT count(*) as noRecord \n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID) \n"
+                            + "WHERE tb1.roleID = 'MT'\n"
+                            + "HAVING COUNT (tb2.userID) = 5";
+                } else if (check == 0) {
+                    sql = "SELECT count(*) as noRecord \n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID) \n"
+                            + "WHERE tb1.roleID = 'MT'\n"
+                            + "HAVING COUNT (tb2.userID) < 5";
+                }
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    result = rs.getInt("noRecord");
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+
+    public List<UserDTO> getSupervisorSearch(int pagesize, int pageNumber, int check) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = null;
+                if (check == 1) {
+                    sql = "SELECT tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID,COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID)\n"
+                            + "WHERE tb1.roleID = 'MT'\n"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID HAVING COUNT (tb2.userID) < 5"
+                            + "ORDER BY (SELECT NULL)"
+                            + "OFFSET ? * (? - 1) ROWS "
+                            + "FETCH NEXT ? ROWS ONLY ";
+                } else if (check == 0) {
+                    sql = "SELECT tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID,COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID)\n"
+                            + "WHERE tb1.roleID = 'MT'\n"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID HAVING COUNT (tb2.userID) = 5"
+                            + "ORDER BY (SELECT NULL)"
+                            + "OFFSET ? * (? - 1) ROWS "
+                            + "FETCH NEXT ? ROWS ONLY ";
+                }
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, pagesize);
+                stm.setInt(2, pageNumber);
+                stm.setInt(3, pagesize);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String username = rs.getString("name");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    String photoUrl = rs.getString("photoUrl");
+                    String statusID = rs.getString("statusID");
+                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
 }
