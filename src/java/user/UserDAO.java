@@ -410,15 +410,23 @@ public class UserDAO {
                 String sql = null;
 
                 if (check == 1) {
-                    sql = "SELECT count(*) as noRecord \n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID) \n"
+                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName\n"
+                            + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
+                            + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "HAVING COUNT (tb2.userID) = 5";
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName\n"
+                            + "HAVING COUNT (tb2.userID) = 5) tableCount";
                 } else if (check == 0) {
-                    sql = "SELECT count(*) as noRecord \n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID) \n"
+                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName\n"
+                            + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
+                            + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "HAVING COUNT (tb2.userID) < 5";
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName\n"
+                            + "HAVING COUNT (tb2.userID) < 5) tableCount";
                 }
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
@@ -451,21 +459,31 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID,COUNT (tb2.userID) AS AmountGroup\n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID)\n"
+                    sql = "SELECT  tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
+                            + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
+                            + ")\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID HAVING COUNT (tb2.userID) < 5"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName HAVING COUNT (tb2.userID) = 5 "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
+
                 } else if (check == 0) {
-                    sql = "SELECT tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID,COUNT (tb2.userID) AS AmountGroup\n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID)\n"
+                    sql = "SELECT  tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
+                            + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
+                            + ")\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail, tb1.phone,tb1.photoUrl,tb1.statusID HAVING COUNT (tb2.userID) = 5"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName HAVING COUNT (tb2.userID) < 5"
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
+
                 }
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, pagesize);
@@ -476,10 +494,12 @@ public class UserDAO {
                     String userID = rs.getString("userID");
                     String username = rs.getString("name");
                     String gmail = rs.getString("gmail");
-                    String phone = rs.getString("phone");
-                    String photoUrl = rs.getString("photoUrl");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    String capstoneName = rs.getString("capstoneName");
+                    String groupID = rs.getString("groupID");
+                    String groupName = rs.getString("groupName");
+                    String amountGroup = rs.getString("AmountGroup");
+                    list.add(new UserDTO(userID, username,"US", gmail, statusID, capstoneName, groupID, groupName, amountGroup));
                 }
             }
         } catch (Exception e) {
