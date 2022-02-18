@@ -40,6 +40,14 @@ public class UserDTO implements Serializable{
         this.photoUrl = photoUrl;
     }
 
+    public UserDTO(String userID, String username, String roleID, String gmail, String phone) {
+        this.userID = userID;
+        this.username = username;
+        this.roleID = roleID;
+        this.gmail = gmail;
+        this.phone = phone;
+    }
+
     public String getSemesterName() {
         return semesterName;
     }

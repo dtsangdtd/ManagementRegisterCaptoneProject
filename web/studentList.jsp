@@ -132,9 +132,11 @@
                                                         <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
+                                                        <form action="MainController">
+                                                            <input type="hidden" name="userID" value="${stu.userID}">
+                                                            <button type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
+                                                        </form>
+                                                        
                                                     </td>
                                                 </tr>
                                             </tbody>
