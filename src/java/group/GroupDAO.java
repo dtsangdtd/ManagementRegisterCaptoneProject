@@ -48,4 +48,61 @@ public class GroupDAO {
         }
         return userGroupID;
     }
+    
+    public boolean inviteGroup (String userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "INSERT into tblRequest (requestID, requestDetail, userID)"
+                        + "VALUE (?,?,?)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(0, "requestID");
+                stm.setString(1, "requestDetail");
+                stm.setString(2, "userID");
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean acceptInviteGroup (String userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "INSERT into tblUserGroup (userGroupID, userID, groupID, isSupervisor)"
+                        + "VALUES (?,?,?,0)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(0, "userGroupID");
+                stm.setString(1, "userID");
+                stm.setString(2, "groupID");
+                stm.setString(3, "isSupervisor");
+                check = stm.executeUpdate() > 0 ? true : false; 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }

@@ -44,6 +44,15 @@ public class UserDTO implements Serializable{
         this.photoUrl = photoUrl;
     }
 
+
+    public UserDTO(String userID, String username, String roleID, String gmail, String phone) {
+        this.userID = userID;
+        this.username = username;
+        this.roleID = roleID;
+        this.gmail = gmail;
+        this.phone = phone;
+}
+
     public String getGroupID() {
         return groupID;
     }
@@ -69,6 +78,7 @@ public class UserDTO implements Serializable{
     }
 
     public UserDTO(String userID, String username, String roleID, String gmail, String statusID, String capstoneName, String groupID, String groupName, String AmountGroup) {
+
         this.userID = userID;
         this.username = username;
         this.roleID = roleID;

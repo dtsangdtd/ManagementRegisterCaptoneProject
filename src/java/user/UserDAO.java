@@ -396,7 +396,45 @@ public class UserDAO {
                 conn.close();
             }
         }
-        return list;
+        return list;   
+    }
+    
+    public UserDTO getUserByUserID(String userID) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = ("SELECT *"
+                        + "FROM tblUser"
+                        + "WHERE userID like ?");
+                stm =conn.prepareStatement(sql);
+                stm.setString(0, "userID");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userName = rs.getString("userName");
+                    String roleID = rs.getString("roleID");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    user = new UserDTO(userID, userName, roleID, gmail, phone);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return user;
     }
 
 
