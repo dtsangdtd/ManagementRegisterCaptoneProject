@@ -33,7 +33,7 @@ public class GetListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         int checked = 1;
-        System.out.println(request.getParameter("radioGroup"));
+//        System.out.println(request.getParameter("radioGroup"));
         if ( request.getParameter("radioGroup") != null) {
             checked = Integer.parseInt(request.getParameter("radioGroup"));
 
@@ -52,7 +52,7 @@ public class GetListController extends HttpServlet {
             int noOfPages;
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked) * 1.0 / pageSize);
             List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked);
-            System.out.println(listStudent);
+//            System.out.println(listStudent);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_STUDENT", listStudent);

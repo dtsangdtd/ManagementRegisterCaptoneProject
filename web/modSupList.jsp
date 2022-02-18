@@ -119,22 +119,31 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
+                                                <th>Gmail</th>
+
                                                 <th>Capstone Name</th>
-                                                <th style="width: 160px">Gmail
+                                                <th>Groups Name</th>
+                                                <th>
                                                     <div class="dropdown">
                                                         <i class="fas fa-filter "></i>
-                                                        <div class="dropdown-content">
-                                                            <input type="checkbox" id="scales" name="full"
-                                                                   checked>
-                                                            <label for="full">full</label>
-                                                            <input type="checkbox" id="scales" name="notFull"
-                                                                   checked>
-                                                            <label for="notFull">not full</label>
-                                                        </div>
+                                                        <form action="GetListSupController" >
+                                                            <div class="dropdown-content">
+                                                                <input type="radio" id="scales" name="radioSupGroup"
+                                                                       <c:if test="${sessionScope.checked == '1'}">
+                                                                           checked="checked"
+                                                                       </c:if>
+                                                                       value="1">
+                                                                <label for="full">full</label>
+                                                                <input type="radio" id="scales" name="radioSupGroup"
+                                                                       <c:if test="${sessionScope.checked == '0'}">
+                                                                           checked="checked"
+                                                                       </c:if>
+                                                                       value="0">
+                                                                <label for="notFull">not full</label>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                </th>
-                                                <th>Groups</th>
-
+                                                    Amount Group</th>
                                                 <!--                                                <th>photoUrl</th>-->
                                             </tr>
                                         </thead>
@@ -143,7 +152,6 @@
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${sup.username}</td>
-                                                    <td>${sup.capstoneName}</td>
                                                     <td>
                                                         <a href="" class="copy-click"
                                                            data-tooltip-text="Click To Copy" 
@@ -151,6 +159,10 @@
                                                             ${sup.gmail}
                                                         </a>
                                                     </td>
+                                                    <td>${sup.capstoneName}</td>
+                                                    <td><a href="mod-group-details.jsp/${sup.groupID}">${sup.groupName}</a></td>
+                                                    <td>${sup.amountGroup}/5</td>
+
                                                 </tr>
                                             </tbody>
                                         </c:forEach>
@@ -161,21 +173,38 @@
                             <!-- /.container-fluid -->
                         </div>
                     </div>
-                    <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                    <nav aria-label="Page navigation example" style="position: absolute; right: 25px" >
                         <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
+                            <c:url var="nextpage" value="GetListSupController">
+                                <c:param name="radioSupGroup" value="${param.radioSupGroup}"></c:param>
+                            </c:url>
+                            <c:if test="${requestScope.currentPage > 1}">
+                                <li class="page-item">
+                                    <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            </c:if>
+
+                            <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                                <c:choose >
+                                    <c:when test="${requestScope.currentPage == i}">
+
+                                        <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
+
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
+                                <li class="page-item">
+                                    <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </c:if>    
                         </ul>
                     </nav>
                 </div>
@@ -266,7 +295,8 @@
                 content: attr(data-tooltip-text-copied);
             }
         </style>
-        <script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
             const links = document.querySelectorAll('.copy-click');
             const cls = {
                 copied: 'is-copied',
@@ -306,6 +336,12 @@
                     }
                 });
             });
+            $('input[type=radio][name=radioSupGroup]').change(function (e) {
+                var selected = $('input[name="radioSupGroup"]:checked').val();
+                console.log(selected);
+                $(this).closest("form").submit();
+                e.preventDefault();
+            })
         </script>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
