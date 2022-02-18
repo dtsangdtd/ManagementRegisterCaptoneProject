@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.Part;
 import org.apache.poi.xssf.usermodel.*;
 import org.apache.poi.hslf.model.Sheet;
@@ -43,6 +44,103 @@ public class ImportController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public class ImportExcel{
+        private String userID;
+        private String name;
+        private String gmail;
+        private String phone;
+        private int statusID;
+        private String roleID;
+        private String semesterID;
+
+        public ImportExcel() {
+            super();
+        }
+
+        public ImportExcel(String userID, String name, String gmail, String phone, int statusID, String roleID, String semesterID) {
+            super();
+            this.userID = userID;
+            this.name = name;
+            this.gmail = gmail;
+            this.phone = phone;
+            this.statusID = statusID;
+            this.roleID = roleID;
+            this.semesterID = semesterID;
+        }
+
+        @Override
+        public String toString() {
+            return "ImportExcel{" + "userID=" + userID + ", name=" + name + ", gmail=" + gmail + ", phone=" + phone + ", statusID=" + statusID + ", roleID=" + roleID + ", semesterID=" + semesterID + '}';
+        }
+        
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getGmail() {
+            return gmail;
+        }
+
+        public void setGmail(String gmail) {
+            this.gmail = gmail;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public int getStatusID() {
+            return statusID;
+        }
+
+        public void setStatusID(int statusID) {
+            this.statusID = statusID;
+        }
+
+        public String getRoleID() {
+            return roleID;
+        }
+
+        public void setRoleID(String roleID) {
+            this.roleID = roleID;
+        }
+
+        public String getSemesterID() {
+            return semesterID;
+        }
+
+        public void setSemesterID(String semesterID) {
+            this.semesterID = semesterID;
+        }
+        
+    }
+    
+    private static List<ImportExcel> getExcel(){
+        List<ImportExcel> list = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            ImportExcel imp;
+            imp = new ImportExcel(i, "Import " + i, i * 2, i * 1000);
+            list.add(imp);
+        }
+        return list;
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -53,12 +151,12 @@ public class ImportController extends HttpServlet {
         try {
             if (btn != null) {
                 if (btn.equals("Import Excel")) {
-                    Part p = request.getPart("file");
                     String Path = "upload";
                     String absolutepath = getServletContext().getRealPath(Path);
                     MultipartRequest mr = new MultipartRequest(request, absolutepath);
                     String filename = mr.getOriginalFileName("filename");
                     FileInputStream myinput = new FileInputStream(new File(absolutepath + "/" + filename));
+                     
                 }
             }
         } catch (Exception e) {
@@ -68,6 +166,7 @@ public class ImportController extends HttpServlet {
             out.close();
         }
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

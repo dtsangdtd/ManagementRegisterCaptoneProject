@@ -170,8 +170,12 @@
                                                     </tbody>
                                                 </c:forEach>
                                             </table>
+<<<<<<< Updated upstream
                                         </div>
 
+=======
+                                        </div>  
+>>>>>>> Stashed changes
                                     </div>
                                 </div>
                                 <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
@@ -233,7 +237,7 @@
                                 </a>
 
                             </div>
-                            <div id="wrapper1 " class="col-5">
+                            <div id="wrapper" class="col-5">
                                 <div class="scrollbar" id="style-default">
                                     <!--                                    <div class="force-overflow"></div>-->
 
@@ -367,28 +371,6 @@
         <!-- Logout Modal-->
         <%@include file="logout.jsp" %>
         <style>
-            /* ScrollBar*/
-            .scrollbar
-            {
-                margin-left: 30px;
-                float: left;
-                height: 70vh;
-                width: auto;                /*                background: #F5F5F5;*/
-                overflow-y: scroll;
-                margin-bottom: 25px;
-            }
-
-            .force-overflow
-            {
-                min-height: 100%;
-            }
-
-            #wrapper1
-            {
-                text-align: center;
-                margin: auto;
-            }
-            /* ScrollBar*/
             .dropdown {
                 position: relative;
                 display: inline-block;
@@ -455,15 +437,13 @@
             }
         </style>
         <script>
-
-            $(document).ready(function () {
-                if (!$.browser.webkit) {
-                    $('.wrapper1').html('<p>Sorry! Non webkit users. :(</p>');
-                }
-            });
-
-
-
+//
+//            $(document).ready(function () {
+//                if (!$.browser.webkit) {
+//                    $('.wrapper1').html('<p>Sorry! Non webkit users. :(</p>');
+//                }
+//            });
+            
             const links = document.querySelectorAll('.copy-click');
             const cls = {
                 copied: 'is-copied',
