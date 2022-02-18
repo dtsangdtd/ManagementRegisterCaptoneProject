@@ -33,7 +33,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListSupController">
+        <a class="nav-link" href="GetListSupController?radioSupGroup=0">
             <i class="fas fa-fw fa-folder"></i>
             <span>Supervisors</span>
         </a>
