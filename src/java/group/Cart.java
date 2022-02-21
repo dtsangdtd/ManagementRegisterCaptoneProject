@@ -5,6 +5,7 @@
 package group;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import user.UserDTO;
 
@@ -13,44 +14,35 @@ import user.UserDTO;
  * @author mac
  */
 public class Cart {
-    private Map<String, UserDTO> cart;
+    private Map<Integer, List<UserDTO>> cart;
 
-    public Cart(Map<String, UserDTO> cart) {
+    public Cart(Map<Integer, List<UserDTO>> cart) {
+        this.cart = cart;
+    }
+
+    public Map<Integer, List<UserDTO>> getCart() {
+        return cart;
+    }
+
+    public void setCart(Map<Integer, List<UserDTO>> cart) {
         this.cart = cart;
     }
 
     public Cart() {
     }
-
-    public Map<String, UserDTO> getCart() {
-        return cart;
-    }
-
-    public void setCart(Map<String, UserDTO> cart) {
-        this.cart = cart;
-    }
-    
-    public void add(UserDTO user){
+    public void add(int key, List<UserDTO> list){
         if(this.cart == null){
             this.cart = new HashMap<>();
         }
-        if(this.cart.containsKey(user.getUserID())){
 
-        }
-        cart.put(user.getUserID(), user);
+        cart.put(key, list);
     }
-    
-    public void delete(String id){
-        if(this.cart == null) return;
-        if(this.cart.containsKey(id)){
-            this.cart.remove(id);
-        } 
+    public UserDTO getUser(int key){
+        UserDTO user = null;
+        List<UserDTO> list = cart.get(key);
+        user = list.get(0);
+        list.remove(0);
+        return user;
     }
-    
-    public void update(UserDTO newUser){
-        if(this.cart == null) return;
-        if(this.cart.containsKey(newUser.getUserID())){
-            this.cart.replace(newUser.getUserID(), newUser);
-        }
-    }
+
 }
