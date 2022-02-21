@@ -3,16 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/group/GroupDAO.java</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/controller/ImportController.java</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/web/modGroup.jsp</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/controller/GetListController.java</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/user/UserDTO.java</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/web/modStudentList.jsp</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/web/modSidebar.jsp</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/controller/GetListSupController.java</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/nbproject/build-impl.xml~</file>
-            <file>file:/C:/Users/dtsang/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/controller/InviteController.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/request/RequestDAO.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
         </group>
     </open-files>
 </project-private>

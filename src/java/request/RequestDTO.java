@@ -10,26 +10,26 @@ package request;
  * @author ASUS
  */
 public class RequestDTO {
-    String requestID;
-    String requestDetail;
-    String userID;
-    String isSupervisor;
+    int requestID;
+    String requestDetail;//Thông tin chi tiết tính sau đi
+    String userID; //ID của người mời (LoginUser)
+    int isSupervisor;
 
     public RequestDTO() {
     }
 
-    public RequestDTO(String requestID, String requestDetail, String userID, String isSupervisor) {
+    public RequestDTO(int requestID, String requestDetail, String userID, int isSupervisor) {
         this.requestID = requestID;
-        this.requestDetail = requestDetail;
-        this.userID = userID;
+        this.requestDetail = requestDetail;//ID của người được mời
+        this.userID = userID;//ID của người mời
         this.isSupervisor = isSupervisor;
     }
-    
-    public String getRequestID() {
+
+    public int getRequestID() {
         return requestID;
     }
 
-    public void setRequestID(String requestID) {
+    public void setRequestID(int requestID) {
         this.requestID = requestID;
     }
 
@@ -49,13 +49,11 @@ public class RequestDTO {
         this.userID = userID;
     }
 
-    public String getIsSupervisor() {
+    public int getIsSupervisor() {
         return isSupervisor;
     }
 
-    public void setIsSupervisor(String isSupervisor) {
+    public void setIsSupervisor(int isSupervisor) {
         this.isSupervisor = isSupervisor;
     }
-    
-    
 }
