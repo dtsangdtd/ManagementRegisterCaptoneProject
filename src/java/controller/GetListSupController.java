@@ -32,63 +32,81 @@ public class GetListSupController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
-        try {
-            UserDAO dao = new UserDAO();
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");           
-            List<UserDTO> listSupervisor = dao.getListSupervisor();         
-            session.setAttribute("LIST_SUPERVISOR", listSupervisor);
-            if (loginUser == null) {
-                url = LOGIN;
-            } else if ("AD".equals(loginUser.getRoleID())) {
-                url = AD;
-            } else if ("US".equals(loginUser.getRoleID())) {
-                url = US;
+        int checked = 1;
+        if (request.getParameter("radioSupGroup") != null) {
+            checked = Integer.parseInt(request.getParameter("radioSupGroup"));
+            try {
+                UserDAO dao = new UserDAO();
+                HttpSession session = request.getSession();
+                session.setAttribute("checked", checked);
+                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                int pageNumber = 1;
+                int pageSize = 11;
+                if (request.getParameter("page") != null) {
+                    pageNumber = Integer.parseInt(request.getParameter("page"));
+                }
+                int noOfPages;
+                noOfPages = (int) Math.ceil(dao.getNoOfRecordsSupervisor(checked) * 1.0 / pageSize);
+                List<UserDTO> listSupervisor = dao.getSupervisorSearch(pageSize, pageNumber, checked);
+                request.setAttribute("noOfPages", noOfPages);
+                request.setAttribute("currentPage", pageNumber);
+                session.setAttribute("LIST_SUPERVISOR", listSupervisor);
+                if (loginUser == null) {
+                    url = LOGIN;
+                } else if ("AD".equals(loginUser.getRoleID())) {
+                    url = AD;
+                } else if ("US".equals(loginUser.getRoleID())) {
+                    url = US;
+                }
+            } catch (Exception e) {
+                log("Error at GetListSupController" + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (Exception e) {
-            log("Error at GetListSupController" + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }
