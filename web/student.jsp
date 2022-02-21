@@ -91,7 +91,10 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Group</h1>
+                       
+                        <h1 class="h3 mb-2 text-gray-800">${sessionScope.LISTGROUP[0].groupName}</h1>
+
+                        
                         <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                             For more information about DataTables, please visit the <a target="_blank"
                                 href="https://datatables.net">official DataTables documentation</a>.</p> -->
@@ -115,97 +118,51 @@
                                                 <th>Kick</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nguyen Tho Thai Bao</td>
-                                                <td>1242234234</td>
-                                                <td>test@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                        <i class="fas fa-times"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Khai Ngu Ngoc</td>
-                                                <td>32323232</td>
-                                                <td>test1@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                        <i class="fas fa-times"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>QA</td>
-                                                <td>23523523523</td>
-                                                <td>test2@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                        <i class="fas fa-times"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Kiêng</td>
-                                                <td>0902915671</td>
-                                                <td>test3@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                        <i class="fas fa-times"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <c:forEach var="listGroup" varStatus="counter" items="${LISTGROUP}">
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${listGroup.username}</td>
+                                                    <td>${listGroup.phone}</td>
+                                                    <td>${listGroup.gmail}</td>
+                                                    <td>${listGroup.groupName}</td>
+                                                    <!--<td>${listGroup.groupID}</td>-->
+                                                    <td>
+                                                        <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                            <i class="fas fa-info"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                            <i class="fas fa-times"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <!--                        <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                                                    <ul class="pagination">
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>-->
                     </div>
                 </div>
 
