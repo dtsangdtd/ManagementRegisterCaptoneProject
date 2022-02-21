@@ -89,7 +89,6 @@ public class UserDTO implements Serializable{
         this.groupName = groupName;
         this.AmountGroup = AmountGroup;
     }
-
     public String getSemesterName() {
         return semesterName;
     }
