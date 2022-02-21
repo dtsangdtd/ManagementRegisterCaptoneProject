@@ -47,7 +47,7 @@ public class RandomStudentController extends HttpServlet {
                 int key = daoGroup.getMaxUserGroupID();
                 UserGroup map = (UserGroup) session.getAttribute("GROUP");
                 for (int i = 0; i < num; i++) {
-                    map.add(key, listStudentNoGroup.subList(i, (i+1)*5));
+//                    map.add(key, listStudentNoGroup.subList(i, (i+1)*5));
                     key++ ;
                 }
                 switch (mod) {

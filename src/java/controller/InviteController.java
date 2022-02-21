@@ -38,25 +38,33 @@ public class InviteController extends HttpServlet {
      */
     
     private static final String SUCCESS = "studentList.jsp";
-    private static final String ERROR = "studentList.jsp";
+    private static final String ERROR = "student.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            //lấy userID + groupID của người mời
+            String userID = request.getParameter("userID");//userID của người dc mời
             HttpSession session = request.getSession();
-            UserGroup LoginUser =  (UserGroup) session.getAttribute("LOGIN_USER");   
-            String loginUserID = LoginUser.getUserID();
-            String groupID = LoginUser.getGroupID();
-            String userID = request.getParameter("userID"); //userID của người dc mời
+            UserDTO loginUser =  (UserDTO) session.getAttribute("LOGIN_USER");  
+            String loginUserID = loginUser.getUserID();//lấy userID của người mời
             RequestDAO reqDAO = new RequestDAO();
-            int requestID = reqDAO.getMaxRequestID() + 1;//Tạo requestID mới nhất
-//            RequestDTO reqDTO = new RequestDTO(userID, userID, userID, userID);
-            GroupDAO grpDAO = new GroupDAO();
-//            grpDAO.inviteGroup(loginUserID); //Insert param vào request 
-            
+            int requestID = reqDAO.getMaxRequestID() + 1;//Tạo RequestID mới
+            UserDAO usDAO = new UserDAO();
+            UserDTO invitedUser =  usDAO.getUserByUserID(userID);
+            if ("US".equals(invitedUser.getRoleID())) {
+                int isSupervior = 0;
+                RequestDTO reqDTO = new RequestDTO(requestID, userID, loginUserID, isSupervior);//Lấy thông tin cho request
+                boolean check = reqDAO.inviteGroup(reqDTO); //Insert param vào request 
+                if (check) url = SUCCESS;
+            } 
+            if ("MT".equals(invitedUser.getRoleID())) {
+                int isSupervior = 1;
+                RequestDTO reqDTO = new RequestDTO(requestID, userID, loginUserID, isSupervior);//Lấy thông tin cho request
+                boolean check = reqDAO.inviteGroup(reqDTO); //Insert param vào request 
+//                if (check) url = SUCCESS;
+            } 
         } catch (Exception e) {
             log ("Error at InviteController" + e.toString());
         } finally {
