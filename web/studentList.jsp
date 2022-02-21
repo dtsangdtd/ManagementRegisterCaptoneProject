@@ -151,23 +151,40 @@
                         </div>
                         
                     </div>
-                    <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                       <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
+                                    <ul class="pagination">
+                                        <c:url var="nextpage" value="GetListController">
+                                            <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
+                                        </c:url>
+                                        <c:if test="${requestScope.currentPage > 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+
+                                        <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                                            <c:choose >
+                                                <c:when test="${requestScope.currentPage == i}">
+
+                                                    <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
+
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>    
+                                    </ul>
+                                </nav>
                     <!-- End of Main Content -->
 
                 </div>

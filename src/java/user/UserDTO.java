@@ -12,22 +12,22 @@ import java.io.Serializable;
  * @author mac
  */
 public class UserDTO implements Serializable{
-    private String userID;
-    private String username;
-    private String password;
-    private String roleID;
-    private String gmail;
-    private String phone;
+    public String userID;
+    public String username;
+    public String password;
+    public String roleID;
+    public String gmail;
+    public String phone;
  
-    private String statusID;
-    private String photoUrl;
+    public String statusID;
+    public String photoUrl;
     
-    private String semesterName;
-    private String capstoneName;
+    public String semesterName;
+    public String capstoneName;
     
-    private String groupID;
-    private String groupName;
-    private String AmountGroup;
+    public String groupID;
+    public String groupName;
+    public String AmountGroup;
             
     public UserDTO() {
     }
@@ -115,7 +115,7 @@ public class UserDTO implements Serializable{
         this.semesterName = semesterName;
         this.capstoneName = capstoneName;
     }
-
+   
     public String getUserID() {
         return userID;
     }
