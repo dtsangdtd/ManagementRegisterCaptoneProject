@@ -126,7 +126,6 @@
                                                     <td>${counter.count}</td>
                                                     <td>${stu.username}</td>
                                                     <td>${stu.phone}</td>
-
                                                     <td>${stu.gmail}</td>
                                                     <td> 
                                                         <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/>

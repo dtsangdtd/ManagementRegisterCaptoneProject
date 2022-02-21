@@ -407,17 +407,17 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = ("SELECT *"
-                        + "FROM tblUser"
-                        + "WHERE userID like ?");
+                String sql = " SELECT name, gmail, phone, roleID"
+                        + " FROM tblUser"
+                        + " WHERE userID like ?";
                 stm =conn.prepareStatement(sql);
-                stm.setString(0, "userID");
+                stm.setString(1, userID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String userName = rs.getString("userName");
-                    String roleID = rs.getString("roleID");
+                    String userName = rs.getString("name");
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
+                    String roleID = rs.getString("roleID");
                     user = new UserDTO(userID, userName, roleID, gmail, phone);
                 }
             }
