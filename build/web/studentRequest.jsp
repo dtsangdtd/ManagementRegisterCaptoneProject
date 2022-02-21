@@ -127,7 +127,10 @@
                                                 <td>test@gmai.com</td>
                                                 <td>
                                                     <form action="MainController">
+<<<<<<< HEAD
 <!--                                                        <input type="hidden" name="userID" value="${stu.userID}">-->
+=======
+>>>>>>> main
                                                         <button type="submit" name="action" value="Accept" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-check"></i> </button>
                                                         <button type="submit" name="action" value="Refuse" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-ban"></i> </button>
                                                     </form>
