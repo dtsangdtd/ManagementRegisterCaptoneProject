@@ -11,14 +11,15 @@ import user.UserDTO;
  *
  * @author Mai
  */
-public class GroupDTO extends UserDTO{
+public class GroupDTO extends UserDTO {
+
     private String groupID;
-    private int groupID;
     private String groupName;
     private int capstoneID;
     private int numOfPer;
     private int statusGroupID;
-
+    private int statusID;
+    private int groupID1;
     public GroupDTO() {
     }
 
@@ -27,18 +28,19 @@ public class GroupDTO extends UserDTO{
         this.groupID = groupID;
         this.groupName = groupName;
     }
-    
+
     @Override
     public String getGroupID() {
+
+        return groupID;
+    }
+
     public GroupDTO(int groupID, String groupName, int capstoneID, int numOfPer, int statusID) {
-        this.groupID = groupID;
+        this.groupID1 = groupID;
         this.groupName = groupName;
         this.capstoneID = capstoneID;
         this.numOfPer = numOfPer;
         this.statusID = statusID;
-    }
-
-        return groupID;
     }
 
     public void setGroupID(String groupID) {
@@ -81,19 +83,17 @@ public class GroupDTO extends UserDTO{
 
     @Override
     public String toString() {
-        return "GroupDTO{" + 
-                "groupID=" + groupID + 
-                ", groupName=" + groupName +
-                ", userGroupID=" + userGroupID + 
-                ", capstoneID=" + capstoneID + 
-                ", numOfPer=" + numOfPer + 
-                ", statusGroupID=" + statusGroupID + 
-                ", userID=" + userID + 
-                ", username=" + username + 
-                ", phone=" + phone + 
-                ", gmail=" + gmail + 
-                ", statusID=" + statusID +'}';
+        return "GroupDTO{"
+                + "groupID=" + groupID
+                + ", groupName=" + groupName
+                + ", capstoneID=" + capstoneID
+                + ", numOfPer=" + numOfPer
+                + ", statusGroupID=" + statusGroupID
+                + ", userID=" + userID
+                + ", username=" + username
+                + ", phone=" + phone
+                + ", gmail=" + gmail
+                + ", statusID=" + statusID + '}';
     }
 
-    
 }
