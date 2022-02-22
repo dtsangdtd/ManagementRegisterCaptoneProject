@@ -10,21 +10,28 @@ package group;
  * @author Mai
  */
 public class GroupDTO {
-    private String groupID;
+    private int groupID;
     private String groupName;
-    private int userGroupID;
-    private String capstoneID;
+    private int capstoneID;
     private int numOfPer;
     private int statusID;
 
     public GroupDTO() {
     }
 
-    public String getGroupID() {
+    public GroupDTO(int groupID, String groupName, int capstoneID, int numOfPer, int statusID) {
+        this.groupID = groupID;
+        this.groupName = groupName;
+        this.capstoneID = capstoneID;
+        this.numOfPer = numOfPer;
+        this.statusID = statusID;
+    }
+
+    public int getGroupID() {
         return groupID;
     }
 
-    public void setGroupID(String groupID) {
+    public void setGroupID(int groupID) {
         this.groupID = groupID;
     }
 
@@ -36,19 +43,11 @@ public class GroupDTO {
         this.groupName = groupName;
     }
 
-    public int getUserGroupID() {
-        return userGroupID;
-    }
-
-    public void setUserGroupID(int userGroupID) {
-        this.userGroupID = userGroupID;
-    }
-
-    public String getCapstoneID() {
+    public int getCapstoneID() {
         return capstoneID;
     }
 
-    public void setCapstoneID(String capstoneID) {
+    public void setCapstoneID(int capstoneID) {
         this.capstoneID = capstoneID;
     }
 
