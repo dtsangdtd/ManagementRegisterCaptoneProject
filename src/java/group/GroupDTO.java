@@ -11,14 +11,15 @@ import user.UserDTO;
  *
  * @author Mai
  */
-public class GroupDTO extends UserDTO{
+public class GroupDTO extends UserDTO {
+
     private String groupID;
     private String groupName;
-    private int userGroupID;
-    private String capstoneID;
+    private int capstoneID;
     private int numOfPer;
     private int statusGroupID;
-
+    private int statusID;
+    private int groupID1;
     public GroupDTO() {
     }
 
@@ -27,13 +28,21 @@ public class GroupDTO extends UserDTO{
         this.groupID = groupID;
         this.groupName = groupName;
     }
-    
+
     @Override
     public String getGroupID() {
+
         return groupID;
     }
 
-    @Override
+    public GroupDTO(int groupID, String groupName, int capstoneID, int numOfPer, int statusID) {
+        this.groupID1 = groupID;
+        this.groupName = groupName;
+        this.capstoneID = capstoneID;
+        this.numOfPer = numOfPer;
+        this.statusID = statusID;
+    }
+
     public void setGroupID(String groupID) {
         this.groupID = groupID;
     }
@@ -48,19 +57,11 @@ public class GroupDTO extends UserDTO{
         this.groupName = groupName;
     }
 
-    public int getUserGroupID() {
-        return userGroupID;
-    }
-
-    public void setUserGroupID(int userGroupID) {
-        this.userGroupID = userGroupID;
-    }
-
-    public String getCapstoneID() {
+    public int getCapstoneID() {
         return capstoneID;
     }
 
-    public void setCapstoneID(String capstoneID) {
+    public void setCapstoneID(int capstoneID) {
         this.capstoneID = capstoneID;
     }
 
@@ -82,19 +83,17 @@ public class GroupDTO extends UserDTO{
 
     @Override
     public String toString() {
-        return "GroupDTO{" + 
-                "groupID=" + groupID + 
-                ", groupName=" + groupName +
-                ", userGroupID=" + userGroupID + 
-                ", capstoneID=" + capstoneID + 
-                ", numOfPer=" + numOfPer + 
-                ", statusGroupID=" + statusGroupID + 
-                ", userID=" + userID + 
-                ", username=" + username + 
-                ", phone=" + phone + 
-                ", gmail=" + gmail + 
-                ", statusID=" + statusID +'}';
+        return "GroupDTO{"
+                + "groupID=" + groupID
+                + ", groupName=" + groupName
+                + ", capstoneID=" + capstoneID
+                + ", numOfPer=" + numOfPer
+                + ", statusGroupID=" + statusGroupID
+                + ", userID=" + userID
+                + ", username=" + username
+                + ", phone=" + phone
+                + ", gmail=" + gmail
+                + ", statusID=" + statusID + '}';
     }
 
-    
 }

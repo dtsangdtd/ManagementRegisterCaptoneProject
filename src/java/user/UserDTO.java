@@ -53,6 +53,11 @@ public class UserDTO implements Serializable{
         this.phone = phone;
 }
 
+    public UserDTO(String userID, String semesterName) {
+        this.userID = userID;
+        this.semesterName = semesterName;
+    }
+
     public String getGroupID() {
         return groupID;
     }
