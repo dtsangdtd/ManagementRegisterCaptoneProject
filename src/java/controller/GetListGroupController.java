@@ -6,71 +6,51 @@
 package controller;
 
 import group.GroupDAO;
-import group.UserGroup;
+import group.GroupDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import request.RequestDAO;
-import request.RequestDTO;
-import user.UserDAO;
 import user.UserDTO;
 
 /**
  *
- * @author ASUS
+ * @author dtsang
  */
-@WebServlet(name = "InviteController", urlPatterns = {"/InviteController"})
-public class InviteController extends HttpServlet {
+@WebServlet(name = "GetListGroupController", urlPatterns = {"/GetListGroupController"})
+public class GetListGroupController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    
-    private static final String SUCCESS = "studentList.jsp";
-    private static final String ERROR = "student.jsp";
-    
+    private static final String US = "student.jsp";
+    private static final String LOGIN = "login.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = LOGIN;
         try {
-            String userID = request.getParameter("userID");//userID của người dc mời
+            GroupDAO groupDao = new GroupDAO();
             HttpSession session = request.getSession();
-            UserDTO loginUser =  (UserDTO) session.getAttribute("LOGIN_USER");  
-            String loginUserID = loginUser.getUserID();//lấy userID của người mời
-            RequestDAO reqDAO = new RequestDAO();
-            int requestID = reqDAO.getMaxRequestID() + 1;//Tạo RequestID mới
-            UserDAO usDAO = new UserDAO();
-            UserDTO invitedUser =  usDAO.getUserByUserID(userID);
-            if ("US".equals(invitedUser.getRoleID())) {
-                int isSupervior = 0;
-                RequestDTO reqDTO = new RequestDTO(requestID, userID, loginUserID, isSupervior);//Lấy thông tin cho request
-                boolean check = reqDAO.inviteGroup(reqDTO); //Insert param vào request 
-                if (check) url = SUCCESS;
-            } 
-            if ("MT".equals(invitedUser.getRoleID())) {
-                int isSupervior = 1;
-                RequestDTO reqDTO = new RequestDTO(requestID, userID, loginUserID, isSupervior);//Lấy thông tin cho request
-                boolean check = reqDAO.inviteGroup(reqDTO); //Insert param vào request 
-//                if (check) url = SUCCESS;
-            } 
+            UserDTO user = (UserDTO) session.getAttribute("INFOR");
+//            System.out.println(user.getUserID());
+            String groupID = groupDao.getGroupID(user.getUserID());
+//            System.out.println(groupID);
+            List<GroupDTO> listGroup = groupDao.getListStudentInGroup(groupID);
+//            System.out.println(listGroup);
+            session.setAttribute("LISTGROUP", listGroup);
+            if (user != null) {
+                url = US;
+            }
         } catch (Exception e) {
-            log ("Error at InviteController" + e.toString());
+            e.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
