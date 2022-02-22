@@ -7,6 +7,7 @@ package controller;
 
 import group.Cart;
 import group.GroupDAO;
+import group.GroupDTO;
 import group.UserGroup;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,12 +47,17 @@ public class RandomStudentController extends HttpServlet {
                 int num = n / 5;
                 int mod = n % 5;
                 GroupDAO daoGroup = new GroupDAO();
-                int key = daoGroup.getMaxUserGroupID();
+                int key = daoGroup.getMaxGroupID();
 //                UserGroup map = (UserGroup) session.getAttribute("GROUP");
                 Cart map = (Cart) session.getAttribute("GROUP");
                 for (int i = 0; i < num; i++) {
                     map.add(key, listStudentNoGroup.subList(i, (i + 1) * 5));
                     key++;
+                    String groupName = "Group" + String.valueOf(key);
+                    int capstoneID = 0;
+                    int numOfPer = 0;
+                    int statusID = 5;
+                    GroupDTO group = new GroupDTO(statusID, groupName, capstoneID, numOfPer, statusID);
                 }
                 List<UserDTO> list = null;
                 switch (mod) {
@@ -59,6 +65,8 @@ public class RandomStudentController extends HttpServlet {
                         list.add(listStudentNoGroup.get(n)); // list dư
                         if (num < 3) {
                             // chuyển sang học kì sau
+                            // lấy học kì tiếp theo 
+                            // for UserDTO UPDATE sesmesterName
 
                         } else {
                             // lấy list group 5 mới tạo key lớn nhất
@@ -67,7 +75,7 @@ public class RandomStudentController extends HttpServlet {
                             list.add(map.getUser(key - 1));
                             list.add(map.getUser(key - 2));
                             map.add(key+1, list);
-                            // lưu trong database
+                            // lưu trong tblGroup
                         }
                         break;
                     case 2:
@@ -87,6 +95,7 @@ public class RandomStudentController extends HttpServlet {
                         } else {
                             list.add(map.getUser(key));
                             map.add(key+1, list);
+                            
                         }
                         break;
                 }

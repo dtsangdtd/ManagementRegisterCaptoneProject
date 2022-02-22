@@ -51,6 +51,37 @@ public class GroupDAO {
         }
         return userGroupID;
     }
+        public int getMaxGroupID() throws SQLException {
+        int userGroupID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT MAX(groupID) AS MAXGROUPID "
+                        + " FROM tblGroup ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    userGroupID = rs.getInt("MAXGROUPID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return userGroupID;
+    }
 
     public boolean inviteGroup(String userID) throws SQLException {
         boolean check = false;
