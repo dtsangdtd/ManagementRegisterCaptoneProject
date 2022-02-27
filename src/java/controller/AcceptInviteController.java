@@ -6,6 +6,7 @@
 package controller;
 
 import group.GroupDAO;
+import group.GroupDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import request.RequestDAO;
 import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
@@ -42,9 +45,27 @@ public class AcceptInviteController extends HttpServlet {
         String url = ERROR;
         try {
             String userID = request.getParameter("userID");
-            GroupDAO dao = new GroupDAO();
-            dao.acceptInviteGroup(userID);
-            
+            String leaderID = request.getParameter("leaderID");
+            UserDAO uDao = new UserDAO();
+            GroupDAO gDao = new GroupDAO();
+            UserDTO leader = uDao.getUserByUserID(leaderID);
+            UserDTO user = uDao.getUserByUserID(userID);
+            String leaderStatus = leader.getStatusID();
+            int groupID = Integer.parseInt(leader.getGroupID());
+            if (leaderStatus.equals("3")) {
+                groupID = gDao.getMaxGroupID() + 1;
+                leader.setStatusID("2");
+                leader.setGroupID(String.valueOf(groupID));
+                user.setStatusID("2");
+                user.setGroupID(String.valueOf(groupID));
+            }
+            if (leader.getGroupID().equals(user.getGroupID())) {
+                RequestDAO reqDao = new RequestDAO();
+                reqDao.removeRequest(userID, leaderID);
+                url = SUCCESS;
+            } else {
+                //SET ATRIBUTE RỒI BÁO LỖI
+            }
         } catch (Exception e) {
             log ("Error at AcceptInviteController" + e.toString());
         } finally {

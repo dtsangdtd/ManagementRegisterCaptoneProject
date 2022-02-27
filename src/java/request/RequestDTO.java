@@ -11,7 +11,7 @@ package request;
  */
 public class RequestDTO {
     int requestID;
-    String requestDetail;//Thông tin chi tiết tính sau đi
+    String requestDetail;//ID của người được mời
     String userID; //ID của người mời (LoginUser)
     int isSupervisor;
 
