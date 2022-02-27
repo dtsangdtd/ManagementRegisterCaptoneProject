@@ -27,7 +27,7 @@
     </head>
 
     <body id="page-top">
-        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
+        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US' and sessionScope.LOGIN_USER.roleID ne 'LD'}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <!-- Page Wrapper -->
@@ -112,28 +112,33 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Photo</th>
                                                 <th>Phone</th>
                                                 <th>Gmail</th>
                                                 <th>Request</th>
                                             </tr>
                                         </thead>
+                                        
+                                        <c:forEach var="req" varStatus="counter" items="${LIST_REQUEST}">
+                                            
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>Donna Snider</td>
-                                                <td><img style="height: 100px; width: 100px; border-radius: 100%" alt="test" src=""/></td>
-                                                <td>Customer Support</td>
-                                                <td>test@gmai.com</td>
+                                                <td>${counter.count}</td>
+                                                <td>${req.username}</td>
+                                                <td>${req.phone}</td>
+                                                <td>${req.gmail}</td>
                                                 <td>
                                                     <form action="MainController">
-<!--                                                        <input type="hidden" name="userID" value="${stu.userID}">-->
+                                                        <input type="hidden" name="userID" value="${sessionScope.LOGIN_USER.userID}"/>
+                                                        <input type="hidden" name="leaderID" value="${req.userID}"/>
                                                         <button type="submit" name="action" value="Accept" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-check"></i> </button>
                                                         <button type="submit" name="action" value="Refuse" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-ban"></i> </button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        
+                                        </c:forEach>
+                                        
                                     </table>
                                 </div>
 

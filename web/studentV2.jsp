@@ -25,7 +25,7 @@
     </head>
 
     <body id="page-top">
-        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US'}">
+        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'US' and sessionScope.LOGIN_USER.roleID ne 'LD'}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <!-- Page Wrapper -->
