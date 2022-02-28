@@ -38,7 +38,7 @@
         </a>
     </li>  
     <li class="nav-item ">
-        <a class="nav-link" href="studentRequest.jsp">
+        <a class="nav-link" href="GetListRequestController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Students Invite</span>
         </a>

@@ -14,61 +14,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import user.UserDAO;
+import request.RequestDAO;
 import user.UserDTO;
 
 /**
  *
- * @author Mai
+ * @author ASUS
  */
-@WebServlet(name = "GetListController", urlPatterns = {"/GetListController"})
-public class GetListController extends HttpServlet {
+@WebServlet(name = "GetListRequestController", urlPatterns = {"/GetListRequestController"})
+public class GetListRequestController extends HttpServlet {
 
-    private static final String AD = "modStudentList.jsp";
-    private static final String US = "studentList.jsp";
-    private static final String LOGIN = "login.jsp";
-    private static final String LD ="studentList.jsp";
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    
+    private static final String ERROR = "student.jsp";
+    private static final String SUCCESS = "studentRequest.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = LOGIN;
-        int checked = 1;
-//        System.out.println(request.getParameter("radioGroup"));
-        if ( request.getParameter("radioGroup") != null) {
-            checked = Integer.parseInt(request.getParameter("radioGroup"));
-
-        }
+        String url = ERROR;
         try {
-            UserDAO dao = new UserDAO();
             HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            List<UserDTO> listSupervisor = dao.getListSupervisor();
-            session.setAttribute("checked", checked);
-            int pageNumber = 1;
-            int pageSize = 11;
-            if (request.getParameter("page") != null) {
-                pageNumber = Integer.parseInt(request.getParameter("page"));
-            }
-            int noOfPages;
-            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked) * 1.0 / pageSize);
-            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked);
-//            System.out.println(listStudent);
-            request.setAttribute("noOfPages", noOfPages);
-            request.setAttribute("currentPage", pageNumber);
-            session.setAttribute("LIST_STUDENT", listStudent);
-            session.setAttribute("LIST_SUPERVISOR", listSupervisor);
-            if (loginUser == null) {
-                url = LOGIN;
-            } else if ("AD".equals(loginUser.getRoleID())) {
-                url = AD;
-            } else if ("US".equals(loginUser.getRoleID())) {
-                url = US;
-            } else if ("LD".equals(loginUser.getRoleID())) {
-                url = LD;
+            UserDTO loginUser =  (UserDTO) session.getAttribute("LOGIN_USER");  
+            RequestDAO reqDAO = new RequestDAO();
+            List<UserDTO> list = reqDAO.getRequestList(loginUser.getUserID());
+            session.setAttribute("LIST_REQUEST", list);
+            if (list != null) {
+                url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at GetListController" + e.toString());
+            log ("Error at GetListRequestController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

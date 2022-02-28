@@ -82,21 +82,23 @@ public class GroupDAO {
         }
         return userGroupID;
     }
+  
+    public boolean acceptInviteGroup (UserGroup user) throws SQLException {
 
-    public boolean inviteGroup(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT into tblRequest (requestID, requestDetail, userID)"
-                        + "VALUE (?,?,?)";
+                String sql = " INSERT INTO tblUserGroup (userGroupID, userID, groupID, isSupervisor) "
+                        + " VALUES (?,?,?,?) ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(0, "requestID");
-                stm.setString(1, "requestDetail");
-                stm.setString(2, "userID");
-                check = stm.executeUpdate() > 0 ? true : false;
+                stm.setInt(1, user.getUserGroupID());
+                stm.setString(2, user.getUserID());
+                stm.setString(3, user.getGroupID());
+                stm.setInt(4, user.getIsSupervisor());
+                check = stm.executeUpdate() > 0 ? true : false; 
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,24 +112,20 @@ public class GroupDAO {
         }
         return check;
     }
-
-    public boolean acceptInviteGroup(String userID) throws SQLException {
+    
+    public boolean AddToGroup () throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT into tblUserGroup (userGroupID, userID, groupID, isSupervisor)"
-                        + "VALUES (?,?,?,0)";
+                String sql = " INSERT INTO tblGroup (groupID, groupName, capstoneID, numberOfPerson, statusID) "
+                        + " VALUES (?,?,?,?,?) ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(0, "userGroupID");
-                stm.setString(1, "userID");
-                stm.setString(2, "groupID");
-                stm.setString(3, "isSupervisor");
-                check = stm.executeUpdate() > 0 ? true : false;
+                
             }
-        } catch (Exception e) {
+        } catch (Exception e ) {
             e.printStackTrace();
         } finally {
             if (stm != null) {
