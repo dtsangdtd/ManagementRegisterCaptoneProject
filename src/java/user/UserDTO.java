@@ -22,7 +22,9 @@ public class UserDTO implements Serializable{
     public String statusID;
     public String photoUrl;
     
+    public String semeterID;
     public String semesterName;
+    public String capstoneID;
     public String capstoneName;
     
     public String groupID;
@@ -51,17 +53,10 @@ public class UserDTO implements Serializable{
         this.roleID = roleID;
         this.gmail = gmail;
         this.phone = phone;
-    }
+}
     
-    public UserDTO(String userID, String username, String gmail, String phone) {
-        this.userID = userID;
-        this.username = username;
-        this.gmail = gmail;
-        this.phone = phone;
-    }
-
-    public UserDTO(String userID, String semesterName) {
-        this.userID = userID;
+    public UserDTO(String semeterID, String semesterName) {
+        this.semeterID = semeterID;
         this.semesterName = semesterName;
     }
 
@@ -100,6 +95,15 @@ public class UserDTO implements Serializable{
         this.groupID = groupID;
         this.groupName = groupName;
         this.AmountGroup = AmountGroup;
+    }
+    
+    public UserDTO(String capstoneID, String capstoneName, String groupID, String groupName, String semeterID, String statusID){
+        this.capstoneID = capstoneID;
+        this.capstoneName = capstoneName;
+        this.groupID = groupID;
+        this.groupName = groupName;
+        this.semeterID = semeterID;
+        this.statusID = statusID;
     }
     public String getSemesterName() {
         return semesterName;

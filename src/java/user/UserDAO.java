@@ -127,6 +127,44 @@ public class UserDAO {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        System.out.println(list);
+        return list;
+    }
+
+    public List<UserDTO> getListStudentSemeter() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT tblUser.userID, tblUser.semeterID, tblSemeter.semeterName"
+                        + " FROM tblSemeter, tblSemeter "
+                        + " WHERE tblUser.semeterID = tblSemeter.SemeterName";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String semeterID = rs.getString("semeterID");
+                    String semeterName = rs.getString("semeterName");
+                    list.add(new UserDTO(semeterID, semeterName));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -436,7 +474,6 @@ public class UserDAO {
         }
         return user;
     }
-    
 
     public int getNoOfRecordsSupervisor(int check) throws SQLException {
         int result = 0;
