@@ -407,7 +407,7 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT name, gmail, phone, roleID"
+                String sql = " SELECT name, gmail, phone, statusID, roleID"
                         + " FROM tblUser"
                         + " WHERE userID like ?";
                 stm = conn.prepareStatement(sql);
@@ -417,8 +417,9 @@ public class UserDAO {
                     String userName = rs.getString("name");
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
+                    String statusID = rs.getString("statusID");
                     String roleID = rs.getString("roleID");
-                    user = new UserDTO(userID, userName, roleID, gmail, phone);
+                    user = new UserDTO(userID, userName, roleID, gmail, phone, statusID);
                 }
             }
         } catch (Exception e) {
@@ -436,7 +437,6 @@ public class UserDAO {
         }
         return user;
     }
-    
 
     public int getNoOfRecordsSupervisor(int check) throws SQLException {
         int result = 0;
@@ -580,6 +580,33 @@ public class UserDAO {
             }
         }
         return result;
+    }
+
+    public boolean updateStatusID(UserDTO user) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblUser set statusID = ? "
+                        + " WHERE userID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, user.getStatusID());
+                stm.setString(1, user.getUserID());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 
 }
