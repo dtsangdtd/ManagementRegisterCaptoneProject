@@ -51,7 +51,8 @@ public class GroupDAO {
         }
         return userGroupID;
     }
-        public int getMaxGroupID() throws SQLException {
+
+    public int getMaxGroupID() throws SQLException {
         int userGroupID = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -82,9 +83,8 @@ public class GroupDAO {
         }
         return userGroupID;
     }
-  
-    public boolean acceptInviteGroup (UserGroup user) throws SQLException {
 
+    public boolean acceptInviteGroup(UserGroup user) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -96,9 +96,9 @@ public class GroupDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, user.getUserGroupID());
                 stm.setString(2, user.getUserID());
-                stm.setString(3, user.getGroupID());
+                stm.setInt(3, user.getGroupID());
                 stm.setInt(4, user.getIsSupervisor());
-                check = stm.executeUpdate() > 0 ? true : false; 
+                check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,8 +112,8 @@ public class GroupDAO {
         }
         return check;
     }
-    
-    public boolean AddToGroup () throws SQLException {
+
+    public boolean AddToGroup(GroupDTO group) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -123,9 +123,41 @@ public class GroupDAO {
                 String sql = " INSERT INTO tblGroup (groupID, groupName, capstoneID, numberOfPerson, statusID) "
                         + " VALUES (?,?,?,?,?) ";
                 stm = conn.prepareStatement(sql);
-                
+                stm.setInt(1, group.getGroupID1());
+                stm.setString(2, group.getGroupName());
+                stm.setInt(3, group.getCapstoneID());
+                stm.setInt(4, group.getNumOfPer());
+                stm.setInt(5, group.getStatusID1());
+                check = stm.executeUpdate() > 0 ? true : false;
             }
-        } catch (Exception e ) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean UpdateNumberOfPerson(GroupDTO group) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblGroup set numberOfPerson = ? "
+                        + " WHERE groupID like ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, group.getNumOfPer());
+                stm.setInt(2, group.getGroupID1());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (stm != null) {
@@ -151,8 +183,8 @@ public class GroupDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
                 rs = stm.executeQuery();
-                if(rs.next()) {
-                groupID = rs.getString("groupID");
+                if (rs.next()) {
+                    groupID = rs.getString("groupID");
                 }
             }
         } catch (Exception e) {
@@ -211,5 +243,77 @@ public class GroupDAO {
             }
         }
         return list;
+    }
+
+    public int getGroupIDByUserID(String userID) throws SQLException {
+        int groupID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT groupID "
+                        + " FROM tblUserGroup "
+                        + " WHERE userID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    groupID = rs.getInt("groupID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return groupID;
+    }
+    
+    public GroupDTO getGroupByGroupID (int groupID) throws SQLException {
+        GroupDTO group = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT groupName, capstoneID, numberOfPerson, statusID "
+                        + " FROM tblGroup "
+                        + " WHERE groupID like ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, groupID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String groupName = rs.getString("groupName");
+                    int capstoneID = rs.getInt("capstoneID");
+                    int numOfPer = rs.getInt("numberOfPerson");
+                    int groupStatus = rs.getInt("statusID");
+                    group = new GroupDTO(groupID, groupName, capstoneID, numOfPer, groupStatus);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return group;
     }
 }

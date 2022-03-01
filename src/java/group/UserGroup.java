@@ -17,10 +17,10 @@ import user.UserDTO;
 public class UserGroup {
     private int userGroupID;
     private String userID;
-    private String groupID;
+    private int groupID;
     private int isSupervisor;
 
-    public UserGroup(int userGroupID, String userID, String groupID, int isSupervisor) {
+    public UserGroup(int userGroupID, String userID, int groupID, int isSupervisor) {
         this.userGroupID = userGroupID;
         this.userID = userID;
         this.groupID = groupID;
@@ -43,13 +43,13 @@ public class UserGroup {
         this.userID = userID;
     }
 
-    public String getGroupID() {
+    public int getGroupID() {
         return groupID;
     }
 
-    public void setGroupID(String groupID) {
+    public void setGroupID(int groupID) {
         this.groupID = groupID;
-    }
+    }  
 
     public int getIsSupervisor() {
         return isSupervisor;
