@@ -26,10 +26,10 @@ import user.UserDTO;
 @WebServlet("/login-google")
 public class GoogleController extends HttpServlet {
 
-    private static final String USER = "student.jsp";
+    private static final String USER = "GetListGroupController";
     private static final String ADMIN = "moderator.jsp";
     private static final String MENTOR = "supervisor.jsp";
-    private static final String LEADER = "student.jsp";
+    private static final String LEADER = "GetListGroupController";
     private static final String AD = "AD";
     private static final String US = "US";
     private static final String MT = "MT";

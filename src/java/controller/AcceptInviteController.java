@@ -82,7 +82,7 @@ public class AcceptInviteController extends HttpServlet {
                     gDao.UpdateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
                     
                     RequestDAO reqDao = new RequestDAO();
-                    
+                    reqDao.removeRequest(userID, leaderID); //Xóa request 
                     url = SUCCESS;
                 }
             } else if (leaderStatus.equals("2")) { //check status của Leader nếu đã có nhóm
@@ -101,6 +101,9 @@ public class AcceptInviteController extends HttpServlet {
                     int numOfPer = group.getNumOfPer() +1;
                     GroupDTO group2 = new GroupDTO(numOfPer, groupID);
                     gDao.UpdateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
+                    
+                    RequestDAO reqDao = new RequestDAO();
+                    reqDao.removeRequest(userID, leaderID); // Xóa request
                     url = SUCCESS;
             }
         } catch (Exception e) {
