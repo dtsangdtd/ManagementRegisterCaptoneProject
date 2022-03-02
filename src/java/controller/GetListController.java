@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import semester.SemesterDAO;
+import semester.SemesterDTO;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -33,12 +35,18 @@ public class GetListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         int checked = 1;
+        String semesterID = "SP22";
 //        System.out.println(request.getParameter("radioGroup"));
-        if ( request.getParameter("radioGroup") != null) {
+        if (request.getParameter("radioGroup") != null) {
             checked = Integer.parseInt(request.getParameter("radioGroup"));
 
         }
+        if (request.getParameter("semesterID") != null) {
+            semesterID = request.getParameter("semesterID");
+        }
         try {
+            SemesterDAO semesterDAO = new SemesterDAO();
+            List<SemesterDTO> listSemester = semesterDAO.getListSemester();
             UserDAO dao = new UserDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -50,11 +58,13 @@ public class GetListController extends HttpServlet {
                 pageNumber = Integer.parseInt(request.getParameter("page"));
             }
             int noOfPages;
-            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked) * 1.0 / pageSize);
-            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked);
+            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
+            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID);
 //            System.out.println(listStudent);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
+            session.setAttribute("LIST_SEMESTER", listSemester);
+            System.out.println(listSemester);
             session.setAttribute("LIST_STUDENT", listStudent);
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {
