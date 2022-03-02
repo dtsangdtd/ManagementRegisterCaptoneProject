@@ -158,7 +158,7 @@
                                                                         <label for="notFull">not full</label>
 
                                                                     </div>
-                                                                    <input hidden name="semesterID" value="${param.semesterID}"/>
+                                                                    <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
 
                                                                 </form>
                                                             </div>
@@ -169,7 +169,7 @@
                                                 <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
                                                     <tbody>
                                                         <tr>
-                                                            <td>${counter.count}</td>
+                                                            <td>${stu.STT}</td>
                                                             <td>${stu.username}</td>
                                                             <td>
                                                                 <a href="" class="copy-click"

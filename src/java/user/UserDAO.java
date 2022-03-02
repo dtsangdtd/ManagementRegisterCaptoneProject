@@ -41,7 +41,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photo = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
-                    user = new UserDTO(userID, username, password, roleID, gmail, phone, statusID, photo);
+                    user = new UserDTO("",userID, username, password, roleID, gmail, phone, statusID, photo);
                 }
             }
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photoUrl = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
-                    user = new UserDTO(userID, username, password, roleID, gmail, phone, statusID, photoUrl);
+                    user = new UserDTO("",userID, username, password, roleID, gmail, phone, statusID, photoUrl);
                 }
             }
         } catch (Exception e) {
@@ -122,7 +122,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
 
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO("",userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
             }
 
@@ -163,7 +163,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
 
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(userID, username, "", "MT", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO("",userID, username, "", "MT", gmail, phone, statusID, photoUrl));
                 }
             }
 
@@ -190,19 +190,20 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT userID, name, gmail, phone, photoUrl, statusID "
+                String sql = " SELECT ROW_NUMBER() OVER (ORDER BY userID) AS STT, userID, name, gmail, phone, photoUrl, statusID "
                         + " FROM tblUser "
                         + " WHERE [statusID] = '2' ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
+                    String stt = rs.getString("STT");
                     String userID = rs.getString("userID");
                     String username = rs.getString("name");
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO(stt,userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
             }
 
@@ -358,7 +359,7 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
                             + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? "
@@ -367,7 +368,7 @@ public class UserDAO {
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
@@ -384,13 +385,14 @@ public class UserDAO {
                 stm.setString(1, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
+                    String stt = rs.getString("STT");
                     String userID = rs.getString("userID");
                     String username = rs.getString("name");
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO(stt,userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
             }
         } catch (Exception e) {
@@ -508,7 +510,7 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT  tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
                             + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
@@ -521,7 +523,7 @@ public class UserDAO {
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT  tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
                             + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
@@ -540,6 +542,7 @@ public class UserDAO {
                 stm.setInt(3, pagesize);
                 rs = stm.executeQuery();
                 while (rs.next()) {
+                    String stt = rs.getString("STT");
                     String userID = rs.getString("userID");
                     String username = rs.getString("name");
                     String gmail = rs.getString("gmail");
@@ -548,7 +551,7 @@ public class UserDAO {
                     String groupID = rs.getString("groupID");
                     String groupName = rs.getString("groupName");
                     String amountGroup = rs.getString("AmountGroup");
-                    list.add(new UserDTO(userID, username, "US", gmail, statusID, capstoneName, groupID, groupName, amountGroup));
+                    list.add(new UserDTO(stt,userID, username, "US", gmail, statusID, capstoneName, groupID, groupName, amountGroup));
                 }
             }
         } catch (Exception e) {

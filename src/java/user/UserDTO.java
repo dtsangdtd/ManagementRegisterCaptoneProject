@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author mac
  */
 public class UserDTO implements Serializable{
+    public String STT;
     public String userID;
     public String username;
     public String password;
@@ -32,6 +33,18 @@ public class UserDTO implements Serializable{
     public UserDTO() {
     }
 
+    public UserDTO(String stt,String userID, String username, String password, String roleID, String gmail, String phone, String statusID, String photoUrl) {
+        this.STT = stt;
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
+        this.roleID = roleID;
+        this.gmail = gmail;
+        this.phone = phone;
+       
+        this.statusID = statusID;
+        this.photoUrl = photoUrl;
+    }
     public UserDTO(String userID, String username, String password, String roleID, String gmail, String phone, String statusID, String photoUrl) {
         this.userID = userID;
         this.username = username;
@@ -97,8 +110,8 @@ public class UserDTO implements Serializable{
         this.AmountGroup = AmountGroup;
     }
 
-    public UserDTO(String userID, String username, String roleID, String gmail, String statusID, String capstoneName, String groupID, String groupName, String AmountGroup) {
-
+    public UserDTO(String STT, String userID, String username, String roleID, String gmail, String statusID, String capstoneName, String groupID, String groupName, String AmountGroup) {
+        this.STT = STT;
         this.userID = userID;
         this.username = username;
         this.roleID = roleID;
@@ -183,6 +196,14 @@ public class UserDTO implements Serializable{
         this.phone = phone;
     }
 
+    public void setSTT(String STT) {
+        this.STT = STT;
+    }
+
+    public String getSTT() {
+        return STT;
+    }
+
    
 
     public String getStatusID() {
@@ -203,7 +224,7 @@ public class UserDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", roleID=" + roleID + ", gmail=" + gmail + ", phone=" + phone + ", statusID=" + statusID + ", photoUrl=" + photoUrl + ", semesterName=" + semesterName + ", capstoneName=" + capstoneName + ", groupID=" + groupID + ", groupName=" + groupName + ", AmountGroup=" + AmountGroup + '}';
+        return "UserDTO{" + "STT=" + STT + ", userID=" + userID + ", username=" + username + ", password=" + password + ", roleID=" + roleID + ", gmail=" + gmail + ", phone=" + phone + ", statusID=" + statusID + ", photoUrl=" + photoUrl + ", semesterName=" + semesterName + ", capstoneName=" + capstoneName + ", groupID=" + groupID + ", groupName=" + groupName + ", AmountGroup=" + AmountGroup + '}';
     }
 
     

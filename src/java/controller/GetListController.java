@@ -65,7 +65,7 @@ public class GetListController extends HttpServlet {
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);
-            System.out.println(listSemester);
+            System.out.println(listStudent);
             session.setAttribute("LIST_STUDENT", listStudent);
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {
