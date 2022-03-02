@@ -7,6 +7,7 @@ package controller;
 
 import group.GroupDAO;
 import group.GroupDTO;
+import group.UserGroup;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -44,27 +45,63 @@ public class AcceptInviteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
-            String leaderID = request.getParameter("leaderID");
+            String leaderID = request.getParameter("leaderID"); //lấy ID của leader
+            String userID = request.getParameter("userID"); //Lấy ID của người được mời
             UserDAO uDao = new UserDAO();
-            GroupDAO gDao = new GroupDAO();
-            UserDTO leader = uDao.getUserByUserID(leaderID);
-            UserDTO user = uDao.getUserByUserID(userID);
-            String leaderStatus = leader.getStatusID();
-            int groupID = Integer.parseInt(leader.getGroupID());
-            if (leaderStatus.equals("3")) {
-                groupID = gDao.getMaxGroupID() + 1;
-                leader.setStatusID("2");
-                leader.setGroupID(String.valueOf(groupID));
-                user.setStatusID("2");
-                user.setGroupID(String.valueOf(groupID));
-            }
-            if (leader.getGroupID().equals(user.getGroupID())) {
-                RequestDAO reqDao = new RequestDAO();
-                reqDao.removeRequest(userID, leaderID);
-                url = SUCCESS;
-            } else {
-                //SET ATRIBUTE RỒI BÁO LỖI
+            UserDTO leader = uDao.getUserByUserID(leaderID); //lấy thông tin leader
+            String leaderStatus = leader.getStatusID(); 
+            if (leaderStatus.equals("3")) { //check status của Leader nếu chưa có nhóm
+                GroupDAO gDao = new GroupDAO();
+                int groupID = gDao.getMaxGroupID() + 1; //Tạo groupID mới -> tạo group mới
+                leader.setStatusID("2"); //chuyển vể trạng thái đã có nhóm
+                uDao.updateStatusID(leader); //Cập nhật lại User statusID trên sql
+                
+                int userGroupID = gDao.getMaxUserGroupID() +1; 
+                int isSupervisor = 0;
+                UserGroup leaderGroup = new UserGroup(userGroupID, leaderID, groupID, isSupervisor);
+                gDao.acceptInviteGroup(leaderGroup); //Cập nhật userGroup mới trên sql
+                               
+                String groupName = "Group " + String.valueOf(groupID); //Tên nhóm mới
+                int numOfPer = 1; //Vì là group mới nên hiện tại thành viên chỉ có 1 là leader
+                int capstoneID = 0; //Vì chưa đăng ký đề tài nên để = 0, sau này đăng ký sẽ có chức năng cập nhật lại
+                int groupStatusID = 1;
+                GroupDTO group1 = new GroupDTO(groupID, groupName, capstoneID, numOfPer, groupStatusID);
+                boolean check = gDao.AddToGroup(group1); //Cập nhật group mới trên sql
+                
+                if (check) { //Kiemr tra đã cập nhật nhóm mới thành công hay không
+                    UserDTO user = uDao.getUserByUserID(userID);
+                    user.setStatusID("2"); //Chuyển về trạng thái đã có nhóm
+                    uDao.updateStatusID(user); // Cập nhật lại User statusID trên sql
+                    
+                    userGroupID += 1;
+                    UserGroup userGroup = new UserGroup(userGroupID, userID, groupID, isSupervisor);
+                    gDao.acceptInviteGroup(userGroup); //Cập nhật userGroup trên sql
+                    
+                    numOfPer +=1;
+                    GroupDTO group2 = new GroupDTO(groupID, groupName, capstoneID, numOfPer, groupStatusID);
+                    gDao.UpdateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
+                    
+                    RequestDAO reqDao = new RequestDAO();
+                    
+                    url = SUCCESS;
+                }
+            } else if (leaderStatus.equals("2")) { //check status của Leader nếu đã có nhóm
+                UserDTO user = uDao.getUserByUserID(userID);
+                    user.setStatusID("2"); //Chuyển về trạng thái đã có nhóm
+                    uDao.updateStatusID(user); // Cập nhật lại User statusID trên sql
+                    
+                    GroupDAO gDao = new GroupDAO();
+                    int userGroupID = gDao.getMaxUserGroupID() +1;
+                    int isSupervisor = 0; 
+                    int groupID = gDao.getGroupIDByUserID(leaderID); //Lấy groupID của leader
+                    UserGroup userGroup = new UserGroup(userGroupID, userID, groupID, isSupervisor);
+                    gDao.acceptInviteGroup(userGroup); //Cập nhật userGroup trên sql
+                    
+                    GroupDTO group = gDao.getGroupByGroupID(groupID);
+                    int numOfPer = group.getNumOfPer() +1;
+                    GroupDTO group2 = new GroupDTO(numOfPer, groupID);
+                    gDao.UpdateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
+                    url = SUCCESS;
             }
         } catch (Exception e) {
             log ("Error at AcceptInviteController" + e.toString());
