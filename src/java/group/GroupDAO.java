@@ -214,7 +214,7 @@ public class GroupDAO {
                 String sql = " SELECT tb2.userID, tb2.name,tb2.phone, tb2.gmail, tb2.statusID,tb1.groupID, tb3.groupName\n"
                         + "FROM (tblUserGroup tb1 INNER JOIN tblUser tb2 ON tb1.userID = tb2.userID \n"
                         + "Left Join tblGroup tb3 ON tb1.groupID = tb3.groupID)\n"
-                        + "WHERE tb1.userID IS NOT NULL AND tb2.roleID = 'US' AND tb1.groupID = ? ";
+                        + "WHERE tb1.userID IS NOT NULL AND (tb2.roleID = 'US' OR tb2.roleID = 'LD') AND tb1.groupID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, groupIdSearch);
                 rs = stm.executeQuery();
