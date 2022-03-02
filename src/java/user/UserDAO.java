@@ -302,7 +302,7 @@ public class UserDAO {
         return false;
     }
 
-    public int getNoOfRecordsSearchAdmin(int check) throws SQLException {
+    public int getNoOfRecordsSearchAdmin(int check, String semesterID) throws SQLException {
         int result = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -315,14 +315,19 @@ public class UserDAO {
                 if (check == 1) {
                     sql = "SELECT count(*) as noRecord \n"
                             + "FROM tblUser \n"
-                            + "WHERE  tblUser.roleID = 'US'";
+                            + "WHERE  tblUser.roleID = 'US' AND tblUser.semesterID = ?";
+
                 } else if (check == 0) {
                     sql = "SELECT count(*) as noRecord "
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US'";
+                            + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ?";
+
                 }
                 stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
+
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     result = rs.getInt("noRecord");
@@ -343,7 +348,7 @@ public class UserDAO {
         return result;
     }
 
-    public List<UserDTO> getUserSearch(int pagesize, int pageNumber, int check) throws SQLException {
+    public List<UserDTO> getUserSearch(int pagesize, int pageNumber, int check, String semesterID) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -355,23 +360,28 @@ public class UserDAO {
                 if (check == 1) {
                     sql = "SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
                             + "FROM tblUser\n"
-                            + "WHERE tblUser.roleID = 'US'"
+                            + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
+                            + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
+
                 } else if (check == 0) {
                     sql = "SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US'"
+                            + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
+
                 }
                 stm = conn.prepareStatement(sql);
-                stm.setInt(1, pagesize);
-                stm.setInt(2, pageNumber);
-                stm.setInt(3, pagesize);
+                stm.setInt(2, pagesize);
+                stm.setInt(3, pageNumber);
+                stm.setInt(4, pagesize);
+                stm.setString(1, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String userID = rs.getString("userID");
