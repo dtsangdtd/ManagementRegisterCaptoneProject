@@ -211,7 +211,7 @@ public class GroupDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT tb2.userID, tb2.name,tb2.phone, tb2.gmail, tb2.statusID,tb1.groupID, tb3.groupName\n"
+                String sql = " SELECT tb2.userID,tb2.roleID,tb2.name,tb2.phone, tb2.gmail, tb2.statusID,tb2.photoUrl,tb1.groupID, tb3.groupName\n"
                         + "FROM (tblUserGroup tb1 INNER JOIN tblUser tb2 ON tb1.userID = tb2.userID \n"
                         + "Left Join tblGroup tb3 ON tb1.groupID = tb3.groupID)\n"
                         + "WHERE tb1.userID IS NOT NULL AND (tb2.roleID = 'US' OR tb2.roleID = 'LD') AND tb1.groupID = ? ";
@@ -223,10 +223,12 @@ public class GroupDAO {
                     String username = rs.getString("name");
                     String phone = rs.getString("phone");
                     String gmail = rs.getString("gmail");
+                    String role = rs.getString("roleID");
                     String statusID = rs.getString("statusID");
+                    String photoUrl = rs.getString("photoUrl");
                     String groupID = rs.getString("groupID");
                     String groupName = rs.getString("groupName");
-                    list.add(new GroupDTO(groupID, groupName, userID, username, "", "", gmail, phone, statusID, ""));
+                    list.add(new GroupDTO(groupID, groupName, userID, username, "", role, gmail, phone, statusID, photoUrl));
                 }
             }
 //            System.out.println(list);

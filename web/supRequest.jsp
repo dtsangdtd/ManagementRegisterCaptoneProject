@@ -127,7 +127,7 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>Donna Snider</td>
-                                                <td><a href="group-detail.jsp">Customer Support </a></td>
+                                                <td><a href="GetListStudentInGroupDetails?groupID=1">Customer Support </a></td>
                                                 <td>New York</td>
                                                 <td>Processing</td>
                                                 <td>
