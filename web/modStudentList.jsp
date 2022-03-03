@@ -197,8 +197,6 @@
                                         <c:url var="nextpage" value="GetListController">
                                             <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
                                             <c:param name="semesterID" value="${param.semesterID}"></c:param>
-
-
                                         </c:url>
                                         <c:if test="${requestScope.currentPage > 1}">
                                             <li class="page-item">

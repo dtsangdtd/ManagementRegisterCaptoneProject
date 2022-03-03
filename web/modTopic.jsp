@@ -97,15 +97,23 @@
                                         <div class="row">
                                             <div class="col-9">
                                                 <div class="dropdown mb-4">
-                                                    <button class="btn btn-info dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    <button style="width: 200px" class="btn btn-info dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                        Semester
+                                                        Semester: 
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <c:if test="${param.semesterID == listSemester.semesterID}">
+                                                                <span>${listSemester.semesterName}</span>
+                                                            </c:if> 
+                                                        </c:forEach>
                                                     </button>
                                                     <div class="dropdown-menu animated--fade-in"
-                                                         aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                                                         aria-labelledby="dropdownMenuButton1">
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <a class="dropdown-item" href="GetListTopicController?radioGroup=0&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,33 +126,43 @@
                                                 <th>Name</th>
                                                 <th>Supervior</th>
                                                 <th>Group Name</th>
-                                                <th style="width: 160px">Status 
-                                                    <div class="dropdown">
-                                                        <i class="fas fa-filter "></i>
-                                                        <div class="dropdown-content" >
-                                                            <div>
-                                                                <input type="checkbox" id="scales" name="full"
-                                                                       checked>
-                                                                <label for="full">Available</label>
-                                                            </div>
-                                                            <div>
-                                                                <input type="checkbox" id="scales" name="notFull"
-                                                                       checked>
-                                                                <label for="notFull">Unavailable</label>
-                                                            </div>
+                                                <th style="width: 160px">
+                                                    <form action="GetListTopicController" >
+                                                        <div class="dropdown-content">
+                                                            <input type="radio" id="scales" name="radioGroup"
+                                                                   <c:if test="${sessionScope.checked == '1'}">
+                                                                       checked="checked"
+                                                                   </c:if>
+                                                                   value="1">
+                                                            <label for="full">Available</label>
+                                                            <input type="radio" id="scales" name="radioGroup"
+                                                                   <c:if test="${sessionScope.checked == '0'}">
+                                                                       checked="checked"
+                                                                   </c:if>
+                                                                   value="0">
+                                                            <label for="notFull">Unavailable</label>
+
                                                         </div>
-                                                    </div>
+                                                        <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
+                                                    </form>Status 
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Donna Snider</td>
-                                                <td>LHK Phuong</td>
-                                                <td>Nhom 1</td>
-                                                <th></th>
-                                            </tr>
+                                            <c:forEach var="top" varStatus="counter" items="${LIST_TOPIC}">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>${counter.count}</td>
+                                                            <td>${top.capstoneName}</td>
+                                                            <td>${top.userName}</td>
+                                                            <td>${top.groupID}</td>
+                                                            <td>
+                                                                <c:if test="${top.statusID == '0'}"><div class="badge bg-dark">inActive</div></c:if>
+                                                                <c:if test="${top.statusID == '1'}"><div class="badge bg-success">Active</div></c:if>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                </c:forEach>
                                         </tbody>
                                     </table>
 
@@ -152,23 +170,23 @@
                             </div>
                         </div>
                         <!-- End of Main Content -->
-                         <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                        <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <!-- Footer -->

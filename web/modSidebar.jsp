@@ -26,7 +26,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="modTopic.jsp">
+        <a class="nav-link" href="GetListTopicController?radioGroup=0&semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Capstone Topics</span>
         </a>
