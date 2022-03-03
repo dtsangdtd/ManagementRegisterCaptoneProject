@@ -26,7 +26,7 @@ public class SemesterDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT tblSemester.semesterID, tblSemester.semesterName FROM tblSemester";
+                String sql = "SELECT tblSemester.semesterID, tblSemester.semesterName FROM tblSemester ORDER BY tblSemester.NO DESC ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
