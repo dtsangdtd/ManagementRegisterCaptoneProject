@@ -18,7 +18,7 @@ import utils.DBUtils;
  * @author dtsang
  */
 public class SemesterDAO {
-     public List<SemesterDTO> getListSemester() throws SQLException {
+    public List<SemesterDTO> getListSemester() throws SQLException {
         List<SemesterDTO> list = new ArrayList<>();
          Connection conn = null;
          PreparedStatement stm = null;
