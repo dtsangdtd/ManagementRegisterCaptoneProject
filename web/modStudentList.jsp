@@ -125,7 +125,7 @@
                                                                  aria-labelledby="dropdownMenuButton1">
                                                                 <c:forEach 
                                                                     items="${sessionScope.LIST_SEMESTER}" var="listSemester">
-                                                                    <a class="dropdown-item" href="GetListController?radioGroup=0&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+                                                                    <a class="dropdown-item" href="GetListController?radioGroup=1&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
 
                                                                 </c:forEach>
                                                             </div>
@@ -143,7 +143,8 @@
                                                             <div class="dropdown">
                                                                 <i class="fas fa-filter "></i>
                                                                 <form action="GetListController" >
-                                                                    <div class="dropdown-content">
+                                                                    <c:if test="${param.semesterID eq 'SP22'}">
+                                                                         <div class="dropdown-content">
                                                                         <input type="radio" id="scales" name="radioGroup"
                                                                                <c:if test="${sessionScope.checked == '1'}">
                                                                                    checked="checked"
@@ -158,6 +159,7 @@
                                                                         <label for="notFull">not full</label>
 
                                                                     </div>
+                                                                    </c:if>
                                                                     <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
 
                                                                 </form>
