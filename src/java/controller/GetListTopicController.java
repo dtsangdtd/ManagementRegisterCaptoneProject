@@ -6,31 +6,28 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import semester.SemesterDAO;
 import semester.SemesterDTO;
+import topic.TopicDAO;
+import topic.TopicDTO;
 import user.UserDAO;
 import user.UserDTO;
 
 /**
  *
- * @author Mai
+ * @author PNKV
  */
-@WebServlet(name = "GetListController", urlPatterns = {"/GetListController"})
-public class GetListController extends HttpServlet {
+public class GetListTopicController extends HttpServlet {
 
-    private static final String AD = "modStudentList.jsp";
-    private static final String US = "studentList.jsp";
+    private static final String AD = "modTopic.jsp";
     private static final String LOGIN = "login.jsp";
-    private static final String LD ="studentList.jsp";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -49,9 +46,11 @@ public class GetListController extends HttpServlet {
             SemesterDAO semesterDAO = new SemesterDAO();
             List<SemesterDTO> listSemester = semesterDAO.getListSemester();
             UserDAO dao = new UserDAO();
+            TopicDAO topdao = new TopicDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             List<UserDTO> listSupervisor = dao.getListSupervisor();
+            
             session.setAttribute("checked", checked);
             int pageNumber = 1;
             int pageSize = 11;
@@ -60,22 +59,17 @@ public class GetListController extends HttpServlet {
             }
             int noOfPages;
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
-            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID);
-//            System.out.println(listStudent);
+            List<TopicDTO> listTopic = topdao.getTopicSearch(semesterID);
+            System.out.println(listTopic);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);
-            System.out.println(listStudent);
-            session.setAttribute("LIST_STUDENT", listStudent);
+            session.setAttribute("LIST_TOPIC", listTopic);
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {
                 url = LOGIN;
             } else if ("AD".equals(loginUser.getRoleID())) {
                 url = AD;
-            } else if ("US".equals(loginUser.getRoleID())) {
-                url = US;
-            } else if ("LD".equals(loginUser.getRoleID())) {
-                url = LD;
             }
         } catch (Exception e) {
             log("Error at GetListController" + e.toString());

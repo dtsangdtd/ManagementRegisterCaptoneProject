@@ -109,15 +109,25 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="dropdown mb-4">
-                                                            <button class="btn btn-info dropdown-toggle" type="button"
+                                                            <button style="width: 200px" class="btn btn-info dropdown-toggle" type="button"
                                                                     id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
                                                                     aria-expanded="false">
-                                                                Semester
+                                                                Semester: 
+                                                                <c:forEach 
+                                                                    items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                                    <c:if test="${param.semesterID == listSemester.semesterID}">
+                                                                        <span>${listSemester.semesterName}</span>
+                                                                    </c:if> 
+                                                                </c:forEach>
+
                                                             </button>
                                                             <div class="dropdown-menu animated--fade-in"
                                                                  aria-labelledby="dropdownMenuButton1">
-                                                                <a class="dropdown-item" href="#">Fall 2021</a>
-                                                                <a class="dropdown-item" href="#">Spring 2021</a>
+                                                                <c:forEach 
+                                                                    items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                                    <a class="dropdown-item" href="GetListController?radioGroup=0&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+
+                                                                </c:forEach>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -146,7 +156,10 @@
                                                                                </c:if>
                                                                                value="0">
                                                                         <label for="notFull">not full</label>
+
                                                                     </div>
+                                                                    <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
+
                                                                 </form>
                                                             </div>
                                                             Status
@@ -156,7 +169,7 @@
                                                 <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
                                                     <tbody>
                                                         <tr>
-                                                            <td>${counter.count}</td>
+                                                            <td>${stu.STT}</td>
                                                             <td>${stu.username}</td>
                                                             <td>
                                                                 <a href="" class="copy-click"
@@ -170,7 +183,7 @@
                                                                 <c:if test="${stu.statusID == '1'}"><div class="badge bg-success">Active</div></c:if>
                                                                 <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
                                                                 <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
-                                                            </td>
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                 </c:forEach>
@@ -183,6 +196,7 @@
                                     <ul class="pagination">
                                         <c:url var="nextpage" value="GetListController">
                                             <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
+                                            <c:param name="semesterID" value="${param.semesterID}"></c:param>
                                         </c:url>
                                         <c:if test="${requestScope.currentPage > 1}">
                                             <li class="page-item">

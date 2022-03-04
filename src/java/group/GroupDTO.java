@@ -32,7 +32,6 @@ public class GroupDTO extends UserDTO {
 
     @Override
     public String getGroupID() {
-
         return groupID;
     }
 
