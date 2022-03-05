@@ -20,9 +20,7 @@
         <link href="css/chat.css" rel="stylesheet">
     </head>
     <body id="page-top">
-        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'MT'}">
-            <c:redirect url="login.jsp"></c:redirect>
-        </c:if>
+        
         <!-- Page Wrapper -->       
         <div id="wrapper">
             <%@include file="supSidebar.jsp" %>

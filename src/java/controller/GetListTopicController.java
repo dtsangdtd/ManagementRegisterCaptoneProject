@@ -60,7 +60,7 @@ public class GetListTopicController extends HttpServlet {
             int noOfPages;
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
             List<TopicDTO> listTopic = topdao.getTopicSearch(semesterID);
-            System.out.println(listTopic);
+//          System.out.println(listTopic);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);

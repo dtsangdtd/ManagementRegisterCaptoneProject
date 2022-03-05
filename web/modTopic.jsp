@@ -127,42 +127,48 @@
                                                 <th>Supervior</th>
                                                 <th>Group Name</th>
                                                 <th style="width: 160px">
-                                                    <form action="GetListTopicController" >
-                                                        <div class="dropdown-content">
-                                                            <input type="radio" id="scales" name="radioGroup"
-                                                                   <c:if test="${sessionScope.checked == '1'}">
-                                                                       checked="checked"
-                                                                   </c:if>
-                                                                   value="1">
-                                                            <label for="full">Available</label>
-                                                            <input type="radio" id="scales" name="radioGroup"
-                                                                   <c:if test="${sessionScope.checked == '0'}">
-                                                                       checked="checked"
-                                                                   </c:if>
-                                                                   value="0">
-                                                            <label for="notFull">Unavailable</label>
+                                                    <div class="dropdown">
+                                                        <i class="fas fa-filter "></i>
+                                                        <form action="GetListTopicController" >
+                                                            <c:if test="${param.semesterID eq 'SP22'}">
+                                                                <div class="dropdown-content">
+                                                                    <input type="radio" id="scales" name="radioGroup"
+                                                                           <c:if test="${sessionScope.checked == '1'}">
+                                                                               checked="checked"
+                                                                           </c:if>
+                                                                           value="1">
+                                                                    <label for="full">Acitve</label>
+                                                                    <input type="radio" id="scales" name="radioGroup"
+                                                                           <c:if test="${sessionScope.checked == '0'}">
+                                                                               checked="checked"
+                                                                           </c:if>
+                                                                           value="0">
+                                                                    <label for="notFull">in Active</label>
 
-                                                        </div>
-                                                        <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
-                                                    </form>Status 
+                                                                </div>
+                                                            </c:if>
+                                                            <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
+
+                                                        </form>
+                                                    </div>Status 
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="top" varStatus="counter" items="${LIST_TOPIC}">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>${counter.count}</td>
-                                                            <td>${top.capstoneName}</td>
-                                                            <td>${top.userName}</td>
-                                                            <td>${top.groupID}</td>
-                                                            <td>
-                                                                <c:if test="${top.statusID == '0'}"><div class="badge bg-dark">inActive</div></c:if>
-                                                                <c:if test="${top.statusID == '1'}"><div class="badge bg-success">Active</div></c:if>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                </c:forEach>
+                                            <tbody>
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${top.capstoneName}</td>
+                                                    <td>${top.userName}</td>
+                                                    <td>${top.groupID}</td>
+                                                    <td>
+                                                        <c:if test="${top.statusID == '0'}"><div class="badge bg-dark">inActive</div></c:if>
+                                                        <c:if test="${top.statusID == '1'}"><div class="badge bg-success">Active</div></c:if>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
 
@@ -170,21 +176,39 @@
                             </div>
                         </div>
                         <!-- End of Main Content -->
-                        <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                        <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
+                                <c:url var="nextpage" value="GetListTopicController">
+                                    <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
+                                    <c:param name="semesterID" value="${param.semesterID}"></c:param>
+                                </c:url>
+                                <c:if test="${requestScope.currentPage > 1}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                                <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                                    <c:choose >
+                                        <c:when test="${requestScope.currentPage == i}">
+
+                                            <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
+
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>    
                             </ul>
                         </nav>
                     </div>
