@@ -510,7 +510,7 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
                             + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
@@ -523,7 +523,7 @@ public class UserDAO {
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
                             + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"

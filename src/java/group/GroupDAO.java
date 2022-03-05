@@ -113,7 +113,7 @@ public class GroupDAO {
         return check;
     }
 
-    public boolean AddToGroup(GroupDTO group) throws SQLException {
+    public boolean addToGroup(GroupDTO group) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
