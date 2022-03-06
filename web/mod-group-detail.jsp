@@ -19,9 +19,7 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
     </head>
     <body id="page-top">
-        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
-            <c:redirect url="login.jsp"></c:redirect>
-        </c:if>
+        
         <!-- Page Wrapper -->       
         <div id="wrapper">
             <%@include file="modSidebar.jsp" %>

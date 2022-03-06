@@ -160,7 +160,7 @@
                                                         </a>
                                                     </td>
                                                     <td>${sup.capstoneName}</td>
-                                                    <td><a href="mod-group-details.jsp/${sup.groupID}">${sup.groupName}</a></td>
+                                                    <td><a href="GetListStudentInGroupDetails?groupID=${sup.groupID}">${sup.groupName}</a></td>
                                                     <td>${sup.amountGroup}/5</td>
 
                                                 </tr>

@@ -43,7 +43,10 @@ public class GetListStudentInGroupDetails extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("CAPSTONE",capstone);
             session.setAttribute("LISTSTUDENTINGROUP", listStudentInGroup);
-            url = GROUP_DETAILS;
+            if(groupID != null){
+                url = GROUP_DETAILS;
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
