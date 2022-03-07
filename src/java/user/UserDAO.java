@@ -138,7 +138,6 @@ public class UserDAO {
                 conn.close();
             }
         }
-        System.out.println(list);
         return list;
     }
 
@@ -182,7 +181,7 @@ public class UserDAO {
         return list;
     }
 
-    public List<UserDTO> getListStudentNoGroup() throws SQLException {
+    public List<UserDTO> getListStudentNoGroup(String semesterID) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -190,10 +189,13 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT ROW_NUMBER() OVER (ORDER BY userID) AS STT, userID, name, gmail, phone, photoUrl, statusID "
-                        + " FROM tblUser "
-                        + " WHERE [statusID] = '2' ";
+                String sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                            + "FROM tblUser\n"
+                            + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
+                            + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? ";
                 stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String stt = rs.getString("STT");
@@ -202,8 +204,9 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
+                    String semesterName = rs.getString("semesterID");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(stt, userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO(stt, userID, username, "", gmail, statusID, semesterName, "", "", "", photoUrl));
                 }
             }
 
@@ -549,7 +552,8 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
 
                     String amountGroup = rs.getString("AmountGroup");
-                    list.add(new UserDTO(stt, userID, username, "US", gmail, statusID, "", "", "", amountGroup));
+                    list.add(new UserDTO(stt, userID, username, "US", gmail, statusID, "", "", "","", amountGroup));
+
                 }
             }
         } catch (Exception e) {
@@ -568,17 +572,18 @@ public class UserDAO {
         return list;
     }
 
-    public boolean updateStudentRedundant(UserDTO user) throws SQLException {
+    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " UPDATE tblUser set sesmesterID=? "
+                String sql = " UPDATE tblUser SET sesmesterID=? "
                         + " WHERE userID=? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getSemesterName());
+                stm.setString(1, sesmesterID);
+                stm.setString(2, userID);
                 result = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

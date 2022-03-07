@@ -144,21 +144,21 @@
                                                                 <i class="fas fa-filter "></i>
                                                                 <form action="GetListController" >
                                                                     <c:if test="${param.semesterID eq 'SP22'}">
-                                                                         <div class="dropdown-content">
-                                                                        <input type="radio" id="scales" name="radioGroup"
-                                                                               <c:if test="${sessionScope.checked == '1'}">
-                                                                                   checked="checked"
-                                                                               </c:if>
-                                                                               value="1">
-                                                                        <label for="full">full</label>
-                                                                        <input type="radio" id="scales" name="radioGroup"
-                                                                               <c:if test="${sessionScope.checked == '0'}">
-                                                                                   checked="checked"
-                                                                               </c:if>
-                                                                               value="0">
-                                                                        <label for="notFull">not full</label>
+                                                                        <div class="dropdown-content">
+                                                                            <input type="radio" id="scales" name="radioGroup"
+                                                                                   <c:if test="${sessionScope.checked == '1'}">
+                                                                                       checked="checked"
+                                                                                   </c:if>
+                                                                                   value="1">
+                                                                            <label for="full">full</label>
+                                                                            <input type="radio" id="scales" name="radioGroup"
+                                                                                   <c:if test="${sessionScope.checked == '0'}">
+                                                                                       checked="checked"
+                                                                                   </c:if>
+                                                                                   value="0">
+                                                                            <label for="notFull">not full</label>
 
-                                                                    </div>
+                                                                        </div>
                                                                     </c:if>
                                                                     <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
 
@@ -232,17 +232,20 @@
                             </div>
 
                             <div class="col-1"> 
-
-                                <button 
-                                    <c:if test="${sessionScope.checked == '1'}">
-                                        disabled="disabled"
-                                    </c:if>
-                                    class="btn btn-info btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </span>
-                                    <span class="text">Random</span>
-                                </button>
+                                <form action="MainController">
+                                    <button type="submit" name="action" value="Random"
+                                                   
+                                        <c:if test="${sessionScope.checked == '1'}">
+                                            disabled="disabled"
+                                        </c:if>
+                                        class="btn btn-info btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </span>
+                                        <span class="text">Random</span>
+                                    </button>
+                                    <input type="hidden" value="${param.semesterID}" name="semesterID"> 
+                                </form>
                                 <div class="mt-2"></div>
                                 <a href="#" class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">
