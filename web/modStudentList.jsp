@@ -90,9 +90,9 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Student</h1>
-                            <form id="file_form" action="ImportController" method="POST"  enctype="multipart/form-data">
-                                <input id="file_input" name="file" type="file" />
-                                <button id="upFile-btn" type="submit" name="action" value="Import Excel" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <form action="ImportController" method="POST"  enctype="multipart/form-data">
+                                <input name="filename" type="file" accept=".xls,.xlsx"/>
+                                <button type="submit" name="action" value="Import Excel" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                     <!--                                                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                                                                                 class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>-->
                                     <i class="fas fa-upload fa-sm text-white-50"></i> Import Excel
