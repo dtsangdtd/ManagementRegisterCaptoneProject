@@ -189,11 +189,10 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
-                            + "FROM tblUser\n"
-                            + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
-                            + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? ";
+                System.out.println("check dao 1");
+                String sql = " SELECT ROW_NUMBER() OVER (ORDER BY userID) AS STT, userID, name, gmail, phone, photoUrl, statusID "
+                        + " FROM tblUser "
+                        + " WHERE [statusID] = '3' AND semesterID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, semesterID);
                 rs = stm.executeQuery();
@@ -204,9 +203,8 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
-                    String semesterName = rs.getString("semesterID");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(stt, userID, username, "", gmail, statusID, semesterName, "", "", "", photoUrl));
+                    list.add(new UserDTO(stt, userID, username, "", gmail, statusID, semesterID, "", "", "", photoUrl));
                 }
             }
 
@@ -572,17 +570,19 @@ public class UserDAO {
         return list;
     }
 
-    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException {
+    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException { // miss: update status ve 2
         boolean result = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " UPDATE tblUser SET sesmesterID=? "
+                String sql = " UPDATE tblUser SET semesterID=? "
                         + " WHERE userID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, sesmesterID);
+                System.out.println(userID);
+                System.out.println(sesmesterID);
                 stm.setString(2, userID);
                 result = stm.executeUpdate() > 0 ? true : false;
             }

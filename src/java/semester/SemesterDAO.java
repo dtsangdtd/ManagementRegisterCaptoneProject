@@ -19,11 +19,12 @@ import utils.DBUtils;
  * @author dtsang
  */
 public class SemesterDAO {
+
     public List<SemesterDTO> getListSemester() throws SQLException {
         List<SemesterDTO> list = new ArrayList<>();
-         Connection conn = null;
-         PreparedStatement stm = null;
-         ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -51,7 +52,8 @@ public class SemesterDAO {
 //        System.out.println(list);
         return list;
     }
-        public int getMaxSemesterNO() throws SQLException {
+
+    public int getMaxSemesterNO() throws SQLException {
         int no = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -91,17 +93,14 @@ public class SemesterDAO {
             LocalDateTime localDate = LocalDateTime.now();
             int year = localDate.getYear();
             String yearID = String.valueOf(year);
-            System.out.println(year);
-            String id = yearID.substring(2,4);
-            System.out.println(id);
+            String id = yearID.substring(2, 4);
             String test = semesterID.substring(0, 2);
-            System.out.println(test);
             conn = DBUtils.getConnection();
-            System.out.println("ses1");
             if (conn != null) {
                 String sql = " INSERT INTO tblSemester(semesterID , semesterName, NO) "
                         + " VALUES(?,?,?)";
                 stm = conn.prepareStatement(sql);
+                // check sql has that id or not
                 switch (test) {
                     case "SP":
                         stm.setString(1, "SU" + id);
@@ -135,7 +134,7 @@ public class SemesterDAO {
     }
 
     public SemesterDTO getSemester(int no) throws SQLException, ClassNotFoundException {
-        SemesterDTO sesmesterDTO = null;
+        SemesterDTO semesterDTO = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -148,11 +147,11 @@ public class SemesterDAO {
             stm.setInt(1, no);
             rs = stm.executeQuery();
             if (rs.next()) {
-                String sesmesterID = rs.getString("semesterID");
-                String sesmesterName = rs.getString("semesterName");
-                sesmesterDTO = new SemesterDTO(sesmesterID, sesmesterName);
+                String semesterID = rs.getString("semesterID");
+                String semesterName = rs.getString("semesterName");
+                semesterDTO = new SemesterDTO(semesterID, semesterName);
             }
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -163,6 +162,6 @@ public class SemesterDAO {
                 conn.close();
             }
         }
-        return sesmesterDTO;
+        return semesterDTO;
     }
 }

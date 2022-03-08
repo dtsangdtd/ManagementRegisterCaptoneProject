@@ -40,23 +40,23 @@ public class RandomStudentController extends HttpServlet {
         String url = ERROR;
         try {
             UserDAO dao = new UserDAO();
-            String semesterID = request.getParameter("semesterID");
-            System.out.println(semesterID);
             HttpSession session = request.getSession();
+            String semesterID = request.getParameter("semesterID");
             List<UserDTO> listStudentNoGroup = dao.getListStudentNoGroup(semesterID);
             int n = listStudentNoGroup.size();
             // check n>0
             System.out.println(n);
             SemesterDAO daoSes = new SemesterDAO();
-            int maxSesID = daoSes.getMaxSemesterNO();//
-            System.out.println("6");
+            int maxSesID = daoSes.getMaxSemesterNO();
             SemesterDTO sesmester = daoSes.getSemester(maxSesID);
-            System.out.println("7");
-            GroupDAO daoGroup = new GroupDAO();
-            boolean check = daoSes.insertNewSesmester(semesterID);
-            System.out.println("5");
             boolean flag = true;
+            //boolean check = (!semesterID.equalsIgnoreCase(sesmester.getSemesterID())) ? daoSes.insertNewSesmester(semesterID) : true;
+            if (sesmester.getSemesterID().equalsIgnoreCase(semesterID)) {
+                boolean check = daoSes.insertNewSesmester(semesterID);
+            }
+            GroupDAO daoGroup = new GroupDAO();
             if (n < 4) {
+                System.out.println("case n<4");
                 for (UserDTO userDTO : listStudentNoGroup) {
                     boolean check2 = dao.updateStudentRedundant(userDTO.getUserID(), sesmester.getSemesterID());
                     if (!check2) {
@@ -68,13 +68,13 @@ public class RandomStudentController extends HttpServlet {
                     url = SUCCESS;
                 }
             } else {
+                System.out.println("case n>4");
                 int num = n / 5;
                 int mod = n % 5;
                 int key = daoGroup.getMaxGroupID();
                 Cart map = new Cart();
-                System.out.println("2");
                 for (int i = 0; i < num; i++) {
-                    System.out.println(i+" "+num + " " + listStudentNoGroup.size());
+                    System.out.println(i + " " + num + " " + listStudentNoGroup.size());
                     map.add(key, listStudentNoGroup.subList(i, (i + 1) * 5));
                     key++;
                     String groupName = "Group" + String.valueOf(key);
@@ -89,9 +89,9 @@ public class RandomStudentController extends HttpServlet {
                     }
                 }
                 List<UserDTO> list = null;
-                System.out.println("mod:" + mod);
                 switch (mod) {
                     case 1: // 1 stu doesn't have group
+                        System.out.println("case mod5 = 1");
                         if (num < 3) {
                             boolean checkStu = dao.updateStudentRedundant(listStudentNoGroup.get(n).getUserID(), sesmester.getSemesterID());
                             System.out.println("ahihi");
@@ -100,14 +100,12 @@ public class RandomStudentController extends HttpServlet {
                             }
                         } else {
                             // lấy list group 5 mới tạo key lớn nhất
-//                            list = map.getGroup(key);
                             list.add(map.getUser(key));
                             list.add(map.getUser(key - 1));
                             list.add(map.getUser(key - 2));
                             map.add(key + 1, list);
                             // lưu trong tblGroup
                             // update status User= 2 
-                            System.out.println("ahihi2");
                             for (UserDTO userDTO : listStudentNoGroup) {
                                 userDTO.setStatusID("2");
                                 boolean checkStatus = dao.updateStatusID(userDTO);
@@ -116,12 +114,12 @@ public class RandomStudentController extends HttpServlet {
                                     break;
                                 }
                             }
-                            
+
                         }
                         break;
                     case 2:
-                        System.out.println("ahihi3");
-                        list = listStudentNoGroup.subList(n - 1, n);
+                        System.out.println("case mod5 = 2");
+                        list = listStudentNoGroup.subList(n - 2, n);
                         if (num < 2) {
                             // chuyển sang học kì sau
                             for (UserDTO userDTO : list) {
@@ -141,8 +139,8 @@ public class RandomStudentController extends HttpServlet {
                         }
                         break;
                     case 3:
-                        System.out.println("ahihi4");
-                        list = listStudentNoGroup.subList(n - 2, n);
+                        System.out.println("case mod5 = 3");
+                        list = listStudentNoGroup.subList(n - 3, n);
                         if (num == 1) {
                             // chuyển sang học kì sau
                             for (UserDTO userDTO : list) {
@@ -166,10 +164,10 @@ public class RandomStudentController extends HttpServlet {
                         break;
                 }
                 for (Map.Entry<Integer, List<UserDTO>> group : map.getCart().entrySet()) {
-                    int groupID = group.getKey(); 
-                    System.out.println("group" +groupID);
+                    int groupID = group.getKey();
+                    System.out.println("group: " + groupID);
                     List listUser = group.getValue();
-                    System.out.println("list:" + listUser.size());
+                    System.out.println("list: " + listUser.size());
                     // set status User = 2
                     // insert tbl UserGroup
                     boolean insertUG = daoGroup.insertUserGroup(listUser, groupID);
@@ -181,7 +179,7 @@ public class RandomStudentController extends HttpServlet {
                 if (flag) {
                     url = SUCCESS;
                 }
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
