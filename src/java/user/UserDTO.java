@@ -41,7 +41,6 @@ public class UserDTO implements Serializable{
         this.roleID = roleID;
         this.gmail = gmail;
         this.phone = phone;
-       
         this.statusID = statusID;
         this.photoUrl = photoUrl;
     }
@@ -81,6 +80,7 @@ public class UserDTO implements Serializable{
         this.phone = phone;
     }
 
+    
     public UserDTO(String userID, String semesterName) {
         this.userID = userID;
         this.semesterName = semesterName;
@@ -110,17 +110,27 @@ public class UserDTO implements Serializable{
         this.AmountGroup = AmountGroup;
     }
 
-    public UserDTO(String STT, String userID, String username, String roleID, String gmail, String statusID, String capstoneName, String groupID, String groupName, String AmountGroup) {
+    public UserDTO(String STT, String userID, String username, String roleID, String gmail, String statusID, String semesterName,  String capstoneName, String groupID, String groupName, String AmountGroup) {
         this.STT = STT;
         this.userID = userID;
         this.username = username;
         this.roleID = roleID;
         this.gmail = gmail;
         this.statusID = statusID;
+        this.semesterName = semesterName;
         this.capstoneName = capstoneName;
         this.groupID = groupID;
         this.groupName = groupName;
         this.AmountGroup = AmountGroup;
+    }
+    public UserDTO(String userID, String username, String gmail, String phone, String photoUrl, String semesterName, String capstoneName) {
+        this.userID = userID;
+        this.username = username;
+        this.gmail = gmail;
+        this.phone = phone;
+        this.photoUrl = photoUrl;
+        this.semesterName = semesterName;
+        this.capstoneName = capstoneName;
     }
     public String getSemesterName() {
         return semesterName;
@@ -135,16 +145,6 @@ public class UserDTO implements Serializable{
     }
 
     public void setCapstoneName(String capstoneName) {
-        this.capstoneName = capstoneName;
-    }
-
-    public UserDTO(String userID, String username, String gmail, String phone, String photoUrl, String semesterName, String capstoneName) {
-        this.userID = userID;
-        this.username = username;
-        this.gmail = gmail;
-        this.phone = phone;
-        this.photoUrl = photoUrl;
-        this.semesterName = semesterName;
         this.capstoneName = capstoneName;
     }
    
