@@ -90,9 +90,9 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Student</h1>
-                            <form action="ImportController" method="POST"  enctype="multipart/form-data">
-                                <input name="filename" type="file" accept=".xls,.xlsx"/>
-                                <button type="submit" name="action" value="Import Excel" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <form id="file_form" action="ImportController" method="POST"  enctype="multipart/form-data">
+                                <input id="file_input" name="file" type="file" />
+                                <button id="upFile-btn" type="submit" name="action" value="Import Excel" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                     <!--                                                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                                                                                 class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>-->
                                     <i class="fas fa-upload fa-sm text-white-50"></i> Import Excel
@@ -144,21 +144,21 @@
                                                                 <i class="fas fa-filter "></i>
                                                                 <form action="GetListController" >
                                                                     <c:if test="${param.semesterID eq 'SP22'}">
-                                                                        <div class="dropdown-content">
-                                                                            <input type="radio" id="scales" name="radioGroup"
-                                                                                   <c:if test="${sessionScope.checked == '1'}">
-                                                                                       checked="checked"
-                                                                                   </c:if>
-                                                                                   value="1">
-                                                                            <label for="full">full</label>
-                                                                            <input type="radio" id="scales" name="radioGroup"
-                                                                                   <c:if test="${sessionScope.checked == '0'}">
-                                                                                       checked="checked"
-                                                                                   </c:if>
-                                                                                   value="0">
-                                                                            <label for="notFull">not full</label>
+                                                                         <div class="dropdown-content">
+                                                                        <input type="radio" id="scales" name="radioGroup"
+                                                                               <c:if test="${sessionScope.checked == '1'}">
+                                                                                   checked="checked"
+                                                                               </c:if>
+                                                                               value="1">
+                                                                        <label for="full">full</label>
+                                                                        <input type="radio" id="scales" name="radioGroup"
+                                                                               <c:if test="${sessionScope.checked == '0'}">
+                                                                                   checked="checked"
+                                                                               </c:if>
+                                                                               value="0">
+                                                                        <label for="notFull">not full</label>
 
-                                                                        </div>
+                                                                    </div>
                                                                     </c:if>
                                                                     <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
 
@@ -232,20 +232,17 @@
                             </div>
 
                             <div class="col-1"> 
-                                <form action="MainController">
-                                    <button type="submit" name="action" value="Random"
-                                                   
-                                        <c:if test="${sessionScope.checked == '1'}">
-                                            disabled="disabled"
-                                        </c:if>
-                                        class="btn btn-info btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-sync-alt"></i>
-                                        </span>
-                                        <span class="text">Random</span>
-                                    </button>
-                                    <input type="hidden" value="${param.semesterID}" name="semesterID"> 
-                                </form>
+
+                                <button 
+                                    <c:if test="${sessionScope.checked == '1'}">
+                                        disabled="disabled"
+                                    </c:if>
+                                    class="btn btn-info btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </span>
+                                    <span class="text">Random</span>
+                                </button>
                                 <div class="mt-2"></div>
                                 <a href="#" class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">

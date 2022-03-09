@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import utils.DBUtils;
 
@@ -54,10 +55,39 @@ public class CapstoneDAO {
         }
         return capstone;
     }
-
-    public List<CapstoneDTO> getListCapsRandom(int n){
-        List<CapstoneDTO> list = null;
-        
+    public List<CapstoneDTO> getListCapsRandom(int n) throws SQLException{
+        List<CapstoneDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT TOP ? capstoneID, semesterID "
+                        + " FROM tblCapstone ";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, n);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String capstoneID = rs.getString("capstoneID");
+                    String semesterID = rs.getString("semesterID");
+                    list.add(new CapstoneDTO(capstoneID, semesterID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
         return list;
     }
+
 }

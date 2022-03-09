@@ -120,6 +120,9 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Gmail</th>
+
+                                                <th>Capstone Name</th>
+                                                <th>Groups Name</th>
                                                 <th>
                                                     <div class="dropdown">
                                                         <i class="fas fa-filter "></i>
@@ -147,7 +150,7 @@
                                         <c:forEach var="sup" varStatus="counter" items="${LIST_SUPERVISOR}">
                                             <tbody>
                                                 <tr>
-                                                    <td>${sup.STT}</td>
+                                                    <td>${counter.count}</td>
                                                     <td>${sup.username}</td>
                                                     <td>
                                                         <a href="" class="copy-click"
@@ -156,6 +159,8 @@
                                                             ${sup.gmail}
                                                         </a>
                                                     </td>
+                                                    <td>${sup.capstoneName}</td>
+                                                    <td><a href="GetListStudentInGroupDetails?groupID=${sup.groupID}">${sup.groupName}</a></td>
                                                     <td>${sup.amountGroup}/5</td>
 
                                                 </tr>
