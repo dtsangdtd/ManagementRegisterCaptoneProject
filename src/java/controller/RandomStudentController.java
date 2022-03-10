@@ -41,11 +41,13 @@ public class RandomStudentController extends HttpServlet {
             String semesterID = request.getParameter("semesterID");
             List<UserDTO> listStudentNoGroup = dao.getListStudentNoGroup(semesterID);
             int n = listStudentNoGroup.size();
-            // check n>0
-            System.out.println(n);
             SemesterDAO daoSes = new SemesterDAO();
             int maxSesID = daoSes.getMaxSemesterNO();
             SemesterDTO sesmester = daoSes.getSemester(maxSesID);
+            GroupDAO daoGroup = new GroupDAO();
+            if (sesmester.getSemesterID().equalsIgnoreCase(semesterID)) {
+                boolean check = daoSes.insertNewSesmester(semesterID);
+            }
             boolean flag = true;
             //boolean check = (!semesterID.equalsIgnoreCase(sesmester.getSemesterID())) ? daoSes.insertNewSesmester(semesterID) : true;
             if (sesmester.getSemesterID().equalsIgnoreCase(semesterID)) {
@@ -70,8 +72,7 @@ public class RandomStudentController extends HttpServlet {
                 int mod = n % 5;
                 GroupDAO daoGroup = new GroupDAO();
                 int key = daoGroup.getMaxGroupID();
-//                UserGroup map = (UserGroup) session.getAttribute("GROUP");
-                Cart map = (Cart) session.getAttribute("GROUP");
+                Cart map = new Cart();
                 for (int i = 0; i < num; i++) {
                     System.out.println(i + " " + num + " " + listStudentNoGroup.size());
                     map.add(key, listStudentNoGroup.subList(i, (i + 1) * 5));
@@ -88,7 +89,6 @@ public class RandomStudentController extends HttpServlet {
                         System.out.println("case mod5 = 1");
                         if (num < 3) {
                             boolean checkStu = dao.updateStudentRedundant(listStudentNoGroup.get(n).getUserID(), sesmester.getSemesterID());
-                            System.out.println("ahihi");
                             if (checkStu) {
                                 url = SUCCESS;
                             }
@@ -112,7 +112,6 @@ public class RandomStudentController extends HttpServlet {
                         }
                         break;
                     case 2:
-                        System.out.println("case mod5 = 2");
                         list = listStudentNoGroup.subList(n - 2, n);
                         if (num < 2) {
                             // chuyển sang học kì sau
@@ -123,7 +122,6 @@ public class RandomStudentController extends HttpServlet {
                         }
                         break;
                     case 3:
-                        System.out.println("case mod5 = 3");
                         list = listStudentNoGroup.subList(n - 3, n);
                         if (num == 1) {
                             // chuyển sang học kì sau
