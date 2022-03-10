@@ -12,15 +12,12 @@ import group.UserGroup;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import semester.SemesterDAO;
-import semester.SemesterDTO;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -32,7 +29,7 @@ import user.UserDTO;
 public class RandomStudentController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "GetListController?radioGroup=0&semesterID=SP22";
+    private static final String SUCCESS = "modStudentList.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,9 +37,8 @@ public class RandomStudentController extends HttpServlet {
         String url = ERROR;
         try {
             UserDAO dao = new UserDAO();
-            String semesterID = request.getParameter("semesterID");
-            System.out.println(semesterID);
             HttpSession session = request.getSession();
+            String semesterID = request.getParameter("semesterID");
             List<UserDTO> listStudentNoGroup = dao.getListStudentNoGroup(semesterID);
             int n = listStudentNoGroup.size();
             SemesterDAO daoSes = new SemesterDAO();
@@ -53,7 +49,13 @@ public class RandomStudentController extends HttpServlet {
                 boolean check = daoSes.insertNewSesmester(semesterID);
             }
             boolean flag = true;
+            //boolean check = (!semesterID.equalsIgnoreCase(sesmester.getSemesterID())) ? daoSes.insertNewSesmester(semesterID) : true;
+            if (sesmester.getSemesterID().equalsIgnoreCase(semesterID)) {
+                boolean check = daoSes.insertNewSesmester(semesterID);
+            }
+            GroupDAO daoGroup = new GroupDAO();
             if (n < 4) {
+                System.out.println("case n<4");
                 for (UserDTO userDTO : listStudentNoGroup) {
                     boolean check2 = dao.updateStudentRedundant(userDTO.getUserID(), sesmester.getSemesterID());
                     if (!check2) {
@@ -65,29 +67,26 @@ public class RandomStudentController extends HttpServlet {
                     url = SUCCESS;
                 }
             } else {
+                System.out.println("case n>4");
                 int num = n / 5;
                 int mod = n % 5;
+                GroupDAO daoGroup = new GroupDAO();
                 int key = daoGroup.getMaxGroupID();
                 Cart map = new Cart();
                 for (int i = 0; i < num; i++) {
-                    System.out.println(i+" "+num + " " + listStudentNoGroup.size());
+                    System.out.println(i + " " + num + " " + listStudentNoGroup.size());
                     map.add(key, listStudentNoGroup.subList(i, (i + 1) * 5));
                     key++;
                     String groupName = "Group" + String.valueOf(key);
                     int capstoneID = 0;
-                    int numOfPer = 5;
-                    int statusID = 2;
-                    GroupDTO group = new GroupDTO(key, groupName, capstoneID, numOfPer, statusID);
-                    boolean checkInsertGroup = daoGroup.addToGroup(group);
-                    if (!checkInsertGroup) {
-                        flag = false;
-                        break;
-                    }
+                    int numOfPer = 0;
+                    int statusID = 5;
+                    GroupDTO group = new GroupDTO(statusID, groupName, capstoneID, numOfPer, statusID);
                 }
                 List<UserDTO> list = null;
-                System.out.println("mod:" + mod);
                 switch (mod) {
                     case 1: // 1 stu doesn't have group
+                        System.out.println("case mod5 = 1");
                         if (num < 3) {
                             boolean checkStu = dao.updateStudentRedundant(listStudentNoGroup.get(n).getUserID(), sesmester.getSemesterID());
                             if (checkStu) {
@@ -95,11 +94,10 @@ public class RandomStudentController extends HttpServlet {
                             }
                         } else {
                             // lấy list group 5 mới tạo key lớn nhất
-//                            list = map.getGroup(key);
                             list.add(map.getUser(key));
                             list.add(map.getUser(key - 1));
                             list.add(map.getUser(key - 2));
-                            map.add(key + 1, list);
+                            map.add(key+1, list);
                             // lưu trong tblGroup
                             // update status User= 2 
                             for (UserDTO userDTO : listStudentNoGroup) {
@@ -110,60 +108,35 @@ public class RandomStudentController extends HttpServlet {
                                     break;
                                 }
                             }
-                            
+
                         }
                         break;
                     case 2:
-                        System.out.println("ahihi3");
                         list = listStudentNoGroup.subList(n - 2, n);
                         if (num < 2) {
                             // chuyển sang học kì sau
-                            for (UserDTO userDTO : list) {
-                                boolean check2 = dao.updateStudentRedundant(userDTO.getUserID(), sesmester.getSemesterID());
-                                if (!check2) {
-                                    flag = false;
-                                    break;
-                                }
-                            }
-                            if (flag) {
-                                url = SUCCESS;
-                            }
                         } else {
                             list.add(map.getUser(key));
                             list.add(map.getUser(key - 1));
-                            map.add(key + 1, list);
+                            map.add(key+1, list);
                         }
                         break;
                     case 3:
-                        System.out.println("ahihi4");
                         list = listStudentNoGroup.subList(n - 3, n);
                         if (num == 1) {
                             // chuyển sang học kì sau
-                            for (UserDTO userDTO : list) {
-                                boolean check2 = dao.updateStudentRedundant(userDTO.getUserID(), sesmester.getSemesterID());
-                                if (!check2) {
-                                    flag = false;
-                                    break;
-                                }
-                            }
-                            if (flag) {
-                                url = SUCCESS;
-                            }
                         } else {
                             list.add(map.getUser(key));
-                            map.add(key + 1, list);
-                            for (UserDTO userDTO : list) {
-                                userDTO.setStatusID("2");
-                                dao.updateStatusID(userDTO);
-                            }
+                            map.add(key+1, list);
+                            
                         }
                         break;
                 }
                 for (Map.Entry<Integer, List<UserDTO>> group : map.getCart().entrySet()) {
-                    int groupID = group.getKey(); 
-                    System.out.println("group" +groupID);
+                    int groupID = group.getKey();
+                    System.out.println("group: " + groupID);
                     List listUser = group.getValue();
-                    System.out.println("list:" + listUser.size());
+                    System.out.println("list: " + listUser.size());
                     // set status User = 2
                     // insert tbl UserGroup
                     boolean insertUG = daoGroup.insertUserGroup(listUser, groupID);
@@ -175,10 +148,9 @@ public class RandomStudentController extends HttpServlet {
                 if (flag) {
                     url = SUCCESS;
                 }
-                
+
             }
         } catch (Exception e) {
-            e.printStackTrace();
             log("Error at GetListController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

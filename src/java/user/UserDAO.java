@@ -138,6 +138,7 @@ public class UserDAO {
                 conn.close();
             }
         }
+        System.out.println(list);
         return list;
     }
 
@@ -181,7 +182,7 @@ public class UserDAO {
         return list;
     }
 
-    public List<UserDTO> getListStudentNoGroup(String semesterID) throws SQLException {
+    public List<UserDTO> getListStudentNoGroup() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -193,7 +194,6 @@ public class UserDAO {
                         + " FROM tblUser "
                         + " WHERE [statusID] = '3' AND semesterID = ? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String stt = rs.getString("STT");
@@ -202,7 +202,6 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
-                    String semesterName = rs.getString("semesterID");
                     String statusID = rs.getString("statusID");
                      list.add(new UserDTO(stt, userID, username, "", gmail, statusID, semesterID, "", "", "", photoUrl));
                 }
@@ -304,7 +303,7 @@ public class UserDAO {
         return false;
     }
 
-    public int getNoOfRecordsSearchAdmin(int check, String semesterID) throws SQLException {
+    public int getNoOfRecordsSearchAdmin(int check, String semesterID, String nameSearch) throws SQLException {
         int result = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -317,19 +316,19 @@ public class UserDAO {
                 if (check == 1) {
                     sql = "SELECT count(*) as noRecord \n"
                             + "FROM tblUser \n"
-                            + "WHERE  tblUser.roleID = 'US' AND tblUser.semesterID = ?";
+                            + "WHERE  tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 } else if (check == 0) {
                     sql = "SELECT count(*) as noRecord "
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ?";
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 }
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, semesterID);
-
+                stm.setString(2, "%" + nameSearch + "%");
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     result = rs.getInt("noRecord");
@@ -350,7 +349,7 @@ public class UserDAO {
         return result;
     }
 
-    public List<UserDTO> getUserSearch(int pagesize, int pageNumber, int check, String semesterID) throws SQLException {
+    public List<UserDTO> getUserSearch(int pagesize, int pageNumber, int check, String semesterID, String nameSearch) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -363,7 +362,7 @@ public class UserDAO {
                     sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? "
+                            + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
@@ -373,17 +372,18 @@ public class UserDAO {
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? "
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 }
                 stm = conn.prepareStatement(sql);
-                stm.setInt(2, pagesize);
-                stm.setInt(3, pageNumber);
-                stm.setInt(4, pagesize);
+                stm.setInt(3, pagesize);
+                stm.setInt(4, pageNumber);
+                stm.setInt(5, pagesize);
                 stm.setString(1, semesterID);
+                stm.setString(2, "%" + nameSearch + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String stt = rs.getString("STT");
@@ -462,22 +462,22 @@ public class UserDAO {
                 String sql = null;
 
                 if (check == 1) {
-                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID\n"
+                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName\n"
                             + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
                             + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID\n"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName\n"
                             + "HAVING COUNT (tb2.userID) = 5) tableCount";
                 } else if (check == 0) {
-                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID\n"
+                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName\n"
                             + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
                             + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID\n"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName\n"
                             + "HAVING COUNT (tb2.userID) < 5) tableCount";
                 }
                 stm = conn.prepareStatement(sql);
@@ -511,7 +511,7 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID, COUNT (tb2.userID) AS AmountGroup\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
                             + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
@@ -524,14 +524,14 @@ public class UserDAO {
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID, COUNT (tb2.userID) AS AmountGroup\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
                             + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
                             + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
                             + ")\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID HAVING COUNT (tb2.userID) < 5"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName HAVING COUNT (tb2.userID) < 5"
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
@@ -548,10 +548,11 @@ public class UserDAO {
                     String username = rs.getString("name");
                     String gmail = rs.getString("gmail");
                     String statusID = rs.getString("statusID");
-
+                    String capstoneName = rs.getString("capstoneName");
+                    String groupID = rs.getString("groupID");
+                    String groupName = rs.getString("groupName");
                     String amountGroup = rs.getString("AmountGroup");
-                    list.add(new UserDTO(stt, userID, username, "US", gmail, statusID, "", "", "","", amountGroup));
-
+                    list.add(new UserDTO(stt, userID, username, "US", gmail, statusID, capstoneName, groupID, groupName, amountGroup));
                 }
             }
         } catch (Exception e) {

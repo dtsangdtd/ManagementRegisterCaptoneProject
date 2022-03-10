@@ -79,7 +79,7 @@ public class AcceptInviteController extends HttpServlet {
                         if (check3) {
                             numOfPer += 1;
                             GroupDTO group2 = new GroupDTO(groupID, groupName, capstoneID, numOfPer, groupStatusID);
-                            boolean check4 = gDao.UpdateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
+                            boolean check4 = gDao.updateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
 
                             if (check4) {
                                 RequestDAO reqDao = new RequestDAO();
@@ -107,7 +107,7 @@ public class AcceptInviteController extends HttpServlet {
                     GroupDTO group = gDao.getGroupByGroupID(groupID);
                     int numOfPer = group.getNumOfPer() + 1;
                     GroupDTO group2 = new GroupDTO(numOfPer, groupID);
-                    boolean check2 = gDao.UpdateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
+                    boolean check2 = gDao.updateNumberOfPerson(group2); //Tăng số lượng thành viên trong Group trên sql
 
                     if (check2) {
                         RequestDAO reqDao = new RequestDAO();

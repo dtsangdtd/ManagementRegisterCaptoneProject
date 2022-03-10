@@ -25,7 +25,7 @@ public class MainController extends HttpServlet {
     private static final String INVITE = "InviteController";
     private static final String ACCEPT = "AcceptInviteController";
     private static final String REFUSE = "RefuseInviteController";
-    private static final String RANDOM = "RandomStudentController";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,8 +57,6 @@ public class MainController extends HttpServlet {
                 url = ACCEPT;
             }else if("Refuse".equals(action)){
                 url = REFUSE;
-            }else if("Random".equals(action)){
-                url = RANDOM;
             }else {
                 session.setAttribute("ERROR_MESSAGE", "Function is not available!");
             }

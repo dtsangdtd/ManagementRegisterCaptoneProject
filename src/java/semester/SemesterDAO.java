@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DBUtils;
@@ -19,11 +18,12 @@ import utils.DBUtils;
  * @author dtsang
  */
 public class SemesterDAO {
+
     public List<SemesterDTO> getListSemester() throws SQLException {
         List<SemesterDTO> list = new ArrayList<>();
-         Connection conn = null;
-         PreparedStatement stm = null;
-         ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -51,7 +51,8 @@ public class SemesterDAO {
 //        System.out.println(list);
         return list;
     }
-        public int getMaxSemesterNO() throws SQLException {
+
+    public int getMaxSemesterNO() throws SQLException {
         int no = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -98,6 +99,7 @@ public class SemesterDAO {
                 String sql = " INSERT INTO tblSemester(semesterID , semesterName, NO) "
                         + " VALUES(?,?,?)";
                 stm = conn.prepareStatement(sql);
+                // check sql has that id or not
                 switch (test) {
                     case "SP":
                         stm.setString(1, "SU" + id);
@@ -148,7 +150,7 @@ public class SemesterDAO {
                 String semesterName = rs.getString("semesterName");
                 semesterDTO = new SemesterDTO(semesterID, semesterName);
             }
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }

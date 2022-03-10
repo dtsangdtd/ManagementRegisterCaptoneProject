@@ -34,7 +34,6 @@ public class GetListTopicController extends HttpServlet {
         String url = LOGIN;
         int checked = 1;
         String semesterID = "SP22";
-//        System.out.println(request.getParameter("radioGroup"));
         if (request.getParameter("radioGroup") != null) {
             checked = Integer.parseInt(request.getParameter("radioGroup"));
 
@@ -60,7 +59,6 @@ public class GetListTopicController extends HttpServlet {
             int noOfPages;
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
             List<TopicDTO> listTopic = topdao.getTopicSearch(semesterID);
-//          System.out.println(listTopic);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);
