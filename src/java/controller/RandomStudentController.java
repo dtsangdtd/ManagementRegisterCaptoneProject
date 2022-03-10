@@ -5,6 +5,7 @@
  */
 package controller;
 
+import capstone.CapstoneDAO;
 import group.Cart;
 import group.GroupDAO;
 import group.GroupDTO;
@@ -96,7 +97,7 @@ public class RandomStudentController extends HttpServlet {
                             boolean checkStu = dao.updateStudentRedundant(listStudentNoGroup.get(n).getUserID(), sesmester.getSemesterID());
                             System.out.println("ahihi");
                             if (checkStu) {
-                                url = SUCCESS;
+                                flag = false;
                             }
                         } else {
                             // lấy list group 5 mới tạo key lớn nhất
@@ -129,9 +130,7 @@ public class RandomStudentController extends HttpServlet {
                                     break;
                                 }
                             }
-                            if (flag) {
-                                url = SUCCESS;
-                            }
+
                         } else {
                             list.add(map.getUser(key));
                             list.add(map.getUser(key - 1));
@@ -150,9 +149,6 @@ public class RandomStudentController extends HttpServlet {
                                     break;
                                 }
                             }
-                            if (flag) {
-                                url = SUCCESS;
-                            }
                         } else {
                             list.add(map.getUser(key));
                             map.add(key + 1, list);
@@ -163,10 +159,12 @@ public class RandomStudentController extends HttpServlet {
                         }
                         break;
                 }
+                List<Integer> listGroupID = null;
                 for (Map.Entry<Integer, List<UserDTO>> group : map.getCart().entrySet()) {
                     int groupID = group.getKey();
+                    listGroupID.add(groupID);
                     System.out.println("group: " + groupID);
-                    List listUser = group.getValue();
+                    List<UserDTO> listUser = group.getValue();
                     System.out.println("list: " + listUser.size());
                     // set status User = 2
                     // insert tbl UserGroup
@@ -174,6 +172,16 @@ public class RandomStudentController extends HttpServlet {
                     if (!insertUG) {
                         flag = false;
                         break;
+                    }
+                }
+                // Random CapstoneID vào tblGroup
+                CapstoneDAO daoCap = new CapstoneDAO();
+                int numOfGroup = map.getCart().size();
+                List<String> listCapstone = daoCap.getListCapsRandom(numOfGroup, semesterID); // list numOfGroup
+                for (int i = 0; i < numOfGroup; i++) {
+                    boolean checkUpdateCaps = daoGroup.updateCapstoneGroup(listGroupID.get(i), listCapstone.get(i));
+                    if (!checkUpdateCaps) {
+                        flag = false;
                     }
                 }
                 if (flag) {
