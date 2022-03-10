@@ -182,7 +182,7 @@ public class UserDAO {
         return list;
     }
 
-    public List<UserDTO> getListStudentNoGroup() throws SQLException {
+    public List<UserDTO> getListStudentNoGroup(String semesterID) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -193,8 +193,9 @@ public class UserDAO {
                 System.out.println("check dao 1");
                 String sql = " SELECT ROW_NUMBER() OVER (ORDER BY userID) AS STT, userID, name, gmail, phone, photoUrl, statusID "
                         + " FROM tblUser "
-                        + " WHERE [statusID] = '2' ";
+                        + " WHERE [statusID] = '3' AND semesterID = ? ";
                 stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String stt = rs.getString("STT");
@@ -204,7 +205,7 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(stt, userID, username, "", gmail, statusID, semesterID, "", "", "", photoUrl));
+                    list.add(new UserDTO(stt, userID, username, gmail, statusID, semesterID, "", "", "", photoUrl));
                 }
             }
 
@@ -572,17 +573,20 @@ public class UserDAO {
         return list;
     }
 
-    public boolean updateStudentRedundant(UserDTO user) throws SQLException {
+    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException { // miss: update status ve 2
         boolean result = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " UPDATE tblUser set sesmesterID=? "
+                String sql = " UPDATE tblUser SET semesterID=? "
                         + " WHERE userID=? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getSemesterName());
+                stm.setString(1, sesmesterID);
+                System.out.println(userID);
+                System.out.println(sesmesterID);
+                stm.setString(2, userID);
                 result = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

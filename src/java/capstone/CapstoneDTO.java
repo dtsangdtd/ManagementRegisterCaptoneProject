@@ -33,6 +33,11 @@ public class CapstoneDTO extends UserDTO{
         this.statusId = statusId;
     }
 
+    public CapstoneDTO(String capstoneID, String semesterId) {
+        this.capstoneID = capstoneID;
+        this.semesterId = semesterId;
+    }
+
     public String getCapstoneID() {
         return capstoneID;
     }
