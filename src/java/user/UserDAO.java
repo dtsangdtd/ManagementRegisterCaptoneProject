@@ -573,19 +573,17 @@ public class UserDAO {
         return list;
     }
 
-    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException { // miss: update status ve 2
+    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException { 
         boolean result = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " UPDATE tblUser SET semesterID=? "
+                String sql = " UPDATE tblUser SET semesterID=?, statusID = '2' "
                         + " WHERE userID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, sesmesterID);
-                System.out.println(userID);
-                System.out.println(sesmesterID);
                 stm.setString(2, userID);
                 result = stm.executeUpdate() > 0 ? true : false;
             }

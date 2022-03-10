@@ -357,4 +357,30 @@ public class GroupDAO {
         }
         return check;
     }
+    public boolean updateCapstoneGroup(int groupID, String capstoneID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblGroup set capstoneID = ? "
+                        + " WHERE groupID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, capstoneID);
+                stm.setInt(2, groupID);
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }
