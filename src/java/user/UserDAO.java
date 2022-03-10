@@ -41,7 +41,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photo = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
-                    user = new UserDTO("",userID, username, password, roleID, gmail, phone, statusID, photo);
+                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photo);
                 }
             }
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photoUrl = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
-                    user = new UserDTO("",userID, username, password, roleID, gmail, phone, statusID, photoUrl);
+                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photoUrl);
                 }
             }
         } catch (Exception e) {
@@ -122,7 +122,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
 
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO("",userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO("", userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
             }
 
@@ -163,7 +163,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
 
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO("",userID, username, "", "MT", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO("", userID, username, "", "MT", gmail, phone, statusID, photoUrl));
                 }
             }
 
@@ -304,7 +304,7 @@ public class UserDAO {
         return false;
     }
 
-    public int getNoOfRecordsSearchAdmin(int check, String semesterID) throws SQLException {
+    public int getNoOfRecordsSearchAdmin(int check, String semesterID, String nameSearch) throws SQLException {
         int result = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -317,19 +317,19 @@ public class UserDAO {
                 if (check == 1) {
                     sql = "SELECT count(*) as noRecord \n"
                             + "FROM tblUser \n"
-                            + "WHERE  tblUser.roleID = 'US' AND tblUser.semesterID = ?";
+                            + "WHERE  tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 } else if (check == 0) {
                     sql = "SELECT count(*) as noRecord "
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ?";
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 }
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, semesterID);
-
+                stm.setString(2, "%" + nameSearch + "%");
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     result = rs.getInt("noRecord");
@@ -350,7 +350,7 @@ public class UserDAO {
         return result;
     }
 
-    public List<UserDTO> getUserSearch(int pagesize, int pageNumber, int check, String semesterID) throws SQLException {
+    public List<UserDTO> getUserSearch(int pagesize, int pageNumber, int check, String semesterID, String nameSearch) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -363,7 +363,7 @@ public class UserDAO {
                     sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? "
+                            + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
@@ -373,17 +373,18 @@ public class UserDAO {
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? "
+                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 }
                 stm = conn.prepareStatement(sql);
-                stm.setInt(2, pagesize);
-                stm.setInt(3, pageNumber);
-                stm.setInt(4, pagesize);
+                stm.setInt(3, pagesize);
+                stm.setInt(4, pageNumber);
+                stm.setInt(5, pagesize);
                 stm.setString(1, semesterID);
+                stm.setString(2, "%" + nameSearch + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String stt = rs.getString("STT");
@@ -393,7 +394,7 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(stt,userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO(stt, userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
             }
         } catch (Exception e) {
@@ -411,7 +412,7 @@ public class UserDAO {
         }
         return list;
     }
-    
+
     public UserDTO getUserByUserID(String userID) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -552,7 +553,7 @@ public class UserDAO {
                     String groupID = rs.getString("groupID");
                     String groupName = rs.getString("groupName");
                     String amountGroup = rs.getString("AmountGroup");
-                    list.add(new UserDTO(stt,userID, username, "US", gmail, statusID, capstoneName, groupID, groupName, amountGroup));
+                    list.add(new UserDTO(stt, userID, username, "US", gmail, statusID, capstoneName, groupID, groupName, amountGroup));
                 }
             }
         } catch (Exception e) {

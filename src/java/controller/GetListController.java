@@ -37,6 +37,7 @@ public class GetListController extends HttpServlet {
         String url = LOGIN;
         int checked = 1;
         String semesterID = "SP22";
+     
 //        System.out.println(request.getParameter("radioGroup"));
         if (request.getParameter("radioGroup") != null) {
             checked = Integer.parseInt(request.getParameter("radioGroup"));
@@ -45,6 +46,8 @@ public class GetListController extends HttpServlet {
         if (request.getParameter("semesterID") != null) {
             semesterID = request.getParameter("semesterID");
         }
+         String searchName = request.getParameter("txtSearch");
+         searchName = searchName == null ? "" : searchName;
         try {
             SemesterDAO semesterDAO = new SemesterDAO();
             List<SemesterDTO> listSemester = semesterDAO.getListSemester();
@@ -59,9 +62,9 @@ public class GetListController extends HttpServlet {
                 pageNumber = Integer.parseInt(request.getParameter("page"));
             }
             int noOfPages;
-            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
-            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID);
-//            System.out.println(listStudent);
+            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID,searchName) * 1.0 / pageSize);
+            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID,searchName);
+            System.out.println(noOfPages);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);
