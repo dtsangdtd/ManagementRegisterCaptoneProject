@@ -182,7 +182,7 @@ public class UserDAO {
         return list;
     }
 
-    public List<UserDTO> getListStudentNoGroup() throws SQLException {
+    public List<UserDTO> getListStudentNoGroup(String semesterID) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -190,10 +190,12 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT ROW_NUMBER() OVER (ORDER BY userID) AS STT, userID, name, gmail, phone, photoUrl, statusID " 
+                System.out.println("check dao 1");
+                String sql = " SELECT ROW_NUMBER() OVER (ORDER BY userID) AS STT, userID, name, gmail, phone, photoUrl, statusID "
                         + " FROM tblUser "
                         + " WHERE [statusID] = '3' AND semesterID = ? ";
                 stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String stt = rs.getString("STT");
@@ -203,7 +205,7 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
                     String statusID = rs.getString("statusID");
-                     list.add(new UserDTO(stt, userID, username, "", gmail, statusID, semesterID, "", "", "", photoUrl));
+                    list.add(new UserDTO(stt, userID, username, gmail, statusID, semesterID, "", "", "", photoUrl));
                 }
             }
 

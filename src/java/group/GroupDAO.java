@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import request.RequestDTO;
+import user.UserDTO;
 import utils.DBUtils;
 
 /**
@@ -143,7 +144,7 @@ public class GroupDAO {
         return check;
     }
 
-    public boolean UpdateNumberOfPerson(GroupDTO group) throws SQLException {
+    public boolean updateNumberOfPerson(GroupDTO group) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -317,5 +318,43 @@ public class GroupDAO {
             }
         }
         return group;
+    }
+    public boolean insertUserGroup(List<UserDTO> list, int groupID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " INSERT INTO tblUserGroup(userGroupID, userID, groupID, isSupervisor) "
+                        + " VALUES ";
+                for (UserDTO user : list) {
+                    sql += "(?,?,?,?),";
+                }
+                sql = sql.substring(0, sql.length() - 1);
+                stm = conn.prepareStatement(sql);
+                int count = 1;
+                int maxUGID = getMaxUserGroupID() + 1;
+                for (UserDTO user : list) {
+                    stm.setInt(count++, maxUGID++);
+                    stm.setString(count++, user.getUserID());
+                    stm.setInt(count++, groupID);
+                    stm.setInt(count++, 0);
+                }
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }
