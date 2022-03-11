@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import semester.SemesterDAO;
 import semester.SemesterDTO;
-import topic.TopicDAO;
-import topic.TopicDTO;
 import user.UserDAO;
 import user.UserDTO;
+import capstone.CapstoneDAO;
+import capstone.CapstoneDTO;
 
 /**
  *
@@ -33,20 +33,16 @@ public class GetListTopicController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         int checked = 1;
-        String semesterID = "SP22";
-//        System.out.println(request.getParameter("radioGroup"));
+        String semesterID = request.getParameter("semesterID");
         if (request.getParameter("radioGroup") != null) {
             checked = Integer.parseInt(request.getParameter("radioGroup"));
 
-        }
-        if (request.getParameter("semesterID") != null) {
-            semesterID = request.getParameter("semesterID");
         }
         try {
             SemesterDAO semesterDAO = new SemesterDAO();
             List<SemesterDTO> listSemester = semesterDAO.getListSemester();
             UserDAO dao = new UserDAO();
-            TopicDAO topdao = new TopicDAO();
+            CapstoneDAO capdao  = new CapstoneDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             List<UserDTO> listSupervisor = dao.getListSupervisor();
@@ -59,8 +55,7 @@ public class GetListTopicController extends HttpServlet {
             }
             int noOfPages;
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
-            List<TopicDTO> listTopic = topdao.getTopicSearch(semesterID);
-//          System.out.println(listTopic);
+            List<CapstoneDTO> listTopic = capdao.getTopicSearch(semesterID);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);

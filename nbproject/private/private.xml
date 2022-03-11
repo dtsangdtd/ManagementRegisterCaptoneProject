@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/controller/InviteController.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/request/RequestDAO.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
+            <file>file:/E:/SlideFPT/9.Spring2022/SWP391-HoangNT/P-2/ManagementRegisterCaptoneProject/src/java/capstone/CapstoneDAO.java</file>
+            <file>file:/E:/SlideFPT/9.Spring2022/SWP391-HoangNT/P-2/ManagementRegisterCaptoneProject/src/java/capstone/CapstoneDTO.java</file>
+            <file>file:/E:/SlideFPT/9.Spring2022/SWP391-HoangNT/P-2/ManagementRegisterCaptoneProject/src/java/controller/GetListTopicController.java</file>
         </group>
     </open-files>
 </project-private>

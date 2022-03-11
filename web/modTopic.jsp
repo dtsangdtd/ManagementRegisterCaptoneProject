@@ -147,7 +147,7 @@
 
                                                                 </div>
                                                             </c:if>
-                                                            <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
+                                                            <input type="hidden" name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
 
                                                         </form>
                                                     </div>Status 
