@@ -13,6 +13,7 @@ import user.UserDTO;
  */
 public class CapstoneDTO extends UserDTO{
     public String capstoneID, capstoneName, groupId, registerDate, startTime, endTime, semesterId, statusId;
+    
 
     public CapstoneDTO() {
     }
