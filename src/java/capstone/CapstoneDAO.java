@@ -101,9 +101,10 @@ public class CapstoneDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 System.out.println(semesterID);
-                String sql = " SELECT  c.capstoneID, c.capstoneName, u.name, c.groupID, c.statusID "
+                String sql = " SELECT  c.capstoneID, c.capstoneName, c.groupID, c.statusID, u.name "
                         + " FROM tblCapstone c full join tblUserCapstone uc on c.capstoneID = uc.capstoneID full join tblUser u on u.userID = uc.userID  "
-                        + " WHERE u.semesterID = ? AND u.roleID = 'MT'";
+                        + " WHERE c.semesterID = ? AND u.roleID = 'MT'"
+                        + " ORDER BY c.capstoneName DESC";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, semesterID);
                 rs = stm.executeQuery();
@@ -131,4 +132,41 @@ public class CapstoneDAO {
         }
         return list;
     }
+    
+//    public List<CapstoneDTO> getTopicSearchV2(String semesterID) throws SQLException {
+//        List<CapstoneDTO> list = new ArrayList<>();
+//        Connection conn = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        try {
+//            conn = DBUtils.getConnection();
+//            if (conn != null) {
+//                System.out.println(semesterID);
+//                String sql = " SELECT u.name "
+//                        + " FROM tblCapstone c full join tblUserCapstone uc on c.capstoneID = uc.capstoneID full join tblUser u on u.userID = uc.userID  "
+//                        + " WHERE c.cName = ? AND u.roleID = 'MT'"
+//                        + " ORDER BY c.capstoneName DESC";
+//                stm = conn.prepareStatement(sql);
+//                stm.setString(1, semesterID);
+//                rs = stm.executeQuery();
+//                while (rs.next()) {
+//                    String userName = rs.getString("name");
+//                    list.add(new CapstoneDTO(capstoneID, capstoneName, groupID, semesterID, statusID, userName));
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//        return list;
+//    }
 }

@@ -26,7 +26,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListTopicController?radioGroup=0">
+        <a class="nav-link" href="GetListTopicController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Capstone Topics</span>
         </a>

@@ -34,18 +34,18 @@ public class GetListTopicController extends HttpServlet {
         String url = LOGIN;
         int checked = 1;
         String semesterID = request.getParameter("semesterID");
-        if (request.getParameter("radioGroup") != null) {
-            checked = Integer.parseInt(request.getParameter("radioGroup"));
-
-        }
+//        if (request.getParameter("radioGroup") != null) {
+//            checked = Integer.parseInt(request.getParameter("radioGroup"));
+//
+//        }
         try {
             SemesterDAO semesterDAO = new SemesterDAO();
-            List<SemesterDTO> listSemester = semesterDAO.getListSemester();
+            List<SemesterDTO> listSemesterTopic = semesterDAO.getListSemester();
             UserDAO dao = new UserDAO();
             CapstoneDAO capdao  = new CapstoneDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            List<UserDTO> listSupervisor = dao.getListSupervisor();
+//            List<UserDTO> listSupervisor = dao.getListSupervisor();
             
             session.setAttribute("checked", checked);
             int pageNumber = 1;
@@ -53,14 +53,14 @@ public class GetListTopicController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 pageNumber = Integer.parseInt(request.getParameter("page"));
             }
-            int noOfPages;
+//          int noOfPages;
 //            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
             List<CapstoneDTO> listTopic = capdao.getTopicSearch(semesterID);
 //            request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
-            session.setAttribute("LIST_SEMESTER", listSemester);
+            session.setAttribute("LIST_SEMESTER_TOPIC", listSemesterTopic);
             session.setAttribute("LIST_TOPIC", listTopic);
-            session.setAttribute("LIST_SUPERVISOR", listSupervisor);
+//            session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {
                 url = LOGIN;
             } else if ("AD".equals(loginUser.getRoleID())) {
