@@ -21,7 +21,11 @@
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-                <link href="css/chat.css" rel="stylesheet">
+        <link href="css/chat.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700" rel="stylesheet"> 
     </head>
 
@@ -87,11 +91,26 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Earnings (Monthly)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                                    Set Deadline</div>
+
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                <section class="container">
+                                                    <form>
+                                                        <div class="row form-group">
+                                                            <div class="col-12">
+                                                                <div class="input-group date" id="datepicker">
+                                                                    <input type="text" class="form-control">
+                                                                    <span class="input-group-append">
+                                                                        <span class="input-group-text">
+                                                                            <i class="fa fa-calendar icon" id="datepicker"></i>
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </section>
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +436,7 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-        
+
         <!-- Logout Modal-->
         <%@include file="logout.jsp" %>
 
@@ -437,7 +456,20 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <style>
+            .input-group .date .input-group-text:hover {
+                background-color: blue!important;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $('#datepicker').datepicker();
+            })
+        </script>
+        
     </body>
 
 </html>

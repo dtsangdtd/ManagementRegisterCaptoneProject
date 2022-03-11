@@ -181,13 +181,11 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <c:if test="${stu.statusID == '0'}"><div class="badge bg-dark">inActive</div></c:if>
-                                                                <c:if test="${stu.statusID == '1'}"><div class="badge bg-success">Active</div></c:if>
                                                                 <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
                                                                 <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
                                                 </c:forEach>
                                             </table>
                                         </div>
