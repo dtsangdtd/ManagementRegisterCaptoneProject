@@ -464,22 +464,22 @@ public class UserDAO {
                 String sql = null;
 
                 if (check == 1) {
-                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName\n"
-                            + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID\n"
+                            + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID\n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
                             + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName\n"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID\n"
                             + "HAVING COUNT (tb2.userID) = 5) tableCount";
                 } else if (check == 0) {
-                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName\n"
-                            + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                    sql = "Select count(*) as noRecord from (SELECT tb1.userID, tb1.name,tb1.gmail, tb1.statusID\n"
+                            + "FROM tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID\n"
                             + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
                             + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName\n"
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID\n"
                             + "HAVING COUNT (tb2.userID) < 5) tableCount";
                 }
                 stm = conn.prepareStatement(sql);
@@ -513,29 +513,27 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
-                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID, COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID\n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID\n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
-                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
-                            + ")\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID )\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName HAVING COUNT (tb2.userID) = 5 "
-                            + "ORDER BY (SELECT NULL)"
-                            + "OFFSET ? * (? - 1) ROWS "
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID HAVING COUNT (tb2.userID) = 5 \n"
+                            + "ORDER BY (SELECT NULL)\n"
+                            + "OFFSET ? * (? - 1) ROWS \n"
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
-                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID, COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID\n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID\n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
-                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
-                            + ")\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID )\n"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID, tb4.capstoneName,tb5.groupID,tb5.groupName HAVING COUNT (tb2.userID) < 5"
-                            + "ORDER BY (SELECT NULL)"
-                            + "OFFSET ? * (? - 1) ROWS "
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID HAVING COUNT (tb2.userID) < 5 \n"
+                            + "ORDER BY (SELECT NULL)\n"
+                            + "OFFSET ? * (? - 1) ROWS \n"
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 }
@@ -550,11 +548,11 @@ public class UserDAO {
                     String username = rs.getString("name");
                     String gmail = rs.getString("gmail");
                     String statusID = rs.getString("statusID");
-                    String capstoneName = rs.getString("capstoneName");
-                    String groupID = rs.getString("groupID");
-                    String groupName = rs.getString("groupName");
+//                    String capstoneName = rs.getString("capstoneName");
+//                    String groupID = rs.getString("groupID");
+//                    String groupName = rs.getString("groupName");
                     String amountGroup = rs.getString("AmountGroup");
-                    list.add(new UserDTO(stt, userID, username, "US", gmail, statusID, capstoneName, groupID, groupName, amountGroup));
+                    list.add(new UserDTO(stt, userID, username, "US", gmail, statusID, "", "", "", amountGroup));
                 }
             }
         } catch (Exception e) {
@@ -573,7 +571,7 @@ public class UserDAO {
         return list;
     }
 
-    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException { 
+    public boolean updateStudentRedundant(String userID, String sesmesterID) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement stm = null;
