@@ -120,9 +120,6 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Gmail</th>
-
-                                                <th>Capstone Name</th>
-                                                <th>Groups Name</th>
                                                 <th>
                                                     <div class="dropdown">
                                                         <i class="fas fa-filter "></i>
@@ -159,8 +156,6 @@
                                                             ${sup.gmail}
                                                         </a>
                                                     </td>
-                                                    <td>${sup.capstoneName}</td>
-                                                    <td><a href="GetListStudentInGroupDetails?groupID=${sup.groupID}">${sup.groupName}</a></td>
                                                     <td>${sup.amountGroup}/5</td>
 
                                                 </tr>
