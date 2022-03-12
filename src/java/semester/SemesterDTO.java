@@ -11,11 +11,19 @@ import java.io.Serializable;
  *
  * @author dtsang
  */
-public class SemesterDTO  implements Serializable{
+public class SemesterDTO implements Serializable {
+
     public String semesterID;
     public String semesterName;
+    public String deadline;
 
     public SemesterDTO() {
+    }
+
+    public SemesterDTO(String semesterID, String semesterName, String deadline) {
+        this.semesterID = semesterID;
+        this.semesterName = semesterName;
+        this.deadline = deadline;
     }
 
     public SemesterDTO(String semesterID, String semesterName) {
@@ -39,9 +47,17 @@ public class SemesterDTO  implements Serializable{
         this.semesterName = semesterName;
     }
 
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
     @Override
     public String toString() {
         return "SemesterDTO{" + "semesterID=" + semesterID + ", semesterName=" + semesterName + '}';
     }
-    
+
 }

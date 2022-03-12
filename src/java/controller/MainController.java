@@ -25,7 +25,9 @@ public class MainController extends HttpServlet {
     private static final String INVITE = "InviteController";
     private static final String ACCEPT = "AcceptInviteController";
     private static final String REFUSE = "RefuseInviteController";
-    
+    private static final String RANDOM = "RandomStudentController";
+    private static final String DEADLINE = "DeadlineSemesterController";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,21 +45,28 @@ public class MainController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             String action = request.getParameter("action");
+            if (action == null) {
+                action = "Import";
+            }
             if ("Login".equals(action)) {
                 url = LOGIN;
             } else if ("Logout".equals(action)) {
-                url = LOGOUT;   
-            }else if ("editProfile".equals(action)){
+                url = LOGOUT;
+            } else if ("editProfile".equals(action)) {
                 url = UPDATEPROFILE;
-            }else if("getList".equals(action)){
+            } else if ("getList".equals(action)) {
                 url = GETLIST;
-            }else if("Invite".equals(action)){
+            } else if ("Invite".equals(action)) {
                 url = INVITE;
-            }else if("Accept".equals(action)){
+            } else if ("Accept".equals(action)) {
                 url = ACCEPT;
-            }else if("Refuse".equals(action)){
+            } else if ("Refuse".equals(action)) {
                 url = REFUSE;
-            }else {
+            } else if ("Random".equals(action)) {
+                url = RANDOM;
+            } else if ("Deadline".equals(action)) {
+                url = DEADLINE;
+            } else {
                 session.setAttribute("ERROR_MESSAGE", "Function is not available!");
             }
         } catch (Exception e) {
