@@ -91,22 +91,23 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Set Deadline</div>
+                                                    Set Deadline</div> ${sessionScope.DEADLINE}
 
                                             </div>
                                             <div class="col-auto">
                                                 <section class="container">
-                                                    <form>
+                                                    <form action="MainController">
                                                         <div class="row form-group">
                                                             <div class="col-12">
                                                                 <div class="input-group date" id="datepicker">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="deadline">
                                                                     <span class="input-group-append">
                                                                         <span class="input-group-text">
                                                                             <i class="fa fa-calendar icon" id="datepicker"></i>
                                                                         </span>
                                                                     </span>
                                                                 </div>
+                                                                <input type="submit" value="Deadline" name="action">
                                                             </div>
                                                         </div>
                                                     </form>
@@ -469,7 +470,7 @@
                 $('#datepicker').datepicker();
             })
         </script>
-        
+
     </body>
 
 </html>
