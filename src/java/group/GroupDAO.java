@@ -152,7 +152,7 @@ public class GroupDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = " UPDATE tblGroup set numberOfPerson = ? "
-                        + " WHERE groupID like ? ";
+                        + " WHERE groupID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, group.getNumOfPer());
                 stm.setInt(2, group.getGroupID1());

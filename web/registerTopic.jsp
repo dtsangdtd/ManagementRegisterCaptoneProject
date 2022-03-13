@@ -111,48 +111,28 @@
                                                 <th>Register</th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Touris Smart Card</td>
-                                                <td>27/2/2021</td>
-                                                <td>30/4/2021</td>
-                                                <td>HoangNT2</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-plus"></i> 
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>IOT things</td>
-                                                <td>27/2/2021</td>
-                                                <td>30/4/2021</td>
-                                                <td>HoangNT2, KhanhKT</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-plus"></i> 
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Phu Quoc Photograph </td>
-                                                <td>27/2/2021</td>
-                                                <td>30/4/2021</td>
-                                                <td>PhuongLHK</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-plus"></i> 
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                            <c:forEach var="topic" varStatus="counter" items="${LIST_SEMESTER_TOPIC}">
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${topic.capstoneName}</td>
+                                                    <td>27/2/2021</td>
+                                                    <td>30/4/2021</td>
+                                                    <td>${topic.userName}</td>
+                                                    <td>
+                                                        <form action="MainController">
+                                                            <input type="hidden" name="userID" value="${topic.userID}"/>
+                                                            <input type="hidden" name="capstoneID" value="${topic.capstoneID}"/>
+                                                            <button type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
+                                                        </form>
+                                                        <a href="#" class="btn btn-success btn-circle btn-sm">
+                                                            <i class="fas fa-plus"></i> 
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>

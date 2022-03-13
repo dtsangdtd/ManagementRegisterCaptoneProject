@@ -133,6 +133,36 @@ public class CapstoneDAO {
         return list;
     }
     
+    public List<CapstoneDTO> getListCapstone (String semesterID) throws SQLException {
+        List<CapstoneDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT capstoneID, capstoneName, startTime, endTime, userID, userName, statusID "
+                        + " FROM tblCapstone c "
+                        + " WHERE semesterID = ? AND roleID = 'MT' "
+                        + " ORDER BY capstoneName DESC ";
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
 //    public List<CapstoneDTO> getTopicSearchV2(String semesterID) throws SQLException {
 //        List<CapstoneDTO> list = new ArrayList<>();
 //        Connection conn = null;
