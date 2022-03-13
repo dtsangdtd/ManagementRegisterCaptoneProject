@@ -28,8 +28,8 @@ public class UserDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "SELECT u.name, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone "
-                        + "FROM tblUser u, tblStatus s "
-                        + "WHERE u.statusID = s.statusID AND gmail=? AND password=? AND s.statusID != 0";
+                        + "FROM tblUser u, tblStatus s, tblSemester st "
+                        + "WHERE u.statusID = s.statusID AND gmail=? AND password=? AND s.statusID != 0 AND u.semesterID = st.semesterID AND st.NO = (SELECT MAX(NO) AS STT FROM tblSemester) ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, gmail);
                 stm.setString(2, password);
@@ -69,8 +69,8 @@ public class UserDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "SELECT u.name, u.password, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone "
-                        + "FROM tblUser u, tblStatus s "
-                        + "WHERE u.statusID = s.statusID AND gmail=? AND s.statusID != 0 ";
+                        + "FROM tblUser u, tblStatus s, tblSemester st "
+                        + "WHERE u.statusID = s.statusID AND gmail=? AND s.statusID != 0 AND u.semesterID = st.semesterID AND st.NO = (SELECT MAX(NO) AS STT FROM tblSemester) ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, gmail);
                 rs = stm.executeQuery();
