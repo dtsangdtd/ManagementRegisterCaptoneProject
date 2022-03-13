@@ -6,6 +6,7 @@
 package semester;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -164,7 +165,7 @@ public class SemesterDAO {
         }
         return semesterDTO;
     }
-    
+
     public List<SemesterDTO> getListSemesterV2() throws SQLException {
         List<SemesterDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -199,5 +200,31 @@ public class SemesterDAO {
         }
 //        System.out.println(list);
         return list;
+    }
+
+    public boolean updateDeadline(String semesterID, String deadline) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = " UPDATE tblSemester "
+                    + " SET deadline = ? "
+                    + " WHERE semesterID = ? ";
+            stm = conn.prepareStatement(sql);
+            stm.setString(1, deadline);
+            stm.setString(2, semesterID);
+            result = stm.executeUpdate() > 0 ? true : false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
     }
 }

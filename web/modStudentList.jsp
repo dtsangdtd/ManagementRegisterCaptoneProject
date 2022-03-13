@@ -44,7 +44,7 @@
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <form action="GetListController?radioGroup=${param.radioGroup}&semesterID=${param.semesterID}" method="POST"
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for name..."
                                        aria-label="Search" aria-describedby="basic-addon2" name="txtSearch" value="${param.txtSearch}">
@@ -92,7 +92,7 @@
                             <h1 class="h3 mb-0 text-gray-800">Student</h1>
                             <form id="file_form" action="ImportController" method="POST"  enctype="multipart/form-data">
                                 <input id="file_input" name="file" type="file" />
-                                <button id="upFile-btn" type="submit" name="action" value="Import Excel" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <button id="upFile-btn" type="submit" name="action" value="Import" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                     <!--                                                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                                                                                                 class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>-->
                                     <i class="fas fa-upload fa-sm text-white-50"></i> Import Excel
@@ -144,21 +144,21 @@
                                                                 <i class="fas fa-filter "></i>
                                                                 <form action="GetListController" >
                                                                     <c:if test="${param.semesterID eq 'SP22'}">
-                                                                         <div class="dropdown-content">
-                                                                        <input type="radio" id="scales" name="radioGroup"
-                                                                               <c:if test="${sessionScope.checked == '1'}">
-                                                                                   checked="checked"
-                                                                               </c:if>
-                                                                               value="1">
-                                                                        <label for="full">full</label>
-                                                                        <input type="radio" id="scales" name="radioGroup"
-                                                                               <c:if test="${sessionScope.checked == '0'}">
-                                                                                   checked="checked"
-                                                                               </c:if>
-                                                                               value="0">
-                                                                        <label for="notFull">not full</label>
+                                                                        <div class="dropdown-content">
+                                                                            <input type="radio" id="scales" name="radioGroup"
+                                                                                   <c:if test="${sessionScope.checked == '1'}">
+                                                                                       checked="checked"
+                                                                                   </c:if>
+                                                                                   value="1">
+                                                                            <label for="full">full</label>
+                                                                            <input type="radio" id="scales" name="radioGroup"
+                                                                                   <c:if test="${sessionScope.checked == '0'}">
+                                                                                       checked="checked"
+                                                                                   </c:if>
+                                                                                   value="0">
+                                                                            <label for="notFull">not full</label>
 
-                                                                    </div>
+                                                                        </div>
                                                                     </c:if>
                                                                     <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
 
@@ -183,9 +183,9 @@
                                                             <td>
                                                                 <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
                                                                 <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
                                                 </c:forEach>
                                             </table>
                                         </div>
@@ -231,17 +231,19 @@
                             </div>
 
                             <div class="col-1"> 
-
-                                <button 
-                                    <c:if test="${sessionScope.checked == '1'}">
-                                        disabled="disabled"
-                                    </c:if>
-                                    class="btn btn-info btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </span>
-                                    <span class="text">Random</span>
-                                </button>
+                                <form action="MainController">
+                                    <button type="submit" name="action" value="Random"
+                                            <c:if test="${sessionScope.checked == '1'}">
+                                                disabled="disabled"
+                                            </c:if>
+                                            class="btn btn-info btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </span>
+                                        <span class="text">Random</span>
+                                    </button>
+                                    <input type="hidden" value="${param.semesterID}" name="semesterID"> 
+                                </form>
                                 <div class="mt-2"></div>
                                 <a href="#" class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">
