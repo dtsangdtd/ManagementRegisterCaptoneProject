@@ -20,25 +20,22 @@ import request.RequestDTO;
 public class EmailUtils {
 
     private static final String USERNAME = "kiennhse150691@fpt.edu.vn";
-    private static final String PASSWORD = "HieuKien123";
+    private static final String PASSWORD = "mooiazodpvbiwejr";
 
     public static boolean send(String email) {
         try {
             Properties prop = new Properties();
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "587");
             prop.put("mail.smtp.auth", "true");
             prop.put("mail.smtp.starttls.enable", "true");
-            prop.put("mail.smtp.host", "smtp.gmail.com");
-            
-            prop.put("mail.smtp.port", "587");
-            prop.put("mail.smtp.ssl.trust", "*");
-            
+
 //            Properties prop = new Properties();
 //            prop.put("smtp.office365.com", "587");
 //            prop.put("mail.smtp.auth", true);
 //            prop.put("mail.smtp.starttls.enable", true);
 //            prop.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
 //            prop.put("mail.smtp.starttls.enable", "true");
-
             Session session = Session.getInstance(prop,
                     new javax.mail.Authenticator() {
                 @Override
