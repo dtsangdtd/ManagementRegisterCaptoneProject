@@ -112,6 +112,7 @@
                                                     <td>
                                                         <form action="MainController">
                                                             <input type="hidden" name="userID" value="${stu.userID}">
+                                                            <input type="hidden" name="email" value="${stu.gmail}">
                                                             <button type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
                                                         </form>
                                                         

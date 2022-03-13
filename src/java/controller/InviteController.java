@@ -19,6 +19,7 @@ import request.RequestDAO;
 import request.RequestDTO;
 import user.UserDAO;
 import user.UserDTO;
+import utils.EmailUtils;
 
 /**
  *
@@ -45,6 +46,7 @@ public class InviteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            String email = request.getParameter("email");
             String userID = request.getParameter("userID");//userID của người dc mời
             HttpSession session = request.getSession();
             UserDTO loginUser =  (UserDTO) session.getAttribute("LOGIN_USER");  
@@ -65,6 +67,9 @@ public class InviteController extends HttpServlet {
                 boolean check = reqDAO.inviteGroup(reqDTO); //Insert param vào request 
 //                if (check) url = SUCCESS;
             } 
+            new Thread(() -> {
+                EmailUtils.send(email);
+            }).start();
         } catch (Exception e) {
             log ("Error at InviteController" + e.toString());
         } finally {
