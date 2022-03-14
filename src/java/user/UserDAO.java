@@ -28,8 +28,8 @@ public class UserDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "SELECT u.name, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone "
-                        + "FROM tblUser u, tblStatus s, tblSemester st "
-                        + "WHERE u.statusID = s.statusID AND gmail=? AND password=? AND s.statusID != 0 AND u.semesterID = st.semesterID AND st.NO = (SELECT MAX(NO) AS STT FROM tblSemester) ";
+                        + "FROM tblUser u, tblStatus s "
+                        + "WHERE u.statusID = s.statusID AND gmail=? AND password=? AND s.statusID != 0 ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, gmail);
                 stm.setString(2, password);
@@ -60,6 +60,47 @@ public class UserDAO {
         return user;
     }
 
+    public UserDTO checkGmail(String gmail) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT u.name, u.password, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone "
+                        + "FROM tblUser u, tblStatus s "
+                        + "WHERE u.statusID = s.statusID AND gmail=? AND s.statusID != 0 ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, gmail);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String username = rs.getString("name");
+                    String password = rs.getString("password");
+                    String roleID = rs.getString("roleID");
+                    String userID = rs.getString("userID");
+                    String statusID = rs.getString("statusID");
+                    String photoUrl = rs.getString("photoUrl");
+                    String phone = rs.getString("phone");
+                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photoUrl);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return user;
+    }
+    
     public UserDTO checkLoginGG(String gmail) throws SQLException {
         UserDTO user = null;
         Connection conn = null;

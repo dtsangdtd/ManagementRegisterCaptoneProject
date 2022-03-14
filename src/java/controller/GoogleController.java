@@ -63,7 +63,8 @@ public class GoogleController extends HttpServlet {
                 GooglePojo ggPojo = GoogleUtils.getUserInfo(accessToken);
                 String gmail = ggPojo.getEmail();
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.checkLoginGG(gmail);
+                UserDTO user = dao.checkGmail(gmail);
+                UserDTO userAD = dao.checkLoginGG(gmail);
                 HttpSession session = request.getSession();
 
                 if (user != null) {
@@ -71,13 +72,13 @@ public class GoogleController extends HttpServlet {
                     session.setAttribute("INFOR", userInfor);
                     session.setAttribute("LOGIN_USER", user);
                     String roleID = user.getRoleID();
-                    if (AD.equals(roleID)) {
-                        url = ADMIN;
-                    } else if (LD.equals(roleID)) {
+                    if (AD.equals(roleID) || AD.equals(user)) {
+                        url = ADMIN;                       
+                    } else if (LD.equals(roleID) || LD.equals(userAD)) {
                         url = LEADER;
-                    }else if (US.equals(roleID)) {
+                    } else if (US.equals(roleID) || US.equals(userAD)) {
                         url = USER;
-                    } else if (MT.equals(roleID)) {
+                    } else if (MT.equals(roleID) || MT.equals(userAD)) {
                         url = MENTOR;
                     }
                 } else {
