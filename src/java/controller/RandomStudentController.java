@@ -12,6 +12,7 @@ import group.GroupDTO;
 import group.UserGroup;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -51,7 +52,6 @@ public class RandomStudentController extends HttpServlet {
             int maxSesID = daoSes.getMaxSemesterNO();
             SemesterDTO sesmester = daoSes.getSemester(maxSesID);
             boolean flag = true;
-            //boolean check = (!semesterID.equalsIgnoreCase(sesmester.getSemesterID())) ? daoSes.insertNewSesmester(semesterID) : true;
             if (sesmester.getSemesterID().equalsIgnoreCase(semesterID)) {
                 boolean check = daoSes.insertNewSesmester(semesterID);
             }
@@ -95,7 +95,6 @@ public class RandomStudentController extends HttpServlet {
                         System.out.println("case mod5 = 1");
                         if (num < 3) {
                             boolean checkStu = dao.updateStudentRedundant(listStudentNoGroup.get(n).getUserID(), sesmester.getSemesterID());
-                            System.out.println("ahihi");
                             if (checkStu) {
                                 flag = false;
                             }
@@ -105,17 +104,6 @@ public class RandomStudentController extends HttpServlet {
                             list.add(map.getUser(key - 1));
                             list.add(map.getUser(key - 2));
                             map.add(key + 1, list);
-                            // lưu trong tblGroup
-                            // update status User= 2 
-                            for (UserDTO userDTO : listStudentNoGroup) {
-                                userDTO.setStatusID("2");
-                                boolean checkStatus = dao.updateStatusID(userDTO);
-                                if (!checkStatus) {
-                                    flag = false;
-                                    break;
-                                }
-                            }
-
                         }
                         break;
                     case 2:
@@ -152,11 +140,14 @@ public class RandomStudentController extends HttpServlet {
                         } else {
                             list.add(map.getUser(key));
                             map.add(key + 1, list);
-                            for (UserDTO userDTO : list) {
-                                userDTO.setStatusID("2");
-                                dao.updateStatusID(userDTO);
-                            }
                         }
+                        break;
+                    case 4:
+                        System.out.println("case mod5 = 4");
+                        list = listStudentNoGroup.subList(n - 4, n);
+                        map.add(key + 1, list);
+                        break;
+                    case 0:
                         break;
                 }
                 List<Integer> listGroupID = null;
@@ -174,12 +165,14 @@ public class RandomStudentController extends HttpServlet {
                         break;
                     }
                 }
-                // Random CapstoneID vào tblGroup
+                // Random CapstoneID into tblGroup
                 CapstoneDAO daoCap = new CapstoneDAO();
                 int numOfGroup = map.getCart().size();
                 List<String> listCapstone = daoCap.getListCapsRandom(numOfGroup, semesterID); // list numOfGroup
                 for (int i = 0; i < numOfGroup; i++) {
                     boolean checkUpdateCaps = daoGroup.updateCapstoneGroup(listGroupID.get(i), listCapstone.get(i));
+                    System.out.println(listGroupID.get(i));
+                    System.out.println(listCapstone.get(i));
                     if (!checkUpdateCaps) {
                         flag = false;
                     }
@@ -190,7 +183,6 @@ public class RandomStudentController extends HttpServlet {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
             log("Error at GetListController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
