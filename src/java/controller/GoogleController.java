@@ -78,7 +78,7 @@ public class GoogleController extends HttpServlet {
                         url = LEADER;
                     } else if (US.equals(roleID) || US.equals(userAD)) {
                         url = USER;
-                    } else if (MT.equals(roleID) || MT.equals(userAD)) {
+                    } else if (MT.equals(roleID) || MT.equals(user)) {
                         url = MENTOR;
                     }
                 } else {
