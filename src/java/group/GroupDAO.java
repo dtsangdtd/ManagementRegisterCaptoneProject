@@ -383,4 +383,41 @@ public class GroupDAO {
         }
         return check;
     }
+    public List<UserDTO> getListCapsRandom(int n, String semesterID) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT TOP ? us.userID, u.name, g.capstoneID "
+                        + " FROM tblUserGroup AS us, tblUser AS u, tblGroup AS g "
+                        + " WHERE groupID = ? AND us.userID = u.userID AND us.groupID = g.groupID ";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, n);
+                stm.setString(2, semesterID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String name = rs.getString("name");
+                    String capstoneID = rs.getString("capstoneID");
+                    //list.add(new UserGroup(n, sql, n, n));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 }

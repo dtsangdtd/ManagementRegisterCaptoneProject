@@ -8,6 +8,16 @@ package controller;
 import capstone.CapstoneDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import user.UserDTO;
+import upload.UploadDAO;
+import user.UserDTO;
+import utils.DBUtils;
 
 /**
  *
@@ -32,10 +45,9 @@ public class GetListTopicRegistController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "student.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
