@@ -93,7 +93,6 @@
                             <form id="file_form" action="MainController">
                                 <input  name="filename" type="file" />
                                 <input  type="submit" name="action" value="Import" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                </input>
                             </form>
                         </div>
 
