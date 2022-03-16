@@ -59,13 +59,14 @@ public class RequestDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " INSERT INTO tblRequest(requestID, requestDetail, isSupervisor, userID) "
-                        + " VALUES(?,?,?,?) ";
+                String sql = " INSERT INTO tblRequest(requestID, requestDetail, isSupervisor, userID, invitedID) "
+                        + " VALUES(?,?,?,?,?) ";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, reqDTO.getRequestID());
                 stm.setString(2, reqDTO.getRequestDetail());
                 stm.setInt(3, reqDTO.getIsSupervisor());
                 stm.setString(4, reqDTO.getUserID());
+                stm.setString(5, reqDTO.getInvitedID());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -89,9 +90,9 @@ public class RequestDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT r.requestDetail, r.userID, u.userID, u.name, u.gmail, u.phone "
-                        + " FROM tblRequest r , tblUser u "
-                        + " WHERE r.userID = u.userID AND requestDetail like ? ";
+                String sql = " SELECT r.requestDetail, u.userID, u.name, u.gmail, u.phone "
+                        + " FROM tblUser u left join tblRequest r on u.userID = r.userID "
+                        + " WHERE r.requestDetail = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, requestDetail);
                 rs = stm.executeQuery();
@@ -103,6 +104,34 @@ public class RequestDAO {
                     list.add(new UserDTO(userID, userName, gmail, phone));
                     System.out.println(list);
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    public List<UserDTO> getRegistRequestList (String invitedID) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+         Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql =  " SELECT r.requestDetail, r.userID, u.userID, u.name, u.gmail, u.phone "
+                        + " FROM tblRequest r , tblUser u "
+                        + " WHERE r.userID = u.userID AND requestDetail like ? ";
             }
         } catch (Exception e) {
             e.printStackTrace();

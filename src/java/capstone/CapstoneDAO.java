@@ -55,7 +55,7 @@ public class CapstoneDAO {
         }
         return capstone;
     }
-    
+
     public List<String> getListCapsRandom(int n, String semesterID) throws SQLException {
         List<String> list = new ArrayList<>();
         Connection conn = null;
@@ -132,8 +132,8 @@ public class CapstoneDAO {
         }
         return list;
     }
-    
-    public List<CapstoneDTO> getListCapstone (String semesterID) throws SQLException {
+
+    public List<CapstoneDTO> getListCapstone(String semesterID) throws SQLException {
         List<CapstoneDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -141,12 +141,23 @@ public class CapstoneDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT capstoneID, capstoneName, startTime, endTime, userID, userName, statusID "
-                        + " FROM tblCapstone c "
-                        + " WHERE semesterID = ? AND roleID = 'MT' "
-                        + " ORDER BY capstoneName DESC ";
+                String sql = " SELECT  c.capstoneID, c.capstoneName, c.statusID, u.userID, u.name, u.gmail "
+                        + " FROM tblCapstone c left join tblUserCapstone uc on c.capstoneID = uc.capstoneID left join tblUser u on uc.userID = u.userID  "
+                        + " WHERE c.semesterID = ? AND u.roleID = 'MT' "
+                        + " ORDER BY c.capstoneName DESC ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String capstoneID = rs.getString("capstoneID");
+                    String capstoneName = rs.getString("capstoneName");
+                    String statusID = rs.getString("statusID");
+                    String userID = rs.getString("userID");
+                    String userName = rs.getString("name");
+                    String gmail = rs.getString("gmail");
+                    list.add(new CapstoneDTO(capstoneID, capstoneName, gmail, userID, statusID, userName));
+                }
             }
-            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -162,7 +173,7 @@ public class CapstoneDAO {
         }
         return list;
     }
-    
+
 //    public List<CapstoneDTO> getTopicSearchV2(String semesterID) throws SQLException {
 //        List<CapstoneDTO> list = new ArrayList<>();
 //        Connection conn = null;
