@@ -5,68 +5,36 @@
  */
 package controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileItemFactory;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
-import upload.UploadDAO;
+import javax.servlet.http.HttpSession;
+import request.RequestDAO;
 import user.UserDTO;
-import utils.DBUtils;
 
 /**
  *
- * @author denwi
+ * @author ASUS
  */
-@WebServlet(name = "ImportController", urlPatterns = {"/ImportController"})
+@WebServlet(name = "GetListRegistRequestController", urlPatterns = {"/GetListRegistRequestController"})
+public class GetListRegistRequestController extends HttpServlet {
 
-public class ImportController extends HttpServlet {
-
-    private static String SUCCESS = "modStudentList.jsp";
-    private static String ERROR = "login.jsp";
-
+    private static final String ERROR = "login.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String filename = request.getParameter("filename");
-            String locationFileName = "C:\\" + filename;
-            UploadDAO dao = new UploadDAO();
-            int check = dao.readFile_Student(locationFileName);
-            if (check == 1) {
-                List<UserDTO> list = dao.getListUser();
-                boolean checkInsertDB = dao.pushExcelList(list);
-                if (checkInsertDB) {
-                    url = SUCCESS;
-                }
-            }
-
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            RequestDAO reqDAO = new RequestDAO();
+            
         } catch (Exception e) {
-            log("Error at ImportController" + e.toString());
+            log ("Error at GetListRegistRequestController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

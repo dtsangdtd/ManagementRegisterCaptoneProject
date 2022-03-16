@@ -227,4 +227,41 @@ public class SemesterDAO {
         }
         return result;
     }
+    
+    public SemesterDTO getSemesterByUserID (String userID) throws SQLException {
+        SemesterDTO semDTO = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT s.semesterID, s.semesterName, s.deadline "
+                        + " FROM tblUser u, tblSemester s "
+                        + "WHERE u.semesterID = s.semesterID AND u.userID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String semesterID = rs.getString("semesterID");
+                    String semesterName = rs.getString("semesterName");
+                    String deadline = rs.getString("deadline");
+                    semDTO = new SemesterDTO(semesterID, semesterName, deadline);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return semDTO;
+    }
 }

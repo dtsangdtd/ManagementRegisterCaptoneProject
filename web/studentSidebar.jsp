@@ -25,7 +25,7 @@
     </li>-->
 
     <li class="nav-item ">
-        <a class="nav-link" href="registerTopic.jsp">
+        <a class="nav-link" href="GetListTopicRegistController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Register Capstone</span>
         </a>
