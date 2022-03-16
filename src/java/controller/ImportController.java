@@ -5,7 +5,6 @@
  */
 package controller;
 
-import com.oreilly.servlet.MultipartRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,7 +12,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +28,14 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
+import upload.UploadDAO;
+import user.UserDTO;
 import utils.DBUtils;
 
 /**
@@ -34,74 +43,25 @@ import utils.DBUtils;
  * @author denwi
  */
 @WebServlet(name = "ImportController", urlPatterns = {"/ImportController"})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 5 * 5)
+
 public class ImportController extends HttpServlet {
 
     private static String SUCCESS = "modStudentList.jsp";
-    private static String ERROR = "modStudentList.jsp";
-    private final String UPLOAD_DIRECTORY = "C:\\demo";
+    private static String ERROR = "login.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         String url = ERROR;
-        ArrayList cellArrayListHolder = new ArrayList();
-        String btn = request.getParameter("action");
         try {
-            if (btn != null) {
-                if (btn.equals("Import Excel")) {
-                    Connection conn = DBUtils.getConnection();
-                    String Path = "upload";
-                    String absolutepath = getServletContext().getRealPath(Path);
-                    MultipartRequest mr = new MultipartRequest(request, absolutepath);
-                    String filename = mr.getOriginalFileName("filename");
-//                    MultipartRequest mr = new MultipartRequest(request, UPLOAD_DIRECTORY);
-//                    File filename = mr.getFile("filename");
-//                    String uploadedfilename = mr.getFilesystemName("filename");
-                    FileInputStream myinput = new FileInputStream(new File(absolutepath + "/" + filename));
-//                    File newfileloc = new File(UPLOAD_DIRECTORY + "/" + uploadedfilename);
-//                    FileInputStream myinput = new FileInputStream(new File("C:\\demo\\test.xlsx"));
-                    Workbook workbook = new XSSFWorkbook(myinput);
-//                    FileInputStream myinput = new FileInputStream("E:\\stu.xlsx");
-                    Sheet firstSheet = workbook.getSheetAt(0);
-                    Iterator<Row> iterator = firstSheet.iterator();
-                    while (iterator.hasNext()) {
-                        XSSFRow nextRow = (XSSFRow) iterator.next();
-                        ArrayList rowarrylist = new ArrayList();
-                        Iterator<Cell> cellIterator = nextRow.cellIterator();
-
-                        while (cellIterator.hasNext()) {
-                            XSSFCell cell = (XSSFCell) cellIterator.next();
-                            rowarrylist.add(cell);
-                        }
-                        cellArrayListHolder.add(rowarrylist);
-                    }
-                    out.println(cellArrayListHolder);
-                    ArrayList rowarrylist = null;
-                    PreparedStatement stm = conn.prepareStatement("INSERT INTO  tblUser(userID, name, gmail, statusID, roleID, semesterID) VALUES (?,?,?,?,?,?)");
-                    for (int i = 1; i < cellArrayListHolder.size(); i++) {
-                        rowarrylist = (ArrayList) cellArrayListHolder.get(i);
-                        stm.setString(1, rowarrylist.get(0)
-                                .toString());
-                        stm.setString(2, rowarrylist.get(1).toString());
-                        stm.setString(3, rowarrylist.get(2).toString());
-                        stm.setString(4, rowarrylist.get(3).toString());
-                        stm.setString(5, rowarrylist.get(4).toString());
-                        stm.setString(6, rowarrylist.get(5).toString());
-                        stm.executeUpdate();
-                    }
+            String filename = request.getParameter("filename");
+            String locationFileName = "C:\\" + filename;
+            UploadDAO dao = new UploadDAO();
+            int check = dao.readFile_Student(locationFileName);
+            if (check == 1) {
+                List<UserDTO> list = dao.getListUser();
+                boolean checkInsertDB = dao.pushExcelList(list);
+                if (checkInsertDB) {
+                    url = SUCCESS;
                 }
             }
 

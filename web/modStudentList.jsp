@@ -90,13 +90,9 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Student</h1>
-                            <form id="file_form" action="ImportController" method="POST"  enctype="multipart/form-data">
-                                <input id="file_input" name="file" type="file" />
-                                <button id="upFile-btn" type="submit" name="action" value="Import" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                    <!--                                                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                                                                                class="fas fa-upload fa-sm text-white-50"></i> Import Excel</a>-->
-                                    <i class="fas fa-upload fa-sm text-white-50"></i> Import Excel
-                                </button>
+                            <form id="file_form" action="MainController">
+                                <input  name="filename" type="file" />
+                                <input  type="submit" name="action" value="Import" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             </form>
                         </div>
 
@@ -252,102 +248,21 @@
                                     <span class="text">Noti</span>
                                 </a>
                                 <div class="mt-2"></div>
-                                <a href="#" class="btn btn-success btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Accept</span>
-                                </a>
-
                             </div>
                             <div id="wrapper1 " class="col-5">
                                 <div class="scrollbar" id="style-default">
-                                    <!--                                    <div class="force-overflow"></div>-->
 
                                     <div style="display: block;">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="stu-tab-gr">
-                                                    <!-- Earnings (Monthly) Card Example -->
                                                     <div class="">
                                                         <div class="card border-left-primary shadow h-100 py-2">
                                                             <div class="card-body mr-2">
                                                                 <div class="row no-gutters align-items-center">
                                                                     <div class="col ">
                                                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                                            Group 1</div>
-                                                                        <div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="stu-tab-gr">
-                                                    <!-- Earnings (Monthly) Card Example -->
-                                                    <div class="">
-                                                        <div class="card border-left-primary shadow h-100 py-2">
-                                                            <div class="card-body mr-2">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col ">
-                                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                                            Group 1</div>
-                                                                        <div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 mt-1">
-                                                <div class="stu-tab-gr">
-                                                    <!-- Earnings (Monthly) Card Example -->
-                                                    <div class="">
-                                                        <div class="card border-left-primary shadow h-100 py-2">
-                                                            <div class="card-body mr-2">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col ">
-                                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                                            Group 1</div>
-                                                                        <div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 mt-1">
-                                                <div class="stu-tab-gr">
-                                                    <!-- Earnings (Monthly) Card Example -->
-                                                    <div class="">
-                                                        <div class="card border-left-primary shadow h-100 py-2">
-                                                            <div class="card-body mr-2">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col ">
-                                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                                            Group 1</div>
+                                                                            Group </div>
                                                                         <div>
                                                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
                                                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
@@ -363,8 +278,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
