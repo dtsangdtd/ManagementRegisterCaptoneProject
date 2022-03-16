@@ -19,8 +19,8 @@ import request.RequestDTO;
  */
 public class EmailUtils {
 
-    private static final String USERNAME = "kiennhse150691@fpt.edu.vn";
-    private static final String PASSWORD = "mooiazodpvbiwejr";
+    private static final String USERNAME = "capstonemanangementprj@gmail.com";
+    private static final String PASSWORD = "shkbroyekonjppoe";
 
     public static boolean send(String email) {
         try {
@@ -45,7 +45,7 @@ public class EmailUtils {
             });
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("kiennhse150691@fpt.edu.vn"));
+            message.setFrom(new InternetAddress("capstonemanangementprj@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(email)
