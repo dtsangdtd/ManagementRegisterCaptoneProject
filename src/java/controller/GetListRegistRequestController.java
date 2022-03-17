@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,69 +14,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import request.RequestDAO;
-import request.RequestDTO;
-import user.UserDAO;
 import user.UserDTO;
-import utils.EmailUtils;
 
 /**
  *
  * @author ASUS
  */
-@WebServlet(name = "InviteController", urlPatterns = {"/InviteController"})
-public class InviteController extends HttpServlet {
+@WebServlet(name = "GetListRegistRequestController", urlPatterns = {"/GetListRegistRequestController"})
+public class GetListRegistRequestController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    
-    private static final String US = "GetListController?radioGroup=0";
-    private static final String MT = "GetListTopicRegistController";
     private static final String ERROR = "login.jsp";
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             RequestDAO reqDAO = new RequestDAO();
-            int requestID = reqDAO.getMaxRequestID() + 1;//Tạo RequestID mới
-            String invitedID = request.getParameter("userID");//userID của người dc mời
-            UserDTO loginUser =  (UserDTO) session.getAttribute("LOGIN_USER");  
-            String loginUserID = loginUser.getUserID();//lấy userID của người mời
-            String email = request.getParameter("email");   
-            UserDAO usDAO = new UserDAO();
-            UserDTO invitedUser =  usDAO.getUserByUserID(invitedID);
-            if ("US".equals(invitedUser.getRoleID())) {
-                int isSupervior = 0;
-                String requestDetail = loginUser.getGroupID();
-                RequestDTO reqDTO = new RequestDTO(requestID, invitedID, loginUserID , requestDetail, isSupervior);//Lấy thông tin cho request
-                boolean check = reqDAO.inviteGroup(reqDTO); //Insert param vào request      
-                if (check) url = US;
-            } 
-            if ("MT".equals(invitedUser.getRoleID())) {
-                int isSupervior = 1;
-                String requestDetail = request.getParameter("capstoneID");
-                RequestDTO reqDTO = new RequestDTO(requestID, invitedID, loginUserID, requestDetail, isSupervior);//Lấy thông tin cho request
-                boolean check = reqDAO.inviteGroup(reqDTO); //Insert param vào request 
-                if (check) url = MT;
-            } 
-            new Thread(() -> {
-                EmailUtils.send(email);
-            }).start();
+            
         } catch (Exception e) {
-            log ("Error at InviteController" + e.toString());
+            log ("Error at GetListRegistRequestController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
