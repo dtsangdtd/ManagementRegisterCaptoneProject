@@ -105,34 +105,28 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Captone Name</th>
-                                                <th>Start time</th>
-                                                <th>End time</th>
                                                 <th>Mentor</th>
                                                 <th>Register</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <c:forEach var="topic" varStatus="counter" items="${LIST_SEMESTER_TOPIC}">
+                                            <c:forEach var="topic" varStatus="counter" items="${LIST_REGIST_TOPIC}">
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${topic.capstoneName}</td>
-                                                    <td>27/2/2021</td>
-                                                    <td>30/4/2021</td>
                                                     <td>${topic.userName}</td>
                                                     <td>
                                                         <form action="MainController">
-                                                            <input type="hidden" name="userID" value="${topic.userID}"/>
+                                                            <input type="hidden" name="userID" value="${topic.semesterId}"/>
                                                             <input type="hidden" name="capstoneID" value="${topic.capstoneID}"/>
+                                                            <input type="hidden" name="gmail" value="${topic.groupId}"/>
                                                             <button type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
                                                         </form>
-                                                        <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                            <i class="fas fa-plus"></i> 
-                                                        </a>
                                                     </td>
                                                 </tr>
-                                            </tbody>
-                                        </c:forEach>
+                                            </c:forEach>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
