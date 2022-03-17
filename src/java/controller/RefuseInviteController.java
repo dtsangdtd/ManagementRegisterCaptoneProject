@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import request.RequestDAO;
+import user.UserDTO;
 
 /**
  *
@@ -38,11 +40,13 @@ public class RefuseInviteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
+            HttpSession session = request.getSession();
+            UserDTO invitedUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String invitedID = invitedUser.getUserID();
             String leaderID = request.getParameter("leaderID");
             RequestDAO reqDao = new RequestDAO();
-            reqDao.removeRequest(userID, leaderID);
-            url = SUCCESS;
+            boolean check = reqDao.refuseRequest(invitedID, leaderID);
+            if (check) url = SUCCESS;
         } catch (Exception e) {
             log("Error at RefuseInviteController" + e.toString());
         } finally {
