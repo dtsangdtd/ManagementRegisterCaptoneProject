@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,7 @@ import user.UserDTO;
 public class GetListRegistRequestController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
+    private static final String SUCCESS = "supRequest.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,8 +33,13 @@ public class GetListRegistRequestController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String invitedID = loginUser.getUserID();
             RequestDAO reqDAO = new RequestDAO();
-            
+            List<UserDTO> list = reqDAO.getRegistRequestList(invitedID);
+            session.setAttribute("LIST_REGIST_TOPIC", list);
+            if (list != null) {
+                url = SUCCESS;
+            }
         } catch (Exception e) {
             log ("Error at GetListRegistRequestController " + e.toString());
         } finally {
