@@ -28,7 +28,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="supRequest.jsp">
+        <a class="nav-link" href="GetListRegistRequestController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Requests</span>
         </a>

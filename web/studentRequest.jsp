@@ -112,7 +112,6 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Phone</th>
                                                 <th>Gmail</th>
                                                 <th>Request</th>
                                             </tr>
@@ -124,7 +123,6 @@
                                             <tr>
                                                 <td>${counter.count}</td>
                                                 <td>${req.username}</td>
-                                                <td>${req.phone}</td>
                                                 <td>${req.gmail}</td>
                                                 <td>
                                                     <form action="MainController">
