@@ -14,17 +14,17 @@ public class RequestDTO {
     String invitedID;//ID của người được mời
     String userID; //ID của người mời (LoginUser)
     String requestDetail; //GroupID/CapstoneID
-    int isSupervisor;
+    int statusID;
 
     public RequestDTO() {
     }
 
-    public RequestDTO(int requestID, String invitedID, String userID, String requestDetail, int isSupervisor) {
+    public RequestDTO(int requestID, String invitedID, String userID, String requestDetail, int statusID) {
         this.requestID = requestID; 
         this.invitedID = invitedID;
         this.userID = userID;
         this.requestDetail = requestDetail;
-        this.isSupervisor = isSupervisor;
+        this.statusID = statusID;
     }
 
     public String getInvitedID() {
@@ -59,11 +59,11 @@ public class RequestDTO {
         this.userID = userID;
     }
 
-    public int getIsSupervisor() {
-        return isSupervisor;
+    public int getStatusID() {
+        return statusID;
     }
 
-    public void setIsSupervisor(int isSupervisor) {
-        this.isSupervisor = isSupervisor;
-    }
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
+    }   
 }
