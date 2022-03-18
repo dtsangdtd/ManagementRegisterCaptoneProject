@@ -92,7 +92,6 @@
                                             <tr >
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Phone</th>
                                                 <th>Gmail</th>
                                                 <th>Photo</th>
                                                 <th>Action</th>
@@ -104,15 +103,14 @@
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${stu.username}</td>
-                                                    <td>${stu.phone}</td>
                                                     <td>${stu.gmail}</td>
                                                     <td> 
                                                         <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/>
                                                     </td>
                                                     <td>
                                                         <form action="MainController">
-                                                            <input type="hidden" name="userID" value="${stu.userID}">
-                                                            <input type="hidden" name="email" value="${stu.gmail}">
+                                                            <input type="hidden" name="userID" value="${stu.userID}"/>
+                                                            <input type="hidden" name="email" value="${stu.gmail}"/>
                                                             <button type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
                                                         </form>
                                                         

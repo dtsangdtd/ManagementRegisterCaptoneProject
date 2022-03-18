@@ -144,7 +144,7 @@ public class GroupDAO {
         return check;
     }
 
-    public boolean updateNumberOfPerson(GroupDTO group) throws SQLException {
+    public boolean updateNumberOfPerson(int numOfPer, int groupID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -154,8 +154,8 @@ public class GroupDAO {
                 String sql = " UPDATE tblGroup set numberOfPerson = ? "
                         + " WHERE groupID = ? ";
                 stm = conn.prepareStatement(sql);
-                stm.setInt(1, group.getNumOfPer());
-                stm.setInt(2, group.getGroupID1());
+                stm.setInt(1, numOfPer);
+                stm.setInt(2, groupID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
