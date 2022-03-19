@@ -359,14 +359,14 @@ public class UserDAO {
                 if (check == 1) {
                     sql = "SELECT count(*) as noRecord \n"
                             + "FROM tblUser \n"
-                            + "WHERE  tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
+                            + "WHERE  (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 } else if (check == 0) {
                     sql = "SELECT count(*) as noRecord "
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
+                            + "WHERE tblUserGroup.userID IS NULL AND (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 }
                 stm = conn.prepareStatement(sql);
@@ -378,6 +378,7 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -402,20 +403,20 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID, tblUser.roleID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
+                            + "WHERE (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID, tblUser.roleID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
+                            + "WHERE tblUserGroup.userID IS NULL AND (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
@@ -435,8 +436,9 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
+                    String roleID = rs.getString("roleID");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(stt, userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO(stt, userID, username, "", roleID, gmail, phone, statusID, photoUrl));
                 }
             }
         } catch (Exception e) {
