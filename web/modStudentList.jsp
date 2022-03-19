@@ -93,6 +93,7 @@
                             <form id="file_form" action="MainController">
                                 <input  name="filename" type="file" />
                                 <input  type="submit" name="action" value="Import" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                </input>
                             </form>
                         </div>
 
@@ -135,6 +136,7 @@
                                                         <th>No</th>
                                                         <th>Name</th>
                                                         <th>Gmail</th>
+                                                        <th>RoleID</th>
                                                         <th style="width: 160px">
                                                             <div class="dropdown">
                                                                 <i class="fas fa-filter "></i>
@@ -176,6 +178,7 @@
                                                                     ${stu.gmail}
                                                                 </a>
                                                             </td>
+                                                            <td>${stu.roleID}</td>
                                                             <td>
                                                                 <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
                                                                 <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>

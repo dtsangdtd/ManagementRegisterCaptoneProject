@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,42 +21,27 @@ import user.UserDTO;
  *
  * @author ASUS
  */
-@WebServlet(name = "RefuseInviteController", urlPatterns = {"/RefuseInviteController"})
-public class RefuseInviteController extends HttpServlet {
+@WebServlet(name = "GetListRegistRequestController", urlPatterns = {"/GetListRegistRequestController"})
+public class GetListRegistRequestController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String MT = "GetListRegistRequestController";
-    private static final String US = "GetListRequestController";
     private static final String ERROR = "login.jsp";
-
+    private static final String SUCCESS = "supRequest.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            UserDTO invitedUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String roleID = invitedUser.getRoleID();
-            String invitedID = invitedUser.getUserID();
-            String leaderID = request.getParameter("leaderID");
-            RequestDAO reqDao = new RequestDAO();
-            boolean check = reqDao.refuseRequest(invitedID, leaderID);
-            if ("US".equals(roleID)) {
-                if (check) url = US;
-            } else if ("MT".equals(roleID)) {
-                if (check) url = MT;
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String invitedID = loginUser.getUserID();
+            RequestDAO reqDAO = new RequestDAO();
+            List<UserDTO> list = reqDAO.getRegistRequestList(invitedID);
+            session.setAttribute("LIST_REGIST_TOPIC", list);
+            if (list != null) {
+                url = SUCCESS;
             }
-            
         } catch (Exception e) {
-            log("Error at RefuseInviteController" + e.toString());
+            log ("Error at GetListRegistRequestController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

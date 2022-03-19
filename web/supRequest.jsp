@@ -56,7 +56,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
                                     <img class="img-profile rounded-circle" src="${sessionScope.INFOR.photoUrl}">
                                 </a>
                                 <!-- Dropdown - User Information -->
@@ -117,52 +117,49 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Captones Name</th>
-                                                <th>Group Name  </th>
-                                                <th>Register Date</th>
-                                                <th>Status</th>
+                                                <th>Group Name </th>
                                                 <th>Request</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Donna Snider</td>
-                                                <td><a href="GetListStudentInGroupDetails?groupID=1">Customer Support </a></td>
-                                                <td>New York</td>
-                                                <td>Processing</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-check"></i>
-                                                    </a>
-                                                    <!-- g?i th?ng qua bên mod n?u dong y-->
-                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                        <i class="fas fa-ban"></i>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
+                                            <c:forEach var="top" varStatus="counter" items="${LIST_REGIST_TOPIC}">
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${top.groupID}</td>
+                                                    <td><a href="GetListStudentInGroupDetails?groupID=1">${top.gmail}</a></td>
+                                                    <td>
+                                                        <form action="MainController">
+                                                            <input type="hidden" name="leaderID" value="${top.username}"/>
+                                                            <input type="hidden" name="groupID" value="${top.gmail}"/>
+                                                            <input type="hidden" name="capstoneID" value="${top.statusID}"/>
+                                                            <button type="submit" name="action" value="Accept" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-check"></i> </button>
+                                                            <button type="submit" name="action" value="Refuse" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-ban"></i> </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                         <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>       
                     <!-- /.container-fluid -->
 

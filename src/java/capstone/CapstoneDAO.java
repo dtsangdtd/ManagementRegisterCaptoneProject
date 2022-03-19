@@ -55,7 +55,7 @@ public class CapstoneDAO {
         }
         return capstone;
     }
-    
+
     public List<String> getListCapsRandom(int n, String semesterID) throws SQLException {
         List<String> list = new ArrayList<>();
         Connection conn = null;
@@ -132,7 +132,113 @@ public class CapstoneDAO {
         }
         return list;
     }
+
+    public List<CapstoneDTO> getListCapstone(String semesterID) throws SQLException {
+        List<CapstoneDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT  c.capstoneID, c.capstoneName, c.statusID, u.userID, u.name, u.gmail "
+                        + " FROM tblCapstone c left join tblUserCapstone uc on c.capstoneID = uc.capstoneID left join tblUser u on uc.userID = u.userID  "
+                        + " WHERE c.semesterID = ? AND u.roleID = 'MT' AND c.statusID = 1 "
+                        + " ORDER BY c.capstoneName ASC ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String capstoneID = rs.getString("capstoneID");
+                    String capstoneName = rs.getString("capstoneName");
+                    String statusID = rs.getString("statusID");
+                    String userID = rs.getString("userID");
+                    String userName = rs.getString("name");
+                    String gmail = rs.getString("gmail");
+                    list.add(new CapstoneDTO(capstoneID, capstoneName, gmail, userID, statusID, userName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public CapstoneDTO getCapstoneByCapstoneID(String capstoneID) throws SQLException {
+        CapstoneDTO capDTO = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT u.userID, u.name, c.capstoneName, c.statusID "
+                        + " FROM tblUser u left join tblUserCapstone uc on u.userID = uc.userID left join tblCapstone c on uc.capstoneID = c.capstoneID "
+                        + " WHERE c.capstoneID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, capstoneID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String userName = rs.getString("name");
+                    String capstoneName = rs.getString("capstoneName");
+                    String statusID = rs.getString("statusID");
+                    capDTO = new CapstoneDTO(capstoneID, capstoneName, userID, userName, statusID);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return capDTO;
+    }
     
+    public boolean updateCapstone (CapstoneDTO capstone) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblCapstone set groupID = ?, statusID = ? "
+                        + " WHERE capstoneID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, capstone.getGroupId());
+                stm.setString(2, capstone.getStatusId());
+                stm.setString(3, capstone.getCapstoneID());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 //    public List<CapstoneDTO> getTopicSearchV2(String semesterID) throws SQLException {
 //        List<CapstoneDTO> list = new ArrayList<>();
 //        Connection conn = null;

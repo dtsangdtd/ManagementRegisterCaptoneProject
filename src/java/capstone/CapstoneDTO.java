@@ -12,7 +12,7 @@ import user.UserDTO;
  * @author dtsang
  */
 public class CapstoneDTO extends UserDTO{
-    public String capstoneID, capstoneName, groupId, registerDate, startTime, endTime, semesterId, statusId, userName;
+    public String capstoneID, capstoneName, groupId, registerDate, startTime, endTime, semesterId, statusId, userID, userName;
 
     public CapstoneDTO() {
     }
@@ -20,6 +20,12 @@ public class CapstoneDTO extends UserDTO{
     public CapstoneDTO(String capstoneName, String userID, String username, String gmail, String phone) {
         super(userID, username, gmail, phone);
         this.capstoneName = capstoneName;
+    }
+
+    public CapstoneDTO(String capstoneID, String groupId, String statusId) {
+        this.capstoneID = capstoneID;
+        this.groupId = groupId;
+        this.statusId = statusId;
     }
 
     public CapstoneDTO(String capstoneID, String capstoneName, String groupId, String registerDate, String startTime, String endTime, String semesterId, String statusId) {
@@ -40,6 +46,14 @@ public class CapstoneDTO extends UserDTO{
         this.semesterId = semesterId;
         this.statusId = statusId;
         this.userName = userName;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getUserName() {

@@ -100,7 +100,7 @@ public class UserDAO {
         }
         return user;
     }
-    
+
     public UserDTO checkLoginGG(String gmail) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -359,14 +359,14 @@ public class UserDAO {
                 if (check == 1) {
                     sql = "SELECT count(*) as noRecord \n"
                             + "FROM tblUser \n"
-                            + "WHERE  tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
+                            + "WHERE  (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 } else if (check == 0) {
                     sql = "SELECT count(*) as noRecord "
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? ";
+                            + "WHERE tblUserGroup.userID IS NULL AND (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? ";
 
                 }
                 stm = conn.prepareStatement(sql);
@@ -378,6 +378,7 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -402,20 +403,20 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID, tblUser.roleID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
+                            + "WHERE (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID \n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tblUser.userID) AS STT, tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone, tblUser.photoUrl, tblUser.statusID, tblUser.roleID \n"
                             + "FROM tblUser\n"
                             + "LEFT JOIN tblUserGroup tblUserGroup ON tblUserGroup.userID = tblUser.userID\n"
                             + "LEFT JOIN tblSemester tblSemester ON tblSemester.semesterID = tblUser.semesterID\n"
-                            + "WHERE tblUserGroup.userID IS NULL AND tblUser.roleID = 'US' AND tblUser.semesterID = ? AND tblUser.name like ? "
+                            + "WHERE tblUserGroup.userID IS NULL AND (tblUser.roleID = 'US' OR tblUser.roleID = 'LD') AND tblUser.semesterID = ? AND tblUser.name like ? "
                             + "ORDER BY (SELECT NULL)"
                             + "OFFSET ? * (? - 1) ROWS "
                             + "FETCH NEXT ? ROWS ONLY ";
@@ -435,8 +436,9 @@ public class UserDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String photoUrl = rs.getString("photoUrl");
+                    String roleID = rs.getString("roleID");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(stt, userID, username, "", "US", gmail, phone, statusID, photoUrl));
+                    list.add(new UserDTO(stt, userID, username, "", roleID, gmail, phone, statusID, photoUrl));
                 }
             }
         } catch (Exception e) {
@@ -463,9 +465,9 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT name, gmail, phone, statusID, roleID"
-                        + " FROM tblUser"
-                        + " WHERE userID like ?";
+                String sql = " SELECT u.name, u.gmail, u.phone, u.statusID, u.roleID, ug.groupID "
+                        + " FROM tblUser u left join tblUserGroup ug on u.userID = ug.userID "
+                        + " WHERE u.userID like ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
                 rs = stm.executeQuery();
@@ -475,7 +477,8 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     String statusID = rs.getString("statusID");
                     String roleID = rs.getString("roleID");
-                    user = new UserDTO(userID, userName, roleID, gmail, phone, statusID);
+                    String groupID = rs.getString("groupID");
+                    user = new UserDTO(userName, roleID, gmail, phone, statusID, groupID);
                 }
             }
         } catch (Exception e) {
@@ -638,7 +641,7 @@ public class UserDAO {
         return result;
     }
 
-    public boolean updateStatusID(UserDTO user) throws SQLException {
+    public boolean updateStatusID(String userID, int statusID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -648,8 +651,8 @@ public class UserDAO {
                 String sql = " UPDATE tblUser set statusID = ? "
                         + " WHERE userID = ? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getStatusID());
-                stm.setString(1, user.getUserID());
+                stm.setInt(1, statusID);
+                stm.setString(2, userID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

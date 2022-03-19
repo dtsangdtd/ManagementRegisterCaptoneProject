@@ -11,18 +11,28 @@ package request;
  */
 public class RequestDTO {
     int requestID;
-    String requestDetail;//ID của người được mời
+    String invitedID;//ID của người được mời
     String userID; //ID của người mời (LoginUser)
-    int isSupervisor;
+    String requestDetail; //GroupID/CapstoneID
+    int statusID;
 
     public RequestDTO() {
     }
 
-    public RequestDTO(int requestID, String requestDetail, String userID, int isSupervisor) {
-        this.requestID = requestID;
-        this.requestDetail = requestDetail;//ID của người được mời
-        this.userID = userID;//ID của người mời
-        this.isSupervisor = isSupervisor;
+    public RequestDTO(int requestID, String invitedID, String userID, String requestDetail, int statusID) {
+        this.requestID = requestID; 
+        this.invitedID = invitedID;
+        this.userID = userID;
+        this.requestDetail = requestDetail;
+        this.statusID = statusID;
+    }
+
+    public String getInvitedID() {
+        return invitedID;
+    }
+
+    public void setInvitedID(String invitedID) {
+        this.invitedID = invitedID;
     }
 
     public int getRequestID() {
@@ -49,11 +59,11 @@ public class RequestDTO {
         this.userID = userID;
     }
 
-    public int getIsSupervisor() {
-        return isSupervisor;
+    public int getStatusID() {
+        return statusID;
     }
 
-    public void setIsSupervisor(int isSupervisor) {
-        this.isSupervisor = isSupervisor;
-    }
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
+    }   
 }

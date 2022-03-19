@@ -5,36 +5,29 @@
  */
 package controller;
 
+import capstone.CapstoneDAO;
+import capstone.CapstoneDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import request.RequestDAO;
+import semester.SemesterDAO;
+import semester.SemesterDTO;
 import user.UserDTO;
 
 /**
  *
  * @author ASUS
  */
-@WebServlet(name = "RefuseInviteController", urlPatterns = {"/RefuseInviteController"})
-public class RefuseInviteController extends HttpServlet {
+@WebServlet(name = "GetListTopicRegistController", urlPatterns = {"/GetListTopicRegistController"})
+public class GetListTopicRegistController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String MT = "GetListRegistRequestController";
-    private static final String US = "GetListRequestController";
     private static final String ERROR = "login.jsp";
+    private static final String SUCCESS = "registerTopic.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,20 +35,17 @@ public class RefuseInviteController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            UserDTO invitedUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String roleID = invitedUser.getRoleID();
-            String invitedID = invitedUser.getUserID();
-            String leaderID = request.getParameter("leaderID");
-            RequestDAO reqDao = new RequestDAO();
-            boolean check = reqDao.refuseRequest(invitedID, leaderID);
-            if ("US".equals(roleID)) {
-                if (check) url = US;
-            } else if ("MT".equals(roleID)) {
-                if (check) url = MT;
-            }
-            
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userID = loginUser.getUserID();
+            SemesterDAO semDAO = new SemesterDAO();
+            SemesterDTO semDTO = semDAO.getSemesterByUserID(userID);
+            String semesterID = semDTO.getSemesterID();
+            CapstoneDAO capDAO = new CapstoneDAO();
+            List<CapstoneDTO> list = capDAO.getListCapstone(semesterID);
+            session.setAttribute("LIST_REGIST_TOPIC", list);
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at RefuseInviteController" + e.toString());
+            log("Error at GetListTopicRegistController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
