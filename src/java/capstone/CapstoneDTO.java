@@ -22,6 +22,12 @@ public class CapstoneDTO extends UserDTO{
         this.capstoneName = capstoneName;
     }
 
+    public CapstoneDTO(String capstoneID, String groupId, String statusId) {
+        this.capstoneID = capstoneID;
+        this.groupId = groupId;
+        this.statusId = statusId;
+    }
+
     public CapstoneDTO(String capstoneID, String capstoneName, String groupId, String registerDate, String startTime, String endTime, String semesterId, String statusId) {
         this.capstoneID = capstoneID;
         this.capstoneName = capstoneName;
