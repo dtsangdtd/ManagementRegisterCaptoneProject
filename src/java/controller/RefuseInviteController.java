@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import request.RequestDAO;
+import user.UserDTO;
 
 /**
  *
@@ -30,19 +32,28 @@ public class RefuseInviteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String SUCCESS = "student.jsp";
-    private static final String ERROR = "student.jsp";
+    private static final String MT = "GetListRegistRequestController";
+    private static final String US = "GetListRequestController";
+    private static final String ERROR = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
+            HttpSession session = request.getSession();
+            UserDTO invitedUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String roleID = invitedUser.getRoleID();
+            String invitedID = invitedUser.getUserID();
             String leaderID = request.getParameter("leaderID");
             RequestDAO reqDao = new RequestDAO();
-            reqDao.removeRequest(userID, leaderID);
-            url = SUCCESS;
+            boolean check = reqDao.refuseRequest(invitedID, leaderID);
+            if ("US".equals(roleID)) {
+                if (check) url = US;
+            } else if ("MT".equals(roleID)) {
+                if (check) url = MT;
+            }
+            
         } catch (Exception e) {
             log("Error at RefuseInviteController" + e.toString());
         } finally {

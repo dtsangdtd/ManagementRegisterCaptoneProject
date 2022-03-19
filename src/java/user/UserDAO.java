@@ -100,7 +100,7 @@ public class UserDAO {
         }
         return user;
     }
-    
+
     public UserDTO checkLoginGG(String gmail) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -465,9 +465,9 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT name, gmail, phone, statusID, roleID"
-                        + " FROM tblUser"
-                        + " WHERE userID like ?";
+                String sql = " SELECT u.name, u.gmail, u.phone, u.statusID, u.roleID, ug.groupID "
+                        + " FROM tblUser u left join tblUserGroup ug on u.userID = ug.userID "
+                        + " WHERE u.userID like ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
                 rs = stm.executeQuery();
@@ -477,7 +477,8 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     String statusID = rs.getString("statusID");
                     String roleID = rs.getString("roleID");
-                    user = new UserDTO(userID, userName, roleID, gmail, phone, statusID);
+                    String groupID = rs.getString("groupID");
+                    user = new UserDTO(userName, roleID, gmail, phone, statusID, groupID);
                 }
             }
         } catch (Exception e) {
@@ -640,7 +641,7 @@ public class UserDAO {
         return result;
     }
 
-    public boolean updateStatusID(UserDTO user) throws SQLException {
+    public boolean updateStatusID(String userID, int statusID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -650,8 +651,8 @@ public class UserDAO {
                 String sql = " UPDATE tblUser set statusID = ? "
                         + " WHERE userID = ? ";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getStatusID());
-                stm.setString(1, user.getUserID());
+                stm.setInt(1, statusID);
+                stm.setString(2, userID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

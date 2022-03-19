@@ -57,13 +57,13 @@ public class UserDTO implements Serializable{
         this.photoUrl = photoUrl;
     }
 
-    public UserDTO(String userID, String username, String roleID, String gmail, String phone, String statusID) {
-        this.userID = userID;
+    public UserDTO(String username, String roleID, String gmail, String phone, String statusID, String groupID) {
         this.username = username;
         this.roleID = roleID;
         this.gmail = gmail;
         this.phone = phone;
         this.statusID = statusID;
+        this.groupID = groupID;
     }
  
     public UserDTO(String userID, String username, String roleID, String gmail, String phone) {
