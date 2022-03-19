@@ -5,11 +5,14 @@
  */
 package controller;
 
+import capstone.CapstoneDAO;
+import capstone.CapstoneDTO;
 import group.GroupDAO;
 import group.GroupDTO;
 import group.UserGroup;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.acl.Group;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +39,7 @@ public class AcceptInviteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String US = "student.jsp";
+    private static final String US = "Getlistcontroller";
     private static final String MT = "GetListRegistRequestController";
     private static final String ERROR = "studentRequest.jsp";
 
@@ -78,6 +81,34 @@ public class AcceptInviteController extends HttpServlet {
                     }
                 }
             } else if ("MT".equals(roleID)) {
+                GroupDAO gDAO = new GroupDAO();
+                int userGroupID = gDAO.getMaxUserGroupID() + 1;
+                int groupID = Integer.parseInt(leader.getGroupID());
+                int isSupervisor = 1;
+                String capstoneID = request.getParameter("capstoneID");
+                CapstoneDAO capDAO = new CapstoneDAO();
+                CapstoneDTO capDTO = capDAO.getCapstoneByCapstoneID(capstoneID);
+                String statusID = capDTO.getPhone();
+                if (statusID.equals("0")) {
+                    RequestDAO reqDao = new RequestDAO();
+                    boolean check = reqDao.refuseRequest(invitedID, leaderID);
+                } else if (statusID.equals("1")) {
+                    UserGroup userGroup = new UserGroup(userGroupID, invitedID, groupID, isSupervisor);
+                    boolean check1 = gDAO.acceptInviteGroup(userGroup);
+                    if (check1) {
+                        GroupDTO group = gDAO.getGroupByGroupID(groupID);
+                        boolean check2 = gDAO.updateCapstoneGroup(groupID, capstoneID);
+                        if (check2) {
+                            statusID = "0";
+                            String groupID1 = String.valueOf(groupID);
+                            CapstoneDTO capDTO2 = new CapstoneDTO(capstoneID, groupID1, statusID);
+                            boolean check3 = capDAO.updateCapstone(capDTO2);
+                            if (check3) {
+                                url = MT;
+                            }
+                        }
+                    }
+                }
 
             }
         } catch (Exception e) {

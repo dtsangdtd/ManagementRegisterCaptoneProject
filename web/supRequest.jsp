@@ -125,13 +125,13 @@
                                             <c:forEach var="top" varStatus="counter" items="${LIST_REGIST_TOPIC}">
                                                 <tr>
                                                     <td>${counter.count}</td>
-                                                    <td>${top.statusID}</td>
+                                                    <td>${top.groupID}</td>
                                                     <td><a href="GetListStudentInGroupDetails?groupID=1">${top.gmail}</a></td>
                                                     <td>
                                                         <form action="MainController">
-                                                            <input type="hidden" name="userID" value="${top.userID}"/>
-                                                            <input type="hidden" name="groupID" value="${top.roleID}"/>
-                                                            <input type="hidden" name="capstoneID" value="${top.phone}"/>
+                                                            <input type="hidden" name="leaderID" value="${top.username}"/>
+                                                            <input type="hidden" name="groupID" value="${top.gmail}"/>
+                                                            <input type="hidden" name="capstoneID" value="${top.statusID}"/>
                                                             <button type="submit" name="action" value="Accept" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-check"></i> </button>
                                                             <button type="submit" name="action" value="Refuse" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-ban"></i> </button>
                                                         </form>
