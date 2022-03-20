@@ -28,7 +28,6 @@
         <!-- Custom styles for this page -->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
     </head>
 
     <body id="page-top">
@@ -135,8 +134,8 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Name</th>
+
                                                         <th>Gmail</th>
-                                                        <th>RoleID</th>
                                                         <th style="width: 160px">
                                                             <div class="dropdown">
                                                                 <i class="fas fa-filter "></i>
@@ -164,6 +163,7 @@
                                                             </div>
                                                             Status
                                                         </th>
+                                                        <th>RoleID</th>
                                                     </tr>
                                                 </thead>
                                                 <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
@@ -178,13 +178,19 @@
                                                                     ${stu.gmail}
                                                                 </a>
                                                             </td>
-                                                            <td>${stu.roleID}</td>
+
                                                             <td>
                                                                 <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
                                                                 <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
                                                                 </td>
-                                                            </tr>
-                                                        </tbody>
+                                                                <td>${stu.roleID}
+                                                                <c:if test="${stu.roleID eq 'US'}">
+                                                                    <input id="txtUserID" name="txtUserID" value="${stu.userID}" hidden/>
+                                                                    <i id="btnEditRole" style="cursor: pointer" class="fas fa-user-edit fa-sm fa-fw"></i>
+                                                                </c:if>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
                                                 </c:forEach>
                                             </table>
                                         </div>
@@ -252,34 +258,31 @@
                                 </a>
                                 <div class="mt-2"></div>
                             </div>
-                            <div id="wrapper1 " class="col-5">
+                            <div id="wrapper1" class="col-5">
                                 <div class="scrollbar" id="style-default">
-
                                     <div style="display: block;">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <div class="stu-tab-gr">
-                                                    <div class="">
-                                                        <div class="card border-left-primary shadow h-100 py-2">
-                                                            <div class="card-body mr-2">
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col ">
-                                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                                            Group </div>
-                                                                        <div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                                        </div>
+                                                    <div class="card border-left-primary shadow h-100 py-2">
+                                                        <div class="card-body">
+                                                            <div class="row no-gutters align-items-center">
+                                                                <div class="col-12">
+                                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                                        Group </div>
+                                                                    <div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                          
                                         </div>
                                     </div>
                                 </div>
@@ -310,9 +313,10 @@
             /* ScrollBar*/
             .scrollbar
             {
-                margin-left: 30px;
+                position: absolute;
+                right: 10px;
                 float: left;
-                height: 70vh;
+                height: 100%;
                 width: auto;                /*                background: #F5F5F5;*/
                 overflow-y: scroll;
                 margin-bottom: 25px;
@@ -326,7 +330,6 @@
             #wrapper1
             {
                 text-align: center;
-                margin: auto;
             }
             /* ScrollBar*/
             .dropdown {
@@ -485,7 +488,29 @@
                 $(this).closest("form").submit();
                 e.preventDefault();
             })
-
+            $(document).on("click", "#btnEditRole", function (e) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to update it!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Update to Leader!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var txtUserID = $("#txtUserID").val();
+                        Swal.fire(
+                                'Updated!',
+                                'Your role has been updated.',
+                                'success'
+                                );
+                        setTimeout(function (e) {
+                            window.location.href = "UpdateRoleController?txtUserID=" + txtUserID;
+                        }, 1000);
+                    }
+                })
+            });
         </script>
         <!-- Bootstrap core JavaScript-->
 
@@ -504,6 +529,8 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
+        <script src="https://kit.fontawesome.com/d117446577.js" crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </body>
 
