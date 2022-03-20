@@ -28,6 +28,7 @@ public class MainController extends HttpServlet {
     private static final String RANDOM = "RandomStudentController";
     private static final String DEADLINE = "DeadlineSemesterController";
     private static final String IMPORT = "ImportController";
+    private static final String KICK = "KickMemberController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,6 +70,8 @@ public class MainController extends HttpServlet {
                 url = DEADLINE;
             } else if ("Import".equals(action)) {
                 url = IMPORT;
+            } else if ("Kick".equals(action)) {
+                url = KICK;
             } else {
                 session.setAttribute("ERROR_MESSAGE", "Function is not available!");
             }

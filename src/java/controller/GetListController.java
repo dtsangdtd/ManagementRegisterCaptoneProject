@@ -5,6 +5,8 @@
  */
 package controller;
 
+import group.GroupDAO;
+import group.GroupDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -49,6 +51,7 @@ public class GetListController extends HttpServlet {
          String searchName = request.getParameter("txtSearch");
          searchName = searchName == null ? "" : searchName;
         try {
+            boolean check = true;
             SemesterDAO semesterDAO = new SemesterDAO();
             List<SemesterDTO> listSemester = semesterDAO.getListSemester();
             UserDAO dao = new UserDAO();
@@ -65,6 +68,15 @@ public class GetListController extends HttpServlet {
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID,searchName) * 1.0 / pageSize);
             List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID,searchName);
 //            System.out.println(noOfPages);
+            String loginUserID = loginUser.getUserID();
+            GroupDAO gDAO = new GroupDAO();
+            int groupID = gDAO.getGroupIDByUserID(loginUserID);
+            GroupDTO group = gDAO.getGroupByGroupID(groupID);
+            int numOfPer = group.getNumOfPer();
+            if (numOfPer == 5 || numOfPer > 5){
+                check = false;
+            }
+            session.setAttribute("CHECK_NUMOFPER", check);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);
