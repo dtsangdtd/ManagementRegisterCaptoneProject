@@ -275,9 +275,9 @@ public class UserDAO {
             if (conn != null) {
                 String sql = " SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone,"
                         + " tblUser.photoUrl, tblSemester.semesterName,tblCapstone.capstoneName"
-                        + " FROM tblUser Left Join tblUserCapstone ON tblUser.userID = tblUserCapstone.userID "
-                        + "Left Join tblCapstone ON tblUserCapstone.capstoneID = tblCapstone.capstoneID  "
-                        + "Left Join tblSemester ON tblUser.semesterID = tblSemester.semesterID where tblUser.userID = ? ";
+                        + " FROM tblUser Left Join tblUserGroup ON tblUser.userID = tblUserGroup.userID  "
+                        + " Left Join tblGroup ON tblUserGroup.groupID = tblGroup.groupID  Left Join tblCapstone on tblGroup.capstoneID = tblCapstone.capstoneID  "
+                        + " Left Join tblSemester ON tblUser.semesterID = tblSemester.semesterID where tblUser.userID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userIDValue);
                 rs = stm.executeQuery();

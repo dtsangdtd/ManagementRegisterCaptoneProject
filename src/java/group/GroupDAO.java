@@ -420,4 +420,30 @@ public class GroupDAO {
         }
         return list;
     }
+    
+    public boolean kickMember (String userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " DELETE tblUserGroup"
+                        + " WHERE userID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                check = stm.executeUpdate() > 0 ? true : false;                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }
