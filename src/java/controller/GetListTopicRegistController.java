@@ -42,27 +42,32 @@ public class GetListTopicRegistController extends HttpServlet {
             String userID = loginUser.getUserID();
             GroupDAO gDAO = new GroupDAO();
             int groupID = gDAO.getGroupIDByUserID(userID);
-            GroupDTO group = gDAO.getGroupByGroupID(groupID);
             SemesterDAO semDAO = new SemesterDAO();
             SemesterDTO semDTO = semDAO.getSemesterByUserID(userID);
             String semesterID = semDTO.getSemesterID();
             CapstoneDAO capDAO = new CapstoneDAO();
             List<CapstoneDTO> list = capDAO.getListCapstone(semesterID);
             session.setAttribute("LIST_REGIST_TOPIC", list);
-            int numOfPer = group.getNumOfPer();
-            int capstoneID = group.getCapstoneID();
-            if (numOfPer < 4) {
-                check = false;
+            if (groupID == 0) {
                 session.setAttribute("CHECK_CAPSTONE", check);
                 url = SUCCESS;
             } else {
-                if (capstoneID == 0) {
-                    session.setAttribute("CHECK_CAPSTONE", check);
-                    url = SUCCESS;
-                } else {
+                GroupDTO group = gDAO.getGroupByGroupID(groupID);
+                int numOfPer = group.getNumOfPer();
+                int capstoneID = group.getCapstoneID();
+                if (numOfPer < 4) {
                     check = false;
                     session.setAttribute("CHECK_CAPSTONE", check);
                     url = SUCCESS;
+                } else {
+                    if (capstoneID == 0) {
+                        session.setAttribute("CHECK_CAPSTONE", check);
+                        url = SUCCESS;
+                    } else {
+                        check = false;
+                        session.setAttribute("CHECK_CAPSTONE", check);
+                        url = SUCCESS;
+                    }
                 }
             }
         } catch (Exception e) {

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import user.UserDAO;
 import user.UserDTO;
 
 /**
@@ -36,13 +37,15 @@ public class GetListGroupController extends HttpServlet {
             boolean check = true;
             GroupDAO groupDao = new GroupDAO();
             HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) request.getAttribute("LOGIN_USER");
+            UserDTO user = (UserDTO) session.getAttribute("INFOR");
+            String loginUserID = user.getUserID();
+            UserDAO uDAO = new UserDAO();
+            UserDTO loginUser = uDAO.getUserByUserID(loginUserID);
             String roleID = loginUser.getRoleID();
-            if ("US".equals(roleID)){
+            if ("US".equals(roleID)) {
                 check = false;
             }
             session.setAttribute("CHECK_ROLEID", check);
-            UserDTO user = (UserDTO) session.getAttribute("INFOR");
 //            System.out.println(user.getUserID());
             String groupID = groupDao.getGroupID(user.getUserID());
 //            System.out.println(groupID);
