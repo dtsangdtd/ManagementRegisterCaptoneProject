@@ -5,69 +5,50 @@
  */
 package controller;
 
-import capstone.CapstoneDAO;
-import capstone.CapstoneDTO;
-import group.GroupDAO;
-import group.GroupDTO;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import semester.SemesterDAO;
-import semester.SemesterDTO;
-import user.UserDTO;
+import user.UserDAO;
 
 /**
  *
- * @author ASUS
+ * @author dtsang
  */
-@WebServlet(name = "GetListTopicRegistController", urlPatterns = {"/GetListTopicRegistController"})
-public class GetListTopicRegistController extends HttpServlet {
+@WebServlet(name = "UpdateRoleController", urlPatterns = {"/UpdateRoleController"})
+public class UpdateRoleController extends HttpServlet {
 
-    private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "registerTopic.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private static final String GET_LIST = "GetListController?radioGroup=0&semesterID=SP22";
+    private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = LOGIN;
         try {
-            boolean check = true;
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String userID = loginUser.getUserID();
-            GroupDAO gDAO = new GroupDAO();
-            int groupID = gDAO.getGroupIDByUserID(userID);
-            GroupDTO group = gDAO.getGroupByGroupID(groupID);
-            SemesterDAO semDAO = new SemesterDAO();
-            SemesterDTO semDTO = semDAO.getSemesterByUserID(userID);
-            String semesterID = semDTO.getSemesterID();
-            CapstoneDAO capDAO = new CapstoneDAO();
-            List<CapstoneDTO> list = capDAO.getListCapstone(semesterID);
-            session.setAttribute("LIST_REGIST_TOPIC", list);
-            int numOfPer = group.getNumOfPer();
-            int capstoneID = group.getCapstoneID();
-            if (numOfPer < 4) {
-                check = false;
-                session.setAttribute("CHECK_CAPSTONE", check);
-                url = SUCCESS;
-            } else {
-                if (capstoneID == 0) {
-                    session.setAttribute("CHECK_CAPSTONE", check);
-                    url = SUCCESS;
-                } else {
-                    check = false;
-                    session.setAttribute("CHECK_CAPSTONE", check);
-                    url = SUCCESS;
+            String userID = request.getParameter("txtUserID");
+            if (userID != null) {
+                UserDAO userDAO = new UserDAO();
+                boolean success = userDAO.updateRoleID(userID);
+                if(success){
+                    url =  GET_LIST;
                 }
             }
         } catch (Exception e) {
-            log("Error at GetListTopicRegistController" + e.toString());
-        } finally {
+            e.printStackTrace();
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

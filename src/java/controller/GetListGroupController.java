@@ -33,8 +33,15 @@ public class GetListGroupController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         try {
+            boolean check = true;
             GroupDAO groupDao = new GroupDAO();
             HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) request.getAttribute("LOGIN_USER");
+            String roleID = loginUser.getRoleID();
+            if ("US".equals(roleID)){
+                check = false;
+            }
+            session.setAttribute("CHECK_ROLEID", check);
             UserDTO user = (UserDTO) session.getAttribute("INFOR");
 //            System.out.println(user.getUserID());
             String groupID = groupDao.getGroupID(user.getUserID());

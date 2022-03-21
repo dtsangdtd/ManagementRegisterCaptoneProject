@@ -275,9 +275,9 @@ public class UserDAO {
             if (conn != null) {
                 String sql = " SELECT tblUser.userID, tblUser.name, tblUser.gmail, tblUser.phone,"
                         + " tblUser.photoUrl, tblSemester.semesterName,tblCapstone.capstoneName"
-                        + " FROM tblUser Left Join tblUserCapstone ON tblUser.userID = tblUserCapstone.userID "
-                        + "Left Join tblCapstone ON tblUserCapstone.capstoneID = tblCapstone.capstoneID  "
-                        + "Left Join tblSemester ON tblUser.semesterID = tblSemester.semesterID where tblUser.userID = ? ";
+                        + " FROM tblUser Left Join tblUserGroup ON tblUser.userID = tblUserGroup.userID  "
+                        + " Left Join tblGroup ON tblUserGroup.groupID = tblGroup.groupID  Left Join tblCapstone on tblGroup.capstoneID = tblCapstone.capstoneID  "
+                        + " Left Join tblSemester ON tblUser.semesterID = tblSemester.semesterID where tblUser.userID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userIDValue);
                 rs = stm.executeQuery();
@@ -653,6 +653,32 @@ public class UserDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, statusID);
                 stm.setString(2, userID);
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+     public boolean updateRoleID(String userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblUser set roleID = 'LD' "
+                        + " WHERE userID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
