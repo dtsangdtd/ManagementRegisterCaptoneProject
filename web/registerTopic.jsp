@@ -117,12 +117,12 @@
                                                     <td>${topic.capstoneName}</td>
                                                     <td>${topic.userName}</td>
                                                     <td>
-                                                        <form action="MainController">
-                                                            <input type="hidden" name="userID" value="${topic.semesterId}"/>
-                                                            <input type="hidden" name="capstoneID" value="${topic.capstoneID}"/>
-                                                            <input type="hidden" name="gmail" value="${topic.groupId}"/>
-                                                            <button type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
-                                                        </form>
+                                                                <form action="MainController">
+                                                                    <input type="hidden" name="userID" value="${topic.semesterId}"/>
+                                                                <input type="hidden" name="capstoneID" value="${topic.capstoneID}"/>
+                                                                <input type="hidden" name="gmail" value="${topic.groupId}"/>
+                                                                <button <c:if test="${sessionScope.CHECK_CAPSTONE == false}"> disabled </c:if> type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm">  <i class="fas fa-plus"></i> </button>
+                                                            </form>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
