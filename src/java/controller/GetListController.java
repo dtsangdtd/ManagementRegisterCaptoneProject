@@ -31,7 +31,7 @@ public class GetListController extends HttpServlet {
     private static final String AD = "modStudentList.jsp";
     private static final String US = "studentList.jsp";
     private static final String LOGIN = "login.jsp";
-    private static final String LD ="studentList.jsp";
+    private static final String LD = "studentList.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,7 +39,7 @@ public class GetListController extends HttpServlet {
         String url = LOGIN;
         int checked = 1;
         String semesterID = "SP22";
-     
+
 //        System.out.println(request.getParameter("radioGroup"));
         if (request.getParameter("radioGroup") != null) {
             checked = Integer.parseInt(request.getParameter("radioGroup"));
@@ -48,8 +48,8 @@ public class GetListController extends HttpServlet {
         if (request.getParameter("semesterID") != null) {
             semesterID = request.getParameter("semesterID");
         }
-         String searchName = request.getParameter("txtSearch");
-         searchName = searchName == null ? "" : searchName;
+        String searchName = request.getParameter("txtSearch");
+        searchName = searchName == null ? "" : searchName;
         try {
             boolean check = true;
             SemesterDAO semesterDAO = new SemesterDAO();
@@ -65,16 +65,23 @@ public class GetListController extends HttpServlet {
                 pageNumber = Integer.parseInt(request.getParameter("page"));
             }
             int noOfPages;
-            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID,searchName) * 1.0 / pageSize);
-            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID,searchName);
+            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked, semesterID, searchName) * 1.0 / pageSize);
+            List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID, searchName);
 //            System.out.println(noOfPages);
-            String loginUserID = loginUser.getUserID();
-            GroupDAO gDAO = new GroupDAO();
-            int groupID = gDAO.getGroupIDByUserID(loginUserID);
-            GroupDTO group = gDAO.getGroupByGroupID(groupID);
-            int numOfPer = group.getNumOfPer();
-            if (numOfPer == 5 || numOfPer > 5){
-                check = false;
+
+            String roleID = loginUser.getRoleID();
+            if ("US".equals(roleID) || "LD".equals(roleID)) {
+                String loginUserID = loginUser.getUserID();
+                GroupDAO gDAO = new GroupDAO();
+                int groupID = gDAO.getGroupIDByUserID(loginUserID);
+                if (groupID == 0) {
+                } else {
+                    GroupDTO group = gDAO.getGroupByGroupID(groupID);
+                    int numOfPer = group.getNumOfPer();
+                    if (numOfPer == 5 || numOfPer > 5) {
+                        check = false;
+                    }
+                }
             }
             session.setAttribute("CHECK_NUMOFPER", check);
             request.setAttribute("noOfPages", noOfPages);
