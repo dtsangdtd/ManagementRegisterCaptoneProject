@@ -7,6 +7,8 @@ package controller;
 
 import capstone.CapstoneDAO;
 import capstone.CapstoneDTO;
+import group.GroupDAO;
+import group.GroupDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -34,16 +36,40 @@ public class GetListTopicRegistController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            boolean check = true;
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String userID = loginUser.getUserID();
+            GroupDAO gDAO = new GroupDAO();
+            int groupID = gDAO.getGroupIDByUserID(userID);
             SemesterDAO semDAO = new SemesterDAO();
             SemesterDTO semDTO = semDAO.getSemesterByUserID(userID);
             String semesterID = semDTO.getSemesterID();
             CapstoneDAO capDAO = new CapstoneDAO();
             List<CapstoneDTO> list = capDAO.getListCapstone(semesterID);
             session.setAttribute("LIST_REGIST_TOPIC", list);
-            url = SUCCESS;
+            if (groupID == 0) {
+                session.setAttribute("CHECK_CAPSTONE", check);
+                url = SUCCESS;
+            } else {
+                GroupDTO group = gDAO.getGroupByGroupID(groupID);
+                int numOfPer = group.getNumOfPer();
+                int capstoneID = group.getCapstoneID();
+                if (numOfPer < 4) {
+                    check = false;
+                    session.setAttribute("CHECK_CAPSTONE", check);
+                    url = SUCCESS;
+                } else {
+                    if (capstoneID == 0) {
+                        session.setAttribute("CHECK_CAPSTONE", check);
+                        url = SUCCESS;
+                    } else {
+                        check = false;
+                        session.setAttribute("CHECK_CAPSTONE", check);
+                        url = SUCCESS;
+                    }
+                }
+            }
         } catch (Exception e) {
             log("Error at GetListTopicRegistController" + e.toString());
         } finally {

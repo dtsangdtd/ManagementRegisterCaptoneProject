@@ -5,28 +5,32 @@
  */
 package controller;
 
-import group.GroupDAO;
-import group.GroupDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import user.UserDAO;
-import user.UserDTO;
 
 /**
  *
  * @author dtsang
  */
-@WebServlet(name = "GetListGroupController", urlPatterns = {"/GetListGroupController"})
-public class GetListGroupController extends HttpServlet {
+@WebServlet(name = "UpdateRoleController", urlPatterns = {"/UpdateRoleController"})
+public class UpdateRoleController extends HttpServlet {
 
-    private static final String US = "student.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private static final String GET_LIST = "GetListController?radioGroup=0&semesterID=SP22";
     private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,30 +38,17 @@ public class GetListGroupController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         try {
-            boolean check = true;
-            GroupDAO groupDao = new GroupDAO();
-            HttpSession session = request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("INFOR");
-            String loginUserID = user.getUserID();
-            UserDAO uDAO = new UserDAO();
-            UserDTO loginUser = uDAO.getUserByUserID(loginUserID);
-            String roleID = loginUser.getRoleID();
-            if ("US".equals(roleID)) {
-                check = false;
-            }
-            session.setAttribute("CHECK_ROLEID", check);
-//            System.out.println(user.getUserID());
-            String groupID = groupDao.getGroupID(user.getUserID());
-//            System.out.println(groupID);
-            List<GroupDTO> listGroup = groupDao.getListStudentInGroup(groupID);
-//            System.out.println(listGroup);
-            session.setAttribute("LISTGROUP", listGroup);
-            if (user != null) {
-                url = US;
+            String userID = request.getParameter("txtUserID");
+            if (userID != null) {
+                UserDAO userDAO = new UserDAO();
+                boolean success = userDAO.updateRoleID(userID);
+                if(success){
+                    url =  GET_LIST;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

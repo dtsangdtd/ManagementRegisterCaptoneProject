@@ -9,7 +9,6 @@ import group.GroupDAO;
 import group.GroupDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,48 +20,54 @@ import user.UserDTO;
 
 /**
  *
- * @author dtsang
+ * @author ASUS
  */
-@WebServlet(name = "GetListGroupController", urlPatterns = {"/GetListGroupController"})
-public class GetListGroupController extends HttpServlet {
+@WebServlet(name = "KickMemberController", urlPatterns = {"/KickMemberController"})
+public class KickMemberController extends HttpServlet {
 
-    private static final String US = "student.jsp";
-    private static final String LOGIN = "login.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private static final String ERROR = "Login.jsp";
+    private static final String SUCCESS = "GetListController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = LOGIN;
+        String url = ERROR;
         try {
-            boolean check = true;
-            GroupDAO groupDao = new GroupDAO();
             HttpSession session = request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("INFOR");
-            String loginUserID = user.getUserID();
-            UserDAO uDAO = new UserDAO();
-            UserDTO loginUser = uDAO.getUserByUserID(loginUserID);
-            String roleID = loginUser.getRoleID();
-            if ("US".equals(roleID)) {
-                check = false;
-            }
-            session.setAttribute("CHECK_ROLEID", check);
-//            System.out.println(user.getUserID());
-            String groupID = groupDao.getGroupID(user.getUserID());
-//            System.out.println(groupID);
-            List<GroupDTO> listGroup = groupDao.getListStudentInGroup(groupID);
-//            System.out.println(listGroup);
-            session.setAttribute("LISTGROUP", listGroup);
-            if (user != null) {
-                url = US;
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String leaderID = loginUser.getRoleID();
+            String userID = request.getParameter("userID");
+            GroupDAO gDAO = new GroupDAO();
+            boolean check1 = gDAO.kickMember(userID);
+            if (check1) {
+                int groupID = Integer.parseInt(loginUser.groupID);
+                GroupDTO group = gDAO.getGroupByGroupID(groupID);
+                int numOfPer = group.getNumOfPer() - 1;
+                boolean check2 = gDAO.updateNumberOfPerson(numOfPer, groupID);
+                if (check2) {
+                    int statusID = 3;
+                    UserDAO uDAO = new UserDAO();
+                    boolean check3 = uDAO.updateStatusID(userID, statusID);
+                    if (check3) url = SUCCESS;
+                } 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log("Error at KickMemberController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
