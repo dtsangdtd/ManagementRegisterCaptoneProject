@@ -130,7 +130,7 @@ public class RequestDAO {
             if (conn != null) {
                 String sql =  " SELECT u.userID, u.name, ug.groupID, g.groupName, uc.capstoneID, c.capstoneName"
                         + " FROM tblRequest r left join tblUser u on r.userID = u.userID left join tblUserGroup ug on u.userID = ug.userID left join tblGroup g on ug.groupID = g.groupID, tblUserCapstone uc left join tblCapstone c on uc.capstoneID = c.capstoneID "
-                        + " WHERE r.invitedID = ? AND r.requestDetail = c.capstoneID ";
+                        + " WHERE r.invitedID = ? AND r.requestDetail = c.capstoneID AND r.statusID = 1 ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, invitedID);
                 rs = stm.executeQuery();

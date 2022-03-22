@@ -12,16 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import request.RequestDAO;
-import user.UserDTO;
+import user.UserDAO;
 
 /**
  *
- * @author ASUS
+ * @author dtsang
  */
-@WebServlet(name = "RefuseInviteController", urlPatterns = {"/RefuseInviteController"})
-public class RefuseInviteController extends HttpServlet {
+@WebServlet(name = "UpdateRoleController", urlPatterns = {"/UpdateRoleController"})
+public class UpdateRoleController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,31 +30,25 @@ public class RefuseInviteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String MT = "GetListRegistRequestController";
-    private static final String US = "GetListRequestController";
-    private static final String ERROR = "login.jsp";
+    private static final String GET_LIST = "GetListController?radioGroup=0&semesterID=SP22";
+    private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = LOGIN;
         try {
-            HttpSession session = request.getSession();
-            UserDTO invitedUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String roleID = invitedUser.getRoleID();
-            String invitedID = invitedUser.getUserID();
-            String leaderID = request.getParameter("leaderID");
-            RequestDAO reqDao = new RequestDAO();
-            boolean check = reqDao.refuseRequest(invitedID, leaderID);
-            if ("US".equals(roleID)) {
-                if (check) url = US;
-            } else if ("MT".equals(roleID)) {
-                if (check) url = MT;
+            String userID = request.getParameter("txtUserID");
+            if (userID != null) {
+                UserDAO userDAO = new UserDAO();
+                boolean success = userDAO.updateRoleID(userID);
+                if(success){
+                    url =  GET_LIST;
+                }
             }
-            
         } catch (Exception e) {
-            log("Error at RefuseInviteController" + e.toString());
-        } finally {
+            e.printStackTrace();
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

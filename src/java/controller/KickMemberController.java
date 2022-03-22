@@ -5,6 +5,8 @@
  */
 package controller;
 
+import group.GroupDAO;
+import group.GroupDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,15 +15,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import request.RequestDAO;
+import user.UserDAO;
 import user.UserDTO;
 
 /**
  *
  * @author ASUS
  */
-@WebServlet(name = "RefuseInviteController", urlPatterns = {"/RefuseInviteController"})
-public class RefuseInviteController extends HttpServlet {
+@WebServlet(name = "KickMemberController", urlPatterns = {"/KickMemberController"})
+public class KickMemberController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +34,8 @@ public class RefuseInviteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String MT = "GetListRegistRequestController";
-    private static final String US = "GetListRequestController";
-    private static final String ERROR = "login.jsp";
+    private static final String ERROR = "Login.jsp";
+    private static final String SUCCESS = "GetListController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,26 +43,31 @@ public class RefuseInviteController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            UserDTO invitedUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String roleID = invitedUser.getRoleID();
-            String invitedID = invitedUser.getUserID();
-            String leaderID = request.getParameter("leaderID");
-            RequestDAO reqDao = new RequestDAO();
-            boolean check = reqDao.refuseRequest(invitedID, leaderID);
-            if ("US".equals(roleID)) {
-                if (check) url = US;
-            } else if ("MT".equals(roleID)) {
-                if (check) url = MT;
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String leaderID = loginUser.getRoleID();
+            String userID = request.getParameter("userID");
+            GroupDAO gDAO = new GroupDAO();
+            boolean check1 = gDAO.kickMember(userID);
+            if (check1) {
+                int groupID = Integer.parseInt(loginUser.groupID);
+                GroupDTO group = gDAO.getGroupByGroupID(groupID);
+                int numOfPer = group.getNumOfPer() - 1;
+                boolean check2 = gDAO.updateNumberOfPerson(numOfPer, groupID);
+                if (check2) {
+                    int statusID = 3;
+                    UserDAO uDAO = new UserDAO();
+                    boolean check3 = uDAO.updateStatusID(userID, statusID);
+                    if (check3) url = SUCCESS;
+                } 
             }
-            
         } catch (Exception e) {
-            log("Error at RefuseInviteController" + e.toString());
+            log("Error at KickMemberController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
