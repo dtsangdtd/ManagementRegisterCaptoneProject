@@ -47,6 +47,7 @@ public class CapstoneDTO extends UserDTO{
         this.statusId = statusId;
         this.userName = userName;
     }
+    
 
     public String getUserID() {
         return userID;
@@ -130,7 +131,9 @@ public class CapstoneDTO extends UserDTO{
 
     @Override
     public String toString() {
-        return "CapstoneDTO{" + "capstoneID=" + capstoneID + ", capstoneName=" + capstoneName + ", groupId=" + groupId + ", registerDate=" + registerDate + ", startTime=" + startTime + ", endTime=" + endTime + ", semesterId=" + semesterId + ", statusId=" + statusId + '}';
+        return "CapstoneDTO{" + "capstoneID=" + capstoneID + ", capstoneName=" + capstoneName + ", groupId=" + groupId + ", registerDate=" + registerDate + ", startTime=" + startTime + ", endTime=" + endTime + ", semesterId=" + semesterId + ", statusId=" + statusId + ", userID=" + userID + ", userName=" + userName + '}';
     }
+
+    
     
 }

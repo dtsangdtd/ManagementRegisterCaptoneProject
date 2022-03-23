@@ -211,8 +211,8 @@ public class CapstoneDAO {
         }
         return capDTO;
     }
-    
-    public boolean updateCapstone (CapstoneDTO capstone) throws SQLException {
+
+    public boolean updateCapstone(CapstoneDTO capstone) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -275,4 +275,47 @@ public class CapstoneDAO {
 //        }
 //        return list;
 //    }
+
+    public List<CapstoneDTO> getListCapstoneMutilpleMentor() throws SQLException {
+        List<CapstoneDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT tb4.capstoneID, tb4.capstoneName, tb1.name"
+                        + " FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                        + " Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
+                        + " Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
+                        + " Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
+                        + " )\n"
+                        + " WHERE tb1.roleID = 'MT'\n"
+                        + " GROUP BY tb4.capstoneID,tb1.name,tb4.capstoneName ORDER BY tb4.capstoneID ASC ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String capstoneID = rs.getString("capstoneID");
+                    String capstoneName = rs.getString("capstoneName");
+                    String name = rs.getString("name");
+                    list.add(new CapstoneDTO(capstoneID, capstoneName, "", "","", name));
+                }
+                System.out.println( list);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
 }
