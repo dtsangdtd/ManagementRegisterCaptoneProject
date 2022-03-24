@@ -120,7 +120,7 @@
                                                                 <form action="MainController">
                                                                     <input type="hidden" name="userID" value="${topic.semesterId}"/>
                                                                 <input type="hidden" name="capstoneID" value="${topic.capstoneID}"/>
-                                                                <input type="hidden" name="gmail" value="${topic.groupId}"/>
+                                                                <input type="hidden" name="email" value="${topic.groupId}"/>
                                                                 <button <c:if test="${sessionScope.CHECK_CAPSTONE == false}"> disabled </c:if> type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm">  <i class="fas fa-plus"></i> </button>
                                                             </form>
                                                     </td>
