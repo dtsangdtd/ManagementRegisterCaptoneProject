@@ -19,7 +19,7 @@ import request.RequestDAO;
 import request.RequestDTO;
 import user.UserDAO;
 import user.UserDTO;
-import utils.EmailUtils;
+import utils.EmailStudentUtils;
 
 /**
  *
@@ -85,6 +85,9 @@ public class InviteController extends HttpServlet {
                                 if (check4) {
                                     url = US;
                                 }
+                                new Thread(() -> {
+                                    EmailStudentUtils.send(email);
+                                }).start();
                             }
                         }
                     }
@@ -97,6 +100,9 @@ public class InviteController extends HttpServlet {
                     if (check) {
                         url = US;
                     }
+                    new Thread(() -> {
+                        EmailStudentUtils.send(email);
+                    }).start();
                 }
             }
             if ("MT".equals(roleID)) {
@@ -107,10 +113,11 @@ public class InviteController extends HttpServlet {
                 if (check) {
                     url = MT;
                 }
+                new Thread(() -> {
+                    EmailStudentUtils.send(email);
+                }).start();
             }
-            new Thread(() -> {
-                EmailUtils.send(email);
-            }).start();
+
         } catch (Exception e) {
             log("Error at InviteController" + e.toString());
         } finally {
