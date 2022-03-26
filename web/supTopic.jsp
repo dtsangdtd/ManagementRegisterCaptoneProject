@@ -97,11 +97,19 @@
                                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
                                                         Semester
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER_TOPIC}" var="listSemester">
+                                                            <c:if test="${param.semesterID == listSemester.semesterID}">
+                                                                <span>${listSemester.semesterName}</span>
+                                                            </c:if> 
+                                                        </c:forEach>
                                                     </button>
                                                     <div class="dropdown-menu animated--fade-in"
                                                          aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER_TOPIC}" var="listSemester">
+                                                            <a class="dropdown-item" href="GetListTopicController?radioGroup=0&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>                                           
@@ -114,45 +122,72 @@
                                                 <th>No</th>
                                                 <th>Captones Name</th>
                                                 <th>Group Name</th>
-                                                <th>Register Date</th>
-                                                <th>Status</th>
+                                                <th style="width: 160px">
+                                                    <div class="dropdown">
+                                                        <i class="fas fa-filter "></i>
+                                                        <form action="GetListTopicController" >
+                                                            <c:if test="${param.semesterID }">
+                                                                <div class="dropdown-content">
+                                                                    <input type="radio" id="scales" name="radioGroup"
+                                                                           <c:if test="${sessionScope.checked == '1'}">
+                                                                               checked="checked"
+                                                                           </c:if>
+                                                                           value="1">
+                                                                    <label for="full">Acitve</label>
+                                                                    <input type="radio" id="scales" name="radioGroup"
+                                                                           <c:if test="${sessionScope.checked == '0'}">
+                                                                               checked="checked"
+                                                                           </c:if>
+                                                                           value="0">
+                                                                    <label for="notFull">in Active</label>
+
+                                                                </div>
+                                                            </c:if>
+                                                            <input type="hidden" name="semesterID" value="${param.semesterID}"/>
+                                                        </form>
+                                                    </div>Status
+                                                </th>
                                                 <!--<th>Action</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>12/1/2021</td>
-                                                <td>Unregistered</td>
-                                                <!--<td></td>-->
-                                            </tr>
+                                            <c:forEach var="topic" varStatus="counter" items="${LIST_MENTOR_TOPIC}">
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${topic.capstoneID}</td>
+                                                    <td>${topic.groupId}</td>
+                                                    <td>
+                                                        <c:if test="${topic.statusId == '0'}"><div class="badge bg-dark">Registered</div></c:if>
+                                                        <c:if test="${topic.statusId == '1'}"><div class="badge bg-dark">No Group</div></c:if>
+                                                    </td>
+                                                    <!--<td></td>-->
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
 
                             </div>          
                             <!-- /.container-fluid -->
-                  
+
                         </div>
-                                  <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                        <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <!-- End of Main Content -->

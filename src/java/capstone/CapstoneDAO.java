@@ -173,6 +173,44 @@ public class CapstoneDAO {
         }
         return list;
     }
+    
+    public List<CapstoneDTO> getListMentorCapstone (String userID) throws SQLException {
+        List<CapstoneDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT c.capstoneName, c.statusID, g.groupName "
+                        + " FROM tblUserCapstone uc left join tblCapstone c on uc.capstoneID = c.capstoneID left join tblGroup g on c.groupID = g.groupID "
+                        + " WHERE uc.userID = ? "
+                        + " ORDER BY c.capstoneName ASC ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String capstoneName = rs.getString("capstoneName");
+                    String statusID = rs.getString("statusID");
+                    String groupName = rs.getString("groupName");
+                    list.add(new CapstoneDTO(capstoneName, groupName, statusID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 
     public CapstoneDTO getCapstoneByCapstoneID(String capstoneID) throws SQLException {
         CapstoneDTO capDTO = null;
