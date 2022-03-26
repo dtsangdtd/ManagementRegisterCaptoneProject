@@ -12,14 +12,14 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListController?radioGroup=0&semesterID=SP22">
+        <a class="nav-link" href="GetListController?radioGroup=1">
             <i class="fas fa-fw fa-folder"></i>
             <span>Students</span>
         </a>
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="modGroup.jsp">
+        <a class="nav-link" href="GetListUserGroupController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Groups</span>
         </a>

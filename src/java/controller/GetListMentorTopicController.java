@@ -5,9 +5,16 @@
  */
 package controller;
 
+import capstone.CapstoneDAO;
+import capstone.CapstoneDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,55 +23,62 @@ import semester.SemesterDAO;
 import semester.SemesterDTO;
 import user.UserDAO;
 import user.UserDTO;
-import capstone.CapstoneDAO;
-import capstone.CapstoneDTO;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import javax.servlet.annotation.WebServlet;
 
 /**
  *
- * @author PNKV
+ * @author ASUS
  */
-@WebServlet(name = "GetListTopicController", urlPatterns = {"/GetListTopicController"})
-public class GetListTopicController extends HttpServlet {
+@WebServlet(name = "GetListMentorTopicController", urlPatterns = {"/GetListMentorTopicController"})
+public class GetListMentorTopicController extends HttpServlet {
 
-    private static final String AD = "modTopic.jsp";
-    private static final String LOGIN = "login.jsp";
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    
+    private static final String MT = "supTopic.jsp";
+    private static final String ERROR = "login.jsp"; 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = LOGIN;
+        String url = ERROR;
         int checked = 1;
+        String semesterID = request.getParameter("semesterID");
         try {
-            String semesterID = request.getParameter("semesterID");
-            if (semesterID == null) {
-                SemesterDAO daoSe = new SemesterDAO();
-                SemesterDTO semesterCurrent = daoSe.getSemesterV2();
-                semesterID = semesterCurrent.getSemesterID();
-            }
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userID = loginUser.getUserID();
+            CapstoneDAO capDAO = new CapstoneDAO();
             SemesterDAO semesterDAO = new SemesterDAO();
             List<SemesterDTO> listSemesterTopic = semesterDAO.getListSemester();
             UserDAO dao = new UserDAO();
-            CapstoneDAO capdao = new CapstoneDAO();
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            
+//            List<UserDTO> listSupervisor = dao.getListSupervisor();
+
             session.setAttribute("checked", checked);
-
-            List<CapstoneDTO> listTopic = capdao.getTopicSearch(semesterID);
-
+            int pageNumber = 1;
+            int pageSize = 11;
+            if (request.getParameter("page") != null) {
+                pageNumber = Integer.parseInt(request.getParameter("page"));
+            }
+//          int noOfPages;
+//            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
+            List<CapstoneDTO> listTopic = capDAO.getListMentorCapstone(userID);
+//            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER_TOPIC", listSemesterTopic);
-            session.setAttribute("LIST_TOPIC", listTopic);
-            session.setAttribute("SEMESTER_CURRENT", semesterID);
+            session.setAttribute("LIST_MENTOR_TOPIC", listTopic);
+//            session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             Map<String, ArrayList<String>> listCapMutippleMentor = new HashMap<>();
-            List<CapstoneDTO> listCapMentor = capdao.getListCapstoneMutilpleMentor();
+            List<CapstoneDTO> listCapMentor = capDAO.getListCapstoneMutilpleMentor();
             for (CapstoneDTO capstoneDTO : listCapMentor) {
-                    listCapMutippleMentor.put(capstoneDTO.getCapstoneName(), new ArrayList<String>());
                 if (!listCapMutippleMentor.containsKey(capstoneDTO.getCapstoneName())) {
+                    listCapMutippleMentor.put(capstoneDTO.getCapstoneName(), new ArrayList<String>());
                 }
 
                 listCapMutippleMentor.get(capstoneDTO.getCapstoneName()).add(capstoneDTO.getUserName());
@@ -73,16 +87,15 @@ public class GetListTopicController extends HttpServlet {
                 String key = entry.getKey();
                 ArrayList<String> value = entry.getValue();
 
-            }
                 System.out.println("key : " + key + " - value : " + value);
-
+            }
             if (loginUser == null) {
-                url = LOGIN;
-            } else if ("AD".equals(loginUser.getRoleID())) {
-                url = AD;
+                url = ERROR;
+            } else if ("MT".equals(loginUser.getRoleID())) {
+                url = MT;
             }
         } catch (Exception e) {
-            log("Error at GetListController" + e.toString());
+            log ("Error at GetListMentorController " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

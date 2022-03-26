@@ -112,7 +112,7 @@
                                                          aria-labelledby="dropdownMenuButton1">
                                                         <c:forEach 
                                                             items="${sessionScope.LIST_SEMESTER_TOPIC}" var="listSemester">
-                                                            <a class="dropdown-item" href="GetListTopicController?radioGroup=0&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+                                                            <a class="dropdown-item" href="GetListTopicController?semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
                                                         </c:forEach>
                                                     </div>
                                                 </div>

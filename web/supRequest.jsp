@@ -126,7 +126,7 @@
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>${top.groupID}</td>
-                                                    <td><a href="GetListStudentInGroupDetails?groupID=1">${top.gmail}</a></td>
+                                                    <td>${top.phone}</td>
                                                     <td>
                                                         <form action="MainController">
                                                             <input type="hidden" name="leaderID" value="${top.username}"/>
