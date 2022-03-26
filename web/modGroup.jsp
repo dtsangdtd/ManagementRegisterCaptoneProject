@@ -27,6 +27,7 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <%@include file="bootstrap.jsp" %>
     </head>
     <body id="page-top"> 
         <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
@@ -92,191 +93,132 @@
                         <!-- <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div> -->
-                        <div style="display: flex;">
 
-                            <div class="col-4">
-                                <div class="stu-tab-gr">
-                                    <!-- Earnings (Monthly) Card Example -->
-                                    <div class="">
-                                        <div class="card border-left-primary shadow h-100 py-2">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                            Group 1</div>
-                                                        <div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                        </div>
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="row col-12" >
+                            <c:forEach var="listUserGroup" items="${sessionScope.LIST_USERGROUP}">
+                                <div class="col-4">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                        ${listUserGroup.key}
+                                                    </div>
+                                                    <div>
+                                                        <c:forEach var="value" items="${listUserGroup.value}">
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${value}</div>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:forEach>
 
-                            <div class="col-4" style="display: block;">
-                                <div class="stu-tab-gr">
-                                    <!-- Earnings (Monthly) Card Example -->
-                                    <div class="">
-                                        <div class="card border-left-primary shadow h-100 py-2">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                            Group 2</div>
-                                                        <div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-4" style="display: block;">
-                                <div class="stu-tab-gr">
-                                    <!-- Earnings (Monthly) Card Example -->
-                                    <div class="">
-                                        <div class="card border-left-primary shadow h-100 py-2">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                            Group 3</div>
-                                                        <div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
-                        <!-- /.container-fluid -->
                     </div>
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <%@include file="footer.jsp" %>
-
-                <!-- End of Footer -->
-
             </div>
-            <!-- End of Content Wrapper -->
-
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <%@include file="footer.jsp" %>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <%@include file="logout.jsp" %>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-        <!-- Bootstrap core JavaScript-->
-        <style>
-            .dropdown {
-                position: relative;
-                display: inline-block;
-            }
+    <!-- Logout Modal-->
+    <%@include file="logout.jsp" %>
 
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                padding: 12px 16px;
-                z-index: 1;
-            }
+    <!-- Bootstrap core JavaScript-->
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
 
-            .dropdown:hover .dropdown-content {
-                display: block;
-            }
-            .copy-click {
-                position: relative;
-                padding-bottom: 2px;
-                text-decoration: none;
-                cursor: copy;
-                color: #484848;
-                /*                border-bottom: 1px dashed #767676;*/
-                transition: background-color calc(var(--duration) * 2) var(--ease);
-            }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
 
-            .copy-click:after {
-                content: attr(data-tooltip-text);
-                position: absolute;
-                bottom: calc(100% + 6px);
-                left: 50%;
-                padding: 8px 16px;
-                white-space: nowrap;
-                background-color: white;
-                border-radius: 4px;
-                box-shadow: 0 0 0 -12px rgba(0, 0, 0, 0);
-                pointer-events: none;
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                opacity: 0;
-                -webkit-transform: translate(-50%, 12px);
-                transform: translate(-50%, 12px);
-                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
-                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce);
-                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
-            }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .copy-click {
+            position: relative;
+            padding-bottom: 2px;
+            text-decoration: none;
+            cursor: copy;
+            color: #484848;
+            /*                border-bottom: 1px dashed #767676;*/
+            transition: background-color calc(var(--duration) * 2) var(--ease);
+        }
 
-            .copy-click.is-hovered:after {
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                opacity: 1;
-                -webkit-transform: translate(-50%, 0);
-                transform: translate(-50%, 0);
-                transition-timing-function: var(--ease);
-            }
+        .copy-click:after {
+            content: attr(data-tooltip-text);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            padding: 8px 16px;
+            white-space: nowrap;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 0 0 -12px rgba(0, 0, 0, 0);
+            pointer-events: none;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            opacity: 0;
+            -webkit-transform: translate(-50%, 12px);
+            transform: translate(-50%, 12px);
+            transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+            transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce);
+            transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+        }
 
-            /*            .copy-click.is-copied {
-                            background-color: yellow;
-                        }*/
+        .copy-click.is-hovered:after {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 1;
+            -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+            transition-timing-function: var(--ease);
+        }
 
-            .copy-click.is-copied:after {
-                content: attr(data-tooltip-text-copied);
-            }
-        </style>
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        /*            .copy-click.is-copied {
+                        background-color: yellow;
+                    }*/
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        .copy-click.is-copied:after {
+            content: attr(data-tooltip-text-copied);
+        }
+    </style>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
-    </body>
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
 
 </html>

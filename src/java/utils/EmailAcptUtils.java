@@ -16,12 +16,12 @@ import javax.mail.internet.MimeMessage;
  *
  * @author mac
  */
-public class EmailStudentUtils {
+public class EmailAcptUtils {
 
     private static final String USERNAME = "capstonemanangementprj@gmail.com";
     private static final String PASSWORD = "shkbroyekonjppoe";
 
-    public static boolean send(String email) {
+    public static boolean send(String email, String leaderID, String invitedID) {
         try {
             Properties prop = new Properties();
             prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -43,10 +43,9 @@ public class EmailStudentUtils {
                     Message.RecipientType.TO,
                     InternetAddress.parse(email)
             );
-            message.setSubject("Request to Group");
-            message.setText("ID: " + email + "\n"
-                    + " have a request to your Capstone Group" + "\n"
-                    + " Please check your request!");
+            message.setSubject("Accept to Group");
+            message.setText("ID: " + invitedID + "\n"
+                    + " have accepted to " + leaderID +  " Group!!!" );
 
             Transport.send(message);
 
