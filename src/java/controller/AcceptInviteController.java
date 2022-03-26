@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import request.RequestDAO;
 import user.UserDAO;
 import user.UserDTO;
+import utils.EmailAcptUtils;
 
 /**
  *
@@ -50,7 +51,8 @@ public class AcceptInviteController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UserDTO invitedUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String leaderID = request.getParameter("leaderID"); //lấy ID của leader           
+            String leaderID = request.getParameter("leaderID"); //lấy ID của leader   
+            String email = request.getParameter("email");
             UserDAO uDAO = new UserDAO();
             UserDTO leader = uDAO.getUserByUserID(leaderID);
             String invitedID = invitedUser.getUserID();
@@ -76,6 +78,9 @@ public class AcceptInviteController extends HttpServlet {
                             if (check4) {
                                 url = US;
                             }
+                            new Thread(() -> {
+                                EmailAcptUtils.send(email, leaderID, invitedID);
+                            }).start();
                         }
 
                     }
@@ -106,6 +111,9 @@ public class AcceptInviteController extends HttpServlet {
                             if (check3) {
                                 url = MT;
                             }
+                            new Thread(() -> {
+                                EmailAcptUtils.send(email, leaderID, invitedID);
+                            }).start();
                         }
                     }
                 }
