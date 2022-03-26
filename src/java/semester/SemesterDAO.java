@@ -264,4 +264,35 @@ public class SemesterDAO {
         }
         return semDTO;
     }
+    
+    public SemesterDTO getSemesterV2() throws SQLException, ClassNotFoundException {
+        SemesterDTO semesterDTO = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = " SELECT semesterID "
+                    + " FROM tblSemester "
+                    + " WHERE NO = (SELECT MAX(NO) AS STT FROM tblSemester) ";
+            stm = conn.prepareStatement(sql);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                String semesterID = rs.getString("semesterID");
+//                String semesterName = rs.getString("semesterName");
+                semesterDTO = new SemesterDTO(semesterID, "");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return semesterDTO;
+    }
 }

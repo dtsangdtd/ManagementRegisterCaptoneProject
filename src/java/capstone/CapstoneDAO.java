@@ -294,7 +294,7 @@ public class CapstoneDAO {
 //                stm.setString(1, semesterID);
 //                rs = stm.executeQuery();
 //                while (rs.next()) {
-//                    String userName = rs.getString("name");
+//                    String userName = rs.gextString("name");
 //                    list.add(new CapstoneDTO(capstoneID, capstoneName, groupID, semesterID, statusID, userName));
 //                }
 //            }

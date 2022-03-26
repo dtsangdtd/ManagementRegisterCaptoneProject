@@ -31,6 +31,10 @@ public class SemesterDTO implements Serializable {
         this.semesterName = semesterName;
     }
 
+    public SemesterDTO(String semesterID) {
+        this.semesterID = semesterID;
+    }
+    
     public String getSemesterID() {
         return semesterID;
     }

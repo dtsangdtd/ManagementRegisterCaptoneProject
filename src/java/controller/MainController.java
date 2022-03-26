@@ -28,6 +28,7 @@ public class MainController extends HttpServlet {
     private static final String RANDOM = "RandomStudentController";
     private static final String DEADLINE = "DeadlineSemesterController";
     private static final String IMPORT = "ImportController";
+    private static final String GETLISTTOPIC = "GetListTopicController";
     private static final String KICK = "KickMemberController";
 
     /**
@@ -58,6 +59,8 @@ public class MainController extends HttpServlet {
                 url = UPDATEPROFILE;
             } else if ("getList".equals(action)) {
                 url = GETLIST;
+            }else if ("getListTopic".equals(action)) {
+                url = GETLISTTOPIC;
             } else if ("Invite".equals(action)) {
                 url = INVITE;
             } else if ("Accept".equals(action)) {
