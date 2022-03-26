@@ -22,11 +22,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author PNKV
  */
+@WebServlet(name = "GetListTopicController", urlPatterns = {"/GetListTopicController"})
 public class GetListTopicController extends HttpServlet {
 
     private static final String AD = "modTopic.jsp";
@@ -37,39 +39,32 @@ public class GetListTopicController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         int checked = 1;
-        String semesterID = request.getParameter("semesterID");
-//        if (request.getParameter("radioGroup") != null) {
-//            checked = Integer.parseInt(request.getParameter("radioGroup"));
-//
-//        }
         try {
+            String semesterID = request.getParameter("semesterID");
+            if (semesterID == null) {
+                SemesterDAO daoSe = new SemesterDAO();
+                SemesterDTO semesterCurrent = daoSe.getSemesterV2();
+                semesterID = semesterCurrent.getSemesterID();
+            }
             SemesterDAO semesterDAO = new SemesterDAO();
             List<SemesterDTO> listSemesterTopic = semesterDAO.getListSemester();
             UserDAO dao = new UserDAO();
             CapstoneDAO capdao = new CapstoneDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-//            List<UserDTO> listSupervisor = dao.getListSupervisor();
-
+            
             session.setAttribute("checked", checked);
-            int pageNumber = 1;
-            int pageSize = 11;
-            if (request.getParameter("page") != null) {
-                pageNumber = Integer.parseInt(request.getParameter("page"));
-            }
-//          int noOfPages;
-//            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
+
             List<CapstoneDTO> listTopic = capdao.getTopicSearch(semesterID);
-//            request.setAttribute("noOfPages", noOfPages);
-            request.setAttribute("currentPage", pageNumber);
+
             session.setAttribute("LIST_SEMESTER_TOPIC", listSemesterTopic);
             session.setAttribute("LIST_TOPIC", listTopic);
-//            session.setAttribute("LIST_SUPERVISOR", listSupervisor);
+            session.setAttribute("SEMESTER_CURRENT", semesterID);
             Map<String, ArrayList<String>> listCapMutippleMentor = new HashMap<>();
             List<CapstoneDTO> listCapMentor = capdao.getListCapstoneMutilpleMentor();
             for (CapstoneDTO capstoneDTO : listCapMentor) {
-                if (!listCapMutippleMentor.containsKey(capstoneDTO.getCapstoneName())) {
                     listCapMutippleMentor.put(capstoneDTO.getCapstoneName(), new ArrayList<String>());
+                if (!listCapMutippleMentor.containsKey(capstoneDTO.getCapstoneName())) {
                 }
 
                 listCapMutippleMentor.get(capstoneDTO.getCapstoneName()).add(capstoneDTO.getUserName());
@@ -78,8 +73,8 @@ public class GetListTopicController extends HttpServlet {
                 String key = entry.getKey();
                 ArrayList<String> value = entry.getValue();
 
-                System.out.println("key : " + key + " - value : " + value);
             }
+                System.out.println("key : " + key + " - value : " + value);
 
             if (loginUser == null) {
                 url = LOGIN;
