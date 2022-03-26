@@ -100,7 +100,7 @@ public class UploadDAO {
                     stm.setString(1, user.getUserID());
                     stm.setString(2, user.getUsername());
                     stm.setString(3, user.getGmail());
-                    stm.setInt(4, 2);
+                    stm.setInt(4, 3);
                     stm.setString(5, user.getSemesterName());
                     check = stm.executeUpdate() > 0 ? true : false;
                 }

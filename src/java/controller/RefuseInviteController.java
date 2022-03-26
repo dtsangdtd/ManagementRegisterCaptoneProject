@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import request.RequestDAO;
 import user.UserDTO;
+import utils.EmailRefuseUtils;
 
 /**
  *
@@ -46,14 +47,25 @@ public class RefuseInviteController extends HttpServlet {
             String roleID = invitedUser.getRoleID();
             String invitedID = invitedUser.getUserID();
             String leaderID = request.getParameter("leaderID");
+            String email = request.getParameter("email");
             RequestDAO reqDao = new RequestDAO();
             boolean check = reqDao.refuseRequest(invitedID, leaderID);
             if ("US".equals(roleID)) {
-                if (check) url = US;
+                if (check) {
+                    url = US;
+                }
+                new Thread(() -> {
+                    EmailRefuseUtils.send(email, leaderID, invitedID);
+                }).start();
             } else if ("MT".equals(roleID)) {
-                if (check) url = MT;
+                if (check) {
+                    url = MT;
+                }
+                new Thread(() -> {
+                    EmailRefuseUtils.send(email, leaderID, invitedID);
+                }).start();
             }
-            
+
         } catch (Exception e) {
             log("Error at RefuseInviteController" + e.toString());
         } finally {

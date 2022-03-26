@@ -11,18 +11,17 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import request.RequestDTO;
 
 /**
  *
  * @author mac
  */
-public class EmailUtils {
+public class EmailAcptUtils {
 
     private static final String USERNAME = "capstonemanangementprj@gmail.com";
     private static final String PASSWORD = "shkbroyekonjppoe";
 
-    public static boolean send(String email) {
+    public static boolean send(String email, String leaderID, String invitedID) {
         try {
             Properties prop = new Properties();
             prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -30,12 +29,6 @@ public class EmailUtils {
             prop.put("mail.smtp.auth", "true");
             prop.put("mail.smtp.starttls.enable", "true");
 
-//            Properties prop = new Properties();
-//            prop.put("smtp.office365.com", "587");
-//            prop.put("mail.smtp.auth", true);
-//            prop.put("mail.smtp.starttls.enable", true);
-//            prop.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
-//            prop.put("mail.smtp.starttls.enable", "true");
             Session session = Session.getInstance(prop,
                     new javax.mail.Authenticator() {
                 @Override
@@ -50,10 +43,9 @@ public class EmailUtils {
                     Message.RecipientType.TO,
                     InternetAddress.parse(email)
             );
-            message.setSubject("Request to Group");
-            message.setText("ID: " + email + "\n"
-                    + " have a request to your Capstone Group" + "\n"
-                    + " Please check your request!");
+            message.setSubject("Accept to Group");
+            message.setText("ID: " + invitedID + "\n"
+                    + " have accepted to " + leaderID +  " Group!!!" );
 
             Transport.send(message);
 
