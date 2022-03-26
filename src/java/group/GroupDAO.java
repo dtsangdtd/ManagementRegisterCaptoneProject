@@ -446,4 +446,40 @@ public class GroupDAO {
         }
         return check;
     }
+    
+    public List<GroupDTO> getListUserGroup (String semesterID) throws SQLException {
+        List<GroupDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+             conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT u.name, g.groupName "
+                        + " FROM tblUser u full join tblUserGroup ug on u.userID = ug.userID full join tblGroup g on ug.groupID = g.groupID "
+                        + " WHERE u.semesterID = ? AND ug.userID is not null ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userName = rs.getString("name");
+                    String groupName = rs.getString("groupName");
+                    list.add(new GroupDTO("", groupName, "", userName, "", "", "", "", semesterID, ""));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 }
