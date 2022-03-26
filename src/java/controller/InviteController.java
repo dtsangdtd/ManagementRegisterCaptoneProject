@@ -19,7 +19,7 @@ import request.RequestDAO;
 import request.RequestDTO;
 import user.UserDAO;
 import user.UserDTO;
-import utils.EmailStudentUtils;
+import utils.EmailSendUtils;
 
 /**
  *
@@ -86,7 +86,7 @@ public class InviteController extends HttpServlet {
                                     url = US;
                                 }
                                 new Thread(() -> {
-                                    EmailStudentUtils.send(email);
+                                    EmailSendUtils.send(email, loginUserID, invitedID);
                                 }).start();
                             }
                         }
@@ -101,7 +101,7 @@ public class InviteController extends HttpServlet {
                         url = US;
                     }
                     new Thread(() -> {
-                        EmailStudentUtils.send(email);
+                        EmailSendUtils.send(email, loginUserID, invitedID);
                     }).start();
                 }
             }
@@ -114,7 +114,7 @@ public class InviteController extends HttpServlet {
                     url = MT;
                 }
                 new Thread(() -> {
-                    EmailStudentUtils.send(email);
+                    EmailSendUtils.send(email, loginUserID, invitedID);
                 }).start();
             }
 
