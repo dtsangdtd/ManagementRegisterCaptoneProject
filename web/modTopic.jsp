@@ -125,50 +125,33 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Supervior</th>
-                                                <th>Group Name</th>
-                                                <th style="width: 160px">
-                                                    <div class="dropdown">
-                                                        <i class="fas fa-filter "></i>
-                                                        <form action="GetListTopicController" >
-<!-- eq SP22 -->                                            <c:if test="${param.semesterID }">
-                                                                <div class="dropdown-content">
-                                                                    <input type="radio" id="scales" name="radioGroup"
-                                                                           <c:if test="${sessionScope.checked == '1'}">
-                                                                               checked="checked"
-                                                                           </c:if>
-                                                                           value="1">
-                                                                    <label for="full">Acitve</label>
-                                                                    <input type="radio" id="scales" name="radioGroup"
-                                                                           <c:if test="${sessionScope.checked == '0'}">
-                                                                               checked="checked"
-                                                                           </c:if>
-                                                                           value="0">
-                                                                    <label for="notFull">in Active</label>
-
-                                                                </div>
-                                                            </c:if>
-                                                            <input type="hidden" name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
-
-                                                        </form>
-                                                    </div>Status 
+                                                <!--                                                <th>Group Name</th>-->
+                                                <th >
+                                                    Status 
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="top" varStatus="counter" items="${LIST_TOPIC}">
-                                            <tbody>
+                                            <c:forEach var="top" varStatus="counter" items="${sessionScope.LIST_MULTI_MT}">
                                                 <tr>
                                                     <td>${counter.count}</td>
-                                                    <td>${top.capstoneName}</td>
-                                                    <td>${top.userName}</td>
-                                                    <td>${top.groupID}</td>
+                                                    <td>${top.key}</td>
+                                                    <!--<td></td>-->
                                                     <td>
-                                                        <c:if test="${top.statusID == '0'}"><div class="badge bg-dark">inActive</div></c:if>
-                                                        <c:if test="${top.statusID == '1'}"><div class="badge bg-success">Active</div></c:if>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                        </c:forEach>
+                                                        <c:forEach var="value" items="${top.value}">
+                                                            <span>${value.userName},</span>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach var="value" varStatus="status" items="${top.value}">
+                                                            
+                                                            <c:if test="${value.statusId == '0' && status.last}"><div class="badge bg-dark">inActive</div></c:if>
+                                                            <c:if test="${value.statusId == '1' && status.last}"><div class="badge bg-success">Active</div></c:if>
+                                                            
+                                                        </c:forEach>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
 

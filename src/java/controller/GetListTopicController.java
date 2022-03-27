@@ -52,7 +52,7 @@ public class GetListTopicController extends HttpServlet {
             CapstoneDAO capdao = new CapstoneDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            
+
             session.setAttribute("checked", checked);
 
             List<CapstoneDTO> listTopic = capdao.getTopicSearch(semesterID);
@@ -60,22 +60,21 @@ public class GetListTopicController extends HttpServlet {
             session.setAttribute("LIST_SEMESTER_TOPIC", listSemesterTopic);
             session.setAttribute("LIST_TOPIC", listTopic);
             session.setAttribute("SEMESTER_CURRENT", semesterID);
-            Map<String, ArrayList<String>> listCapMutippleMentor = new HashMap<>();
-            List<CapstoneDTO> listCapMentor = capdao.getListCapstoneMutilpleMentor();
-            for (CapstoneDTO capstoneDTO : listCapMentor) {
-                    listCapMutippleMentor.put(capstoneDTO.getCapstoneName(), new ArrayList<String>());
+            Map<String, ArrayList<CapstoneDTO>> listCapMutippleMentor = new HashMap<>();
+            List<CapstoneDTO> listCapMentor = capdao.getListCapstoneMutilpleMentorV2(semesterID);
+            for (CapstoneDTO capstoneDTO : listCapMentor) {                
                 if (!listCapMutippleMentor.containsKey(capstoneDTO.getCapstoneName())) {
+                    listCapMutippleMentor.put(capstoneDTO.getCapstoneName(), new ArrayList<CapstoneDTO>());
                 }
 
-                listCapMutippleMentor.get(capstoneDTO.getCapstoneName()).add(capstoneDTO.getUserName());
+                listCapMutippleMentor.get(capstoneDTO.getCapstoneName()).add(capstoneDTO);
             }
-            for (Map.Entry<String, ArrayList<String>> entry : listCapMutippleMentor.entrySet()) {
+            for (Map.Entry<String, ArrayList<CapstoneDTO>> entry : listCapMutippleMentor.entrySet()) {
                 String key = entry.getKey();
-                ArrayList<String> value = entry.getValue();
-
+                ArrayList<CapstoneDTO> value = entry.getValue();
+                                System.out.println("key : " + key + " - value : " + value);
             }
-                System.out.println("key : " + key + " - value : " + value);
-
+            session.setAttribute("LIST_MULTI_MT", listCapMutippleMentor);
             if (loginUser == null) {
                 url = LOGIN;
             } else if ("AD".equals(loginUser.getRoleID())) {
