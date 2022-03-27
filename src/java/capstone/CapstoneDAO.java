@@ -101,20 +101,19 @@ public class CapstoneDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 System.out.println(semesterID);
-                String sql = " SELECT  c.capstoneID, c.capstoneName, c.groupID, c.statusID, u.name "
-                        + " FROM tblCapstone c full join tblUserCapstone uc on c.capstoneID = uc.capstoneID full join tblUser u on u.userID = uc.userID  "
-                        + " WHERE c.semesterID = ? AND u.roleID = 'MT'"
-                        + " ORDER BY c.capstoneName DESC";
+                String sql = " SELECT  capstoneID, capstoneName, groupID, statusID "
+                        + " FROM tblCapstone "
+                        + " WHERE semesterID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String capstoneID = rs.getString("capstoneID");
                     String capstoneName = rs.getString("capstoneName");
-                    String userName = rs.getString("name");
+//                    String userName = rs.getString("name");
                     String groupID = rs.getString("groupID");
                     String statusID = rs.getString("statusID");
-                    list.add(new CapstoneDTO(capstoneID, capstoneName, groupID, semesterID, statusID, userName));
+                    list.add(new CapstoneDTO(capstoneID, capstoneName, groupID, semesterID, statusID, ""));
                 }
             }
         } catch (Exception e) {
@@ -173,8 +172,8 @@ public class CapstoneDAO {
         }
         return list;
     }
-    
-    public List<CapstoneDTO> getListMentorCapstone (String userID) throws SQLException {
+
+    public List<CapstoneDTO> getListMentorCapstone(String userID) throws SQLException {
         List<CapstoneDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -336,9 +335,9 @@ public class CapstoneDAO {
                     String capstoneID = rs.getString("capstoneID");
                     String capstoneName = rs.getString("capstoneName");
                     String name = rs.getString("name");
-                    list.add(new CapstoneDTO(capstoneID, capstoneName, "", "","", name));
+                    list.add(new CapstoneDTO(capstoneID, capstoneName, "", "", "", name));
                 }
-                System.out.println( list);
+                System.out.println(list);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -356,4 +355,46 @@ public class CapstoneDAO {
         return list;
     }
 
+    public List<CapstoneDTO> getListCapstoneMutilpleMentorV2(String semesterID) throws SQLException {
+        List<CapstoneDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT tb4.capstoneID, tb4.capstoneName, tb4.statusID, tb1.name\n"
+                        + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID\n"
+                        + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID\n"
+                        + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
+                        + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID)\n"
+                        + "WHERE tb4.semesterID = ? AND tb1.roleID = 'MT'\n"
+                        + "GROUP BY tb4.capstoneID,tb4.capstoneName,tb1.name, tb4.statusID ORDER BY tb4.capstoneID ASC  ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, semesterID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String capstoneID = rs.getString("capstoneID");
+                    String capstoneName = rs.getString("capstoneName");
+                    String statusID = rs.getString("statusID");
+                    String name = rs.getString("name");
+                    list.add(new CapstoneDTO(capstoneID, capstoneName, "", "", statusID, name));
+                }
+                System.out.println(list);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 }
