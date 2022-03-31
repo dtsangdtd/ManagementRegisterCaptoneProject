@@ -5,9 +5,13 @@
  */
 package controller;
 
+import capstone.CapstoneDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,9 +52,20 @@ public class GetListSupController extends HttpServlet {
                 int noOfPages;
                 noOfPages = (int) Math.ceil(dao.getNoOfRecordsSupervisor(checked) * 1.0 / pageSize);
                 List<UserDTO> listSupervisor = dao.getSupervisorSearch(pageSize, pageNumber, checked);
+
+                Map<String, ArrayList<UserDTO>> ListSupervisorMap = new HashMap<>();
+                for (UserDTO userDTO : listSupervisor) {
+                    if (!ListSupervisorMap.containsKey(userDTO.getUserID())) {
+                        ListSupervisorMap.put(userDTO.getUserID(), new ArrayList<UserDTO>());
+                    }
+
+                    ListSupervisorMap.get(userDTO.getUserID()).add(userDTO);
+                }
+
+                System.out.println(listSupervisor);
                 request.setAttribute("noOfPages", noOfPages);
                 request.setAttribute("currentPage", pageNumber);
-                session.setAttribute("LIST_SUPERVISOR", listSupervisor);
+                session.setAttribute("LIST_SUPERVISOR", ListSupervisorMap);
                 if (loginUser == null) {
                     url = LOGIN;
                 } else if ("AD".equals(loginUser.getRoleID())) {
@@ -66,47 +81,43 @@ public class GetListSupController extends HttpServlet {
         }
     }
 
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
+        processRequest(request, response);
     }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
