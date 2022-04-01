@@ -97,7 +97,12 @@
                             <form id="form" action="UpdateProfileController" method="POST">
                                 <div class="container">                              
                                     <div class="row">
+                                        <c:if test="${sessionScope.Check eq '1'}">
                                         <h2 style="text-align: center">Edit profile</h2>
+                                        </c:if>
+                                        <c:if test="${sessionScope.Check eq '1'}">
+                                            <h2 style="text-align: center">Profile</h2>
+                                        </c:if>
                                         <div class="col-7">
                                             <div class="row">
                                                 <div class="col-6">
