@@ -41,7 +41,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photo = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
-                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photo, "");
+                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photo);
                 }
             }
         } catch (Exception e) {
@@ -68,8 +68,8 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT u.name, u.password, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone, sm.deadline "
-                        + "FROM tblUser u, tblStatus s, tblSemester sm "
+                String sql = "SELECT u.name, u.password, u.roleID, u.userID, s.statusID, u.photoUrl, u.phone "
+                        + "FROM tblUser u, tblStatus s "
                         + "WHERE u.statusID = s.statusID AND gmail=? AND s.statusID != 0 ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, gmail);
@@ -82,8 +82,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photoUrl = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
-                    String deadline = rs.getString("deadline");
-                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photoUrl, deadline, "");
+                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photoUrl);
                 }
             }
         } catch (Exception e) {
@@ -124,7 +123,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photoUrl = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
-                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photoUrl, "");
+                    user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photoUrl);
                 }
             }
         } catch (Exception e) {
@@ -164,7 +163,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
 
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO("", userID, username, "", "US", gmail, phone, statusID, photoUrl, ""));
+                    list.add(new UserDTO("", userID, username, "", "US", gmail, phone, statusID, photoUrl));
                 }
             }
 
@@ -204,7 +203,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
 
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO("", userID, username, "", "MT", gmail, phone, statusID, photoUrl, ""));
+                    list.add(new UserDTO("", userID, username, "", "MT", gmail, phone, statusID, photoUrl));
                 }
             }
 
@@ -437,7 +436,7 @@ public class UserDAO {
                     String photoUrl = rs.getString("photoUrl");
                     String roleID = rs.getString("roleID");
                     String statusID = rs.getString("statusID");
-                    list.add(new UserDTO(stt, userID, username, "", roleID, gmail, phone, statusID, photoUrl, ""));
+                    list.add(new UserDTO(stt, userID, username, "", roleID, gmail, phone, statusID, photoUrl));
                 }
             }
         } catch (Exception e) {
