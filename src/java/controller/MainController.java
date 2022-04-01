@@ -31,6 +31,7 @@ public class MainController extends HttpServlet {
     private static final String IMPORTCAPSTONE = "ImportCapstoneController";
     private static final String GETLISTTOPIC = "GetListTopicController";
     private static final String KICK = "KickMemberController";
+    private static final String GROUPMAX = "ChartController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,6 +69,8 @@ public class MainController extends HttpServlet {
                 url = KICK;
             }else if ("Infor".equals(action)) {
                 url = UPDATEPROFILE;
+            }else if ("maxGroup".equals(action)) {
+                url = GROUPMAX;
             }else {
                 session.setAttribute("ERROR_MESSAGE", "Function is not available!");
             }
