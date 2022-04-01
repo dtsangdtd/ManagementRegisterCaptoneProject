@@ -19,7 +19,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListUserGroupController">
+        <a class="nav-link" href="GetListUserGroupController?semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Groups</span>
         </a>
