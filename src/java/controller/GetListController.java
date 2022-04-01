@@ -56,6 +56,8 @@ public class GetListController extends HttpServlet {
             UserDAO dao = new UserDAO();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String loginUserID = loginUser.getUserID();
+//            String userDeadline = loginUser.getDeadline();
             List<UserDTO> listSupervisor = dao.getListSupervisor();
             session.setAttribute("checked", checked);
             int pageNumber = 1;
@@ -67,10 +69,12 @@ public class GetListController extends HttpServlet {
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked, semesterID, searchName) * 1.0 / pageSize);
             List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID, searchName);
 //            System.out.println(noOfPages);
+            SemesterDAO sem = new SemesterDAO();
+            SemesterDTO semDeadline = sem.getSemesterByUserID(loginUserID);
 
             String roleID = loginUser.getRoleID();
             if ("US".equals(roleID) || "LD".equals(roleID)) {
-                String loginUserID = loginUser.getUserID();
+                
                 GroupDAO gDAO = new GroupDAO();
                 int groupID = gDAO.getGroupIDByUserID(loginUserID);
                 if (groupID == 0) {
@@ -82,6 +86,9 @@ public class GetListController extends HttpServlet {
                     }
                 }
             }
+//            if(userDeadline.equals(semDeadline)){
+//                check = false;
+//            }
             if(roleID.equals("US")){
                 check = false;
             }
@@ -89,7 +96,6 @@ public class GetListController extends HttpServlet {
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);
-            System.out.println(listStudent);
             session.setAttribute("LIST_STUDENT", listStudent);
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {

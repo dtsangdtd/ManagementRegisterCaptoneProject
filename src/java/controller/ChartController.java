@@ -5,28 +5,29 @@
  */
 package controller;
 
-import capstone.CapstoneDAO;
-import capstone.CapstoneDTO;
 import group.GroupDAO;
-import group.GroupDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import semester.SemesterDAO;
+import semester.SemesterDTO;
+import user.UserDTO;
 
 /**
  *
- * @author dtsang
+ * @author Mai
  */
-@WebServlet(name = "GetListStudentInGroupDetails", urlPatterns = {"/GetListStudentInGroupDetails"})
-public class GetListStudentInGroupDetails extends HttpServlet {
+@WebServlet(name = "ChartController", urlPatterns = {"/ChartController"})
+public class ChartController extends HttpServlet {
 
-    private static final String GROUP_DETAILS = "group-detail.jsp";
+    private static final String AD = "moderator.jsp";
     private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,20 +35,27 @@ public class GetListStudentInGroupDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         try {
-            String groupID = request.getParameter("groupID");
-            GroupDAO groupDAO = new GroupDAO();
-            List<GroupDTO> listStudentInGroup = groupDAO.getListStudentInGroup(groupID);
-            CapstoneDAO capstoneDAO = new CapstoneDAO();
-            CapstoneDTO capstone = capstoneDAO.getCapstoneName(groupID);
             HttpSession session = request.getSession();
-            session.setAttribute("CAPSTONE",capstone);
-            session.setAttribute("LISTSTUDENTINGROUP", listStudentInGroup);
-            if(groupID != null){
-                url = GROUP_DETAILS;
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            GroupDAO daoSe = new GroupDAO();
+            int groupMax = daoSe.getMaxGroupID();
+            int capstoneMax = daoSe.getMaxCapstoneID();
+            int capstoneChecked = daoSe.getCapstoneIDCheck();
+            int studentMax = daoSe.getMaxStudentID();
+            int studentInGroup = daoSe.getStudnentInGroup();
+            session.setAttribute("GROUP_MAX", groupMax);
+            session.setAttribute("CAPSTONE_MAX", capstoneMax);
+            session.setAttribute("CAPSTONE_CHECKED", capstoneChecked);
+            session.setAttribute("STUDENT_MAX", studentMax);
+            session.setAttribute("STUDENT_IN_GROUP", studentInGroup);
+            if (loginUser == null) {
+                url = LOGIN;
+            } else if ("AD".equals(loginUser.getRoleID())) {
+                url = AD;
             }
-            
+
         } catch (Exception e) {
-            e.printStackTrace();
+            log("Error at DeadlineSemesterController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

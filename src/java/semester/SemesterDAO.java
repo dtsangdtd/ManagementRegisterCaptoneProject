@@ -50,7 +50,6 @@ public class SemesterDAO {
                 conn.close();
             }
         }
-//        System.out.println(list);
         return list;
     }
 
@@ -198,7 +197,6 @@ public class SemesterDAO {
                 conn.close();
             }
         }
-//        System.out.println(list);
         return list;
     }
 
@@ -227,8 +225,8 @@ public class SemesterDAO {
         }
         return result;
     }
-    
-    public SemesterDTO getSemesterByUserID (String userID) throws SQLException {
+
+    public SemesterDTO getSemesterByUserID(String userID) throws SQLException {
         SemesterDTO semDTO = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -264,7 +262,7 @@ public class SemesterDAO {
         }
         return semDTO;
     }
-    
+
     public SemesterDTO getSemesterV2() throws SQLException, ClassNotFoundException {
         SemesterDTO semesterDTO = null;
         Connection conn = null;

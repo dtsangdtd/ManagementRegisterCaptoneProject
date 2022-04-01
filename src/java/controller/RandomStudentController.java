@@ -36,7 +36,7 @@ import user.UserDTO;
 public class RandomStudentController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "GetListController?radioGroup=0&semesterID=SP22";
+    private static final String SUCCESS = "GetListUserGroupController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,7 +49,6 @@ public class RandomStudentController extends HttpServlet {
             List<UserDTO> listStudentNoGroup = dao.getListStudentNoGroup(semesterID);
             int n = listStudentNoGroup.size();
             // check n>0
-            System.out.println(n);
             SemesterDAO daoSes = new SemesterDAO();
             int maxSesID = daoSes.getMaxSemesterNO();
             SemesterDTO sesmester = daoSes.getSemester(maxSesID);

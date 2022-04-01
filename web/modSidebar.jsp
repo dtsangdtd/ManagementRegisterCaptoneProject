@@ -19,7 +19,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListUserGroupController">
+        <a class="nav-link" href="GetListUserGroupController?semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Groups</span>
         </a>
@@ -32,12 +32,12 @@
         </a>
     </li>
 
-    <li class="nav-item ">
+<!--    <li class="nav-item ">
         <a class="nav-link" href="GetListSupController?radioSupGroup=0">
             <i class="fas fa-fw fa-folder"></i>
             <span>Supervisors</span>
         </a>
-    </li>
+    </li>-->
 
 <!--    <li class="nav-item ">
         <a class="nav-link" href="modRequest.jsp">

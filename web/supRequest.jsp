@@ -92,25 +92,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <div class="dropdown mb-4">
-                                                    <button class="btn btn-info dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                        Semester
-                                                    </button>
-                                                    <div class="dropdown-menu animated--fade-in"
-                                                         aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
-                                                    </div>
-                                                </div>
-                                            </div>                                          
-                                        </div>
-                                    </div>
-
+                                   
                                     <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>

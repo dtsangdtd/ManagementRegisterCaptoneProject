@@ -231,7 +231,6 @@ public class GroupDAO {
                     list.add(new GroupDTO(groupID, groupName, userID, username, "", role, gmail, phone, statusID, photoUrl));
                 }
             }
-//            System.out.println(list);
         } catch (Exception e) {
         } finally {
             if (rs != null) {
@@ -324,7 +323,6 @@ public class GroupDAO {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
-            System.out.println(list.size());
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = " INSERT INTO tblUserGroup(userGroupID, userID, groupID, isSupervisor) "
@@ -584,5 +582,135 @@ public class GroupDAO {
             }
         }
         return list;
+    }
+    
+    public int getMaxCapstoneID() throws SQLException {
+        int capstoneID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT COUNT(c.capstoneID) AS ALLCAPSTONE "
+                        + " FROM tblCapstone c"
+                        + " WHERE c.statusID = '1' ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    capstoneID = rs.getInt("MAXCAPSTONEID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return capstoneID;
+    }
+    public int getCapstoneIDCheck() throws SQLException {
+        int capstoneID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT COUNT(c.capstoneID) AS CAPSTONEHADCHECKED "
+                        + " FROM tblCapstone c "
+                        + " WHERE c.statusID = '0'";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    capstoneID = rs.getInt("MAXCAPSTONEID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return capstoneID;
+    }
+    
+    public int getMaxStudentID() throws SQLException {
+        int studentID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT COUNT(u.userID) AS ALLSTUDENT "
+                        + " FROM tblUser u "
+                        + " WHERE u.roleID = 'LD' OR u.roleID = 'US' AND u.semesterID = 'SP22' ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    studentID = rs.getInt("MAXSTUDENTID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return studentID;
+    }
+    public int getStudnentInGroup() throws SQLException {
+        int studentID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT COUNT(u.userID) AS USERINGROUP "
+                        + " FROM tblUser u "
+                        + " WHERE u.statusID = '2'";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    studentID = rs.getInt("USERINGROUP");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return studentID;
     }
 }

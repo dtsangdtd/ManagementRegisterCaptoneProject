@@ -62,7 +62,6 @@ public class GetListSupController extends HttpServlet {
                     ListSupervisorMap.get(userDTO.getUserID()).add(userDTO);
                 }
 
-                System.out.println(listSupervisor);
                 request.setAttribute("noOfPages", noOfPages);
                 request.setAttribute("currentPage", pageNumber);
                 session.setAttribute("LIST_SUPERVISOR", ListSupervisorMap);
