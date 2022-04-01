@@ -37,7 +37,6 @@
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                             <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -153,27 +152,6 @@
                 </div>
 
                 <!-- End of Main Content -->
-                <section class="chatbox js-chatbox">
-                    <div class="chatbox__header">
-                        <h3 class="chatbox__header-cta-text"><span class="chatbox__header-cta-icon"><i
-                                    class="fas fa-comments"></i></span>Let's chat</h3>
-                        <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-chevron-up"></i></button>
-                    </div>
-                    <!-- End of .chatbox__header -->
-                    <div class="js-chatbox-display chatbox__display">
-
-                    </div>
-                    <!-- End of .chatbox__display -->
-                    <form class="js-chatbox-form chatbox__form">     
-                        <div style="display: flex; width: 100%">                  
-                            <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
-                            <span>
-                                <button class="chatbox__form-submit u-btn"><i class="fas fa-paper-plane"></i></button>
-                            </span>
-                        </div>
-                    </form>
-                    <!-- End of .chatbox__form -->
-                </section>
                 <!-- Footer -->
                 <%@include file ="footer.jsp" %>
                 <!-- End of Footer -->
