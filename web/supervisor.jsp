@@ -98,12 +98,19 @@
                                                     <button class="btn btn-info dropdown-toggle" type="button"
                                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                        Semester
+                                                        Semester:
+                                                        <c:forEach items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <c:if test="${param.semesterID == listSemester.semesterID}">
+                                                                <span>${listSemester.semesterName}</span>
+                                                            </c:if> 
+                                                        </c:forEach>
                                                     </button>
                                                     <div class="dropdown-menu animated--fade-in"
                                                          aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <a class="dropdown-item" href="GetListMentorGroupcController?semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>                                           
@@ -116,55 +123,39 @@
                                                 <th>Group Name</th>
                                                 <th>Capstone Name</th>
                                                 <th>Person Of Group</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>New York</td>
-                                                <td>Tourism Smart Card</td>
-                                                <td>4</td>
-                                                <td>
-                                                    <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-search"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>New York</td>
-                                                <td>Tourism Smart Card</td>
-                                                <td>4</td>
-                                                <td>
-                                                    <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-search"></i>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
+                                            <c:forEach var="group" varStatus="counter" items="${LIST_MENTOR_GROUP}">
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${group.groupName}</td>
+                                                    <td>${group.capstoneName}</td>
+                                                    <td>${group.numOfPer}</td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                                  <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                        <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
 
                 </div>

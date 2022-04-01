@@ -68,7 +68,7 @@ public class GetListMentorTopicController extends HttpServlet {
             }
 //          int noOfPages;
 //            noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked,semesterID) * 1.0 / pageSize);
-            List<CapstoneDTO> listTopic = capDAO.getListMentorCapstone(userID);
+            List<CapstoneDTO> listTopic = capDAO.getListMentorCapstone(userID, semesterID);
 //            request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER_TOPIC", listSemesterTopic);
@@ -86,10 +86,8 @@ public class GetListMentorTopicController extends HttpServlet {
             for (Map.Entry<String, ArrayList<String>> entry : listCapMutippleMentor.entrySet()) {
                 String key = entry.getKey();
                 ArrayList<String> value = entry.getValue();
-
-                System.out.println("key : " + key + " - value : " + value);
             }
-            if (loginUser == null) {
+        if (loginUser == null) {
                 url = ERROR;
             } else if ("MT".equals(loginUser.getRoleID())) {
                 url = MT;

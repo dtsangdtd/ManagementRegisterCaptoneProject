@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item ">
-        <a class="nav-link" href="supervisor.jsp">
+        <a class="nav-link" href="GetListMentorGroupController?semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Your Groups</span>
         </a>
