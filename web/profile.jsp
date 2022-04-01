@@ -103,19 +103,19 @@
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                                        <input class="form-control" type="text" id="userID" name="userID" aria-label="Disabled input example" readonly value="${sessionScope.INFOR.userID}">
+                                                        <input class="form-control" type="text" id="userID" name="userID" aria-label="Disabled input example" value="${sessionScope.INFOR.userID}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                        <input type="email" class="form-control" readonly name="email" id="exampleFormControlInput1" placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
+                                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-                                                        <input type="text" class="form-control" readonly name="fullname" id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
+                                                        <input type="text" class="form-control" name="fullname" id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -125,7 +125,7 @@
                                                         <span id="span"></span>
                                                     </div>
                                                 </div>
-                                                <c:if test="${sessionScope.LOGIN_USER.roleID ne 'MT'}">
+                                                <c:if test="${sessionScope.LOGIN_USER.roleID ne 'MT' and sessionScope.LOGIN_USER.roleID ne 'AD' }">
                                                     <div class="col-6">
                                                         <div class="mb-3">
                                                             <label for="exampleFormControlInput1" class="form-label">Semester</label>
@@ -320,6 +320,38 @@
                 readURL(this);
 
             });
+//            
+//        $(document).ready(function() {
+//
+//                //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+//                $("#form").validate({
+//                        rules: {
+//                                userID: "required",
+//                                email: "required",
+//                                fullname: {
+//                                        required: true,
+//                                        minlength: 2
+//                                },
+//                                phone: {
+//                                    required: true,
+//                                    minlength: 10
+//                                }
+//                        },
+//                        messages: {
+//                                userID: "phone is required",
+//                                email: "Vui lòng nhập tên",
+//                                fullname: {
+//                                        required: "phone is required",
+//                                        minlength: "Địa chỉ ngắn vậy, chém gió ah?"
+//                                },
+//                                phone:{
+//                                     required: "phone is required",
+//                                     minlength: "Địa chỉ ngắn vậy, chém gió ah?"
+//                                }
+//                        }
+//                });
+//        });
+            
             //sweatalert
             $("#btnSubmit").click(function () {
 //                if ($("input").first().val() === "correct") {

@@ -38,7 +38,7 @@ public class GetListUserGroupController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             GroupDAO gDAO = new GroupDAO();
-            String semesterID = "SP22";
+            String semesterID = request.getParameter("semesterID");
             Map<String, ArrayList<String>> listUserGroup = new HashMap<>();
             List<GroupDTO> listGroup = gDAO.getListUserGroup(semesterID);
             for (GroupDTO gDTO : listGroup) {
