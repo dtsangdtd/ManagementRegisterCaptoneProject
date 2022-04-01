@@ -179,10 +179,10 @@
                                                         <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
                                                         <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
                                                         </td>
-                                                        <td>${stu.roleID}
+                                                        <td>${stu.roleID} 
                                                         <c:if test="${stu.roleID eq 'US'}">
-                                                            <input id="txtUserID" name="txtUserID" value="${stu.userID}" hidden/>
-                                                            <i id="btnEditRole" style="cursor: pointer" class="fas fa-user-edit fa-sm fa-fw"></i>
+                                                            <a  id="btnEditRole" href="UpdateRoleController?txtUserID=${stu.userID}"><i style="cursor: pointer" class="fas fa-user-edit fa-sm fa-fw"></i></a>
+
                                                         </c:if>
                                                     </td>
                                                 </tr>
@@ -405,6 +405,32 @@
                 });
             });
         </script>
+        <script type="text/javascript">
+//            $(document).on("click", "#edit", function (e) {
+//                Swal.fire({
+//                    title: 'Are you sure?',
+//                    text: "You want to update it!",
+//                    icon: 'warning',
+//                    showCancelButton: true,
+//                    confirmButtonColor: '#3085d6',
+//                    cancelButtonColor: '#d33',
+//                    confirmButtonText: 'Yes, Update to Leader!'
+//                }).then((result) => {
+//                    if (result.isConfirmed) {
+//                        Swal.fire(
+//                                'Updated!',
+//                                'Your role has been updated.',
+//                                'success'
+//                                );
+//                        setTimeout(function (e) {
+//                            $( "#btnEditRole" ).click();
+//                        }, 1000);
+//                    }
+//                });
+//            });
+
+
+        </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
             $(function () {
@@ -445,31 +471,12 @@
                 console.log(selected);
                 $(this).closest("form").submit();
                 e.preventDefault();
-            })
-            $(document).on("click", "#btnEditRole", function (e) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You want to update it!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Update to Leader!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var txtUserID = $("#txtUserID").val();
-                        Swal.fire(
-                                'Updated!',
-                                'Your role has been updated.',
-                                'success'
-                                );
-                        setTimeout(function (e) {
-                            window.location.href = "UpdateRoleController?txtUserID=" + txtUserID;
-                        }, 1000);
-                    }
-                })
             });
+
+
+
         </script>
+
         <!-- Bootstrap core JavaScript-->
 
         <script src="vendor/jquery/jquery.min.js"></script>

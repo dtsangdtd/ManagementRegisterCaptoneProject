@@ -37,7 +37,7 @@ public class GetListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         int checked = 1;
-        String semesterID = "SP22";
+        String semesterID = request.getParameter("semesterID");
 
 //        System.out.println(request.getParameter("radioGroup"));
         if (request.getParameter("radioGroup") != null) {
