@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/web/studentSidebar.jsp</file>
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/src/java/controller/GetListController.java</file>
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
@@ -16,6 +17,20 @@
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/web/supTopic.jsp</file>
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/src/java/controller/LoginController.java</file>
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/src/java/group/GroupDAO.java</file>
+=======
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/group/Cart.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/group/GroupDAO.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/upload/UploadError.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/modStudentList.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/upload/UploadDAO.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/ImportController.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/RandomStudentController.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/capstone/CapstoneDAO.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/DeadlineSemesterController.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/GetListGroupController.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/capstone/CapstoneDTO.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

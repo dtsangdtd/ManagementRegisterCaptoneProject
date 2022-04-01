@@ -18,12 +18,12 @@ import user.UserDTO;
 
 /**
  *
- * @author dtsang
+ * @author Mai
  */
-@WebServlet(name = "UpdateProfileController", urlPatterns = {"/UpdateProfileController"})
-public class UpdateProfileController extends HttpServlet {
+@WebServlet(name = "GetInforController", urlPatterns = {"/GetInforController"})
+public class GetInforController extends HttpServlet {
 
-    private static final String SUCCESS = "profile.jsp";
+    private static final String SUCCESS = "infor.jsp";
     private static final String ERROR = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -32,16 +32,15 @@ public class UpdateProfileController extends HttpServlet {
         String url = ERROR;
         try {
             String userID = request.getParameter("userID");
-            String name = request.getParameter("fullname");
-            String phone = request.getParameter("phone");
-            String photoUrl = request.getParameter("imageURL");
             UserDAO userDao = new UserDAO();
-            userDao.updateInfor(name, phone, photoUrl, userID);
             UserDTO userInfor = userDao.getInforUser(userID);
+            System.out.println(userInfor);
             HttpSession session = request.getSession();
-            session.setAttribute("INFOR", userInfor);
+            session.setAttribute("INFORSTU", userInfor);
+            session.setAttribute("Check", 1);
+            url = SUCCESS;
         } catch (Exception e) {
-            log("ERROR at UpdateProfileController" + e.toString());
+            log("ERROR at GetInforController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

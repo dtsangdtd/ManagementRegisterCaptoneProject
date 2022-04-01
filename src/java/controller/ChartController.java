@@ -5,43 +5,57 @@
  */
 package controller;
 
+import group.GroupDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import user.UserDAO;
+import semester.SemesterDAO;
+import semester.SemesterDTO;
 import user.UserDTO;
 
 /**
  *
- * @author dtsang
+ * @author Mai
  */
-@WebServlet(name = "UpdateProfileController", urlPatterns = {"/UpdateProfileController"})
-public class UpdateProfileController extends HttpServlet {
+@WebServlet(name = "ChartController", urlPatterns = {"/ChartController"})
+public class ChartController extends HttpServlet {
 
-    private static final String SUCCESS = "profile.jsp";
-    private static final String ERROR = "login.jsp";
+    private static final String AD = "moderator.jsp";
+    private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = LOGIN;
         try {
-            String userID = request.getParameter("userID");
-            String name = request.getParameter("fullname");
-            String phone = request.getParameter("phone");
-            String photoUrl = request.getParameter("imageURL");
-            UserDAO userDao = new UserDAO();
-            userDao.updateInfor(name, phone, photoUrl, userID);
-            UserDTO userInfor = userDao.getInforUser(userID);
             HttpSession session = request.getSession();
-            session.setAttribute("INFOR", userInfor);
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            GroupDAO daoSe = new GroupDAO();
+            int groupMax = daoSe.getMaxGroupID();
+            int capstoneMax = daoSe.getMaxCapstoneID();
+            int capstoneChecked = daoSe.getCapstoneIDCheck();
+            int studentMax = daoSe.getMaxStudentID();
+            int studentInGroup = daoSe.getStudnentInGroup();
+            session.setAttribute("GROUP_MAX", groupMax);
+            session.setAttribute("CAPSTONE_MAX", capstoneMax);
+            session.setAttribute("CAPSTONE_CHECKED", capstoneChecked);
+            session.setAttribute("STUDENT_MAX", studentMax);
+            session.setAttribute("STUDENT_IN_GROUP", studentInGroup);
+            if (loginUser == null) {
+                url = LOGIN;
+            } else if ("AD".equals(loginUser.getRoleID())) {
+                url = AD;
+            }
+
         } catch (Exception e) {
-            log("ERROR at UpdateProfileController" + e.toString());
+            log("Error at DeadlineSemesterController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
