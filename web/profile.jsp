@@ -26,9 +26,11 @@
         <div id="wrapper">
             <c:if test="${sessionScope.LOGIN_USER == null }">
                 <c:redirect url="login.jsp"></c:redirect>
-
             </c:if>
             <c:if test="${sessionScope.LOGIN_USER.roleID == 'US'}">
+                <%@include file="sidebar.jsp"%>
+            </c:if>
+            <c:if test="${sessionScope.LOGIN_USER.roleID == 'LD'}">
                 <%@include file="sidebar.jsp"%>
             </c:if>
             <c:if test="${sessionScope.LOGIN_USER.roleID == 'MT'}">
@@ -103,19 +105,19 @@
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                                        <input class="form-control" type="text" id="userID" name="userID" aria-label="Disabled input example" value="${sessionScope.INFOR.userID}">
+                                                        <input class="form-control" type="text" id="userID" name="userID" readonly aria-label="Disabled input example" value="${sessionScope.INFOR.userID}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
+                                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" readonly placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-                                                        <input type="text" class="form-control" name="fullname" id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
+                                                        <input type="text" class="form-control" name="fullname" readonly id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
