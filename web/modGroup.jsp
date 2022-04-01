@@ -27,7 +27,7 @@
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%@include file="bootstrap.jsp" %>
+
     </head>
     <body id="page-top"> 
         <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID ne 'AD'}">
@@ -59,12 +59,12 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
                                     <img class="img-profile rounded-circle"
-                                         src="img/undraw_profile.svg">
+                                         src="${sessionScope.INFOR.photoUrl}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="profile.jsp">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
@@ -106,7 +106,7 @@
                                                     </div>
                                                     <div>
                                                         <c:forEach var="value" items="${listUserGroup.value}">
-                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${value}</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${value}</div>
                                                         </c:forEach>
                                                     </div>
                                                 </div>
@@ -115,109 +115,106 @@
                                     </div>
                                 </div>
                             </c:forEach>
-
                         </div>
                     </div>
                 </div>
+                <!-- End of Content Wrapper -->
+
+                <%@include file="footer.jsp" %>
             </div>
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    </div>
-    <%@include file="footer.jsp" %>
-    <!-- End of Page Wrapper -->
+        <!-- Logout Modal-->
+        <%@include file="logout.jsp" %>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Bootstrap core JavaScript-->
+        <style>
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
 
-    <!-- Logout Modal-->
-    <%@include file="logout.jsp" %>
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
 
-    <!-- Bootstrap core JavaScript-->
-    <style>
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            .copy-click {
+                position: relative;
+                padding-bottom: 2px;
+                text-decoration: none;
+                cursor: copy;
+                color: #484848;
+                /*                border-bottom: 1px dashed #767676;*/
+                transition: background-color calc(var(--duration) * 2) var(--ease);
+            }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
+            .copy-click:after {
+                content: attr(data-tooltip-text);
+                position: absolute;
+                bottom: calc(100% + 6px);
+                left: 50%;
+                padding: 8px 16px;
+                white-space: nowrap;
+                background-color: white;
+                border-radius: 4px;
+                box-shadow: 0 0 0 -12px rgba(0, 0, 0, 0);
+                pointer-events: none;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                opacity: 0;
+                -webkit-transform: translate(-50%, 12px);
+                transform: translate(-50%, 12px);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce);
+                transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+            }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .copy-click {
-            position: relative;
-            padding-bottom: 2px;
-            text-decoration: none;
-            cursor: copy;
-            color: #484848;
-            /*                border-bottom: 1px dashed #767676;*/
-            transition: background-color calc(var(--duration) * 2) var(--ease);
-        }
+            .copy-click.is-hovered:after {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                opacity: 1;
+                -webkit-transform: translate(-50%, 0);
+                transform: translate(-50%, 0);
+                transition-timing-function: var(--ease);
+            }
 
-        .copy-click:after {
-            content: attr(data-tooltip-text);
-            position: absolute;
-            bottom: calc(100% + 6px);
-            left: 50%;
-            padding: 8px 16px;
-            white-space: nowrap;
-            background-color: white;
-            border-radius: 4px;
-            box-shadow: 0 0 0 -12px rgba(0, 0, 0, 0);
-            pointer-events: none;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            opacity: 0;
-            -webkit-transform: translate(-50%, 12px);
-            transform: translate(-50%, 12px);
-            transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
-            transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce);
-            transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
-        }
+            /*            .copy-click.is-copied {
+                            background-color: yellow;
+                        }*/
 
-        .copy-click.is-hovered:after {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            opacity: 1;
-            -webkit-transform: translate(-50%, 0);
-            transform: translate(-50%, 0);
-            transition-timing-function: var(--ease);
-        }
+            .copy-click.is-copied:after {
+                content: attr(data-tooltip-text-copied);
+            }
+        </style>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        /*            .copy-click.is-copied {
-                        background-color: yellow;
-                    }*/
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        .copy-click.is-copied:after {
-            content: attr(data-tooltip-text-copied);
-        }
-    </style>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-
-</body>
+    </body>
 
 </html>

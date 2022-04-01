@@ -156,7 +156,7 @@
                                                     <td>${topic.capstoneID}</td>
                                                     <td>${topic.groupId}</td>
                                                     <td>
-                                                        <c:if test="${topic.statusId == '0'}"><div class="badge bg-dark">Registered</div></c:if>
+                                                        <c:if test="${topic.statusId == '0'}"><div class="badge bg-success">Registered</div></c:if>
                                                         <c:if test="${topic.statusId == '1'}"><div class="badge bg-dark">No Group</div></c:if>
                                                     </td>
                                                     <!--<td></td>-->
