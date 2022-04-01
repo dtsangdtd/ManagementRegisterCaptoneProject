@@ -128,7 +128,7 @@
                                                     <td>${listGroup.groupName}</td>
                                                     <!--<td>${listGroup.groupID}</td>-->
                                                     <td>
-                                                        <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                        <a href="mod-group-detail.jsp" class="btn btn-info btn-circle btn-sm">
                                                             <i class="fas fa-info"></i>
                                                         </a>
                                                     </td>
