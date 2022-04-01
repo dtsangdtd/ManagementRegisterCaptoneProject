@@ -320,6 +320,38 @@
                 readURL(this);
 
             });
+//            
+//        $(document).ready(function() {
+//
+//                //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+//                $("#form").validate({
+//                        rules: {
+//                                userID: "required",
+//                                email: "required",
+//                                fullname: {
+//                                        required: true,
+//                                        minlength: 2
+//                                },
+//                                phone: {
+//                                    required: true,
+//                                    minlength: 10
+//                                }
+//                        },
+//                        messages: {
+//                                userID: "phone is required",
+//                                email: "Vui lòng nhập tên",
+//                                fullname: {
+//                                        required: "phone is required",
+//                                        minlength: "Địa chỉ ngắn vậy, chém gió ah?"
+//                                },
+//                                phone:{
+//                                     required: "phone is required",
+//                                     minlength: "Địa chỉ ngắn vậy, chém gió ah?"
+//                                }
+//                        }
+//                });
+//        });
+            
             //sweatalert
             $("#btnSubmit").click(function () {
 //                if ($("input").first().val() === "correct") {
