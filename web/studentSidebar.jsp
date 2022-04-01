@@ -32,7 +32,7 @@
     </li>   
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListController?radioGroup=0">
+        <a class="nav-link" href="GetListController?radioGroup=0&semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Students</span>
         </a>
