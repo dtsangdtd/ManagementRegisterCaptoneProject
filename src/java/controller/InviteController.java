@@ -37,7 +37,7 @@ public class InviteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String US = "GetListController?radioGroup=0";
+    private static final String US = "GetListController?radioGroup=0&semesterID=SP22";
     private static final String MT = "GetListTopicRegistController";
     private static final String ERROR = "login.jsp";
 

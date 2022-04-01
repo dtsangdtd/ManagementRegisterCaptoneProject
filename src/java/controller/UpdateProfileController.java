@@ -31,32 +31,15 @@ public class UpdateProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDAO userDao = new UserDAO();
             String userID = request.getParameter("userID");
-//            String name = request.getParameter("fullname");
-//            String phone = request.getParameter("phone");
-//            String photoUrl = request.getParameter("imageURL");
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String loginUserID = loginUser.getUserID();
-            if (!loginUserID.equals(userID)) {
-                UserDTO userInfor = userDao.getInforUser(userID);
-                session.setAttribute("INFOR", userInfor);
-                session.setAttribute("Check", 1);
-                url = SUCCESS;
-            } else {
-                String name = request.getParameter("fullname");
-                String phone = request.getParameter("phone");
-                String photoUrl = request.getParameter("imageURL");
-                boolean success = userDao.updateInfor(name, phone, photoUrl, userID);
-                UserDTO userInfor = userDao.getInforUser(userID);
-                session.setAttribute("INFOR", userInfor);
-                session.setAttribute("Check", 2);
-                if (success) {
-                    url = SUCCESS;
-                }
-            }
-
+            String name = request.getParameter("fullname");
+            String phone = request.getParameter("phone");
+            String photoUrl = request.getParameter("imageURL");
+            UserDAO userDao = new UserDAO();
+            userDao.updateInfor(name, phone, photoUrl, userID);
+            UserDTO userInfor = userDao.getInforUser(userID);
+            HttpSession session = request.getSession();
+            session.setAttribute("INFOR", userInfor);
         } catch (Exception e) {
             log("ERROR at UpdateProfileController" + e.toString());
         } finally {

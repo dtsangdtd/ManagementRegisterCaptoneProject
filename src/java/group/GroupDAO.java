@@ -143,7 +143,7 @@ public class GroupDAO {
         return check;
     }
 
-    public boolean updateNumberOfPerson(int numOfPer, int groupID) throws SQLException {
+        public boolean updateNumberOfPerson(int numOfPer, int groupID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -290,7 +290,7 @@ public class GroupDAO {
             if (conn != null) {
                 String sql = " SELECT groupName, capstoneID, numberOfPerson, statusID "
                         + " FROM tblGroup "
-                        + " WHERE groupID like ? ";
+                        + " WHERE groupID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, groupID);
                 rs = stm.executeQuery();

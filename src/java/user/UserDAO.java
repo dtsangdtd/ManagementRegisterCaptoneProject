@@ -296,6 +296,7 @@ public class UserDAO {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
