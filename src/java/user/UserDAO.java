@@ -179,7 +179,6 @@ public class UserDAO {
                 conn.close();
             }
         }
-        System.out.println(list);
         return list;
     }
 
@@ -231,7 +230,6 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                System.out.println("check dao 1");
                 String sql = " SELECT ROW_NUMBER() OVER (ORDER BY userID) AS STT, userID, name, gmail, phone, photoUrl, statusID "
                         + " FROM tblUser "
                         + " WHERE [statusID] = '3' AND semesterID = ? ";

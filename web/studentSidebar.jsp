@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="student.jsp">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="GetListGroupController">
         <!-- <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div> -->
@@ -11,7 +11,7 @@
     <hr class="sidebar-divider my-0">
 
     <li class="nav-item ">
-        <a class="nav-link" href="student.jsp">
+        <a class="nav-link" href="GetListGroupController">
             <i class="fas fa-fw fa-folder"></i>
             <span>Your Group</span>
         </a>

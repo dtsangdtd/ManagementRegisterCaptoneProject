@@ -140,10 +140,10 @@
                                                     <td>
                                                         <form action="MainController">
                                                             <input type="hidden" name="userID" value="${listGroup.userID}"/>
-                                                            <button <c:if test="${sessionScope.CHECK_ROLEID == false}"> disable </c:if> type="submit" name="action" value="Kick" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
+                                                            <button type="submit" name="action" value="Kick" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
 
                                                 </tbody>
                                         </c:forEach>

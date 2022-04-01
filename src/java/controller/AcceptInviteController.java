@@ -40,9 +40,9 @@ public class AcceptInviteController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String US = "Getlistcontroller";
+    private static final String US = "GetListRequestController";
     private static final String MT = "GetListRegistRequestController";
-    private static final String ERROR = "studentRequest.jsp";
+    private static final String ERROR = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
