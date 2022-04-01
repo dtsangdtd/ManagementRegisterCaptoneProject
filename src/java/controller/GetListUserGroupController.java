@@ -50,8 +50,6 @@ public class GetListUserGroupController extends HttpServlet {
             for (Map.Entry<String, ArrayList<String>> entry : listUserGroup.entrySet()) {
                 String key = entry.getKey();
                 ArrayList<String> value = entry.getValue();
-
-                System.out.println("key : " + key + " - value : " + value);
             }
             session.setAttribute("LIST_USERGROUP", listUserGroup);
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");

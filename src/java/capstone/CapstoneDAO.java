@@ -101,7 +101,6 @@ public class CapstoneDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                System.out.println(semesterID);
                 String sql = " SELECT  capstoneID, capstoneName, groupID, statusID "
                         + " FROM tblCapstone "
                         + " WHERE semesterID = ? ";
@@ -278,42 +277,6 @@ public class CapstoneDAO {
         }
         return check;
     }
-//    public List<CapstoneDTO> getTopicSearchV2(String semesterID) throws SQLException {
-//        List<CapstoneDTO> list = new ArrayList<>();
-//        Connection conn = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                System.out.println(semesterID);
-//                String sql = " SELECT u.name "
-//                        + " FROM tblCapstone c full join tblUserCapstone uc on c.capstoneID = uc.capstoneID full join tblUser u on u.userID = uc.userID  "
-//                        + " WHERE c.cName = ? AND u.roleID = 'MT'"
-//                        + " ORDER BY c.capstoneName DESC";
-//                stm = conn.prepareStatement(sql);
-//                stm.setString(1, semesterID);
-//                rs = stm.executeQuery();
-//                while (rs.next()) {
-//                    String userName = rs.gextString("name");
-//                    list.add(new CapstoneDTO(capstoneID, capstoneName, groupID, semesterID, statusID, userName));
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return list;
-//    }
 
     public List<CapstoneDTO> getListCapstoneMutilpleMentor() throws SQLException {
         List<CapstoneDTO> list = new ArrayList<>();
@@ -339,7 +302,6 @@ public class CapstoneDAO {
                     String name = rs.getString("name");
                     list.add(new CapstoneDTO(capstoneID, capstoneName, "", "", "", name));
                 }
-                System.out.println(list);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -382,7 +344,6 @@ public class CapstoneDAO {
                     String name = rs.getString("name");
                     list.add(new CapstoneDTO(capstoneID, capstoneName, "", "", statusID, name));
                 }
-                System.out.println(list);
             }
         } catch (Exception e) {
             e.printStackTrace();

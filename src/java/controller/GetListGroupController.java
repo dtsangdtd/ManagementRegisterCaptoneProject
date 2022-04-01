@@ -26,7 +26,8 @@ import user.UserDTO;
 @WebServlet(name = "GetListGroupController", urlPatterns = {"/GetListGroupController"})
 public class GetListGroupController extends HttpServlet {
 
-    private static final String US = "student.jsp";
+    private static final String US = "studentV2.jsp";
+    private static final String LD = "student.jsp";
     private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +35,6 @@ public class GetListGroupController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
         try {
-            boolean check = true;
             GroupDAO groupDao = new GroupDAO();
             HttpSession session = request.getSession();
             UserDTO user = (UserDTO) session.getAttribute("INFOR");
@@ -42,17 +42,12 @@ public class GetListGroupController extends HttpServlet {
             UserDAO uDAO = new UserDAO();
             UserDTO loginUser = uDAO.getUserByUserID(loginUserID);
             String roleID = loginUser.getRoleID();
-            if ("US".equals(roleID)) {
-                check = false;
-            }
-            session.setAttribute("CHECK_ROLEID", check);
-//            System.out.println(user.getUserID());
             String groupID = groupDao.getGroupID(user.getUserID());
-//            System.out.println(groupID);
             List<GroupDTO> listGroup = groupDao.getListStudentInGroup(groupID);
-//            System.out.println(listGroup);
             session.setAttribute("LISTGROUP", listGroup);
-            if (user != null) {
+            if ("LD".equals(roleID)) {
+                url = LD;
+            } else if ("US".equals(roleID)) {
                 url = US;
             }
         } catch (Exception e) {

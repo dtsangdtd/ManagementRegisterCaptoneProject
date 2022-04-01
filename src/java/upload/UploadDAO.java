@@ -303,15 +303,6 @@ public class UploadDAO {
                 cap.setSemesterName(semesterID);
                 String userID = currentRow.getCell(2).getStringCellValue();
                 cap.setUserID(userID);
-//                if (userID.contains(",")) {
-//                    List<String> list = new ArrayList<String>(Arrays.asList(userID.split(" , ")));
-//                for (int i = 0; i < list.size(); i++) {
-//                    System.out.println(" -->" + list.get(i));
-//                    CapstoneDTO newCap = new CapstoneDTO(capstoneName, semesterID, userID, list.get(i));
-//                    }
-//                }else{
-//                    cap.setUserID(userID);
-//                }
                 this.listCapstone.add(cap);
                 count++;
             }
