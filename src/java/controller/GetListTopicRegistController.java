@@ -39,6 +39,7 @@ public class GetListTopicRegistController extends HttpServlet {
             boolean check = true;
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String roleID = loginUser.getRoleID();
             String userID = loginUser.getUserID();
             GroupDAO gDAO = new GroupDAO();
             int groupID = gDAO.getGroupIDByUserID(userID);
@@ -48,7 +49,11 @@ public class GetListTopicRegistController extends HttpServlet {
             CapstoneDAO capDAO = new CapstoneDAO();
             List<CapstoneDTO> list = capDAO.getListCapstone(semesterID);
             session.setAttribute("LIST_REGIST_TOPIC", list);
+            if (roleID.equals("US")){
+                check = false;
+            }
             if (groupID == 0) {
+                check = false;
                 session.setAttribute("CHECK_CAPSTONE", check);
                 url = SUCCESS;
             } else {

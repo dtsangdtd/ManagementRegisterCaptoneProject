@@ -12,7 +12,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListController?radioGroup=1">
+        <a class="nav-link" href="GetListController?radioGroup=1&semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Students</span>
         </a>
@@ -26,7 +26,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListTopicController">
+        <a class="nav-link" href="GetListTopicController?semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Capstone Topics</span>
         </a>
@@ -39,12 +39,12 @@
         </a>
     </li>
 
-    <li class="nav-item ">
+<!--    <li class="nav-item ">
         <a class="nav-link" href="modRequest.jsp">
             <i class="fas fa-fw fa-folder"></i>
             <span>Request</span>
         </a>
-    </li>
+    </li>-->
 
 
     <!-- Divider -->
