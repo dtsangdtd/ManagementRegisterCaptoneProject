@@ -34,6 +34,9 @@
             <c:if test="${sessionScope.LOGIN_USER.roleID == 'MT'}">
                 <%@include file="supSidebar.jsp"%>
             </c:if>
+            <c:if test="${sessionScope.LOGIN_USER.roleID == 'AD'}">
+                <%@include file="modSidebar.jsp"%>
+            </c:if>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -43,7 +46,6 @@
                             </button>
                         </form>
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                             <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -88,12 +90,11 @@
                                     </a>
                                 </div>
                             </li>
-
                         </ul>
                     </nav>
                     <div class="container-fluid" style="height: 70%">
                         <div class="card shadow mb-4">
-                            <form action="MainController" method="POST" >
+                            <form id="form" action="UpdateProfileController" method="POST">
                                 <div class="container">                              
                                     <div class="row">
                                         <h2 style="text-align: center">Edit profile</h2>
@@ -102,25 +103,26 @@
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                                        <input class="form-control" type="text" name="userID" aria-label="Disabled input example" readonly value="${sessionScope.INFOR.userID}">
+                                                        <input class="form-control" type="text" id="userID" name="userID" aria-label="Disabled input example" readonly value="${sessionScope.INFOR.userID}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
+                                                        <input type="email" class="form-control" readonly name="email" id="exampleFormControlInput1" placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-                                                        <input type="text" class="form-control" name="fullname"id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
+                                                        <input type="text" class="form-control" readonly name="fullname" id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Phone</label>
-                                                        <input type="text" class="form-control" name="phone" id="exampleFormControlInput1"  value="${sessionScope.INFOR.phone}">
+                                                        <input type="number" class="form-control" name="phone" id="phone"  value="${sessionScope.INFOR.phone}">
+                                                        <span id="span"></span>
                                                     </div>
                                                 </div>
                                                 <c:if test="${sessionScope.LOGIN_USER.roleID ne 'MT'}">
@@ -161,9 +163,10 @@
 
                                         </div>
                                     </div>
+
                                 </div>
-                                <div class="container" style="width: 100%; text-align: center">  <button type="submit" name="action" value="editProfile" class="btn btn-success">Save</button></div>
                             </form>
+                            <div class="container" style="width: 100%; text-align: center">  <button id="btnSubmit" class="btn btn-success">Save</button></div>
                         </div>
                     </div>
                 </div>
@@ -266,56 +269,89 @@
         <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
         <!-- Page level custom scripts -->
         <script src="js/demo/datatables-demo.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="module">
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
             import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
             const firebaseConfig = {
-            apiKey: "AIzaSyAaeDrbFpEOKxfsmeYaUvVhOCsh9o8nxyI",
-            authDomain: "upload-image-125bb.firebaseapp.com",
-            projectId: "upload-image-125bb",
-            storageBucket: "upload-image-125bb.appspot.com",
-            messagingSenderId: "186232203166",
-            appId: "1:186232203166:web:8350eb791825d6adbad88f",
-            measurementId: "G-16ZE60ZJVS"
+                apiKey: "AIzaSyAaeDrbFpEOKxfsmeYaUvVhOCsh9o8nxyI",
+                authDomain: "upload-image-125bb.firebaseapp.com",
+                projectId: "upload-image-125bb",
+                storageBucket: "upload-image-125bb.appspot.com",
+                messagingSenderId: "186232203166",
+                appId: "1:186232203166:web:8350eb791825d6adbad88f",
+                measurementId: "G-16ZE60ZJVS"
             };
             const firebaseApp = initializeApp(firebaseConfig);
             const storage = getStorage(firebaseApp);
             function readURL(input) {
-            const metadata = {
-            contentType: 'image/jpeg'
-            };
-            if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-            //            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-            //            $('#imagePreview').hide();
-            //            $('#imagePreview').fadeIn(650);
+                const metadata = {
+                    contentType: 'image/jpeg'
+                };
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        //            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        //            $('#imagePreview').hide();
+                        //            $('#imagePreview').fadeIn(650);
 
-            }
+                    }
 
-            reader.readAsDataURL(input.files[0]);
-            const name = new Date().getTime() + '-' + input.files[0].name;
-            console.log(name);
-            const storageRef = ref(storage, 'images/' + name);
-            uploadBytesResumable(storageRef, input.files[0], metadata).then((snapshot) => {
-            console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-            console.log('File metadata:', snapshot.metadata);
-            getDownloadURL(snapshot.ref).then((url) => {
-            console.log('File available at', url);
-            document.getElementById("imagePreview").src = url;
-            document.getElementById("imageURL").value = url;
-            });
-            }).catch((error) => {
-            console.error('Upload failed', error);
+                    reader.readAsDataURL(input.files[0]);
+                    const name = new Date().getTime() + '-' + input.files[0].name;
+                    console.log(name);
+                    const storageRef = ref(storage, 'images/' + name);
+                    uploadBytesResumable(storageRef, input.files[0], metadata).then((snapshot) => {
+                        console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+                        console.log('File metadata:', snapshot.metadata);
+                        getDownloadURL(snapshot.ref).then((url) => {
+                            console.log('File available at', url);
+                            document.getElementById("imagePreview").src = url;
+                            document.getElementById("imageURL").value = url;
+                        });
+                    }).catch((error) => {
+                        console.error('Upload failed', error);
 
-            });
-            }
+                    });
+                }
             }
 
             $("#imageUpload").change(function () {
-            readURL(this);
+                readURL(this);
 
             });
+            //sweatalert
+            $("#btnSubmit").click(function () {
+//                if ($("input").first().val() === "correct") {
+//                    $("span").text("Validated...").show();
+//                    return;
+//                }
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to update it!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Update Profile!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Swal.fire(
+                                'Updated!',
+                                'Your Profile has been updated.',
+                                'success'
+                                );
+                        setTimeout(function (e) {
+                            $("#form").submit();
+                        }, 1000);
+                    }
+                })
+            });
+//            $("span").text("Not valid!").show().fadeOut(1000);
+//            event.preventDefault();
         </script>
+
     </body>
 </html>

@@ -102,7 +102,12 @@
                                                     <td>${stu.username}</td>
                                                     <td>${stu.gmail}</td>
                                                     <td> 
-                                                        <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/>
+                                                        <c:if test="${stu.photoUrl eq null}">
+                                                            <img style="height: 100px; width: 100px; border-radius: 100%" src="img/275648169_3113055995634312_1238254939168784104_n.jpg"/>
+                                                        </c:if>
+                                                        <c:if test="${not empty stu.photoUrl}">
+                                                            <img style="height: 100px; width: 100px; border-radius: 100%" src="${stu.photoUrl}"/>
+                                                        </c:if>
                                                     </td>
                                                     <td>
                                                         <form action="MainController">
