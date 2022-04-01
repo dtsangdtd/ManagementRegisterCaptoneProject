@@ -174,7 +174,7 @@ public class CapstoneDAO {
         return list;
     }
 
-    public List<CapstoneDTO> getListMentorCapstone(String userID) throws SQLException {
+    public List<CapstoneDTO> getListMentorCapstone(String userID, String semesterID) throws SQLException {
         List<CapstoneDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -184,10 +184,11 @@ public class CapstoneDAO {
             if (conn != null) {
                 String sql = " SELECT c.capstoneName, c.statusID, g.groupName "
                         + " FROM tblUserCapstone uc left join tblCapstone c on uc.capstoneID = c.capstoneID left join tblGroup g on c.groupID = g.groupID "
-                        + " WHERE uc.userID = ? "
+                        + " WHERE uc.userID = ? AND c.semesterID = ? "
                         + " ORDER BY c.capstoneName ASC ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
+                stm.setString(2, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String capstoneName = rs.getString("capstoneName");
