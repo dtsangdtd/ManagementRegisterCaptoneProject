@@ -37,18 +37,19 @@ public class UpdateRoleController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN;
+        String userID = request.getParameter("txtUserID");
         try {
-            String userID = request.getParameter("txtUserID");
+            System.out.println(userID);
             if (userID != null) {
                 UserDAO userDAO = new UserDAO();
                 boolean success = userDAO.updateRoleID(userID);
-                if(success){
-                    url =  GET_LIST;
+                if (success) {
+                    url = GET_LIST;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
