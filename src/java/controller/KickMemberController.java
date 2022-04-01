@@ -35,7 +35,7 @@ public class KickMemberController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String ERROR = "Login.jsp";
-    private static final String SUCCESS = "GetListController";
+    private static final String SUCCESS = "GetListGroupController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,19 +43,20 @@ public class KickMemberController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String leaderID = loginUser.getRoleID();
+            UserDTO loginUser = (UserDTO) session.getAttribute("INFOR");
+            String leaderID = loginUser.getUserID();
             String userID = request.getParameter("userID");
             GroupDAO gDAO = new GroupDAO();
             boolean check1 = gDAO.kickMember(userID);
             if (check1) {
-                int groupID = Integer.parseInt(loginUser.groupID);
+                UserDAO uDAO = new UserDAO();
+                UserDTO leader = uDAO.getUserByUserID(leaderID);
+                int groupID = Integer.parseInt(leader.getGroupID());
                 GroupDTO group = gDAO.getGroupByGroupID(groupID);
                 int numOfPer = group.getNumOfPer() - 1;
                 boolean check2 = gDAO.updateNumberOfPerson(numOfPer, groupID);
                 if (check2) {
                     int statusID = 3;
-                    UserDAO uDAO = new UserDAO();
                     boolean check3 = uDAO.updateStatusID(userID, statusID);
                     if (check3) url = SUCCESS;
                 } 
