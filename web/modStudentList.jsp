@@ -55,7 +55,6 @@
                             </div>
                         </form>
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -95,199 +94,158 @@
                                 </input>
                             </form>
                         </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <div class="table-responsive" >
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="dropdown mb-4">
+                                                    <button style="width: 200px" class="btn btn-info dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                        Semester: 
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <c:if test="${param.semesterID == listSemester.semesterID}">
+                                                                <span>${listSemester.semesterName}</span>
+                                                            </c:if> 
+                                                        </c:forEach>
 
-                        <div class="row" style="display: flex; margin-bottom: 50px">
-                            <div class="col-6" style="position: relative">
-                                <div class="card shadow mb-4">
-                                    <div class="card-body">
-                                        <div class="table-responsive" >
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="dropdown mb-4">
-                                                            <button style="width: 200px" class="btn btn-info dropdown-toggle" type="button"
-                                                                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                Semester: 
-                                                                <c:forEach 
-                                                                    items="${sessionScope.LIST_SEMESTER}" var="listSemester">
-                                                                    <c:if test="${param.semesterID == listSemester.semesterID}">
-                                                                        <span>${listSemester.semesterName}</span>
-                                                                    </c:if> 
-                                                                </c:forEach>
+                                                    </button>
+                                                    <div class="dropdown-menu animated--fade-in"
+                                                         aria-labelledby="dropdownMenuButton1">
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <a class="dropdown-item" href="GetListController?radioGroup=1&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
 
-                                                            </button>
-                                                            <div class="dropdown-menu animated--fade-in"
-                                                                 aria-labelledby="dropdownMenuButton1">
-                                                                <c:forEach 
-                                                                    items="${sessionScope.LIST_SEMESTER}" var="listSemester">
-                                                                    <a class="dropdown-item" href="GetListController?radioGroup=1&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
-
-                                                                </c:forEach>
-                                                            </div>
-                                                        </div>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <table class="table-sm" width="100%" cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Name</th>
-
-                                                        <th>Gmail</th>
-                                                        <th style="width: 160px">
-                                                            <div class="dropdown">
-                                                                <i class="fas fa-filter "></i>
-                                                                <form action="GetListController" >
-                                                                    <c:if test="${param.semesterID eq 'SP22'}">
-                                                                        <div class="dropdown-content">
-                                                                            <input type="radio" id="scales" name="radioGroup"
-                                                                                   <c:if test="${sessionScope.checked == '1'}">
-                                                                                       checked="checked"
-                                                                                   </c:if>
-                                                                                   value="1">
-                                                                            <label for="full">full</label>
-                                                                            <input type="radio" id="scales" name="radioGroup"
-                                                                                   <c:if test="${sessionScope.checked == '0'}">
-                                                                                       checked="checked"
-                                                                                   </c:if>
-                                                                                   value="0">
-                                                                            <label for="notFull">not full</label>
-
-                                                                        </div>
-                                                                    </c:if>
-                                                                    <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
-
-                                                                </form>
-                                                            </div>
-                                                            Status
-                                                        </th>
-                                                        <th>RoleID</th>
-                                                    </tr>
-                                                </thead>
-                                                <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>${stu.STT}</td>
-                                                            <td>${stu.username}</td>
-                                                            <td>
-                                                                <a href="" class="copy-click"
-                                                                   data-tooltip-text="Click To Copy" 
-                                                                   data-tooltip-text-copied="✔ Copied">
-                                                                    ${stu.gmail}
-                                                                </a>
-                                                            </td>
-
-                                                            <td>
-                                                                <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
-                                                                <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
-                                                                </td>
-                                                                <td>${stu.roleID}
-                                                                <c:if test="${stu.roleID eq 'US'}">
-                                                                    <input id="txtUserID" name="txtUserID" value="${stu.userID}" hidden/>
-                                                                    <i id="btnEditRole" style="cursor: pointer" class="fas fa-user-edit fa-sm fa-fw"></i>
-                                                                </c:if>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </c:forEach>
-                                            </table>
                                         </div>
-
                                     </div>
-                                </div>
-                                <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
-                                    <ul class="pagination">
-                                        <c:url var="nextpage" value="GetListController">
-                                            <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
-                                            <c:param name="semesterID" value="${param.semesterID}"></c:param>
-                                            <c:param name="txtSearch" value="${param.txtSearch}"></c:param>
-                                        </c:url>
-                                        <c:if test="${requestScope.currentPage > 1}">
-                                            <li class="page-item">
-                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
+                                    <table class="table-sm" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
 
-                                        <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
-                                            <c:choose >
-                                                <c:when test="${requestScope.currentPage == i}">
+                                                <th>Gmail</th>
+                                                <th style="width: 160px">
+                                                    <div class="dropdown">
+                                                        <i class="fas fa-filter "></i>
+                                                        <form action="GetListController" >
+                                                            <c:if test="${param.semesterID eq 'SP22'}">
+                                                                <div class="dropdown-content">
+                                                                    <input type="radio" id="scales" name="radioGroup"
+                                                                           <c:if test="${sessionScope.checked == '1'}">
+                                                                               checked="checked"
+                                                                           </c:if>
+                                                                           value="1">
+                                                                    <label for="full">full</label>
+                                                                    <input type="radio" id="scales" name="radioGroup"
+                                                                           <c:if test="${sessionScope.checked == '0'}">
+                                                                               checked="checked"
+                                                                           </c:if>
+                                                                           value="0">
+                                                                    <label for="notFull">not full</label>
 
-                                                    <li class="page-item"><a class="page-link" href="#">${i}</a></li>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                    <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
-
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                        <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
-                                            <li class="page-item">
-                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>    
-                                    </ul>
-                                </nav>
-                            </div>
-
-                            <div class="col-1"> 
-                                <form action="MainController">
-                                    <button type="submit" name="action" value="Random"
-                                            <c:if test="${sessionScope.checked == '1'}">
-                                                disabled="disabled"
-                                            </c:if>
-                                            class="btn btn-info btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-sync-alt"></i>
-                                        </span>
-                                        <span class="text">Random</span>
-                                    </button>
-                                    <input type="hidden" value="${param.semesterID}" name="semesterID"> 
-                                </form>
-                                <div class="mt-2"></div>
-                                <a href="#" class="btn btn-info btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-bell"></i>
-                                    </span>
-                                    <span class="text">Noti</span>
-                                </a>
-                                <div class="mt-2"></div>
-                            </div>
-                            <div id="wrapper1" class="col-5">
-                                <div class="scrollbar" id="style-default">
-                                    <div style="display: block;">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="stu-tab-gr">
-                                                    <div class="card border-left-primary shadow h-100 py-2">
-                                                        <div class="card-body">
-                                                            <div class="row no-gutters align-items-center">
-                                                                <div class="col-12">
-                                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                                        Group </div>
-                                                                    <div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hieu Kien</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Hong Mai</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Nguyen Tho Thai Bao</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Pham Khai</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Duong Thanh Sang</div>
-                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                            </c:if>
+                                                            <input hidden name="semesterID" value="${param.semesterID}"/> <!--vi du cho khai -->
+
+                                                        </form>
                                                     </div>
-                                                </div>
-                                            </div>                                          
-                                        </div>
-                                    </div>
+                                                    Status
+                                                </th>
+                                                <th>RoleID</th>
+                                            </tr>
+                                        </thead>
+                                        <c:forEach var="stu" varStatus="counter" items="${LIST_STUDENT}">
+                                            <tbody>
+                                                <tr>
+                                                    <td>${stu.STT}</td>
+                                                    <td>${stu.username}</td>
+                                                    <td>
+                                                        <a href="" class="copy-click"
+                                                           data-tooltip-text="Click To Copy" 
+                                                           data-tooltip-text-copied="✔ Copied">
+                                                            ${stu.gmail}
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        <c:if test="${stu.statusID == '2'}"><div class="badge bg-info text-dark">In Group</div></c:if>
+                                                        <c:if test="${stu.statusID == '3'}"><div class="badge bg-warning text-dark">Not group yet</div></c:if>
+                                                        </td>
+                                                        <td>${stu.roleID}
+                                                        <c:if test="${stu.roleID eq 'US'}">
+                                                            <input id="txtUserID" name="txtUserID" value="${stu.userID}" hidden/>
+                                                            <i id="btnEditRole" style="cursor: pointer" class="fas fa-user-edit fa-sm fa-fw"></i>
+                                                        </c:if>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
+                                    </table>
                                 </div>
+
                             </div>
                         </div>
+                        <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
+                            <ul class="pagination">
+                                <c:url var="nextpage" value="GetListController">
+                                    <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
+                                    <c:param name="semesterID" value="${param.semesterID}"></c:param>
+                                    <c:param name="txtSearch" value="${param.txtSearch}"></c:param>
+                                </c:url>
+                                <c:if test="${requestScope.currentPage > 1}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                                <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                                    <c:choose >
+                                        <c:when test="${requestScope.currentPage == i}">
+
+                                            <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
+
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>    
+                            </ul>
+                        </nav>
+
+                        <div class="col-1"> 
+                            <form action="MainController">
+                                <button type="submit" name="action" value="Random"
+                                        <c:if test="${sessionScope.checked == '1'}">
+                                            disabled="disabled"
+                                        </c:if>
+                                        class="btn btn-info btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </span>
+                                    <span class="text">Random</span>
+                                </button>
+                                <input type="hidden" value="${param.semesterID}" name="semesterID"> 
+                            </form>
+                        </div>
+
                     </div>
                 </div>
                 <!-- End of Main Content -->

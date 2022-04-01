@@ -37,7 +37,7 @@
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <form action="GetListController?radioGroup=${param.radioGroup}" method="POST"
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for name..."
                                        aria-label="Search" aria-describedby="basic-addon2"name="txtSearch" value="${param.txtSearch}">
@@ -49,9 +49,6 @@
                             </div>
                         </form>
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
-                   
-                          
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -112,11 +109,11 @@
                                                             <input type="hidden" name="userID" value="${stu.userID}"/>
                                                             <input type="hidden" name="email" value="${stu.gmail}"/>
                                                             <button <c:if test="${sessionScope.CHECK_NUMOFPER == false}"> disabled </c:if> type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
-                                                        </form>
-                                                        
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                                            </form>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                         </c:forEach>
 
                                     </table>
@@ -126,70 +123,47 @@
                             <!-- /.container-fluid -->
 
                         </div>
-                        
+
                     </div>
-                       <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
-                                    <ul class="pagination">
-                                        <c:url var="nextpage" value="GetListController">
-                                            <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
-                                             <c:param name="txtSearch" value="${param.txtSearch}"></c:param>
-                                        </c:url>
-                                        <c:if test="${requestScope.currentPage > 1}">
-                                            <li class="page-item">
-                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
+                    <nav aria-label="Page navigation example" style="position: absolute; right: 10px" >
+                        <ul class="pagination">
+                            <c:url var="nextpage" value="GetListController">
+                                <c:param name="radioGroup" value="${param.radioGroup}"></c:param>
+                                <c:param name="txtSearch" value="${param.txtSearch}"></c:param>
+                            </c:url>
+                            <c:if test="${requestScope.currentPage > 1}">
+                                <li class="page-item">
+                                    <a class="page-link" href="${nextpage}&page=${requestScope.currentPage - 1}"aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            </c:if>
 
-                                        <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
-                                            <c:choose >
-                                                <c:when test="${requestScope.currentPage == i}">
+                            <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                                <c:choose >
+                                    <c:when test="${requestScope.currentPage == i}">
 
-                                                    <li class="page-item"><a class="page-link" href="#">${i}</a></li>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                    <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <li class="page-item"><a class="page-link" href="${nextpage}&page=${i}">${i}</a></li>
 
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                        <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
-                                            <li class="page-item">
-                                                <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>    
-                                    </ul>
-                                </nav>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${requestScope.currentPage < requestScope.noOfPages}">
+                                <li class="page-item">
+                                    <a class="page-link" href="${nextpage}&page=${requestScope.currentPage + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </c:if>    
+                        </ul>
+                    </nav>
                     <!-- End of Main Content -->
 
                 </div>
-                                <div class="mt-5"></div>
-                <section class="chatbox js-chatbox">
-                    <div class="chatbox__header">
-                        <h3 class="chatbox__header-cta-text"><span class="chatbox__header-cta-icon"><i
-                                    class="fas fa-comments"></i></span>Let's chat</h3>
-                        <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-chevron-up"></i></button>
-                    </div>
-                    <!-- End of .chatbox__header -->
-                    <div class="js-chatbox-display chatbox__display">
-
-                    </div>
-                    <!-- End of .chatbox__display -->
-
-                    <form class="js-chatbox-form chatbox__form">     
-                        <div style="display: flex; width: 100%">                  
-                            <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
-                            <span>
-                                <button class="chatbox__form-submit u-btn"><i class="fas fa-paper-plane"></i></button>
-                            </span>
-                        </div>
-                    </form>
-
-                    <!-- End of .chatbox__form -->
-                </section>
+                <div class="mt-5"></div>
                 <!-- Footer -->
                 <%@include file ="footer.jsp" %>
                 <!-- End of Footer -->

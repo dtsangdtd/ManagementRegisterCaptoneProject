@@ -36,7 +36,6 @@
 
                 <!-- Main Content -->
                 <div id="content">
-
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <form
@@ -52,7 +51,6 @@
                             </div>
                         </form>
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -100,12 +98,19 @@
                                                     <button class="btn btn-info dropdown-toggle" type="button"
                                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                        Semester
+                                                        Semester:
+                                                        <c:forEach items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <c:if test="${param.semesterID == listSemester.semesterID}">
+                                                                <span>${listSemester.semesterName}</span>
+                                                            </c:if> 
+                                                        </c:forEach>
                                                     </button>
                                                     <div class="dropdown-menu animated--fade-in"
                                                          aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Fall 2021</a>
-                                                        <a class="dropdown-item" href="#">Spring 2021</a>
+                                                        <c:forEach 
+                                                            items="${sessionScope.LIST_SEMESTER}" var="listSemester">
+                                                            <a class="dropdown-item" href="GetListMentorGroupcController?semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>                                           
@@ -118,83 +123,44 @@
                                                 <th>Group Name</th>
                                                 <th>Capstone Name</th>
                                                 <th>Person Of Group</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>New York</td>
-                                                <td>Tourism Smart Card</td>
-                                                <td>4</td>
-                                                <td>
-                                                    <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-search"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>New York</td>
-                                                <td>Tourism Smart Card</td>
-                                                <td>4</td>
-                                                <td>
-                                                    <a href="group-detail.jsp" class="btn btn-success btn-circle btn-sm">
-                                                        <i class="fas fa-search"></i>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
+                                            <c:forEach var="group" varStatus="counter" items="${LIST_MENTOR_GROUP}">
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${group.groupName}</td>
+                                                    <td>${group.capstoneName}</td>
+                                                    <td>${group.numOfPer}</td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                                  <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                        <nav aria-label="Page navigation example" style="position: absolute; right: 20px" >
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
 
                 </div>
 
                 <!-- End of Main Content -->
-                <section class="chatbox js-chatbox">
-                    <div class="chatbox__header">
-                        <h3 class="chatbox__header-cta-text"><span class="chatbox__header-cta-icon"><i
-                                    class="fas fa-comments"></i></span>Let's chat</h3>
-                        <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-chevron-up"></i></button>
-                    </div>
-                    <!-- End of .chatbox__header -->
-                    <div class="js-chatbox-display chatbox__display">
-
-                    </div>
-                    <!-- End of .chatbox__display -->
-
-                    <form class="js-chatbox-form chatbox__form">     
-                        <div style="display: flex; width: 100%">                  
-                            <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
-                            <span>
-                                <button class="chatbox__form-submit u-btn"><i class="fas fa-paper-plane"></i></button>
-                            </span>
-                        </div>
-                    </form>
-
-                    <!-- End of .chatbox__form -->
-                </section>
                 <%@include file ="footer.jsp" %>
 
             </div>

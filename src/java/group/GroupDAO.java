@@ -449,14 +449,14 @@ public class GroupDAO {
         }
         return check;
     }
-    
-    public List<GroupDTO> getListUserGroup (String semesterID) throws SQLException {
+
+    public List<GroupDTO> getListUserGroup(String semesterID) throws SQLException {
         List<GroupDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-             conn = DBUtils.getConnection();
+            conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = " SELECT u.name, g.groupName "
                         + " FROM tblUser u full join tblUserGroup ug on u.userID = ug.userID full join tblGroup g on ug.groupID = g.groupID "
@@ -500,9 +500,9 @@ public class GroupDAO {
                 }
                 sql = sql.substring(0, sql.length() - 1);
                 stm = conn.prepareStatement(sql);
-                 int count = 1;
-                  int maxUGID = getMaxUserGroupID() + 1;
-                 for (String userID : listSupID) {
+                int count = 1;
+                int maxUGID = getMaxUserGroupID() + 1;
+                for (String userID : listSupID) {
                     stm.setInt(count++, maxUGID++);
                     stm.setString(count++, userID);
                     stm.setInt(count++, groupID);
@@ -522,7 +522,8 @@ public class GroupDAO {
         }
         return check;
     }
-        public boolean updateStudentStatus(String userID) throws SQLException {
+
+    public boolean updateStudentStatus(String userID) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -545,5 +546,43 @@ public class GroupDAO {
             }
         }
         return result;
+    }
+    
+    public List<GroupDTO> getListMentorGroup (String userID, String semesterID) throws SQLException {
+        List<GroupDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT g.groupName, c.capstoneName, g.numberOfPerson "
+                        + " FROM tblUser u left join tblUserGroup ug on u.userID = ug.userID left join tblGroup g on ug.groupID = g.groupID left join tblCapstone c on g.capstoneID = c.capstoneID "
+                        + " WHERE u.userID = ? AND c.semesterID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                stm.setString(2, semesterID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String groupName = rs.getString("groupName");
+                    String capstoneName = rs.getString("capstoneName");
+                    int numOfPer = rs.getInt("numberOfPerson");
+                    list.add(new GroupDTO(groupName, capstoneName, numOfPer));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }

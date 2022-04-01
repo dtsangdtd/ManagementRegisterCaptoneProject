@@ -6,10 +6,11 @@
 package controller;
 
 import capstone.CapstoneDAO;
-import capstone.CapstoneDTO;
 import group.GroupDAO;
 import group.GroupDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,58 +26,48 @@ import user.UserDTO;
  *
  * @author ASUS
  */
-@WebServlet(name = "GetListTopicRegistController", urlPatterns = {"/GetListTopicRegistController"})
-public class GetListTopicRegistController extends HttpServlet {
+@WebServlet(name = "GetListMentorGroupController", urlPatterns = {"/GetListMentorGroupController"})
+public class GetListMentorGroupController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "registerTopic.jsp";
+    private static final String SUCCESS = "supervisor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String semesterID = request.getParameter("semesterID");
         try {
-            boolean check = true;
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String roleID = loginUser.getRoleID();
             String userID = loginUser.getUserID();
-            GroupDAO gDAO = new GroupDAO();
-            int groupID = gDAO.getGroupIDByUserID(userID);
-            SemesterDAO semDAO = new SemesterDAO();
-            SemesterDTO semDTO = semDAO.getSemesterByUserID(userID);
-            String semesterID = semDTO.getSemesterID();
+
             CapstoneDAO capDAO = new CapstoneDAO();
-            List<CapstoneDTO> list = capDAO.getListCapstone(semesterID);
-            session.setAttribute("LIST_REGIST_TOPIC", list);
-            if (roleID.equals("US")){
-                check = false;
-            }
-            if (groupID == 0) {
-                check = false;
-                session.setAttribute("CHECK_CAPSTONE", check);
+            SemesterDAO semesterDAO = new SemesterDAO();
+            List<SemesterDTO> listSemester = semesterDAO.getListSemester();
+            session.setAttribute("LIST_SEMESTER", listSemester);
+
+            List<GroupDTO> listGroup = new ArrayList<>();
+            GroupDAO gDAO = new GroupDAO();
+            listGroup = gDAO.getListMentorGroup(userID, semesterID);
+            session.setAttribute("LIST_MENTOR_GROUP", listGroup);
+
+            if (loginUser == null) {
+                url = ERROR;
+            } else if ("MT".equals(loginUser.getRoleID())) {
                 url = SUCCESS;
-            } else {
-                GroupDTO group = gDAO.getGroupByGroupID(groupID);
-                int numOfPer = group.getNumOfPer();
-                int capstoneID = group.getCapstoneID();
-                if (numOfPer < 4) {
-                    check = false;
-                    session.setAttribute("CHECK_CAPSTONE", check);
-                    url = SUCCESS;
-                } else {
-                    if (capstoneID == 0) {
-                        session.setAttribute("CHECK_CAPSTONE", check);
-                        url = SUCCESS;
-                    } else {
-                        check = false;
-                        session.setAttribute("CHECK_CAPSTONE", check);
-                        url = SUCCESS;
-                    }
-                }
             }
         } catch (Exception e) {
-            log("Error at GetListTopicRegistController" + e.toString());
+            log("Error at GetListMentorGroupController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
