@@ -31,6 +31,7 @@ public class MainController extends HttpServlet {
     private static final String IMPORTCAPSTONE = "ImportCapstoneController";
     private static final String GETLISTTOPIC = "GetListTopicController";
     private static final String KICK = "KickMemberController";
+    private static final String INFOR = "GetInforController";
     private static final String GROUPMAX = "ChartController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -68,6 +69,7 @@ public class MainController extends HttpServlet {
             } else if ("Kick".equals(action)) {
                 url = KICK;
             }else if ("Infor".equals(action)) {
+                url = INFOR;
                 url = UPDATEPROFILE;
             }else if ("maxGroup".equals(action)) {
                 url = GROUPMAX;

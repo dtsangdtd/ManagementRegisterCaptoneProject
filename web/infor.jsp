@@ -26,6 +26,7 @@
         <div id="wrapper">
             <c:if test="${sessionScope.LOGIN_USER == null }">
                 <c:redirect url="login.jsp"></c:redirect>
+
             </c:if>
             <c:if test="${sessionScope.LOGIN_USER.roleID == 'US'}">
                 <%@include file="sidebar.jsp"%>
@@ -76,7 +77,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
-                                    <img class="img-profile rounded-circle" src="${sessionScope.INFOR.photoUrl}">
+                                    <img class="img-profile rounded-circle" src="${sessionScope.INFORSTU.photoUrl}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -96,34 +97,36 @@
                     </nav>
                     <div class="container-fluid" style="height: 70%">
                         <div class="card shadow mb-4">
-                            <form id="form" action="UpdateProfileController" method="POST">
+                            
                                 <div class="container">                              
                                     <div class="row">
-                                        <h2 style="text-align: center">Edit profile</h2>
+                                            <h2 style="text-align: center">Profile</h2>
                                         <div class="col-7">
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                                        <input class="form-control" type="text" id="userID" name="userID" readonly aria-label="Disabled input example" value="${sessionScope.INFOR.userID}">
+                                                        <input class="form-control" type="text" id="userID" name="userID" aria-label="Disabled input example" readonly value="${sessionScope.INFORSTU.userID}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" readonly placeholder="name@example.com" value="${sessionScope.INFOR.gmail}" >
+                                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" readonly value="${sessionScope.INFORSTU.gmail}" >
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-                                                        <input type="text" class="form-control" name="fullname" readonly id="exampleFormControlInput1" value="${sessionScope.INFOR.username}">
+                                                        <input type="text" class="form-control" name="fullname" id="exampleFormControlInput1" readonly value="${sessionScope.INFORSTU.username}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Phone</label>
-                                                        <input type="number" class="form-control" name="phone" id="phone"  value="${sessionScope.INFOR.phone}">
+                                                        
+                                                        <input type="number" class="form-control" name="phone" id="phone" readonly value="${sessionScope.INFORSTU.phone}">
+                                                        
                                                         <span id="span"></span>
                                                     </div>
                                                 </div>
@@ -146,17 +149,11 @@
                                         <div class="col-5">
                                             <div id="preview-wrapper">
                                                 <div class="container">
-                                                    <div class="avatar-upload">
-                                                        
-                                                        <div class="avatar-edit">
-                                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"  />
-                                                            <label for="imageUpload"><i style="padding: 8px 0 0 8px" class="fas fa-pen"></i></label>
-                                                        </div>
-                                                                                                                          
+                                                    <div class="avatar-upload">                                               
                                                         <div class="avatar-preview">
                                                             <div>
-                                                                <img id="imagePreview" src="${sessionScope.INFOR.photoUrl}"/>
-                                                                <input type='text' id="imageURL" name="imageURL" hidden value="${sessionScope.INFOR.photoUrl}"/>
+                                                                <img id="imagePreview" src="${sessionScope.INFORSTU.photoUrl}"/>
+                                                                <input type='text' id="imageURL" name="imageURL" hidden value="${sessionScope.INFORSTU.photoUrl}"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,10 +164,7 @@
                                     </div>
 
                                 </div>
-                            </form>
-                            
-                            <div class="container" style="width: 100%; text-align: center">  <button id="btnSubmit" class="btn btn-success">Save</button></div>
-                            
+                                                        
                         </div>
                     </div>
                 </div>
