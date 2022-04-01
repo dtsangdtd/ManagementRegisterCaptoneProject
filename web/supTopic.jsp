@@ -96,8 +96,7 @@
                                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
                                                         Semester:
-                                                        <c:forEach 
-                                                            items="${sessionScope.LIST_SEMESTER_TOPIC}" var="listSemester">
+                                                        <c:forEach items="${sessionScope.LIST_SEMESTER_TOPIC}" var="listSemester">
                                                             <c:if test="${param.semesterID == listSemester.semesterID}">
                                                                 <span>${listSemester.semesterName}</span>
                                                             </c:if> 

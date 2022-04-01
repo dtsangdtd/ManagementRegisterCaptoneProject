@@ -54,6 +54,7 @@ public class GetListMentorTopicController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String userID = loginUser.getUserID();
+            
             CapstoneDAO capDAO = new CapstoneDAO();
             SemesterDAO semesterDAO = new SemesterDAO();
             List<SemesterDTO> listSemesterTopic = semesterDAO.getListSemester();
