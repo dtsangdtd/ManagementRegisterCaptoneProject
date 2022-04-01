@@ -115,7 +115,6 @@
                                                             <input type="hidden" name="email" value="${stu.gmail}"/>
                                                             <button <c:if test="${sessionScope.CHECK_NUMOFPER == false}"> disabled </c:if> type="submit" name="action" value="Invite" class="btn btn-success btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
                                                             </form>
-
                                                         </td>
                                                     </tr>
                                                 </tbody>
