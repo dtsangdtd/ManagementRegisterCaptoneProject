@@ -37,7 +37,6 @@ public class GetListStudentInGroupDetails extends HttpServlet {
             String groupID = request.getParameter("groupID");
             GroupDAO groupDAO = new GroupDAO();
             List<GroupDTO> listStudentInGroup = groupDAO.getListStudentInGroup(groupID);
-            System.out.println(listStudentInGroup);
             CapstoneDAO capstoneDAO = new CapstoneDAO();
             CapstoneDTO capstone = capstoneDAO.getCapstoneName(groupID);
             HttpSession session = request.getSession();

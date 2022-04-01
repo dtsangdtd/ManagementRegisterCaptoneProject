@@ -50,7 +50,6 @@ public class SemesterDAO {
                 conn.close();
             }
         }
-//        System.out.println(list);
         return list;
     }
 
@@ -198,7 +197,6 @@ public class SemesterDAO {
                 conn.close();
             }
         }
-//        System.out.println(list);
         return list;
     }
 

@@ -66,7 +66,6 @@ public class GetListController extends HttpServlet {
             int noOfPages;
             noOfPages = (int) Math.ceil(dao.getNoOfRecordsSearchAdmin(checked, semesterID, searchName) * 1.0 / pageSize);
             List<UserDTO> listStudent = dao.getUserSearch(pageSize, pageNumber, checked, semesterID, searchName);
-//            System.out.println(noOfPages);
 
             String roleID = loginUser.getRoleID();
             if ("US".equals(roleID) || "LD".equals(roleID)) {
@@ -89,7 +88,6 @@ public class GetListController extends HttpServlet {
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);
             session.setAttribute("LIST_SEMESTER", listSemester);
-            System.out.println(listStudent);
             session.setAttribute("LIST_STUDENT", listStudent);
             session.setAttribute("LIST_SUPERVISOR", listSupervisor);
             if (loginUser == null) {

@@ -30,13 +30,12 @@
         </c:if>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <%@include file="stuSidebarV2.jsp"%>
+            <%@include file="studentSidebar.jsp"%>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                             <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -64,8 +63,8 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">student 4</span>
-                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
+                                    <img class="img-profile rounded-circle" src="${sessionScope.INFOR.photoUrl}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -114,57 +113,22 @@
                                                 <th>Info</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Donna Snider</td>
-                                                <td>1242234234</td>
-                                                <td>test@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Khai Ngu Ngoc</td>
-                                                <td>32323232</td>
-                                                <td>test1@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>QA</td>
-                                                <td>23523523523</td>
-                                                <td>test2@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Student 4</td>
-                                                <td>23523523523</td>
-                                                <td>test2@fpt.edu.vn</td>
-                                                <td>Group 1</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <c:forEach var="listGroup" varStatus="counter" items="${LISTGROUP}">
+                                            <tbody>
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>${listGroup.username}</td>
+                                                    <td>${listGroup.phone}</td>
+                                                    <td>${listGroup.gmail}</td>
+                                                    <td>${listGroup.groupName}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                            <i class="fas fa-info"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>

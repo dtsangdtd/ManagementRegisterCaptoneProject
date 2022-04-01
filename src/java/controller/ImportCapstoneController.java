@@ -32,7 +32,6 @@ public class ImportCapstoneController extends HttpServlet {
         try {
             String filename = request.getParameter("filename");
             String locationFileName = "C:\\" + filename;
-            System.out.println(locationFileName);
             UploadDAO dao = new UploadDAO();
             int check = dao.readFile_Capstone(locationFileName);
             if (check == 1) {
