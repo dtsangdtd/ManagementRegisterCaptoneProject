@@ -66,7 +66,9 @@ public class MainController extends HttpServlet {
                 url = IMPORTCAPSTONE;
             } else if ("Kick".equals(action)) {
                 url = KICK;
-            } else {
+            }else if ("Infor".equals(action)) {
+                url = UPDATEPROFILE;
+            }else {
                 session.setAttribute("ERROR_MESSAGE", "Function is not available!");
             }
         } catch (Exception e) {
