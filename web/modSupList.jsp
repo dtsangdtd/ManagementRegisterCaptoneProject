@@ -1,7 +1,7 @@
-        <%-- 
-    Document   : modStudentList
-    Created on : Jan 16, 2022, 12:56:11 PM
-    Author     : mac
+<%-- 
+Document   : modStudentList
+Created on : Jan 16, 2022, 12:56:11 PM
+Author     : mac
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -56,7 +56,6 @@
                             </div>
                         </form>
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -117,7 +116,7 @@
                                     <table class="table-sm" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                                <th>UserID</th>
                                                 <th>Name</th>
                                                 <th>Gmail</th>
                                                 <th>
@@ -144,19 +143,25 @@
                                                 <!--                                                <th>photoUrl</th>-->
                                             </tr>
                                         </thead>
-                                        <c:forEach var="sup" varStatus="counter" items="${LIST_SUPERVISOR}">
+                                        <c:forEach  var="sup" varStatus="counter" items="${LIST_SUPERVISOR}">
                                             <tbody>
                                                 <tr>
-                                                    <td>${counter.count}</td>
-                                                    <td>${sup.username}</td>
-                                                    <td>
-                                                        <a href="" class="copy-click"
-                                                           data-tooltip-text="Click To Copy" 
-                                                           data-tooltip-text-copied="✔ Copied">
-                                                            ${sup.gmail}
-                                                        </a>
-                                                    </td>
-                                                    <td>${sup.amountGroup}/5</td>
+                                                    <td>${sup.key}</td>
+                                                    <c:forEach varStatus="status" var="value" items="${sup.value}">
+                                                        <c:if test="${status.last}">
+                                                            <td>${value.username}</td>
+                                                            <td>
+                                                                <a href="" class="copy-click"
+                                                                   data-tooltip-text="Click To Copy" 
+                                                                   data-tooltip-text-copied="✔ Copied">
+                                                                    ${value.gmail}
+                                                                </a>
+                                                            </td>
+                                                            <td>${value.amountGroup}/5</td>
+                                                        </c:if>
+
+                                                    </c:forEach>
+
 
                                                 </tr>
                                             </tbody>

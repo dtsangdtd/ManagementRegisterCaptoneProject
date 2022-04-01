@@ -16,6 +16,7 @@ public class GroupDTO extends UserDTO {
     private String groupID;
     private String groupName;
     private int capstoneID;
+    private String capstoneName;
     private int numOfPer;
     private int statusGroupID;
     private String statusID;
@@ -35,6 +36,7 @@ public class GroupDTO extends UserDTO {
         return groupID;
     }
 
+    
     public GroupDTO(int numOfPer, int groupID1) {
         this.numOfPer = numOfPer;
         this.groupID1 = groupID1;
@@ -55,6 +57,12 @@ public class GroupDTO extends UserDTO {
     @Override
     public String getGroupName() {
         return groupName;
+    }
+
+    public GroupDTO(String groupName, String capstoneName, int numOfPer) {
+        this.groupName = groupName;
+        this.capstoneName = capstoneName;
+        this.numOfPer = numOfPer;
     }
 
     @Override
@@ -100,6 +108,22 @@ public class GroupDTO extends UserDTO {
 
     public void setGroupID1(int groupID1) {
         this.groupID1 = groupID1;
+    }
+
+    public String getCapstoneName() {
+        return capstoneName;
+    }
+
+    public void setCapstoneName(String capstoneName) {
+        this.capstoneName = capstoneName;
+    }
+
+    public String getStatusID() {
+        return statusID;
+    }
+
+    public void setStatusID(String statusID) {
+        this.statusID = statusID;
     }
 
     @Override

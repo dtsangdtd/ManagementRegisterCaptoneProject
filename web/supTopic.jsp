@@ -51,7 +51,6 @@
                             </div>
                         </form>
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -96,7 +95,7 @@
                                                     <button class="btn btn-info dropdown-toggle" type="button"
                                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                        Semester
+                                                        Semester:
                                                         <c:forEach 
                                                             items="${sessionScope.LIST_SEMESTER_TOPIC}" var="listSemester">
                                                             <c:if test="${param.semesterID == listSemester.semesterID}">
@@ -108,7 +107,7 @@
                                                          aria-labelledby="dropdownMenuButton">
                                                         <c:forEach 
                                                             items="${sessionScope.LIST_SEMESTER_TOPIC}" var="listSemester">
-                                                            <a class="dropdown-item" href="GetListTopicController?radioGroup=0&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
+                                                            <a class="dropdown-item" href="GetListMentorTopicController?radioGroup=0&semesterID=${listSemester.semesterID}" >${listSemester.semesterName}</a>
                                                         </c:forEach>
                                                     </div>
                                                 </div>
@@ -157,7 +156,7 @@
                                                     <td>${topic.capstoneID}</td>
                                                     <td>${topic.groupId}</td>
                                                     <td>
-                                                        <c:if test="${topic.statusId == '0'}"><div class="badge bg-dark">Registered</div></c:if>
+                                                        <c:if test="${topic.statusId == '0'}"><div class="badge bg-success">Registered</div></c:if>
                                                         <c:if test="${topic.statusId == '1'}"><div class="badge bg-dark">No Group</div></c:if>
                                                     </td>
                                                     <!--<td></td>-->
@@ -191,29 +190,6 @@
                     </div>
                 </div>
                 <!-- End of Main Content -->
-                <section class="chatbox js-chatbox">
-                    <div class="chatbox__header">
-                        <h3 class="chatbox__header-cta-text"><span class="chatbox__header-cta-icon"><i
-                                    class="fas fa-comments"></i></span>Let's chat</h3>
-                        <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-chevron-up"></i></button>
-                    </div>
-                    <!-- End of .chatbox__header -->
-                    <div class="js-chatbox-display chatbox__display">
-
-                    </div>
-                    <!-- End of .chatbox__display -->
-
-                    <form class="js-chatbox-form chatbox__form">     
-                        <div style="display: flex; width: 100%">                  
-                            <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
-                            <span>
-                                <button class="chatbox__form-submit u-btn"><i class="fas fa-paper-plane"></i></button>
-                            </span>
-                        </div>
-                    </form>
-
-                    <!-- End of .chatbox__form -->
-                </section>
                 <%@include file ="footer.jsp" %>
 
             </div>

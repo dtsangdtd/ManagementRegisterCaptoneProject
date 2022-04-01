@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import user.UserDTO;
 import utils.DBUtils;
 
 /**
@@ -64,7 +65,7 @@ public class CapstoneDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT TOP ? capstoneID "
+                String sql = " SELECT TOP (?) capstoneID "
                         + " FROM tblCapstone"
                         + " WHERE semesterID = ? ";
                 stm = conn.prepareStatement(sql);
@@ -173,7 +174,7 @@ public class CapstoneDAO {
         return list;
     }
 
-    public List<CapstoneDTO> getListMentorCapstone(String userID) throws SQLException {
+    public List<CapstoneDTO> getListMentorCapstone(String userID, String semesterID) throws SQLException {
         List<CapstoneDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -183,10 +184,11 @@ public class CapstoneDAO {
             if (conn != null) {
                 String sql = " SELECT c.capstoneName, c.statusID, g.groupName "
                         + " FROM tblUserCapstone uc left join tblCapstone c on uc.capstoneID = c.capstoneID left join tblGroup g on c.groupID = g.groupID "
-                        + " WHERE uc.userID = ? "
+                        + " WHERE uc.userID = ? AND c.semesterID = ? "
                         + " ORDER BY c.capstoneName ASC ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
+                stm.setString(2, semesterID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String capstoneName = rs.getString("capstoneName");
@@ -397,4 +399,39 @@ public class CapstoneDAO {
         }
         return list;
     }
+        public List<String> getSupByCapstoneID(String capstoneID) throws SQLException {
+        List<String> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT userID "
+                        + " FROM tblUserCapstone "
+                        + " WHERE capstoneID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, capstoneID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    list.add(userID);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
 }

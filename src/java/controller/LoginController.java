@@ -24,7 +24,7 @@ import user.UserDTO;
 public class LoginController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String MENTOR = "supervisor.jsp";
+    private static final String MENTOR = "GetListMentorGroupController?semesterID=SP22";
     private static final String MT = "MT";
 
     /**
