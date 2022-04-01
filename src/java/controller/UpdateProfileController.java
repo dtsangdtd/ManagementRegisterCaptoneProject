@@ -26,32 +26,37 @@ public class UpdateProfileController extends HttpServlet {
     private static final String SUCCESS = "profile.jsp";
     private static final String ERROR = "login.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
-            String name = request.getParameter("fullname");
-            String phone = request.getParameter("phone");
-            String photoUrl = request.getParameter("imageURL");
-            UserDAO userDao = new UserDAO();
-            boolean success = userDao.updateInfor(name, phone, photoUrl, userID);
-            UserDTO userInfor = userDao.getInforUser(userID);
             HttpSession session = request.getSession();
-            session.setAttribute("INFOR", userInfor);
-            if(success){
+            UserDAO userDao = new UserDAO();
+            String userID = request.getParameter("userID");
+//            String name = request.getParameter("fullname");
+//            String phone = request.getParameter("phone");
+//            String photoUrl = request.getParameter("imageURL");
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String loginUserID = loginUser.getUserID();
+            if (!loginUserID.equals(userID)) {
+                UserDTO userInfor = userDao.getInforUser(userID);
+                session.setAttribute("INFOR", userInfor);
+                session.setAttribute("Check", 1);
                 url = SUCCESS;
-            }            
+            } else {
+                String name = request.getParameter("fullname");
+                String phone = request.getParameter("phone");
+                String photoUrl = request.getParameter("imageURL");
+                boolean success = userDao.updateInfor(name, phone, photoUrl, userID);
+                UserDTO userInfor = userDao.getInforUser(userID);
+                session.setAttribute("INFOR", userInfor);
+                session.setAttribute("Check", 2);
+                if (success) {
+                    url = SUCCESS;
+                }
+            }
+
         } catch (Exception e) {
             log("ERROR at UpdateProfileController" + e.toString());
         } finally {

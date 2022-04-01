@@ -121,7 +121,12 @@
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                                                        <c:if test="${sessionScope.Check eq '2'}">
                                                         <input type="number" class="form-control" name="phone" id="phone"  value="${sessionScope.INFOR.phone}">
+                                                        </c:if>
+                                                        <c:if test="${sessionScope.Check eq '1'}">
+                                                        <input type="number" class="form-control" name="phone" id="phone" disabled value="${sessionScope.INFOR.phone}">
+                                                        </c:if>
                                                         <span id="span"></span>
                                                     </div>
                                                 </div>
@@ -145,16 +150,19 @@
                                             <div id="preview-wrapper">
                                                 <div class="container">
                                                     <div class="avatar-upload">
-
+                                                        <c:if test="${sessionScope.Check eq '2'}">
                                                         <div class="avatar-edit">
 
                                                             <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"  />
                                                             <label for="imageUpload"><i style="padding: 8px 0 0 8px" class="fas fa-pen"></i></label>
                                                         </div>
+                                                        </c:if>                                                                    
                                                         <div class="avatar-preview">
                                                             <div>
                                                                 <img id="imagePreview" src="${sessionScope.INFOR.photoUrl}"/>
+                                                                <c:if test="${sessionScope.Check eq '2'}">
                                                                 <input type='text' id="imageURL" name="imageURL" hidden value="${sessionScope.INFOR.photoUrl}"/>
+                                                                </c:if>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -166,7 +174,9 @@
 
                                 </div>
                             </form>
+                            <c:if test="${sessionScope.Check eq '2'}">
                             <div class="container" style="width: 100%; text-align: center">  <button id="btnSubmit" class="btn btn-success">Save</button></div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
