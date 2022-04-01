@@ -5,55 +5,47 @@
  */
 package controller;
 
+import capstone.CapstoneDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import user.UserDAO;
-import user.UserDTO;
+import upload.UploadDAO;
 
 /**
  *
- * @author dtsang
+ * @author Mai
  */
-@WebServlet(name = "UpdateProfileController", urlPatterns = {"/UpdateProfileController"})
-public class UpdateProfileController extends HttpServlet {
+@WebServlet(name = "ImportCapstoneController", urlPatterns = {"/ImportCapstoneController"})
+public class ImportCapstoneController extends HttpServlet {
 
-    private static final String SUCCESS = "profile.jsp";
-    private static final String ERROR = "login.jsp";
+    private static String SUCCESS = "GetListTopicController";
+    private static String ERROR = "login.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
-            String name = request.getParameter("fullname");
-            String phone = request.getParameter("phone");
-            String photoUrl = request.getParameter("imageURL");
-            UserDAO userDao = new UserDAO();
-            boolean success = userDao.updateInfor(name, phone, photoUrl, userID);
-            UserDTO userInfor = userDao.getInforUser(userID);
-            HttpSession session = request.getSession();
-            session.setAttribute("INFOR", userInfor);
-            if(success){
-                url = SUCCESS;
-            }            
+            String filename = request.getParameter("filename");
+            String locationFileName = "C:\\" + filename;
+            System.out.println(locationFileName);
+            UploadDAO dao = new UploadDAO();
+            int check = dao.readFile_Capstone(locationFileName);
+            if (check == 1) {
+                List<CapstoneDTO> list = dao.getListCapstone();
+                boolean checkInsertCapstone = dao.pushExcelListCap(list);
+                boolean checkInsertUserCapstone = dao.pushExcelListUserCap(list);
+                if (checkInsertCapstone && checkInsertUserCapstone) {
+                    url = SUCCESS;
+                }
+            }
+
         } catch (Exception e) {
-            log("ERROR at UpdateProfileController" + e.toString());
+            log("Error at ImportController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

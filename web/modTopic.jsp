@@ -60,12 +60,12 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
                                     <img class="img-profile rounded-circle"
-                                         src="img/undraw_profile.svg">
+                                         src="${sessionScope.INFOR.photoUrl}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="profile.jsp">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
@@ -87,8 +87,12 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Capstone Topic</h1>
+                            <form id="file_form" action="MainController">
+                                <input  name="filename" type="file" />
+                                <input  type="submit" name="action" value="ImportCapstone" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                </input>
+                            </form>
                         </div>
-
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive" style="height: 500px">
@@ -137,16 +141,19 @@
                                                     <td>${top.key}</td>
                                                     <!--<td></td>-->
                                                     <td>
-                                                        <c:forEach var="value" items="${top.value}">
-                                                            <span>${value.userName},</span>
+                                                        <c:forEach var="value" items="${top.value}" varStatus="status">
+                                                            
+                                                            <span>${value.userName}
+                                                                <c:if test="${!status.last}">,</c:if>
+                                                            </span>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
                                                         <c:forEach var="value" varStatus="status" items="${top.value}">
-                                                            
+
                                                             <c:if test="${value.statusId == '0' && status.last}"><div class="badge bg-dark">inActive</div></c:if>
                                                             <c:if test="${value.statusId == '1' && status.last}"><div class="badge bg-success">Active</div></c:if>
-                                                            
+
                                                         </c:forEach>
                                                     </td>
                                                 </tr>
