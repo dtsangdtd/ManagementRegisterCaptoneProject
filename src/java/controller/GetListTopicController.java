@@ -72,7 +72,7 @@ public class GetListTopicController extends HttpServlet {
             for (Map.Entry<String, ArrayList<CapstoneDTO>> entry : listCapMutippleMentor.entrySet()) {
                 String key = entry.getKey();
                 ArrayList<CapstoneDTO> value = entry.getValue();
-                                System.out.println("key : " + key + " - value : " + value);
+                                //System.out.println("key : " + key + " - value : " + value);
             }
             session.setAttribute("LIST_MULTI_MT", listCapMutippleMentor);
             if (loginUser == null) {
