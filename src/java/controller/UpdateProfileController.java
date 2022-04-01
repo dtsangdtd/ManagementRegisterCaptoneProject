@@ -23,6 +23,9 @@ import user.UserDTO;
 @WebServlet(name = "UpdateProfileController", urlPatterns = {"/UpdateProfileController"})
 public class UpdateProfileController extends HttpServlet {
 
+    private static final String SUCCESS = "profile.jsp";
+    private static final String ERROR = "login.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,20 +38,24 @@ public class UpdateProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
             String userID = request.getParameter("userID");
             String name = request.getParameter("fullname");
             String phone = request.getParameter("phone");
             String photoUrl = request.getParameter("imageURL");
             UserDAO userDao = new UserDAO();
-            userDao.updateInfor(name, phone, photoUrl, userID);
+            boolean success = userDao.updateInfor(name, phone, photoUrl, userID);
             UserDTO userInfor = userDao.getInforUser(userID);
             HttpSession session = request.getSession();
             session.setAttribute("INFOR", userInfor);
+            if(success){
+                url = SUCCESS;
+            }            
         } catch (Exception e) {
-             log("ERROR at MainController" + e.toString());
-        }finally{
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            log("ERROR at UpdateProfileController" + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

@@ -60,12 +60,12 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.LOGIN_USER.username} (${sessionScope.LOGIN_USER.userID})</span>
                                     <img class="img-profile rounded-circle"
-                                         src="img/undraw_profile.svg">
+                                         src="${sessionScope.INFOR.photoUrl}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="profile.jsp">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
@@ -141,8 +141,11 @@
                                                     <td>${top.key}</td>
                                                     <!--<td></td>-->
                                                     <td>
-                                                        <c:forEach var="value" items="${top.value}">
-                                                            <span>${value.userName},</span>
+                                                        <c:forEach var="value" items="${top.value}" varStatus="status">
+                                                            
+                                                            <span>${value.userName}
+                                                                <c:if test="${!status.last}">,</c:if>
+                                                            </span>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
