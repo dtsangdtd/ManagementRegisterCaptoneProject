@@ -231,7 +231,6 @@ public class GroupDAO {
                     list.add(new GroupDTO(groupID, groupName, userID, username, "", role, gmail, phone, statusID, photoUrl));
                 }
             }
-//            System.out.println(list);
         } catch (Exception e) {
         } finally {
             if (rs != null) {
@@ -324,7 +323,6 @@ public class GroupDAO {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
-            System.out.println(list.size());
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = " INSERT INTO tblUserGroup(userGroupID, userID, groupID, isSupervisor) "
