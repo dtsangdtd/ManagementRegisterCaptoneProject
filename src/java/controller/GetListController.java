@@ -82,6 +82,9 @@ public class GetListController extends HttpServlet {
                     }
                 }
             }
+            if(roleID.equals("US")){
+                check = false;
+            }
             session.setAttribute("CHECK_NUMOFPER", check);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", pageNumber);

@@ -21,7 +21,7 @@
     </li>
 
     <li class="nav-item ">
-        <a class="nav-link" href="GetListMentorTopicController">
+        <a class="nav-link" href="GetListMentorTopicController?semesterID=SP22">
             <i class="fas fa-fw fa-folder"></i>
             <span>Capstone Topics</span>
         </a>

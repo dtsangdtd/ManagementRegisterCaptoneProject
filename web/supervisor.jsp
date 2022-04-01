@@ -36,7 +36,6 @@
 
                 <!-- Main Content -->
                 <div id="content">
-
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <form
@@ -52,7 +51,6 @@
                             </div>
                         </form>
                         <ul class="navbar-nav ml-auto">
-                            <%@include file="noti.jsp" %>
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -172,29 +170,6 @@
                 </div>
 
                 <!-- End of Main Content -->
-                <section class="chatbox js-chatbox">
-                    <div class="chatbox__header">
-                        <h3 class="chatbox__header-cta-text"><span class="chatbox__header-cta-icon"><i
-                                    class="fas fa-comments"></i></span>Let's chat</h3>
-                        <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn"><i class="fas fa-chevron-up"></i></button>
-                    </div>
-                    <!-- End of .chatbox__header -->
-                    <div class="js-chatbox-display chatbox__display">
-
-                    </div>
-                    <!-- End of .chatbox__display -->
-
-                    <form class="js-chatbox-form chatbox__form">     
-                        <div style="display: flex; width: 100%">                  
-                            <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
-                            <span>
-                                <button class="chatbox__form-submit u-btn"><i class="fas fa-paper-plane"></i></button>
-                            </span>
-                        </div>
-                    </form>
-
-                    <!-- End of .chatbox__form -->
-                </section>
                 <%@include file ="footer.jsp" %>
 
             </div>

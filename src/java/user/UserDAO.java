@@ -557,34 +557,36 @@ public class UserDAO {
             if (conn != null) {
                 String sql = null;
                 if (check == 1) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID, COUNT (tb2.userID) AS AmountGroup\n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID\n"
-                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT,tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
-                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID )\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
+                            + ")"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID HAVING COUNT (tb2.userID) = 5 \n"
-                            + "ORDER BY (SELECT NULL)\n"
-                            + "OFFSET ? * (? - 1) ROWS \n"
-                            + "FETCH NEXT ? ROWS ONLY ";
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName HAVING COUNT (tb2.userID) = 5 \n"
+                            + "ORDER BY (SELECT NULL)\n";
+//                            + "OFFSET ? * (? - 1) ROWS \n"
+//                            + "FETCH NEXT ? ROWS ONLY ";
 
                 } else if (check == 0) {
-                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID, COUNT (tb2.userID) AS AmountGroup\n"
-                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID\n"
-                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID\n"
+                    sql = "SELECT ROW_NUMBER() OVER (ORDER BY tb1.userID) AS STT, tb1.userID, tb1.name,tb1.gmail, tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName, COUNT (tb2.userID) AS AmountGroup\n"
+                            + "FROM (tblUser tb1 LEFT JOIN tblUserGroup tb2 ON tb1.userID = tb2.userID \n"
+                            + "Left Join tblUserCapstone tb3 ON tb1.userID = tb3.userID \n"
                             + "Left Join tblCapstone tb4 ON tb3.capstoneID = tb4.capstoneID\n"
-                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID )\n"
+                            + "Left Join tblGroup tb5 ON tb4.groupID = tb5.groupID\n"
+                            + ")"
                             + "WHERE tb1.roleID = 'MT'\n"
-                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID HAVING COUNT (tb2.userID) < 5 \n"
-                            + "ORDER BY (SELECT NULL)\n"
-                            + "OFFSET ? * (? - 1) ROWS \n"
-                            + "FETCH NEXT ? ROWS ONLY ";
+                            + "GROUP BY tb1.userID, tb1.name,tb1.gmail,tb1.statusID,tb4.capstoneName,tb5.groupID, tb5.groupName HAVING COUNT (tb2.userID) < 5 \n"
+                            + "ORDER BY (SELECT NULL)\n";
+//                            + "OFFSET ? * (? - 1) ROWS \n"
+//                            + "FETCH NEXT ? ROWS ONLY ";
 
                 }
                 stm = conn.prepareStatement(sql);
-                stm.setInt(1, pagesize);
-                stm.setInt(2, pageNumber);
-                stm.setInt(3, pagesize);
+//                stm.setInt(1, pagesize);
+//                stm.setInt(2, pageNumber);
+//                stm.setInt(3, pagesize);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String stt = rs.getString("STT");
@@ -667,8 +669,8 @@ public class UserDAO {
         }
         return check;
     }
-    
-     public boolean updateRoleID(String userID) throws SQLException {
+
+    public boolean updateRoleID(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
