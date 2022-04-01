@@ -90,10 +90,10 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                       
+
                         <h1 class="h3 mb-2 text-gray-800">${sessionScope.LISTGROUP[0].groupName}</h1>
 
-                        
+
                         <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                             For more information about DataTables, please visit the <a target="_blank"
                                 href="https://datatables.net">official DataTables documentation</a>.</p> -->
@@ -128,19 +128,24 @@
                                                     <td>${listGroup.groupName}</td>
                                                     <!--<td>${listGroup.groupID}</td>-->
                                                     <td>
-                                                        <a href="mod-group-detail.jsp" class="btn btn-info btn-circle btn-sm">
+                                                        <c:url var="info" value="MainController">
+                                                            <c:param name="action" value="Infor"></c:param>
+                                                            <c:param name="userID" value="${listGroup.userID}"></c:param>
+                                                        </c:url>
+                                                        <a href="${info}" class="btn btn-info btn-circle btn-sm">
                                                             <i class="fas fa-info"></i>
                                                         </a>
+                                                        
                                                     </td>
                                                     <td>
                                                         <form action="MainController">
                                                             <input type="hidden" name="userID" value="${listGroup.userID}"/>
                                                             <button <c:if test="${sessionScope.CHECK_ROLEID == false}"> disable </c:if> type="submit" name="action" value="Kick" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-plus"></i> </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
 
-                                            </tbody>
+                                                </tbody>
                                         </c:forEach>
                                     </table>
                                 </div>
