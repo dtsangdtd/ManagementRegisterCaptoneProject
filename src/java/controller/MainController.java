@@ -28,18 +28,10 @@ public class MainController extends HttpServlet {
     private static final String RANDOM = "RandomStudentController";
     private static final String DEADLINE = "DeadlineSemesterController";
     private static final String IMPORT = "ImportController";
+    private static final String IMPORTCAPSTONE = "ImportCapstoneController";
     private static final String GETLISTTOPIC = "GetListTopicController";
     private static final String KICK = "KickMemberController";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -48,9 +40,6 @@ public class MainController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             String action = request.getParameter("action");
-            if (action == null) {
-                action = "Import";
-            }
             if ("Login".equals(action)) {
                 url = LOGIN;
             } else if ("Logout".equals(action)) {
@@ -73,6 +62,8 @@ public class MainController extends HttpServlet {
                 url = DEADLINE;
             } else if ("Import".equals(action)) {
                 url = IMPORT;
+            } else if ("ImportCapstone".equals(action)) {
+                url = IMPORTCAPSTONE;
             } else if ("Kick".equals(action)) {
                 url = KICK;
             } else {

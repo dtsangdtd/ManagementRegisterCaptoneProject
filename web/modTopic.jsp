@@ -87,8 +87,12 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Capstone Topic</h1>
+                            <form id="file_form" action="MainController">
+                                <input  name="filename" type="file" />
+                                <input  type="submit" name="action" value="ImportCapstone" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                </input>
+                            </form>
                         </div>
-
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive" style="height: 500px">
@@ -143,10 +147,10 @@
                                                     </td>
                                                     <td>
                                                         <c:forEach var="value" varStatus="status" items="${top.value}">
-                                                            
+
                                                             <c:if test="${value.statusId == '0' && status.last}"><div class="badge bg-dark">inActive</div></c:if>
                                                             <c:if test="${value.statusId == '1' && status.last}"><div class="badge bg-success">Active</div></c:if>
-                                                            
+
                                                         </c:forEach>
                                                     </td>
                                                 </tr>

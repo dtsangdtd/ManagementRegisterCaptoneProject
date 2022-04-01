@@ -624,7 +624,7 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " UPDATE tblUser SET semesterID=?, statusID = '2' "
+                String sql = " UPDATE tblUser SET semesterID=?, statusID = 3 "
                         + " WHERE userID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, sesmesterID);
