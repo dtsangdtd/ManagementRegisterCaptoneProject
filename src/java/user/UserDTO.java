@@ -33,6 +33,23 @@ public class UserDTO implements Serializable{
     public UserDTO() {
     }
 
+    public UserDTO(String STT, String userID, String username, String password, String roleID, String gmail, String phone, String statusID, String photoUrl, String semesterName, String capstoneName, String groupID, String groupName, String AmountGroup) {
+        this.STT = STT;
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
+        this.roleID = roleID;
+        this.gmail = gmail;
+        this.phone = phone;
+        this.statusID = statusID;
+        this.photoUrl = photoUrl;
+        this.semesterName = semesterName;
+        this.capstoneName = capstoneName;
+        this.groupID = groupID;
+        this.groupName = groupName;
+        this.AmountGroup = AmountGroup;
+    }
+    
     public UserDTO(String stt,String userID, String username, String password, String roleID, String gmail, String phone, String statusID, String photoUrl) {
         this.STT = stt;
         this.userID = userID;
