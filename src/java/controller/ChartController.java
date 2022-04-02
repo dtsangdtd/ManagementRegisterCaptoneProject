@@ -6,69 +6,62 @@
 package controller;
 
 import group.GroupDAO;
-import group.GroupDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import user.UserDAO;
+import semester.SemesterDAO;
+import semester.SemesterDTO;
 import user.UserDTO;
 
 /**
  *
- * @author ASUS
+ * @author Mai
  */
-@WebServlet(name = "KickMemberController", urlPatterns = {"/KickMemberController"})
-public class KickMemberController extends HttpServlet {
+@WebServlet(name = "ChartController", urlPatterns = {"/ChartController"})
+public class ChartController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String ERROR = "Login.jsp";
-    private static final String SUCCESS = "GetListGroupController";
+    private static final String AD = "moderator.jsp";
+    private static final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = LOGIN;
         try {
             HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("INFOR");
-            String leaderID = loginUser.getUserID();
-            String userID = request.getParameter("userID");
-            GroupDAO gDAO = new GroupDAO();
-            boolean check1 = gDAO.kickMember(userID);
-            if (check1) {
-                UserDAO uDAO = new UserDAO();
-                UserDTO leader = uDAO.getUserByUserID(leaderID);
-                int groupID = Integer.parseInt(leader.getGroupID());
-                GroupDTO group = gDAO.getGroupByGroupID(groupID);
-                int numOfPer = group.getNumOfPer() - 1;
-                boolean check2 = gDAO.updateNumberOfPerson(numOfPer, groupID);
-                if (check2) {
-                    int statusID = 3;
-                    boolean check3 = uDAO.updateStatusID(userID, statusID);
-                    if (check3) url = SUCCESS;
-                } 
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            GroupDAO daoSe = new GroupDAO();
+            int groupMax = daoSe.getMaxGroupID();
+            int capstoneMax = daoSe.getMaxCapstoneID();
+            int capstoneChecked = daoSe.getCapstoneIDCheck();
+            int studentMax = daoSe.getMaxStudentID();
+            int studentInGroup = daoSe.getStudnentInGroup();
+            session.setAttribute("GROUP_MAX", groupMax);
+            session.setAttribute("CAPSTONE_MAX", capstoneMax);
+            session.setAttribute("CAPSTONE_CHECKED", capstoneChecked);
+            session.setAttribute("STUDENT_MAX", studentMax);
+            session.setAttribute("STUDENT_IN_GROUP", studentInGroup);
+            if (loginUser == null) {
+                url = LOGIN;
+            } else if ("AD".equals(loginUser.getRoleID())) {
+                url = AD;
             }
+
         } catch (Exception e) {
-            log("Error at KickMemberController " + e.toString());
+            log("Error at DeadlineSemesterController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
