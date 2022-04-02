@@ -37,7 +37,6 @@ public class GetInforController extends HttpServlet {
             System.out.println(userInfor);
             HttpSession session = request.getSession();
             session.setAttribute("INFORSTU", userInfor);
-            session.setAttribute("Check", 1);
             url = SUCCESS;
         } catch (Exception e) {
             log("ERROR at GetInforController" + e.toString());
