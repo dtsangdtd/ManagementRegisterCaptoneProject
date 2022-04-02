@@ -122,7 +122,11 @@
                                                     <td>${listGroup.gmail}</td>
                                                     <td>${listGroup.groupName}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                        <c:url var="info" value="MainController">
+                                                            <c:param name="action" value="Infor"></c:param>
+                                                            <c:param name="userID" value="${listGroup.userID}"></c:param>
+                                                        </c:url>
+                                                        <a href="${info}" class="btn btn-info btn-circle btn-sm">
                                                             <i class="fas fa-info"></i>
                                                         </a>
                                                     </td>

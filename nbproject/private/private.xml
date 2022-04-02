@@ -5,6 +5,7 @@
         <group>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/web/studentSidebar.jsp</file>
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/src/java/controller/GetListController.java</file>
             <file>file:/C:/Users/ASUS/Documents/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
@@ -21,9 +22,19 @@
 =======
             <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/group/Cart.java</file>
             <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/group/GroupDAO.java</file>
+=======
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/logout.jsp</file>
+>>>>>>> Stashed changes
             <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/user/UserDAO.java</file>
-            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/upload/UploadError.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/stuSidebarV2.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/student.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/noti.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/studentV2.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/infor.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/UpdateProfileController.java</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/MainController.java</file>
             <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/modStudentList.jsp</file>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/upload/UploadDAO.java</file>
             <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/ImportController.java</file>
             <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/RandomStudentController.java</file>
@@ -84,6 +95,12 @@
             <file>file:/E:/ManagementRegisterCaptoneProject/web/modSupList.jsp</file>
             <file>file:/E:/ManagementRegisterCaptoneProject/src/java/group/GroupDAO.java</file>
             <file>file:/E:/ManagementRegisterCaptoneProject/src/java/capstone/CapstoneDAO.java</file>
+>>>>>>> Stashed changes
+=======
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/profile.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/sidebar.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/web/moderator.jsp</file>
+            <file>file:/C:/Users/Mai/Desktop/Mei/ManagementRegisterCaptoneProject/src/java/controller/GetInforController.java</file>
 >>>>>>> Stashed changes
         </group>
     </open-files>

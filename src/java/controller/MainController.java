@@ -70,7 +70,6 @@ public class MainController extends HttpServlet {
                 url = KICK;
             }else if ("Infor".equals(action)) {
                 url = INFOR;
-                url = UPDATEPROFILE;
             }else if ("maxGroup".equals(action)) {
                 url = GROUPMAX;
             }else {
