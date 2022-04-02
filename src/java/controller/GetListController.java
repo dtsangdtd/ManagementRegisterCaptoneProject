@@ -57,7 +57,7 @@ public class GetListController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String loginUserID = loginUser.getUserID();
-//            String userDeadline = loginUser.getDeadline();
+//            String userDeadline = loginUser.getSTT();
             List<UserDTO> listSupervisor = dao.getListSupervisor();
             session.setAttribute("checked", checked);
             int pageNumber = 1;
