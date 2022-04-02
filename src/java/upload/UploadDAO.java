@@ -72,7 +72,9 @@ public class UploadDAO {
                 user.setUsername(userName);
                 String gmail = currentRow.getCell(2).getStringCellValue();
                 user.setGmail(gmail);
-                String semesterID = currentRow.getCell(3).getStringCellValue();
+                String roleID = currentRow.getCell(3).getStringCellValue();
+                user.setRoleID(roleID);
+                String semesterID = currentRow.getCell(4).getStringCellValue();
                 user.setSemesterName(semesterID);
                 if (this.listUser == null) {
                     this.listUser = new ArrayList<>();
@@ -103,15 +105,16 @@ public class UploadDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " INSERT INTO tblUser(userID, name, gmail, statusID, semesterID)"
-                        + " VALUES(?,?,?,?,?)";
+                String sql = " INSERT INTO tblUser(userID, name, gmail, statusID, roleID, semesterID)"
+                        + " VALUES(?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 for (UserDTO user : list) {
                     stm.setString(1, user.getUserID());
                     stm.setString(2, user.getUsername());
                     stm.setString(3, user.getGmail());
                     stm.setInt(4, 3);
-                    stm.setString(5, user.getSemesterName());
+                    stm.setString(5, user.getRoleID());
+                    stm.setString(6, user.getSemesterName());
                     check = stm.executeUpdate() > 0 ? true : false;
                 }
             }

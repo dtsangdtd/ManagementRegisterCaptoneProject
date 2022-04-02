@@ -47,8 +47,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.mail-1.4.7.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
+                    <file>${&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream}</file>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.SparseBitSet-1.2.jar}</file>

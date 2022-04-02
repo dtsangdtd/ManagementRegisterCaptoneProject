@@ -40,6 +40,7 @@ public class UpdateProfileController extends HttpServlet {
             UserDTO userInfor = userDao.getInforUser(userID);
             HttpSession session = request.getSession();
             session.setAttribute("INFOR", userInfor);
+            url = SUCCESS;
         } catch (Exception e) {
             log("ERROR at UpdateProfileController" + e.toString());
         } finally {

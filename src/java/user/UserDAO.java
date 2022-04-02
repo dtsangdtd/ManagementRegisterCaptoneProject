@@ -82,6 +82,7 @@ public class UserDAO {
                     String statusID = rs.getString("statusID");
                     String photoUrl = rs.getString("photoUrl");
                     String phone = rs.getString("phone");
+//                    String deadline = rs.getString("deadline");
                     user = new UserDTO("", userID, username, password, roleID, gmail, phone, statusID, photoUrl);
                 }
             }
